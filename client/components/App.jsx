@@ -5,8 +5,6 @@ import Users from './Users'
 import PingRoutes from './PingRoutes'
 import Registration from './Registration'
 import { Route, Routes } from 'react-router-dom'
-import NavBar from './Nav/NavBar'
-
 
 function App () {
   cacheUser(useAuth0)
@@ -16,7 +14,7 @@ function App () {
       <Routes>
         <Route path='/' element={
           <>
-            <NavBar/>
+
             <Users/>
             <PingRoutes/>
           </>

@@ -15,13 +15,6 @@ import { useSelector } from 'react-redux'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { IfAuthenticated, IfNotAuthenticated } from '../Authenticated'
 
-// Note: This code could be better,
-// so I'd recommend you to understand how I solved and you could write yours better :)
-// Good luck! 🍀
-
-// Update: Check these awesome headers from Choc UI 👇
-// https://choc-ui.tech/docs/elements/headers
-
 const Header = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleToggle = () => (isOpen ? onClose() : onOpen())
@@ -74,36 +67,47 @@ const Header = (props) => {
         flexGrow={1}
         mt={{ base: 4, md: 0 }}
       >
-        <Text>Docs</Text>
-        <a href='/' className='nav-link'>Log out</a>
+        <Text>Mole</Text>
+        <a href='/users' className='nav-link'>Users</a>
         <Text>Examples</Text>
         <Text>Blog</Text>
-        <IfAuthenticated>
-          <p>Hello, {user.name} {user.roles ? `(${user.roles})` : null}</p>
-          <section className='sign'>
-            <a href='/' onClick={handleLogoff} className='nav-link'>Log out</a>
-          </section>
-        </IfAuthenticated>
-
-        <IfNotAuthenticated>
-          <p>Hello, guest</p>
-          <section className='sign'>
-            <a href='/' onClick={handleLogin} className='nav-link'>Sign in</a>
-            <a href='/' onClick={handleRegister} className='nav-link'>Register</a>
-          </section>
-        </IfNotAuthenticated>
       </Stack>
 
       <Box
         display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
         mt={{ base: 4, md: 0 }}
       >
-        <Button
-          variant="outline"
-          _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
-        >
-          Create account
-        </Button>
+
+        <IfAuthenticated>
+          <p>Hello, {user.name} {user.roles ? `(${user.roles})` : null}</p>
+          <section className='sign'>
+            <Button
+              variant="outline"
+              _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+            >
+              <a href='/' onClick={handleLogoff} className='nav-link'>Log out</a>
+            </Button>
+          </section>
+        </IfAuthenticated>
+
+        <IfNotAuthenticated>
+          <p>Hello, guest</p>
+          <section className='sign'>
+            <Button
+              variant="outline"
+              _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+            >
+              <a href='/' onClick={handleLogin} className='nav-link'>Sign in</a>
+            </Button>
+            <Button
+              variant="outline"
+              _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+            >
+              <a href='/' onClick={handleRegister} className='nav-link'>Register</a>
+            </Button>
+          </section>
+        </IfNotAuthenticated>
+
       </Box>
     </Flex>
   )
