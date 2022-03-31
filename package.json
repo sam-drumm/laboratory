@@ -76,8 +76,6 @@
     "react-router-dom": "^6.2.2",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
-    "sass": "^1.42.1",
-    "sass-loader": "^12.1.0",
     "sqlite3": "^5.0.2",
     "style-loader": "^3.3.0",
     "supertest": "6.1.6",

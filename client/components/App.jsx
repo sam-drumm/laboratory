@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { cacheUser } from '../auth0-utils'
-import Nav from './Nav'
+import Nav from './Nav/Nav'
 import Users from './Users'
 import PingRoutes from './PingRoutes'
 import Registration from './Registration'
