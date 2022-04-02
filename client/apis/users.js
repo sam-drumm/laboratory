@@ -20,3 +20,4 @@ export function getUserRoles (id) {
       return res.body.roles
     })
 }
+

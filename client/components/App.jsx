@@ -4,21 +4,23 @@ import { cacheUser } from '../auth0-utils'
 import Users from './Users'
 import PingRoutes from './PingRoutes'
 import Registration from './Registration'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+import Profile from '../pages/Profile/Profile'
 
 function App () {
-  cacheUser(useAuth0)
+  const navigate = useNavigate()
+  cacheUser(useAuth0, navigate)
 
   return (
     <div className='app'>
       <Routes>
         <Route path='/' element={
           <>
-
             <Users/>
             <PingRoutes/>
           </>
         } />
+        {/* <Route path='/profile' element={<Profile/>} /> */}
         <Route path='/register' element={<Registration/>} />
       </Routes>
     </div>

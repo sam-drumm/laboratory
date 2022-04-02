@@ -6,8 +6,8 @@ import {
   Flex,
   Text,
   Button,
-  useDisclosure,
-  Image
+  useDisclosure
+
 } from '@chakra-ui/react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
@@ -51,7 +51,7 @@ const Header = (props) => {
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-          <Image src="https://static.wikia.nocookie.net/villains/images/8/87/ECorp.png" h="75px" />
+          <a>Co_lab</a>
         </Heading>
       </Flex>
 
@@ -91,7 +91,6 @@ const Header = (props) => {
         </IfAuthenticated>
 
         <IfNotAuthenticated>
-          <p>Hello, guest</p>
           <section className='sign'>
             <Button
               variant="outline"

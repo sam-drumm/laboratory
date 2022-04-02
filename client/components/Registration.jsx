@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { addUser } from '../apis/users'
 
-function Registration () {
-  const user = useSelector(state => state.user)
-  const navigate = useNavigate()
+import { setUser } from '../actions/user'
+import { useNavigate } from 'react-router-dom'
 
-  const [form, setForm] = useState({
-    auth0Id: '',
-    name: '',
-    email: '',
-    description: ''
-  })
+function Registration () {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [form, setForm] = useState({})
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
     setForm({
-      auth0Id: user.auth0Id,
-      name: user.name,
-      email: user.email,
-      description: user.description
+      auth0Id: user?.auth0Id,
+      email: user?.email,
+      token: user?.token
     })
   }, [user])
 
@@ -31,12 +27,11 @@ function Registration () {
     })
   }
 
-  async function handleClick (e) {
-    e.preventDefault()
-    // registerUser(form, authUser, history.push)
+  async function handleSubmit () {
+    dispatch(setUser(form))
     try {
       await addUser(form)
-      navigate.push('/')
+      navigate('/profile')
     } catch (error) {
       console.error(error)
     }
@@ -44,6 +39,7 @@ function Registration () {
 
   return (
     <section className='form'>
+
       <h2>Register Profile</h2>
       <form className='registration'>
         <label htmlFor='auth0Id'>auth0Id</label>
@@ -59,16 +55,16 @@ function Registration () {
           name='name'
           value={form.name}
           onChange={handleChange}
-          disabled={true}
+          // disabled={true}
         ></input>
 
-        <label htmlFor='email'>Email</label>
+        {/* <label htmlFor='email'>Email</label>
         <input
           name='email'
           value={form.email}
           onChange={handleChange}
           disabled={true}
-        ></input>
+        ></input> */}
 
         <label htmlFor='description' >Description</label>
         <textarea
@@ -77,9 +73,10 @@ function Registration () {
           onChange={handleChange}
           cols={3}
         ></textarea>
+
         <button
           type='button'
-          onClick={handleClick}
+          onClick={handleSubmit}
         >
           Register
         </button>

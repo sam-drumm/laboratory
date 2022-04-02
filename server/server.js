@@ -8,10 +8,12 @@ const server = express()
 server.use(express.json())
 server.use(express.static(path.join(__dirname, 'public')))
 
+// authenticated routes
+
 server.use('/api/v1/users', usersRoutes)
 
 server.get('*', (req, res) => {
-  res.sendFile(path.resolve('server/public/index.html'))
+  res.sendFile(path.join(__dirname, './public/index.html'))
 })
 
 module.exports = server

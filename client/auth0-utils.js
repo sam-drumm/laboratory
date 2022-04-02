@@ -1,3 +1,4 @@
+// import consume from './consume'
 import { setUser } from './actions/user'
 import { getUserRoles } from './apis/users'
 import store from './store'
@@ -28,6 +29,10 @@ export async function cacheUser (useAuth0) {
         roles
       }
       saveUser(userToSave)
+
+      // if (id === undefined) {
+      //   navigate('/profile')
+      // }
     } catch (err) {
       console.error(err)
     }
@@ -50,7 +55,7 @@ export function getIsAuthenticated (useAuth0) {
 
 export function getRegisterFn (useAuth0) {
   const { loginWithRedirect } = useAuth0()
-  const redirectUri = `${window.location.origin}/#/register`
+  const redirectUri = `${window.location.origin}/register`
   return () => loginWithRedirect({
     redirectUri,
     screen_hint: 'signup',
