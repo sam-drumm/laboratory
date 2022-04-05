@@ -10,8 +10,8 @@ const checkAdmin = jwtAuthz(['read:my_private_route'], { customScopeKey: 'permis
 
 // POST /api/v1/users/protected
 router.post('/', async (req, res) => {
-  const { auth0Id, name, email, description } = req.body
-  const user = { auth0Id, name, email, description }
+  const { auth0Id, userName, firstName, surname, email } = req.body
+  const user = { auth0Id, userName, firstName, surname, email }
 
   try {
     await db.addUser(user)

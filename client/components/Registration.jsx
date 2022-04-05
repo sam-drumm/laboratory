@@ -31,7 +31,7 @@ function Registration () {
     dispatch(setUser(form))
     try {
       await addUser(form)
-      navigate('/profile')
+      navigate('/')
     } catch (error) {
       console.error(error)
     }
@@ -40,39 +40,55 @@ function Registration () {
   return (
     <section className='form'>
 
-      <h2>Register Profile</h2>
+      <h2>Setup your Profile</h2>
       <form className='registration'>
-        <label htmlFor='auth0Id'>auth0Id</label>
+        {/* <label htmlFor='auth0Id'>auth0Id</label>
         <input
           name='auth0Id'
           value={form.auth0Id}
           onChange={handleChange}
           disabled={true}
-        ></input>
+        ></input> */}
 
-        <label htmlFor='name'>Name</label>
+        <label htmlFor='firstName'>First Name</label>
         <input
-          name='name'
-          value={form.name}
+          name='firstName'
+          value={form.firstName}
           onChange={handleChange}
-          disabled={true}
+          // disabled={true}
         ></input>
 
-        <label htmlFor='email'>Email</label>
+        <label htmlFor='surname'>Surname</label>
+        <input
+          name='surname'
+          value={form.surname}
+          onChange={handleChange}
+          // disabled={true}
+        ></input>
+
+        <label htmlFor='userName'>User Name</label>
+        <input
+          name='userName'
+          value={form.userName}
+          onChange={handleChange}
+          // disabled={true}
+        ></input>
+
+        {/* <label htmlFor='email'>Email</label>
         <input
           name='email'
           value={form.email}
           onChange={handleChange}
           disabled={true}
-        ></input>
+        ></input> */}
 
-        <label htmlFor='description' >Description</label>
+        {/* <label htmlFor='description' >Description</label>
         <textarea
           name='description'
           value={form.description}
           onChange={handleChange}
           cols={3}
-        ></textarea>
+        ></textarea> */}
 
         <button
           type='button'
