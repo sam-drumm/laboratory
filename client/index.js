@@ -10,7 +10,6 @@ import App from './components/App'
 import store from './store'
 import config from './auth_config.json'
 
-
 import colabTheme from './styles/colabTheme'
 
 document.addEventListener('DOMContentLoaded', () => {
