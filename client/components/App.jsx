@@ -5,7 +5,6 @@ import Users from './Users'
 import PingRoutes from './PingRoutes'
 import Registration from './Registration'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import Profile from '../pages/Profile/Profile'
 
 function App () {
   const navigate = useNavigate()

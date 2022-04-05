@@ -55,16 +55,16 @@ function Registration () {
           name='name'
           value={form.name}
           onChange={handleChange}
-          // disabled={true}
+          disabled={true}
         ></input>
 
-        {/* <label htmlFor='email'>Email</label>
+        <label htmlFor='email'>Email</label>
         <input
           name='email'
           value={form.email}
           onChange={handleChange}
           disabled={true}
-        ></input> */}
+        ></input>
 
         <label htmlFor='description' >Description</label>
         <textarea
