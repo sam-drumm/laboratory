@@ -5,6 +5,16 @@ import { addUser } from '../apis/users'
 import { setUser } from '../actions/user'
 import { useNavigate } from 'react-router-dom'
 
+import {
+  Flex,
+  Box,
+  Heading,
+  FormControl,
+  FormLabel,
+  Input,
+  Button
+} from '@chakra-ui/core';
+
 function Registration () {
   const dispatch = useDispatch()
   const navigate = useNavigate()

@@ -2,7 +2,8 @@ const connection = require('./connection')
 
 function getUsers (db = connection) {
   return db('users')
-    .select('id',
+    .select(
+      // 'id',
       'auth0_id as auth0Id',
       'user_name as userName',
       'first_name as firstName',

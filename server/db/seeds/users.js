@@ -3,7 +3,7 @@ exports.seed = function (knex) {
     .then(function () {
       return knex('users').insert([
         {
-          id: 1,
+          // id: 1,
           auth0_id: 'auth0|61414f84d35ac900717bc280',
           user_name: 'kelmarna',
           first_name: 'sandy',
@@ -11,7 +11,7 @@ exports.seed = function (knex) {
           email: 'kelmarna@email.nz'
         },
         {
-          id: 2,
+          // id: 2,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
           user_name: 'donna',
           first_name: 'watch',
@@ -19,7 +19,7 @@ exports.seed = function (knex) {
           email: 'peach@email.nz'
         },
         {
-          id: 3,
+          // id: 3,
           auth0_id: 'auth0|09414f84d35ac900717bc280',
           user_name: 'keiligh',
           first_name: 'kelly',
@@ -27,7 +27,7 @@ exports.seed = function (knex) {
           email: 'kelly@email.nz'
         },
         {
-          id: 4,
+          // id: 4,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           user_name: 'joecamel',
           first_name: 'joe',
