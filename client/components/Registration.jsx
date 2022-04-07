@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { addUser } from '../apis/users'
+import {
+  useSelector
+} from 'react-redux'
+import { registerUser } from './registerHelper'
+import { useAuth0 } from '@auth0/auth0-react'
 
-import { setUser } from '../actions/user'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -16,20 +18,20 @@ import {
 } from '@chakra-ui/react'
 
 function Registration () {
-  const dispatch = useDispatch()
+  const authUser = useAuth0().user
   const navigate = useNavigate()
   const [form, setForm] = useState({})
   const user = useSelector(state => state.user)
 
   useEffect(() => {
     setForm({
-      auth0Id: user?.auth0Id,
-      email: user?.email,
-      token: user?.token
+      firstName: '',
+      lastName: ''
     })
   }, [user])
 
   function handleChange (e) {
+    e.preventDefault()
     const { name, value } = e.target
     setForm({
       ...form,
@@ -38,13 +40,7 @@ function Registration () {
   }
 
   async function handleSubmit () {
-    dispatch(setUser(form))
-    try {
-      await addUser(form)
-      navigate('/')
-    } catch (error) {
-      console.error(error)
-    }
+    registerUser(form, authUser, navigate)
   }
 
   return (
@@ -57,79 +53,39 @@ function Registration () {
         boxShadow="lg"
       >
 
-        {/* <section className='form'> */}
         <Box textAlign="centre">
           <Heading>Setup your Profile</Heading>
         </Box>
-        <form
-        // className='registration'
-        >
-          {/* <label htmlFor='auth0Id'>auth0Id</label>
-        <input
-        name='auth0Id'
-        value={form.auth0Id}
-        onChange={handleChange}
-        disabled={true}
-      ></input> */}
-          <FormControl isRequired={true}>
+        <form>
 
+          <FormControl isRequired={true}>
             <FormLabel htmlFor='firstName'>First Name</FormLabel>
             <Input
               name='firstName'
-
               value={form.firstName}
               onChange={handleChange}
-            // disabled={true}
             ></Input>
           </FormControl>
 
           <FormControl isRequired={true} mt={6}>
-            <FormLabel htmlFor='surname'>Surname</FormLabel>
+            <FormLabel htmlFor='lastName'>Surname</FormLabel>
             <Input
-              name='surname'
-              value={form.surname}
+              name='lastName'
+              value={form.lastName}
               onChange={handleChange}
-            // disabled={true}
             ></Input>
           </FormControl>
-
-          <FormControl isRequired={true} mt={6}>
-            <FormLabel htmlFor='userName'>Username</FormLabel>
-            <Input
-              name='userName'
-              value={form.userName}
-              onChange={handleChange}
-              // disabled={true}
-            ></Input>
-          </FormControl>
-          {/* <label htmlFor='email'>Email</label>
-        <input
-        name='email'
-        value={form.email}
-        onChange={handleChange}
-        disabled={true}
-      ></input> */}
-
-          {/* <label htmlFor='description' >Description</label>
-        <textarea
-        name='description'
-        value={form.description}
-        onChange={handleChange}
-        cols={3}
-      ></textarea> */}
 
           <Button
             width="full"
             mt={8}
-            type='submit'
-            variantColor="teal"
-            variant="outline"
+            type='button'
             onClick={handleSubmit}
           >
           Register
           </Button>
+
         </form>
-        {/* </section> */}
       </Box>
     </Flex>
   )

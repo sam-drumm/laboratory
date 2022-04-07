@@ -1,39 +1,39 @@
+// const path = require('path')
+// require('dotenv').config({ path: path.join(__dirname, '../../.env') })
+
 exports.seed = function (knex) {
-  return knex('users').del()
-    .then(function () {
-      return knex('users').insert([
+  return knex('users')
+    .del() // Deletes ALL existing entries
+    .then(() =>
+      knex('users').insert([
         {
-          // id: 1,
+          id: 1,
           auth0_id: 'auth0|61414f84d35ac900717bc280',
-          user_name: 'kelmarna',
           first_name: 'sandy',
-          surname: 'bojangles',
+          last_name: 'bojangles',
           email: 'kelmarna@email.nz'
         },
         {
-          // id: 2,
+          id: 2,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
-          user_name: 'donna',
           first_name: 'watch',
-          surname: 'butachican',
+          last_name: 'butachican',
           email: 'peach@email.nz'
         },
         {
-          // id: 3,
+          id: 3,
           auth0_id: 'auth0|09414f84d35ac900717bc280',
-          user_name: 'keiligh',
           first_name: 'kelly',
-          surname: 'europa',
+          last_name: 'europa',
           email: 'kelly@email.nz'
         },
         {
-          // id: 4,
+          id: 4,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
-          user_name: 'joecamel',
           first_name: 'joe',
-          surname: 'smoking',
+          last_name: 'smoking',
           email: 'joe@camel.usa'
         }
       ])
-    })
+    )
 }

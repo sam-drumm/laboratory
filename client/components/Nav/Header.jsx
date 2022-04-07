@@ -79,7 +79,7 @@ const Header = (props) => {
       >
 
         <IfAuthenticated>
-          <p>Hello, {user.name} {user.roles ? `(${user.roles})` : null}</p>
+          <p>Hello, {user.firstName} {user.roles ? `(${user.roles})` : null}</p>
           <section className='sign'>
             <Button
               variant="outline"

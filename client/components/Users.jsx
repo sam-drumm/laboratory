@@ -26,9 +26,6 @@ function Users (props) {
               firstname
               </th>
               <th>
-              surname
-              </th>
-              <th>
               email
               </th>
             </tr>
@@ -40,15 +37,11 @@ function Users (props) {
                   {user.auth0Id}
                 </td>
                 <td>
-                  {user.userName}
-                </td>
-                <td>
                   {user.firstName}
                 </td>
                 <td>
-                  {user.surname}
+                  {user.lastName}
                 </td>
-
                 <td>
                   {user.email}
                 </td>

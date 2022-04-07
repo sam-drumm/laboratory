@@ -8,14 +8,14 @@ export const CLEAR_USERS = 'CLEAR_USERS'
 export function setUser (user) {
   return {
     type: SET_USER,
-    user
+    user: user
   }
 }
 
 export function setUsers (users) {
   return {
     type: SET_USERS,
-    users
+    users: users
   }
 }
 

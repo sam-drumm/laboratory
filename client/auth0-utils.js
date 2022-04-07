@@ -1,40 +1,29 @@
-// import consume from './consume'
+import consume from './consume'
 import { setUser } from './actions/user'
-import { getUserRoles } from './apis/users'
-import store from './store'
+import { dispatch } from './store'
+import { showError } from './actions/error'
 
 const emptyUser = {
-  auth0Id: '',
-  email: '',
-  name: '',
-  token: '',
-  roles: []
+  id: null
 }
 
 function saveUser (user = emptyUser) {
-  store.dispatch(setUser(user))
+  dispatch(setUser(user))
 }
 
-export async function cacheUser (useAuth0) {
+export async function cacheUser (useAuth0, navigate) {
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
   if (isAuthenticated) {
     try {
       const token = await getAccessTokenSilently()
-      const roles = await getUserRoles(user.sub)
-      const userToSave = {
-        auth0Id: user.sub,
-        email: user.email,
-        name: user.nickname,
-        token,
-        roles
+      const res = await consume(`/users/${user.sub}`, token)
+      const { id, firstName, lastName, email } = res.body
+      if (id === undefined) {
+        navigate('/register')
       }
-      saveUser(userToSave)
-
-      // if (id === undefined) {
-      //   navigate('/profile')
-      // }
+      saveUser({ id, firstName, lastName, email, token })
     } catch (err) {
-      console.error(err)
+      dispatch(showError('Unable to set the current user'))
     }
   } else {
     saveUser()

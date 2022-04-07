@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Registration from './Registration'
+import Registration from '../Registration'
 
 export default function Profile () {
-  const user = useSelector(globalState => globalState.user)
+  const user = useSelector(state => state.user)
 
   return (
     <>

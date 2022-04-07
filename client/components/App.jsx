@@ -4,6 +4,7 @@ import { cacheUser } from '../auth0-utils'
 import Users from './Users'
 import PingRoutes from './PingRoutes'
 import Registration from './Registration'
+import Profile from './Profile/Profile'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 
 function App () {
@@ -19,7 +20,7 @@ function App () {
             <PingRoutes/>
           </>
         } />
-        {/* <Route path='/profile' element={<Profile/>} /> */}
+        <Route path='/profile' element={<Profile/>} />
         <Route path='/register' element={<Registration/>} />
       </Routes>
     </div>
