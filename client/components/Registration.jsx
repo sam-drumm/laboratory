@@ -13,7 +13,7 @@ import {
   FormLabel,
   Input,
   Button
-} from '@chakra-ui/core';
+} from '@chakra-ui/react'
 
 function Registration () {
   const dispatch = useDispatch()
@@ -48,66 +48,90 @@ function Registration () {
   }
 
   return (
-    <section className='form'>
+    <Flex width="full" align="center" justifyContent="center" >
+      <Box
+        p={8}
+        maxWidth="500px"
+        borderWidth={2}
+        borderRadius={8}
+        boxShadow="lg"
+      >
 
-      <h2>Setup your Profile</h2>
-      <form className='registration'>
-        {/* <label htmlFor='auth0Id'>auth0Id</label>
-        <input
-          name='auth0Id'
-          value={form.auth0Id}
-          onChange={handleChange}
-          disabled={true}
-        ></input> */}
-
-        <label htmlFor='firstName'>First Name</label>
-        <input
-          name='firstName'
-          value={form.firstName}
-          onChange={handleChange}
-          // disabled={true}
-        ></input>
-
-        <label htmlFor='surname'>Surname</label>
-        <input
-          name='surname'
-          value={form.surname}
-          onChange={handleChange}
-          // disabled={true}
-        ></input>
-
-        <label htmlFor='userName'>User Name</label>
-        <input
-          name='userName'
-          value={form.userName}
-          onChange={handleChange}
-          // disabled={true}
-        ></input>
-
-        {/* <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          value={form.email}
-          onChange={handleChange}
-          disabled={true}
-        ></input> */}
-
-        {/* <label htmlFor='description' >Description</label>
-        <textarea
-          name='description'
-          value={form.description}
-          onChange={handleChange}
-          cols={3}
-        ></textarea> */}
-
-        <button
-          type='button'
-          onClick={handleSubmit}
+        {/* <section className='form'> */}
+        <Box textAlign="centre">
+          <Heading>Setup your Profile</Heading>
+        </Box>
+        <form
+        // className='registration'
         >
+          {/* <label htmlFor='auth0Id'>auth0Id</label>
+        <input
+        name='auth0Id'
+        value={form.auth0Id}
+        onChange={handleChange}
+        disabled={true}
+      ></input> */}
+          <FormControl isRequired={true}>
+
+            <FormLabel htmlFor='firstName'>First Name</FormLabel>
+            <Input
+              name='firstName'
+
+              value={form.firstName}
+              onChange={handleChange}
+            // disabled={true}
+            ></Input>
+          </FormControl>
+
+          <FormControl isRequired={true} mt={6}>
+            <FormLabel htmlFor='surname'>Surname</FormLabel>
+            <Input
+              name='surname'
+              value={form.surname}
+              onChange={handleChange}
+            // disabled={true}
+            ></Input>
+          </FormControl>
+
+          <FormControl isRequired={true} mt={6}>
+            <FormLabel htmlFor='userName'>Username</FormLabel>
+            <Input
+              name='userName'
+              value={form.userName}
+              onChange={handleChange}
+              // disabled={true}
+            ></Input>
+          </FormControl>
+          {/* <label htmlFor='email'>Email</label>
+        <input
+        name='email'
+        value={form.email}
+        onChange={handleChange}
+        disabled={true}
+      ></input> */}
+
+          {/* <label htmlFor='description' >Description</label>
+        <textarea
+        name='description'
+        value={form.description}
+        onChange={handleChange}
+        cols={3}
+      ></textarea> */}
+
+          <Button
+            width="full"
+            mt={8}
+            type='submit'
+            variantColor="teal"
+            variant="outline"
+            onClick={handleSubmit}
+          >
           Register
-        </button>
-      </form>
-    </section>
+          </Button>
+        </form>
+        {/* </section> */}
+      </Box>
+    </Flex>
   )
 }
 
