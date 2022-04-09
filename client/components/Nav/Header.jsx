@@ -13,7 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
 import { useSelector } from 'react-redux'
 import { HamburgerIcon } from '@chakra-ui/icons'
-import { IfAuthenticated, IfNotAuthenticated } from '../Authenticated'
+import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
 
 const Header = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -67,7 +67,7 @@ const Header = (props) => {
         flexGrow={1}
         mt={{ base: 4, md: 0 }}
       >
-        <Text>Mole</Text>
+        <Text>Projects</Text>
         <a href='/users' className='nav-link'>Users</a>
         <Text>Examples</Text>
         <Text>Blog</Text>
@@ -79,7 +79,7 @@ const Header = (props) => {
       >
 
         <IfAuthenticated>
-          <p>Hello, {user.name} {user.roles ? `(${user.roles})` : null}</p>
+          <p>Hello, {user.firstName} {user.roles ? `(${user.roles})` : null}</p>
           <section className='sign'>
             <Button
               variant="outline"
