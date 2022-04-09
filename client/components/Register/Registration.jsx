@@ -18,15 +18,19 @@ import {
 } from '@chakra-ui/react'
 
 function Registration () {
+  const user = useSelector(state => state.user)
   const authUser = useAuth0().user
   const navigate = useNavigate()
-  const [form, setForm] = useState({})
-  const user = useSelector(state => state.user)
+
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: ''
+  })
 
   useEffect(() => {
     setForm({
-      firstName: '',
-      lastName: ''
+      firstName: form.firstName,
+      lastName: form.lastName
     })
   }, [user])
 
@@ -58,7 +62,7 @@ function Registration () {
         </Box>
         <form>
 
-          <FormControl isRequired={true}>
+          <FormControl isRequired>
             <FormLabel htmlFor='firstName'>First Name</FormLabel>
             <Input
               name='firstName'
@@ -67,7 +71,7 @@ function Registration () {
             ></Input>
           </FormControl>
 
-          <FormControl isRequired={true} mt={6}>
+          <FormControl isRequired mt={6}>
             <FormLabel htmlFor='lastName'>Surname</FormLabel>
             <Input
               name='lastName'

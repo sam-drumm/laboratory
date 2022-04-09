@@ -1,8 +1,8 @@
-import requestor from '../consume'
-import { dispatch, getState } from '../store'
-import { setWaiting, clearWaiting } from '../actions/waiting'
-import { setUser } from '../actions/user'
-import { showError } from '../actions/error'
+import requestor from '../../consume'
+import { dispatch, getState } from '../../store'
+import { setWaiting, clearWaiting } from '../../actions/waiting'
+import { setUser } from '../../actions/user'
+import { showError } from '../../actions/error'
 
 export function registerUser (user, authUser, navigateTo, consume = requestor) {
   const newUser = {

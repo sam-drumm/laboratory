@@ -21,6 +21,9 @@ export async function cacheUser (useAuth0, navigate) {
       if (id === undefined) {
         navigate('/register')
       }
+      if (user.email_verified === false) {
+        navigate('/verification')
+      }
       saveUser({ id, firstName, lastName, email, token })
     } catch (err) {
       dispatch(showError('Unable to set the current user'))
