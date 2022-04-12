@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import {
-  useSelector
-} from 'react-redux'
+import React from 'react'
 import { registerUser } from './registerHelper'
 import { useAuth0 } from '@auth0/auth0-react'
-
+import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
 
 import {
   Flex,
@@ -17,34 +15,36 @@ import {
   Button
 } from '@chakra-ui/react'
 
+const registerSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, 'This must be at least 2 characters long')
+    .max(15, 'Sorry, this must be under 15 characters long')
+    .required('Required'),
+  lastName: Yup.string()
+    .required('Required')
+    .min(2, 'This must be at least 2 characters long')
+    .max(20, 'Sorry, this must be under 20 characters long')
+})
+
 function Registration () {
-  const user = useSelector(state => state.user)
   const authUser = useAuth0().user
   const navigate = useNavigate()
 
-  const [form, setForm] = useState({
-    firstName: '',
-    lastName: ''
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: ''
+    },
+    onSubmit: values => {
+      registerUser(values, authUser, navigate)
+    },
+    validationSchema: registerSchema
   })
 
-  useEffect(() => {
-    setForm({
-      firstName: form.firstName,
-      lastName: form.lastName
-    })
-  }, [user])
-
-  function handleChange (e) {
-    e.preventDefault()
-    const { name, value } = e.target
-    setForm({
-      ...form,
-      [name]: value
-    })
-  }
-
-  async function handleSubmit () {
-    registerUser(form, authUser, navigate)
+  function showAnyErrors (inputName) {
+    return formik.errors[inputName] && formik.touched[inputName]
+      ? <p className='inputError'>{formik.errors[inputName]}</p>
+      : null
   }
 
   return (
@@ -60,31 +60,32 @@ function Registration () {
         <Box textAlign="centre">
           <Heading>Setup your Profile</Heading>
         </Box>
-        <form>
+        <form onSubmit={formik.handleSubmit}>
 
           <FormControl isRequired>
             <FormLabel htmlFor='firstName'>First Name</FormLabel>
+            {showAnyErrors('firstName')}
             <Input
               name='firstName'
-              value={form.firstName}
-              onChange={handleChange}
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
             ></Input>
           </FormControl>
 
           <FormControl isRequired mt={6}>
             <FormLabel htmlFor='lastName'>Surname</FormLabel>
+            {showAnyErrors('lastName')}
             <Input
               name='lastName'
-              value={form.lastName}
-              onChange={handleChange}
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
             ></Input>
           </FormControl>
 
           <Button
             width="full"
             mt={8}
-            type='button'
-            onClick={handleSubmit}
+            type='submit'
           >
           Register
           </Button>
