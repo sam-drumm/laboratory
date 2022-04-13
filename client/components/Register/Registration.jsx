@@ -62,23 +62,25 @@ function Registration () {
         </Box>
         <form onSubmit={formik.handleSubmit}>
 
-          <FormControl isRequired>
+          <FormControl>
             <FormLabel htmlFor='firstName'>First Name</FormLabel>
             {showAnyErrors('firstName')}
             <Input
               name='firstName'
               value={formik.values.firstName}
               onChange={formik.handleChange}
+              placeholder="enter your first name"
             ></Input>
           </FormControl>
 
-          <FormControl isRequired mt={6}>
+          <FormControl mt={6}>
             <FormLabel htmlFor='lastName'>Surname</FormLabel>
             {showAnyErrors('lastName')}
             <Input
               name='lastName'
               value={formik.values.lastName}
               onChange={formik.handleChange}
+              placeholder="enter your last name"
             ></Input>
           </FormControl>
 
