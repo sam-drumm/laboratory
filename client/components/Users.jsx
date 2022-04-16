@@ -20,10 +20,10 @@ function Users (props) {
               auth0Id
               </th>
               <th>
-              username
+              firstname
               </th>
               <th>
-              firstname
+              lastname
               </th>
               <th>
               email
