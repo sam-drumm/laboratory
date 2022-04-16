@@ -4,7 +4,12 @@ import { dispatch } from './store'
 import { showError } from './actions/error'
 
 const emptyUser = {
-  id: null
+  id: null,
+  auth0Id: '',
+  email: '',
+  firstName: '',
+  lastName: '',
+  token: ''
 }
 
 function saveUser (user = emptyUser) {
@@ -24,7 +29,7 @@ export async function cacheUser (useAuth0, navigate) {
       if (user.email_verified === false) {
         navigate('/verification')
       }
-      saveUser({ id, firstName, lastName, email, token })
+      saveUser({ id, auth0Id: user.sub, firstName, lastName, email, token })
     } catch (err) {
       dispatch(showError('Unable to set the current user'))
     }

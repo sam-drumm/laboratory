@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-// import { useAuth0 } from '@auth0/auth0-react'
 import { addProject } from '../../actions/project'
 
 import {
@@ -15,15 +14,14 @@ import {
   Stack,
   Radio,
   RadioGroup,
-  Textarea
+  Textarea,
+  FormHelperText,
+  FormErrorMessage
 } from '@chakra-ui/react'
 
 function NewProject () {
   const { auth0Id, token, id } = useSelector(state => state.user)
 
-  // const auth0Id = useSelector(state => state.user.auth0Id)
-
-  console.log(auth0Id)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -38,6 +36,7 @@ function NewProject () {
   const [skillDescription, setSkillDescription] = useState('')
 
   const form = ({
+    auth0Id,
     projectTitle,
     category,
     description,
@@ -60,6 +59,7 @@ function NewProject () {
     }
   }
 
+
   return (
     <Flex width="full" align="center" justifyContent="center" >
       <Box
@@ -72,24 +72,21 @@ function NewProject () {
 
         <Box textAlign="centre">
           <Heading> What's your idea?</Heading>
-          <p>{id}</p>
-
-// Auth0 does not exisit in the user state. This is where the issue is.
-
         </Box>
         <form onSubmit={handleSubmit}>
 
-          <FormControl mt={3}>
+          <FormControl mt={3} isRequired>
             <FormLabel htmlFor='projectTitle'>Project Title</FormLabel>
             <Input
               name='projectTitle'
               onChange={(e) => setProjectTitle(e.target.value)}
               placeholder="e.g. Mural on K’rd, Build an app for Vege Delivery"
-            ></Input>
+            />
+
           </FormControl>
 
-          <FormControl mt={6}>
-            <FormLabel htmlFor='category'>Category</FormLabel>
+          <FormControl mt={6} isRequired>
+            <FormLabel htmlFor='category' >Category</FormLabel>
             <RadioGroup onChange={setCategory} value={category}>
               <Stack spacing={[1, 5]} direction={['column', 'row']}>
                 <Radio value='1'>Fun</Radio>
@@ -103,7 +100,7 @@ function NewProject () {
             <Heading> Idea Details</Heading>
           </Box>
 
-          <FormControl mt={3}>
+          <FormControl mt={3} isRequired>
             <FormLabel htmlFor='description'>Description</FormLabel>
             <Textarea
               name='description'
@@ -112,8 +109,8 @@ function NewProject () {
             </Textarea>
           </FormControl>
 
-          <FormControl>
-            <FormLabel mt={6}htmlFor='seeking'>Looking for</FormLabel>
+          <FormControl isRequired>
+            <FormLabel mt={6}htmlFor='seeking' >Looking for</FormLabel>
             <RadioGroup onChange={setSeeking} value={seeking}>
               <Stack direction='column'>
                 <Radio value='1'>Partners to develop the idea and share in any future rewards</Radio>
@@ -124,7 +121,7 @@ function NewProject () {
             </RadioGroup>
           </FormControl>
 
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel mt={6}htmlFor='purpose'>Purpose</FormLabel>
             <RadioGroup onChange={setPurpose} value={purpose}>
               <Stack direction='column'>
@@ -135,7 +132,7 @@ function NewProject () {
             </RadioGroup>
           </FormControl>
 
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel mt={6}htmlFor='teamEstablished'>Team</FormLabel>
             <RadioGroup onChange={setTeamEstablished} value={teamEstablished}>
               <Stack direction='column'>
@@ -145,7 +142,7 @@ function NewProject () {
             </RadioGroup>
           </FormControl>
 
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel mt={6}htmlFor='started'>Status</FormLabel>
             <RadioGroup onChange={setStarted} value={started} placeholder="Select a post type">
               <Stack direction='column'>
@@ -159,7 +156,7 @@ function NewProject () {
             <Heading>Skills</Heading>
           </Box>
 
-          <FormControl mt={3}>
+          <FormControl mt={3} isRequired>
             <FormLabel htmlFor='skillType'>Skill Category</FormLabel>
             <Textarea
               name='skillCategory'
@@ -168,7 +165,7 @@ function NewProject () {
             ></Textarea>
           </FormControl>
 
-          <FormControl mt={3}>
+          <FormControl mt={3} isRequired>
             <FormLabel htmlFor='skillDescription'>Skill Description</FormLabel>
             <Textarea
               name='skillDescription'
