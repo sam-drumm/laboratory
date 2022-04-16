@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useAuth0 } from '@auth0/auth0-react'
+// import { useAuth0 } from '@auth0/auth0-react'
 import { addProject } from '../../actions/project'
 
 import {
@@ -12,20 +12,18 @@ import {
   FormLabel,
   Input,
   Button,
-  CheckboxGroup,
-  Checkbox,
   Stack,
   Radio,
   RadioGroup,
-  Textarea,
-  Select
+  Textarea
 } from '@chakra-ui/react'
 
 function NewProject () {
-  // const authUser = useAuth0().user
-  const token = useSelector(state => state.user.token)
+  const { auth0Id, token, id } = useSelector(state => state.user)
+
   // const auth0Id = useSelector(state => state.user.auth0Id)
 
+  console.log(auth0Id)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -40,7 +38,6 @@ function NewProject () {
   const [skillDescription, setSkillDescription] = useState('')
 
   const form = ({
-   
     projectTitle,
     category,
     description,
@@ -54,6 +51,7 @@ function NewProject () {
 
   async function handleSubmit (event) {
     event.preventDefault()
+    console.log(form)
     try {
       dispatch(addProject(form, token))
       navigate('/')
@@ -74,6 +72,10 @@ function NewProject () {
 
         <Box textAlign="centre">
           <Heading> What's your idea?</Heading>
+          <p>{id}</p>
+
+// Auth0 does not exisit in the user state. This is where the issue is.
+
         </Box>
         <form onSubmit={handleSubmit}>
 

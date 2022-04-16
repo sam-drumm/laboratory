@@ -8,7 +8,8 @@ exports.seed = function (knex) {
       knex('projects').insert([
         {
           id: 1,
-          category: 'dfsaklf',
+          auth0_id: 'rowValue1',
+          category: 13,
           description: 'saniutdy',
           seeking: 'dsfdsijf',
           purpose: 'tirtjwnlwemail.nz',
@@ -19,6 +20,7 @@ exports.seed = function (knex) {
         {
           id: 2,
           category: 'fdsinf',
+          auth0_id: 'rowValue1',
           description: 'slkfnjd',
           seeking: 'slkfns',
           purpose: 'fslkjfsnz',
@@ -28,6 +30,7 @@ exports.seed = function (knex) {
         },
         {
           id: 3,
+          auth0_id: 'rowValue1',
           category: 'sfjns',
           description: 'skfjs',
           seeking: 'slfdsfdsijf',
@@ -38,6 +41,7 @@ exports.seed = function (knex) {
         },
         {
           id: 4,
+          auth0_id: 'rowValue1',
           category: 'fidjsaf',
           description: 'dskjfisdah',
           seeking: 'gkastj',
