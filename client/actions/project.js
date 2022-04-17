@@ -31,7 +31,7 @@ export function clearProjects () {
   }
 }
 
-export function fetchEvents () {
+export function fetchProjects () {
   return dispatch => {
     return getProjects()
       .then(projects => {

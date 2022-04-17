@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { cacheUser } from '../auth0-utils'
 import NewProject from './Projects/NewProject'
 import Users from './Users'
+import Projects from './Projects'
 import PingRoutes from './PingRoutes'
 import Registration from './Register/Registration'
 import Profile from './Register/Profile'
@@ -20,6 +21,7 @@ function App () {
           <>
             <Users/>
             <PingRoutes/>
+            <Projects/>
           </>
         } />
         <Route path='/profile' element={<Profile/>} />
