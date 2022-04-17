@@ -30,6 +30,7 @@ const getAccessToken = async () => {
     .type('form')
   return body.access_token
 }
+
 const checkJwt = jwt({
   secret: jwks.expressJwtSecret({
     cache: true,
@@ -44,5 +45,6 @@ const checkJwt = jwt({
 
 module.exports = {
   checkJwt,
-  getUserRoles
+  getUserRoles,
+  getAccessToken
 }

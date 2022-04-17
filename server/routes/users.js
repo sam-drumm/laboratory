@@ -1,23 +1,16 @@
 const express = require('express')
-// const jwtAuthz = require('express-jwt-authz')
-const {
-  getUserRoles
-  // checkJwt
-} = require('../auth0')
-
+const { getUserRoles } = require('../auth0')
 const db = require('../db/users')
 const router = express.Router()
 
 // middleware for checking permissions (authorization)
 // const checkAdmin = jwtAuthz(['read:my_private_route'], { customScopeKey: 'permissions' })
 
-// POST /api/v1/users/protected
 router.post('/', async (req, res) => {
-  const { auth0Id, userName, firstName, lastName, email } = req.body
-  const user = { auth0Id, userName, firstName, lastName, email }
+  const { auth0Id, firstName, lastName, email } = req.body
+  const user = { auth0Id, firstName, lastName, email }
 
   try {
-    // await db.addUser(user)
     await db.createUser(user)
   } catch (err) {
     console.error(err.message)
@@ -41,7 +34,6 @@ router.post('/', async (req, res) => {
   }
 })
 
-// GET /api/v1/users/
 router.get('/', (req, res) => {
   db.getUsers()
     .then(users => {

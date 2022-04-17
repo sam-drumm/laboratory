@@ -1,49 +1,49 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchUsers } from '../actions/user'
+import { fetchProjects } from '../actions/project'
 
-function Users (props) {
+function Projects (props) {
   const dispatch = useDispatch()
-  const users = useSelector(state => state.users)
+  const projects = useSelector(state => state.projects)
   useEffect(() => {
-    dispatch(fetchUsers())
+    dispatch(fetchProjects())
   }, [])
 
   return (
     <>
-      <section className='users'>
-        <p className='title'>Registered users in the database</p>
+      <section className='projects'>
+        <p className='title'>Projects in the database</p>
         <table>
           <thead>
             <tr>
               <th>
-              auth0Id
+              id
               </th>
               <th>
-              firstname
+              category
               </th>
               <th>
-              lastname
+              purpose
               </th>
               <th>
-              email
+              started
               </th>
             </tr>
           </thead>
           <tbody>
-            {users.map(user =>
-              <tr key={user.id}>
+            {projects.map(project =>
+              <tr key={project.id}>
                 <td>
-                  {user.auth0Id}
+                  {project.category}
                 </td>
                 <td>
-                  {user.firstName}
+                  {project.description}
                 </td>
                 <td>
-                  {user.lastName}
+                  {project.purpose}
                 </td>
                 <td>
-                  {user.email}
+                  {project.started}
                 </td>
               </tr>
             )}
@@ -54,4 +54,4 @@ function Users (props) {
   )
 }
 
-export default Users
+export default Projects

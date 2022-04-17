@@ -72,6 +72,7 @@
     "@chakra-ui/react": "^1.8.7",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "chakra-ui-steps": "^1.7.2",
     "express": "^4.17.1",
     "express-jwt": "^6.1.0",
     "express-jwt-authz": "^2.4.1",
@@ -80,6 +81,7 @@
     "jwks-rsa": "^2.0.4",
     "knex": "^0.95.11",
     "pg": "^8.7.1",
+    "react-icons": "^4.3.1",
     "superagent": "^6.1.0",
     "yup": "^0.32.11"
   },
