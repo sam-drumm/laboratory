@@ -1,4 +1,10 @@
 import React from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
+import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
+import { useSelector } from 'react-redux'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
+
 import {
   Box,
   Stack,
@@ -9,11 +15,6 @@ import {
   useDisclosure
 
 } from '@chakra-ui/react'
-import { useAuth0 } from '@auth0/auth0-react'
-import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
-import { useSelector } from 'react-redux'
-import { HamburgerIcon } from '@chakra-ui/icons'
-import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
 
 const Header = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -30,7 +31,9 @@ const Header = (props) => {
 
   function handleLogoff (event) {
     event.preventDefault()
-    logout()
+    logout({
+      returnTo: window.location.origin
+    })
   }
 
   function handleRegister (event) {
@@ -39,58 +42,101 @@ const Header = (props) => {
   }
 
   return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
-      padding={6}
-      bg="teal.500"
-      color="white"
-      {...props}
-    >
-      <Flex align="center" mr={5}>
-        <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-          <a>Co_lab</a>
-        </Heading>
-      </Flex>
+    <>
+      <IfAuthenticated>
+        <Flex
+          as="nav"
+          align="center"
+          justify="space-between"
+          wrap="wrap"
+          padding={6}
+          bg="teal.500"
+          color="white"
+          {...props}
+        >
+          <Flex align="center" mr={5}>
+            <Heading as="h1" size="lg" letterSpacing={'tighter'}>
+              <a>Co_lab</a>
+            </Heading>
+          </Flex>
 
-      <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
-        <HamburgerIcon />
-      </Box>
+          <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
+            <HamburgerIcon />
+          </Box>
 
-      <Stack
-        direction={{ base: 'column', md: 'row' }}
-        display={{ base: isOpen ? 'block' : 'none', md: 'flex' }}
-        width={{ base: 'full', md: 'auto' }}
-        alignItems="center"
-        flexGrow={1}
-        mt={{ base: 4, md: 0 }}
-      >
-        <Text>Projects</Text>
-        <a href='/users' className='nav-link'>Users</a>
-        <Text>Examples</Text>
-        <Text>Blog</Text>
-      </Stack>
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            spacing={{ base: 8, md: 1 }}
+            display={{ base: isOpen ? 'block' : 'none', md: 'flex' }}
+            width={{ base: 'full', md: 'auto' }}
+            alignItems="center"
+            flexGrow={1}
+            mt={{ base: 4, md: 0 }}
+          >
+            <a href='/users' className='nav-link'>Pitch an Idea 🧠 </a>
+            <a href='/users' className='nav-link'>Find a Team 🧑🏽‍🤝‍🧑🏻</a>
 
-      <Box
-        display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
-        mt={{ base: 4, md: 0 }}
-      >
+          </Stack>
 
-        <IfAuthenticated>
-          <p>Hello, {user.firstName} {user.roles ? `(${user.roles})` : null}</p>
-          <section className='sign'>
-            <Button
-              variant="outline"
-              _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
-            >
-              <a href='/' onClick={handleLogoff} className='nav-link'>Log out</a>
-            </Button>
-          </section>
-        </IfAuthenticated>
+          <Box
+            display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
+            mt={{ base: 4, md: 0 }}
+          >
 
-        <IfNotAuthenticated>
+            {/* <p>Hey, {user.firstName} </p> */}
+            <section className='sign'>
+              <Button
+                variant="outline"
+                _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+              >
+                <a href='/' onClick={handleLogoff} className='nav-link'>My Co_Lab</a>
+              </Button>
+              <Button
+                variant="outline"
+                _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+              >
+                <a href='/' onClick={handleLogoff} className='nav-link'>Log out</a>
+              </Button>
+            </section>
+          </Box>
+        </Flex>
+      </IfAuthenticated>
+
+      <IfNotAuthenticated>
+        <Flex
+          as="nav"
+          align="center"
+          justify="space-between"
+          wrap="wrap"
+          padding={6}
+          bg="teal.500"
+          color="white"
+          {...props}
+        >
+          <Flex align="center" mr={5}>
+            <Heading as="h1" size="lg" letterSpacing={'tighter'}>
+              <a>Co_lab</a>
+            </Heading>
+          </Flex>
+
+          <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
+            <HamburgerIcon />
+          </Box>
+
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            spacing={{ base: 4, md: 1 }}
+            display={{ base: isOpen ? 'block' : 'none', md: 'flex' }}
+            width={{ base: 'full', md: 'auto' }}
+            alignItems="center"
+            flexGrow={1}
+            mt={{ base: 4, md: 0 }}
+          >
+            <Text>mole</Text>
+            <a href='/users' className='nav-link'>Users</a>
+            <Text>next</Text>
+            <Text>quarri3</Text>
+          </Stack>
           <section className='sign'>
             <Button
               variant="outline"
@@ -105,10 +151,10 @@ const Header = (props) => {
               <a href='/' onClick={handleRegister} className='nav-link'>Register</a>
             </Button>
           </section>
-        </IfNotAuthenticated>
+        </Flex>
+      </IfNotAuthenticated>
 
-      </Box>
-    </Flex>
+    </>
   )
 }
 
