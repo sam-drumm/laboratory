@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { cacheUser } from '../auth0-utils'
 import NewProject from './Projects/NewProject'
 import Users from './Users'
+import Carousel from './Carousel/Carousel'
 import Home from './Home'
 import Projects from './Projects'
 import PingRoutes from './PingRoutes'
@@ -21,6 +22,7 @@ function App () {
         <Route path='/' element={
           <>
             <Home/>
+            {/* <Carousel/> */}
             {/* <Users/>
             <PingRoutes/>
             <Projects/> */}

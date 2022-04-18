@@ -45,6 +45,8 @@ const Header = (props) => {
     <>
       <IfAuthenticated>
         <Flex
+          position="fixed"
+          width="100%"
           as="nav"
           align="center"
           justify="space-between"
@@ -66,15 +68,16 @@ const Header = (props) => {
 
           <Stack
             direction={{ base: 'column', md: 'row' }}
-            spacing={{ base: 8, md: 1 }}
+            spacing={8}
             display={{ base: isOpen ? 'block' : 'none', md: 'flex' }}
             width={{ base: 'full', md: 'auto' }}
             alignItems="center"
             flexGrow={1}
             mt={{ base: 4, md: 0 }}
           >
-            <a href='/users' className='nav-link'>Pitch an Idea 🧠 </a>
-            <a href='/users' className='nav-link'>Find a Team 🧑🏽‍🤝‍🧑🏻</a>
+            <a href='/users' className='nav-link'>Find Teams 🧑🏽‍🤝‍🧑🏻</a>
+            <a href='/users' className='nav-link'>Pitch an Idea 🧠</a>
+            <a href='/users' className='nav-link'>Favorites 💖</a>
 
           </Stack>
 
