@@ -7,6 +7,8 @@ const {
 
 const db = require('../db/projects')
 const router = express.Router()
+const log = require('../logger')
+
 
 module.exports = router
 
@@ -43,20 +45,30 @@ router.post('/', async (req, res) => {
   // }
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const id = Number(req.params.id)
+  //   .then(project => {
+  //     return null
+  //   })
+  //   .catch(err => {
+  //     console.error(err)
+  //     res.status(500).json({ message: 'Something went wrong' })
+  //   })
+  // })
 
-  db.getProjectById(id)
-    .then(project => {
-      res.json(project)
-      return null
+  try {
+    const getProject = await db.getProjectById(id)
+    const project = JSON.parse(JSON.stringify(getProject))
+    return res.json(project)
+  } catch (err) {
+    log(err.message)
+    res.status(500).json({
+      error: {
+        title: 'Unable to retrieve project!'
+      }
     })
-    .catch(err => {
-      console.error(err)
-      res.status(500).json({ message: 'Something went wrong' })
-    })
+  }
 })
-
 // const express = require('express')
 // const checkJwt = require('../auth0')
 // const db = require('../db/projects')

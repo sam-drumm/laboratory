@@ -32,8 +32,8 @@ function App () {
         <Route path='/profile' element={<Profile/>} />
         <Route path='/register' element={<Registration/>} />
         <Route path='/verification' element={<Verification/>} />
-        <Route path='/project/new' element={<NewProject />}/>
-        <Route path='/project/:id' element={<Project />}/>
+        <Route path='/projects/new' element={<NewProject />}/>
+        <Route path='/projects/:id' element={<Project />}/>
       </Routes>
     </div>
   )

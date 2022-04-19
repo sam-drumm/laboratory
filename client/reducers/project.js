@@ -2,7 +2,7 @@ import { SET_PROJECT, CLEAR_PROJECT } from '../actions/project'
 
 const emptyProject = {
   id: null,
-  userId: null,
+  auth0Id: '',
   projectTitle: '',
   category: '',
   description: '',

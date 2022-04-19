@@ -1,4 +1,4 @@
-import { addProjects, getProjects } from '../apis/projects'
+import { addProjects, getProjectById, getProjects } from '../apis/projects'
 
 export const SET_PROJECT = 'SET_PROJECT'
 export const SET_PROJECTS = 'SET_PROJECTS'
@@ -8,14 +8,14 @@ export const CLEAR_PROJECTS = 'CLEAR_PROJECTS'
 export function setProject (project) {
   return {
     type: SET_PROJECT,
-    project
+    project: project
   }
 }
 
 export function setProjects (projects) {
   return {
     type: SET_PROJECTS,
-    projects
+    projects: projects
   }
 }
 
@@ -37,6 +37,19 @@ export function fetchProjects () {
       .then(projects => {
         dispatch(setProjects(projects))
         return null
+      })
+  }
+}
+
+export function fetchProject (id) {
+  return dispatch => {
+    return getProjectById(id)
+      .then(project => {
+        dispatch(setProject(project))
+        return null
+      })
+      .catch(err => {
+        console.error(err)
       })
   }
 }
