@@ -2,6 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('projects', table => {
     table.increments('id').primary()
     table.string('auth0_id').references('users.hash')
+    table.string('project_title')
     table.string('category')
     table.string('description')
     table.string('seeking')

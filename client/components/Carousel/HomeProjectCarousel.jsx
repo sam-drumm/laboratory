@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { showError } from '../../actions/error'
+
 import Carousel from './Carousel'
-import { capsFirst } from './utils'
 import {
   Button,
   Flex,
@@ -8,67 +10,104 @@ import {
   Text,
   VStack,
   HStack,
-  Tag
+  Tag,
+  useBreakpointValue
 } from '@chakra-ui/react'
+import { getAllProjects } from '../Projects/projectsHelper'
+import { capsFirst } from '../utils'
 
 export default function HomeProjectCarousel () {
   const [data, setData] = useState([])
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts/')
-      .then((res) => res.json())
-      .then((res) => setData(res))
-    return null
+    getAllProjects()
+      .then(projects => {
+        setData(projects)
+        return null
+      })
+      .catch(err => {
+        dispatch(showError(err.message))
+        return false
+      })
   }, [])
 
   return (
-    <Carousel gap={32}>
-      {data.slice(5, 15).map((post, index) => (
-        <Flex
-          key={index}
-          boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
-          justifyContent="space-between"
-          flexDirection="column"
-          overflow="hidden"
-          color="gray.300"
-          bg="base.d100"
-          rounded={5}
-          flex={1}
-          p={5}
-        >
-          <VStack mb={6}>
-            <Heading
-              fontSize={{ base: 'xl', md: '2xl' }}
-              textAlign="left"
-              w="full"
-              mb={2}
-            >
-              {capsFirst(post.title)}
-            </Heading>
-            <Text w="full">{capsFirst(post.body)}</Text>
-          </VStack>
+    <>
+      <Flex p={8} flex={1} align={'left'} justify={'left'}>
+        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+          <Text
+            left={1}
+            as={'span'}
+            position={'relative'}
+            _after={{
+              content: "''",
+              width: 'full',
+              height: useBreakpointValue({ base: '20%', md: '30%' }),
+              position: 'absolute',
+              bottom: 1,
+              left: 0,
+              bg: 'blue.400',
+              zIndex: -1
+            }}
+          >
+          Mole
+          </Text>
 
-          <Flex justifyContent="space-between">
-            <HStack spacing={2}>
-              <Tag size="sm" variant="outline" colorScheme="green">
+        </Heading>
+      </Flex>
+
+      <Carousel gap={32}>
+        {data.slice(5, 15).map((post, index) => (
+          <Flex
+            key={index}
+            boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
+            justifyContent="space-between"
+            flexDirection="column"
+            overflow="hidden"
+            color="gray.300"
+            bg="base.d100"
+            rounded={5}
+            flex={1}
+            p={5}
+          >
+            <VStack mb={6}>
+              <Heading
+                fontSize={{ base: 'xl', md: '2xl' }}
+                textAlign="left"
+                w="full"
+                mb={2}
+              >
+                {capsFirst(post.project_title)}
+              </Heading>
+              <Text w="full">
+                {capsFirst(post.description)}
+              </Text>
+            </VStack>
+
+            <Flex justifyContent="space-between">
+              <HStack spacing={2}>
+                <Tag size="sm" variant="outline" colorScheme="green">
                       User: {post.userId}
-              </Tag>
-              <Tag size="sm" variant="outline" colorScheme="cyan">
+                </Tag>
+                <Tag size="sm" variant="outline" colorScheme="cyan">
                       Post: {post.id - 5}
-              </Tag>
-            </HStack>
-            <Button
-              onClick={() => alert(`Post ${post.id - 5} clicked`)}
-              colorScheme="green"
-              fontWeight="bold"
-              color="gray.900"
-              size="sm"
-            >
+                </Tag>
+              </HStack>
+              <Button
+                onClick={() => alert(`Post ${post.id - 5} clicked`)}
+                colorScheme="green"
+                fontWeight="bold"
+                color="gray.900"
+                size="sm"
+              >
                     More
-            </Button>
+              </Button>
+            </Flex>
           </Flex>
-        </Flex>
-      ))}
-    </Carousel>
+        ))}
+      </Carousel>
+
+    </>
   )
 }

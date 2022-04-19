@@ -15,8 +15,8 @@ module.exports = router
 
 // POST /api/v1/users/protected
 router.post('/', async (req, res) => {
-  const { auth0Id, category, description, seeking, purpose, started, skillType, skillDescription } = req.body
-  const project = { auth0Id, category, description, seeking, purpose, started, skillType, skillDescription }
+  const { auth0Id, category, description, projectTitle, seeking, purpose, started, skillType, skillDescription } = req.body
+  const project = { auth0Id, category, description, projectTitle, seeking, purpose, started, skillType, skillDescription }
 
   try {
     // await db.addUser(user)
@@ -43,6 +43,20 @@ router.post('/', async (req, res) => {
   // }
 })
 
+router.get('/:id', (req, res) => {
+  const id = Number(req.params.id)
+
+  db.getProjectById(id)
+    .then(project => {
+      res.json(project)
+      return null
+    })
+    .catch(err => {
+      console.error(err)
+      res.status(500).json({ message: 'Something went wrong' })
+    })
+})
+
 // const express = require('express')
 // const checkJwt = require('../auth0')
 // const db = require('../db/projects')
@@ -53,14 +67,26 @@ router.post('/', async (req, res) => {
 
 // // A public endpoint that anyone can access
 // // GET /api/v1/projects
-router.get('/', async (req, res) => {
-  try {
-    const projects = await db.getProjects()
-    res.json({ projects })
-  } catch (err) {
-    console.error(err)
-    res.status(500).send(err.message)
-  }
+// router.get('/', async (req, res) => {
+//   try {
+//     const projects = await db.getProjects()
+//     res.json({ projects })
+//   } catch (err) {
+//     console.error(err)
+//     res.status(500).send(err.message)
+//   }
+// })
+
+router.get('/', (req, res) => {
+  db.getProjects()
+    .then(projects => {
+      res.json({ projects })
+      return null
+    })
+    .catch(err => {
+      console.error(err)
+      return res.status(500).json({ message: 'Something went wrong' })
+    })
 })
 
 // // use checkJwt as middleware
