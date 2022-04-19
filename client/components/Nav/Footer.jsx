@@ -5,42 +5,21 @@ import {
   Heading,
   Flex,
   Text,
-  Button,
   useDisclosure
-
 } from '@chakra-ui/react'
-// import { useAuth0 } from '@auth0/auth0-react'
-// import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
-import { useSelector } from 'react-redux'
+
 import { HamburgerIcon } from '@chakra-ui/icons'
-// import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
 
 const Footer = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleToggle = () => (isOpen ? onClose() : onOpen())
-  const user = useSelector(state => state.user)
-  //   const login = getLoginFn(useAuth0)
-  //   const logout = getLogoutFn(useAuth0)
-  //   const register = getRegisterFn(useAuth0)
-
-  //   function handleLogin (event) {
-  //     event.preventDefault()
-  //     login()
-  //   }
-
-  //   function handleLogoff (event) {
-  //     event.preventDefault()
-  //     logout()
-  //   }
-
-  //   function handleRegister (event) {
-  //     event.preventDefault()
-  //     register()
-  //   }
 
   return (
     <Flex
-      as="nav"
+      marginTop={80}
+      as="footer"
+      position="none"
+      bottom={0}
       align="center"
       justify="space-between"
       wrap="wrap"

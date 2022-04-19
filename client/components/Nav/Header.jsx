@@ -45,7 +45,7 @@ const Header = (props) => {
     <>
       <IfAuthenticated>
         <Flex
-          position="fixed"
+          position="static"
           width="100%"
           as="nav"
           align="center"
