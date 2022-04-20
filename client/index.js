@@ -6,6 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { Auth0Provider } from '@auth0/auth0-react'
 
 import Header from './components/Nav/Header'
+import Footer from './components/Nav/Footer'
 import App from './components/App'
 import store from './store'
 import config from './auth_config.json'
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <Router>
             <Header/>
             <App />
+            <Footer />
           </Router>
         </Provider>
       </Auth0Provider>

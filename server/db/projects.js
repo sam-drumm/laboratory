@@ -5,7 +5,8 @@ module.exports = {
   addProject,
   updateProject,
   deleteProject,
-  authorizeUpdate
+  authorizeUpdate,
+  getProjectById
 }
 
 function sort (projectArray) {
@@ -19,8 +20,8 @@ async function getProjects (db = connection) {
 }
 
 async function addProject (input, db = connection) {
-  const { auth0Id, category, description, seeking, purpose, started, skillType, skillDescription } = input
-  const project = { auth0_id: auth0Id, category, description, seeking, purpose, started, skill_type: skillType, skill_description: skillDescription }
+  const { auth0Id, category, projectTitle, description, seeking, purpose, started, skillType, skillDescription } = input
+  const project = { auth0_id: auth0Id, category, project_title: projectTitle, description, seeking, purpose, started, skill_type: skillType, skill_description: skillDescription }
   return db('projects')
     .insert(project)
     .then(() => db)
@@ -62,4 +63,11 @@ function authorizeUpdate (project, auth0Id) {
   if (project.added_by_user !== auth0Id) {
     throw new Error('Unauthorized')
   }
+}
+
+function getProjectById (id, db = connection) {
+  return db('Projects')
+    .where('id', id)
+    .first()
+    // .select()
 }

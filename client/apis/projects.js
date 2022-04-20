@@ -13,3 +13,10 @@ export function addProjects (project) {
   return request.post(rootUrl + '/projects')
     .send(project)
 }
+
+export function getProjectById (id, token) {
+  return request
+    .get(`${rootUrl}/projects/${id}`)
+    .set('authorization', `Bearer ${token}`)
+    .then(res => res.body)
+}
