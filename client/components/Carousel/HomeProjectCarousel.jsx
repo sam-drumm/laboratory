@@ -34,7 +34,6 @@ export default function HomeProjectCarousel () {
       })
   }, [])
 
-
   return (
     <>
       <Flex p={8} flex={1} align={'left'} justify={'left'}>

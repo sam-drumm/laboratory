@@ -14,13 +14,12 @@ import {
   Stack,
   Radio,
   RadioGroup,
-  Textarea,
-  FormHelperText,
-  FormErrorMessage
+  Textarea
+
 } from '@chakra-ui/react'
 
 function NewProject () {
-  const { auth0Id, token, id } = useSelector(state => state.user)
+  const { auth0Id, token } = useSelector(state => state.user)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()

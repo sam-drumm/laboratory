@@ -26,8 +26,6 @@ export default function Project (props) {
     skillDescription
   } = project
 
-
-
   return (
 
     <Flex width="full" align="center" justifyContent="center" >
