@@ -14,9 +14,9 @@ export function addProjects (project) {
     .send(project)
 }
 
-export function getProjectById (id) {
+export function getProjectById (id, token) {
   return request
     .get(`${rootUrl}/projects/${id}`)
-    // .set('authorization', `Bearer ${token}`)
+    .set('authorization', `Bearer ${token}`)
     .then(res => res.body)
 }

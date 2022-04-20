@@ -66,7 +66,8 @@ function authorizeUpdate (project, auth0Id) {
 }
 
 function getProjectById (id, db = connection) {
-  return db('projects')
+  return db('Projects')
     .where('id', id)
-    .select()
+    .first()
+    // .select()
 }

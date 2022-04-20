@@ -8,7 +8,7 @@ export const CLEAR_PROJECTS = 'CLEAR_PROJECTS'
 export function setProject (project) {
   return {
     type: SET_PROJECT,
-    project: project
+    project
   }
 }
 
@@ -41,9 +41,11 @@ export function fetchProjects () {
   }
 }
 
-export function fetchProject (id) {
+// GET project by ID
+
+export function fetchProject (id, token) {
   return dispatch => {
-    return getProjectById(id)
+    return getProjectById(id, token)
       .then(project => {
         dispatch(setProject(project))
         return null
