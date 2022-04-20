@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { showError } from '../../actions/error'
 
 import Carousel from './Carousel'
@@ -19,6 +20,7 @@ import { capsFirst } from '../utils'
 export default function HomeProjectCarousel () {
   const [data, setData] = useState([])
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     getAllProjects()
@@ -31,6 +33,7 @@ export default function HomeProjectCarousel () {
         return false
       })
   }, [])
+
 
   return (
     <>
@@ -88,14 +91,14 @@ export default function HomeProjectCarousel () {
             <Flex justifyContent="space-between">
               <HStack spacing={2}>
                 <Tag size="sm" variant="outline" colorScheme="green">
-                      User: {post.userId}
+                      Category: {post.category}
                 </Tag>
                 <Tag size="sm" variant="outline" colorScheme="cyan">
-                      Post: {post.id - 5}
+                      Location: {post.id - 5}
                 </Tag>
               </HStack>
               <Button
-                onClick={() => alert(`Post ${post.id - 5} clicked`)}
+                onClick={() => navigate(`./projects/${post.id - 5}`)}
                 colorScheme="green"
                 fontWeight="bold"
                 color="gray.900"

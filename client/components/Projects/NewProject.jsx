@@ -59,7 +59,6 @@ function NewProject () {
     }
   }
 
-
   return (
     <Flex width="full" align="center" justifyContent="center" >
       <Box
