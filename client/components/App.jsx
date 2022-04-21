@@ -12,6 +12,7 @@ import Registration from './Register/Registration'
 import Profile from './Register/Profile'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import Verification from './Register/Verification'
+import AddressForm from './Address/AddressForm'
 
 function App () {
   const navigate = useNavigate()
@@ -34,6 +35,7 @@ function App () {
         <Route path='/verification' element={<Verification/>} />
         <Route path='/projects/new' element={<NewProject />}/>
         <Route path='/projects/:id' element={<Project />}/>
+        <Route path='/address' element={<AddressForm />}/>
       </Routes>
     </div>
   )

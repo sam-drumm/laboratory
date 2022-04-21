@@ -36,7 +36,8 @@ export default function HomeProjectCarousel () {
 
   return (
     <>
-      <Flex p={8} flex={1} align={'left'} justify={'left'}>
+
+      {/* <Flex p={8} flex={1} align={'left'} justify={'left'}>
         <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
           <Text
             left={1}
@@ -57,7 +58,7 @@ export default function HomeProjectCarousel () {
           </Text>
 
         </Heading>
-      </Flex>
+      </Flex> */}
 
       <Carousel gap={32}>
         {data.slice(5, 15).map((post, index) => (

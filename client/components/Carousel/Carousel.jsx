@@ -23,6 +23,7 @@ import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons'
 import { motion, useAnimation, useMotionValue } from 'framer-motion'
 import { percentage } from '../utils'
 import useBoundingRect from './useBoundingRect'
+import colabTheme from '../../styles/colabTheme'
 
 const MotionFlex = motion(Flex)
 
@@ -48,7 +49,7 @@ const Carousel = ({ children, gap }) => {
     [children, itemWidth, gap]
   )
 
-  const { breakpoints } = useTheme()
+  const { breakpoints } = useTheme(colabTheme)
 
   const [isBetweenBaseAndMd] = useMediaQuery(
       `(min-width: ${breakpoints.base}) and (max-width: ${breakpoints.md})`
@@ -162,7 +163,7 @@ const Slider = ({
     <>
       <Box
         ref={ref}
-        w={{ base: '100%', md: `calc(100% + ${gap}px)` }}
+        w={{ base: '90%', md: `calc(90% + ${gap}px)` }}
         ml={{ base: 0, md: `-${gap / 2}px` }}
         px={`${gap / 2}px`}
         position="relative"
@@ -191,7 +192,11 @@ const Slider = ({
         {children}
       </Box>
 
-      <Flex w={`${itemWidth}px`} mt={`${gap / 2}px`} mx="auto">
+      <Flex
+        w={`${itemWidth}px`}
+        mt={`${gap / 2}px`}
+        mx="auto"
+      >
         <Button
           onClick={handleDecrementClick}
           onFocus={handleFocus}

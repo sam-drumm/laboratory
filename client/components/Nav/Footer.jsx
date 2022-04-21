@@ -17,8 +17,10 @@ const Footer = (props) => {
   return (
     <Flex
       marginTop={80}
+
       as="footer"
-      position="none"
+      width="100%"
+      position="sticky"
       bottom={0}
       align="center"
       justify="space-between"
