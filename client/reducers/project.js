@@ -11,7 +11,8 @@ const emptyProject = {
   teamEstablished: '',
   started: '',
   skillType: '',
-  skillDescription: ''
+  skillDescription: '',
+  region: ''
 }
 
 export default function project (state = emptyProject, action) {

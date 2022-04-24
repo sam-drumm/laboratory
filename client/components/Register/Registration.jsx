@@ -26,6 +26,21 @@ const registerSchema = Yup.object().shape({
     .max(20, 'Sorry, this must be under 20 characters long')
 })
 
+
+{
+  "street_number": "102",
+  "street": "Metehau Street",
+  "locality": "Marshland",
+  "city": "Christchurch",
+  "region": "Canterbury",
+  "postcode": "8083",
+  "meshblock": "4009482",
+  "lon": 172.664203,
+  "lat": -43.465657,
+  "formatted": "102 Metehau Street, Marshland, Christchurch"
+}
+
+
 function Registration () {
   const authUser = useAuth0().user
   const navigate = useNavigate()

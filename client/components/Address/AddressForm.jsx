@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import AddressSuggest from './AddressSuggest'
 import AddressInput from './AddressInput'
 import request from 'superagent'
+import { getAddressAPI } from '../../apis/address'
 
-const APP_ID_HERE = 'APP_ID_HERE'
-const APP_CODE_HERE = 'APP_CODE_HERE'
+const apiKey = 'XO9YG5MdhFek5S4qFzQxjg'
+
+// const result = getAddressAPI(q)
+// console.log(result)
 
 class AddressForm extends Component {
   constructor (props) {
@@ -14,10 +17,13 @@ class AddressForm extends Component {
 
     // User has entered something in the address bar
     this.onQuery = this.onQuery.bind(this)
+
     // User has entered something in an address field
     this.onAddressChange = this.onAddressChange.bind(this)
+
     // User has clicked the check button
     this.onCheck = this.onCheck.bind(this)
+
     // User has clicked the clear button
     this.onClear = this.onClear.bind(this)
   }
@@ -31,10 +37,12 @@ class AddressForm extends Component {
     }
 
     const self = this
-    request.get('https://api.addressable.co.nz/v2/profile',
+    // getAddressAPI(res)
+    request.get('https://api.addressable.co.nz/v2/autocomplete',
       {
         params: {
-          api_key: 'XO9YG5MdhFek5S4qFzQxjg'
+          api_key: apiKey,
+          country_code: 'nz'
         //   app_code: APP_CODE_HERE,
         //   query: query,
         //   maxresults: 1
@@ -53,6 +61,9 @@ class AddressForm extends Component {
         self.setState(state)
       }
     })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 
   getInitialState () {
@@ -87,13 +98,14 @@ class AddressForm extends Component {
 
   onCheck (evt) {
     const params = {
-      api_key: 'XO9YG5MdhFek5S4qFzQxjg'
+      api_key: apiKey,
+      country_code: 'nz'
     }
 
     if (this.state.locationId.length > 0) {
       params.locationId = this.state.locationId
     } else {
-      params.searchtext = this.state.address.street +
+      params.q = this.state.address.street +
         this.state.address.city +
         this.state.address.state +
         this.state.address.postalCode +
@@ -101,7 +113,7 @@ class AddressForm extends Component {
     }
 
     const self = this
-    request.get('https://api.addressable.co.nz/v2/profile',
+    request.get('https://api.addressable.co.nz/v2/autocomplete',
       { params: params }
     ).then(function (response) {
       const view = response.data.Response.View

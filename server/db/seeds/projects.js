@@ -16,7 +16,8 @@ exports.seed = function (knex) {
           purpose: 'fun',
           started: 'sdfljs',
           skill_type: 'dfjasdkfj',
-          skill_description: 'dfljasdofi'
+          skill_description: 'dfljasdofi',
+          region: 9
         },
         {
           id: 2,
@@ -28,7 +29,9 @@ exports.seed = function (knex) {
           purpose: 'community',
           started: 'smfnsk',
           skill_type: 'fsmnkf',
-          skill_description: 'sfnsj'
+          skill_description: 'sfnsj',
+          region: 49
+
         },
         {
           id: 3,
@@ -40,7 +43,9 @@ exports.seed = function (knex) {
           purpose: 'commerical',
           started: 'sdsldkfjsfljs',
           skill_type: 'dfjasdsifjsdijkfj',
-          skill_description: 'fdsijosi'
+          skill_description: 'fdsijosi',
+          region: 48
+
         },
         {
           id: 4,
@@ -52,7 +57,9 @@ exports.seed = function (knex) {
           purpose: 'commerical',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 54
+
         },
         {
           id: 5,
@@ -64,7 +71,9 @@ exports.seed = function (knex) {
           purpose: 'community',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 17
+
         },
         {
           id: 6,
@@ -76,7 +85,9 @@ exports.seed = function (knex) {
           purpose: 'fun',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 1
+
         },
         {
           id: 7,
@@ -88,7 +99,9 @@ exports.seed = function (knex) {
           purpose: 'fun',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 23
+
         },
         {
           id: 8,
@@ -100,7 +113,9 @@ exports.seed = function (knex) {
           purpose: 'community',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 87
+
         },
         {
           id: 9,
@@ -112,7 +127,9 @@ exports.seed = function (knex) {
           purpose: 'community',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 32
+
         },
         {
           id: 10,
@@ -124,7 +141,9 @@ exports.seed = function (knex) {
           purpose: 'commerical',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 1
+
         },
         {
           id: 11,
@@ -136,7 +155,9 @@ exports.seed = function (knex) {
           purpose: 'fun',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 43
+
         },
         {
           id: 12,
@@ -148,7 +169,9 @@ exports.seed = function (knex) {
           purpose: 'fun',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 32
+
         },
         {
           id: 13,
@@ -160,8 +183,12 @@ exports.seed = function (knex) {
           purpose: 'commerical',
           started: 'stuhwtwothw',
           skill_type: 'wjbtwo',
-          skill_description: 'odsifjdoifj'
+          skill_description: 'odsifjdoifj',
+          region: 88
+
         }
       ])
     )
 }
+
+

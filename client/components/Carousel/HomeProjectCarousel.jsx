@@ -94,11 +94,11 @@ export default function HomeProjectCarousel () {
                       Category: {post.category}
                 </Tag>
                 <Tag size="sm" variant="outline" colorScheme="cyan">
-                      Location: {post.id - 5}
+                      Location: {post.region}
                 </Tag>
               </HStack>
               <Button
-                onClick={() => navigate(`./projects/${post.id - 5}`)}
+                onClick={() => navigate(`./projects/${post.id}`)}
                 colorScheme="green"
                 fontWeight="bold"
                 color="gray.900"
