@@ -2,7 +2,7 @@ import request from 'superagent'
 
 // const serverURL = 'http://localhost:3000/api/v1'
 
-export function getAddress (query) {
+export function getAddresses (query) {
   const keyAPI = 'XO9YG5MdhFek5S4qFzQxjg'
   const countryCode = 'nz'
 

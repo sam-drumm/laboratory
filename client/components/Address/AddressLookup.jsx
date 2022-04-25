@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { getAddress } from '../../apis/address'
 import { FormControl, FormLabel, Input, Select } from '@chakra-ui/react'
 
-export default function AddressTest () {
+export default function AddressLookup () {
   const [address, setAddress] = useState('')
   const [data, setData] = useState([])
 
@@ -29,10 +29,10 @@ export default function AddressTest () {
       ...address,
       [e.target.name]: e.target.value
     })
-    this.setAddress = this.address
+    // this.setAddress = this.address
   }
 
-  console.log(address)
+  // console.log(address)
 
   return (
     <FormControl mt={3} isRequired>
@@ -41,13 +41,13 @@ export default function AddressTest () {
         name='address'
         // onChange={(e) => searchData(e.target.value)}
         onChange={handleChange}
-        placeholder="e.g. Mural on K’rd, Build an app for Vege Delivery"
+        placeholder="Search for your address here"
       />
       <Select>
         {data.map((addy) => (
           <option key={addy.key} value={addy.id}>{addy.formatted}</option>
         ))}
-        onSelect={handleSelect}
+        onClick={handleSelect}
       </Select>
     </FormControl>
   )

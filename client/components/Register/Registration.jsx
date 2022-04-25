@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { registerUser } from './registerHelper'
+import { getAddresses } from '../../apis/address'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +13,8 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Button
+  Button,
+  Select
 } from '@chakra-ui/react'
 
 const registerSchema = Yup.object().shape({
@@ -26,35 +28,50 @@ const registerSchema = Yup.object().shape({
     .max(20, 'Sorry, this must be under 20 characters long')
 })
 
-
-{
-  "street_number": "102",
-  "street": "Metehau Street",
-  "locality": "Marshland",
-  "city": "Christchurch",
-  "region": "Canterbury",
-  "postcode": "8083",
-  "meshblock": "4009482",
-  "lon": 172.664203,
-  "lat": -43.465657,
-  "formatted": "102 Metehau Street, Marshland, Christchurch"
-}
-
-
 function Registration () {
   const authUser = useAuth0().user
   const navigate = useNavigate()
+  const [addresses, setAddresses] = useState([])
+  const [data, setData] = useState('')
+
+  async function handleChange (e) {
+    e.preventDefault()
+    if (e.target.value.length > 5) {
+      setData({
+        [e.target.name]: e.target.value
+      })
+    }
+  }
+
+  useEffect(() => {
+    console.log('mole')
+    getAddresses(data)
+      .then(addressList => setAddresses(addressList))
+      .catch(err => console.error(err))
+  }, [data])
 
   const formik = useFormik({
     initialValues: {
       firstName: '',
-      lastName: ''
+      lastName: '',
+      street_number: '',
+      street: '',
+      locality: '',
+      city: '',
+      region: '',
+      postcode: '',
+      meshblock: '',
+      lon: null,
+      lat: null,
+      formatted: ''
     },
     onSubmit: values => {
       registerUser(values, authUser, navigate)
     },
     validationSchema: registerSchema
   })
+
+  console.log(data)
 
   function showAnyErrors (inputName) {
     return formik.errors[inputName] && formik.touched[inputName]
@@ -97,6 +114,20 @@ function Registration () {
               onChange={formik.handleChange}
               placeholder="enter your last name"
             ></Input>
+          </FormControl>
+
+          <FormControl mt={3} isRequired>
+            <FormLabel htmlFor='address'>Address</FormLabel>
+            <Input
+              name='address'
+              onChange={handleChange}
+              placeholder="Search for your address here"
+            />
+            <Select>
+              {addresses.map((address) => (
+                <option key={address.key}>{address.formatted}</option>
+              ))}
+            </Select>
           </FormControl>
 
           <Button

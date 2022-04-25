@@ -12,7 +12,7 @@ import Registration from './Register/Registration'
 import Profile from './Register/Profile'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import Verification from './Register/Verification'
-import AddressTest from './Address/AddressTest'
+import AddressTest from './Address/AddressLookup'
 
 function App () {
   const navigate = useNavigate()
