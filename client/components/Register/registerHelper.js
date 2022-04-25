@@ -9,7 +9,18 @@ export function registerUser (user, authUser, navigateTo, consume = requestor) {
     firstName: user.firstName,
     lastName: user.lastName,
     email: authUser.email,
-    auth0Id: authUser.sub
+    auth0Id: authUser.sub,
+    street_number: user.streetNumber,
+    street: user.street,
+    locality: user.locality,
+    city: user.city,
+    region: user.region,
+    postcode: user.postcode,
+    meshblock: user.meshblock,
+    lon: user.lon,
+    lat: user.lat,
+    formatted: user.formatted
+
   }
   const storeState = getState()
   const { token } = storeState.user

@@ -38,13 +38,13 @@ function Registration () {
     e.preventDefault()
     if (e.target.value.length > 5) {
       setData({
+        ...data,
         [e.target.name]: e.target.value
       })
     }
   }
 
   useEffect(() => {
-    console.log('mole')
     getAddresses(data)
       .then(addressList => setAddresses(addressList))
       .catch(err => console.error(err))
@@ -70,8 +70,6 @@ function Registration () {
     },
     validationSchema: registerSchema
   })
-
-  console.log(data)
 
   function showAnyErrors (inputName) {
     return formik.errors[inputName] && formik.touched[inputName]
@@ -116,16 +114,27 @@ function Registration () {
             ></Input>
           </FormControl>
 
-          <FormControl mt={3} isRequired>
+          <FormControl mt={3}>
             <FormLabel htmlFor='address'>Address</FormLabel>
             <Input
               name='address'
               onChange={handleChange}
               placeholder="Search for your address here"
             />
-            <Select>
-              {addresses.map((address) => (
-                <option key={address.key}>{address.formatted}</option>
+            <Select onSelect={formik.handleChange}>
+              {addresses?.map((address) => (
+                <>
+                  <option key={address.key} value = {formik.values.formatted}>{address.formatted}</option>
+                  <option disabled value={formik.values.street_number}>{address.street_number}</option>
+                  <option disabled value={formik.values.street}>{address.street}</option>
+                  <option disabled value={formik.values.locality}>{address.locality}</option>
+                  <option disabled value={formik.values.city}>{address.city}</option>
+                  <option disabled value={formik.values.region}>{address.region}</option>
+                  <option disabled value={formik.values.postcode}>{address.postcode}</option>
+                  <option disabled value={formik.values.meshblock}>{address.meshblock}</option>
+                  <option disabled value={formik.values.lon}>{address.lon}</option>
+                  <option disabled value={formik.values.lat}>{address.lat}</option>
+                </>
               ))}
             </Select>
           </FormControl>
