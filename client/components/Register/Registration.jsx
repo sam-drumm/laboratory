@@ -31,6 +31,7 @@ const registerSchema = Yup.object().shape({
 function Registration () {
   const authUser = useAuth0().user
   const navigate = useNavigate()
+
   const [addresses, setAddresses] = useState([])
   const [data, setData] = useState('')
 

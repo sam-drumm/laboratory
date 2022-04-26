@@ -18,6 +18,7 @@ import {
   Select
 
 } from '@chakra-ui/react'
+import Category from './Category'
 
 function NewProject () {
   const { auth0Id, token } = useSelector(state => state.user)
@@ -32,9 +33,13 @@ function NewProject () {
   const [purpose, setPurpose] = useState('')
   const [teamEstablished, setTeamEstablished] = useState('')
   const [started, setStarted] = useState('')
-  const [skillType, setSkillType] = useState('')
   const [skillDescription, setSkillDescription] = useState('')
   const [region, setRegion] = useState('')
+  const [selectedItems, setSelectedItems] = useState([])
+
+  const skillType = selectedItems.map(skill =>
+    skill.value
+  )
 
   const form = ({
     auth0Id,
@@ -97,7 +102,7 @@ function NewProject () {
             </RadioGroup>
           </FormControl>
 
-          <FormControl mt={3}>
+          <FormControl mt={3} isRequired>
             <FormLabel htmlFor='region'>Nearest Region</FormLabel>
             <Select
               defaultValue={13}
@@ -344,13 +349,13 @@ function NewProject () {
             <Heading>Skills</Heading>
           </Box>
 
-          <FormControl mt={3} isRequired>
+          <FormControl mt={3}>
             <FormLabel htmlFor='skillType'>Skill Category</FormLabel>
-            <Textarea
-              name='skillCategory'
-              onChange={(e) => setSkillType(e.target.value)}
-              placeholder="e.g. Website, Campaiging, Accountancy"
-            ></Textarea>
+            <Category
+              isRequired
+              setSelectedItems={setSelectedItems}
+              selectedItems={selectedItems}
+            />
           </FormControl>
 
           <FormControl mt={3} isRequired>

@@ -8,8 +8,6 @@ export function registerUser (user, authUser, navigateTo, consume = requestor) {
   const newUser = {
     firstName: user.firstName,
     lastName: user.lastName,
-    email: authUser.email,
-    auth0Id: authUser.sub,
     street_number: user.streetNumber,
     street: user.street,
     locality: user.locality,
@@ -19,7 +17,9 @@ export function registerUser (user, authUser, navigateTo, consume = requestor) {
     meshblock: user.meshblock,
     lon: user.lon,
     lat: user.lat,
-    formatted: user.formatted
+    formatted: user.formatted,
+    email: authUser.email,
+    auth0Id: authUser.sub
 
   }
   const storeState = getState()
