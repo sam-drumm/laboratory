@@ -3,7 +3,7 @@ require('dotenv').config({ path: path.join(__dirname, '../../.env') })
 
 exports.seed = function (knex) {
   return knex('users')
-    .del() // Deletes ALL existing entries
+    .del()
     .then(() =>
       knex('users').insert([
         {
@@ -63,6 +63,7 @@ exports.seed = function (knex) {
           first_name: 'joe',
           last_name: 'smoking',
           email: 'joe@camel.usa',
+
           street_number: '102',
           street: 'Marlborough Ridge Drive',
           locality: 'Fairhall',

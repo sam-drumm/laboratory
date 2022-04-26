@@ -4,20 +4,20 @@ import { setWaiting, clearWaiting } from '../../actions/waiting'
 import { setUser } from '../../actions/user'
 import { showError } from '../../actions/error'
 
-export function registerUser (user, authUser, navigateTo, consume = requestor) {
+export function registerUser (user, address, authUser, navigateTo, consume = requestor) {
   const newUser = {
     firstName: user.firstName,
     lastName: user.lastName,
-    street_number: user.streetNumber,
-    street: user.street,
-    locality: user.locality,
-    city: user.city,
-    region: user.region,
-    postcode: user.postcode,
-    meshblock: user.meshblock,
-    lon: user.lon,
-    lat: user.lat,
-    formatted: user.formatted,
+    street_number: address.streetNumber,
+    street: address.street,
+    locality: address.locality,
+    city: address.city,
+    region: address.region,
+    postcode: address.postcode,
+    meshblock: address.meshblock,
+    lon: address.lon,
+    lat: address.lat,
+    formatted: address.formatted,
     email: authUser.email,
     auth0Id: authUser.sub
 

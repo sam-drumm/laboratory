@@ -34,19 +34,20 @@ function Registration () {
 
   const [addresses, setAddresses] = useState([])
   const [data, setData] = useState('')
+  const [selectedAddress, setSelectedAddress] = useState('')
 
   async function handleChange (e) {
     e.preventDefault()
     if (e.target.value.length > 5) {
       setData({
-        ...data,
         [e.target.name]: e.target.value
       })
     }
   }
 
   useEffect(() => {
-    getAddresses(data)
+    const address = JSON.stringify(data.address)
+    getAddresses(address)
       .then(addressList => setAddresses(addressList))
       .catch(err => console.error(err))
   }, [data])
@@ -54,23 +55,28 @@ function Registration () {
   const formik = useFormik({
     initialValues: {
       firstName: '',
-      lastName: '',
-      street_number: '',
-      street: '',
-      locality: '',
-      city: '',
-      region: '',
-      postcode: '',
-      meshblock: '',
-      lon: null,
-      lat: null,
-      formatted: ''
+      lastName: ''
     },
     onSubmit: values => {
-      registerUser(values, authUser, navigate)
+      registerUser(values, addressObject, authUser, navigate)
     },
     validationSchema: registerSchema
   })
+
+  const addressObject = {
+    street_number: selectedAddress.streetNumber,
+    street: selectedAddress.street,
+    locality: selectedAddress.locality,
+    city: selectedAddress.city,
+    region: selectedAddress.region,
+    postcode: selectedAddress.postcode,
+    meshblock: selectedAddress.meshblock,
+    lon: selectedAddress.lon,
+    lat: selectedAddress.lat,
+    formatted: selectedAddress.formatted
+  }
+
+  console.log(selectedAddress)
 
   function showAnyErrors (inputName) {
     return formik.errors[inputName] && formik.touched[inputName]
@@ -122,19 +128,26 @@ function Registration () {
               onChange={handleChange}
               placeholder="Search for your address here"
             />
-            <Select onSelect={formik.handleChange}>
+            <Select
+              mt={3}
+              variant='outline'
+              onChange={(e) => setSelectedAddress(e.target.value)}
+            >
               {addresses?.map((address) => (
                 <>
-                  <option key={address.key} value = {formik.values.formatted}>{address.formatted}</option>
-                  <option disabled value={formik.values.street_number}>{address.street_number}</option>
-                  <option disabled value={formik.values.street}>{address.street}</option>
-                  <option disabled value={formik.values.locality}>{address.locality}</option>
-                  <option disabled value={formik.values.city}>{address.city}</option>
-                  <option disabled value={formik.values.region}>{address.region}</option>
-                  <option disabled value={formik.values.postcode}>{address.postcode}</option>
-                  <option disabled value={formik.values.meshblock}>{address.meshblock}</option>
-                  <option disabled value={formik.values.lon}>{address.lon}</option>
-                  <option disabled value={formik.values.lat}>{address.lat}</option>
+                  <option
+                    key={address.index}
+                    value={address}
+                  >{address.formatted}</option>
+                  {/* <option disabled hidden onSelect={formik.handleChange} value={formik.values.street_number}>{address.street_number}</option>
+                  <option disabled hidden value={formik.values.street}>{address.street}</option>
+                  <option disabled hidden value={formik.values.locality}>{address.locality}</option>
+                  <option disabled hidden value={formik.values.city}>{address.city}</option>
+                  <option disabled hidden value={formik.values.region}>{address.region}</option>
+                  <option disabled hidden value={formik.values.postcode}>{address.postcode}</option>
+                  <option disabled hidden value={formik.values.meshblock}>{address.meshblock}</option>
+                  <option disabled hidden value={formik.values.lon}>{address.lon}</option>
+                  <option disabled hidden value={formik.values.lat}>{address.lat}</option> */}
                 </>
               ))}
             </Select>
