@@ -34,7 +34,7 @@ function Registration () {
 
   const [addresses, setAddresses] = useState([])
   const [data, setData] = useState('')
-  const [selectedAddress, setSelectedAddress] = useState('')
+  const [selectedAddress, setSelectedAddress] = useState([])
 
   async function handleChange (e) {
     e.preventDefault()
@@ -43,6 +43,11 @@ function Registration () {
         [e.target.name]: e.target.value
       })
     }
+  }
+
+  async function handleSelectedAddress (e) {
+    e.preventDefault()
+    setSelectedAddress(e.target.value)
   }
 
   useEffect(() => {
@@ -58,23 +63,10 @@ function Registration () {
       lastName: ''
     },
     onSubmit: values => {
-      registerUser(values, addressObject, authUser, navigate)
+      registerUser(values, selectedAddress, authUser, navigate)
     },
     validationSchema: registerSchema
   })
-
-  const addressObject = {
-    street_number: selectedAddress.streetNumber,
-    street: selectedAddress.street,
-    locality: selectedAddress.locality,
-    city: selectedAddress.city,
-    region: selectedAddress.region,
-    postcode: selectedAddress.postcode,
-    meshblock: selectedAddress.meshblock,
-    lon: selectedAddress.lon,
-    lat: selectedAddress.lat,
-    formatted: selectedAddress.formatted
-  }
 
   console.log(selectedAddress)
 
@@ -131,14 +123,16 @@ function Registration () {
             <Select
               mt={3}
               variant='outline'
-              onChange={(e) => setSelectedAddress(e.target.value)}
+              name='address'
+              onSelect={handleSelectedAddress}
             >
               {addresses?.map((address) => (
                 <>
-                  <option
+                  <option value={address}
                     key={address.index}
-                    value={address}
+                    name='address'
                   >{address.formatted}</option>
+
                   {/* <option disabled hidden onSelect={formik.handleChange} value={formik.values.street_number}>{address.street_number}</option>
                   <option disabled hidden value={formik.values.street}>{address.street}</option>
                   <option disabled hidden value={formik.values.locality}>{address.locality}</option>
@@ -147,7 +141,7 @@ function Registration () {
                   <option disabled hidden value={formik.values.postcode}>{address.postcode}</option>
                   <option disabled hidden value={formik.values.meshblock}>{address.meshblock}</option>
                   <option disabled hidden value={formik.values.lon}>{address.lon}</option>
-                  <option disabled hidden value={formik.values.lat}>{address.lat}</option> */}
+                <option disabled hidden value={formik.values.lat}>{address.lat}</option> */}
                 </>
               ))}
             </Select>

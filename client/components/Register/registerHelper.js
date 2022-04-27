@@ -5,10 +5,12 @@ import { setUser } from '../../actions/user'
 import { showError } from '../../actions/error'
 
 export function registerUser (user, address, authUser, navigateTo, consume = requestor) {
+  // console.log(address)
+
   const newUser = {
     firstName: user.firstName,
     lastName: user.lastName,
-    street_number: address.streetNumber,
+    streetNumber: address.streetNumber,
     street: address.street,
     locality: address.locality,
     city: address.city,
@@ -20,7 +22,6 @@ export function registerUser (user, address, authUser, navigateTo, consume = req
     formatted: address.formatted,
     email: authUser.email,
     auth0Id: authUser.sub
-
   }
   const storeState = getState()
   const { token } = storeState.user
