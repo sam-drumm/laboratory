@@ -6,6 +6,7 @@ const emptyProject = {
   projectTitle: '',
   category: '',
   description: '',
+  success: '',
   seeking: '',
   purpose: '',
   teamEstablished: '',

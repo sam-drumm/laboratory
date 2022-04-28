@@ -40,8 +40,8 @@ export default function Category (props) {
 
   return (
     <CUIAutoComplete
-      label={"Choose some skills you're looking for"}
-      placeholder="Type a skill"
+      label={"What are some of the skills you're looking for?"}
+      placeholder="Type to search"
       onCreateItem={handleCreateItem}
       items={pickerItems}
       selectedItems={props.selectedItems}
