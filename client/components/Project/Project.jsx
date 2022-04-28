@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
-import { Box, Heading, Flex, Button, HStack, ButtonGroup, Stack } from '@chakra-ui/react'
+import { Box, Heading, Flex, Button, HStack } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
 
 export default function Project (props) {

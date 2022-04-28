@@ -45,7 +45,7 @@ function Registration () {
     }
   }
 
-  async function handleSelectedAddress (e) {
+  function handleSelectedAddress (e) {
     e.preventDefault()
     setSelectedAddress(e.target.value)
   }
@@ -68,8 +68,6 @@ function Registration () {
     validationSchema: registerSchema
   })
 
-  console.log(selectedAddress)
-
   function showAnyErrors (inputName) {
     return formik.errors[inputName] && formik.touched[inputName]
       ? <p className='inputError'>{formik.errors[inputName]}</p>
@@ -77,9 +75,10 @@ function Registration () {
   }
 
   return (
-    <Flex width="full" align="center" justifyContent="center" >
+    <Flex width="full" align="center" justifyContent="center" marginTop={10}>
       <Box
         p={8}
+        minWidth='500px'
         maxWidth="500px"
         borderWidth={2}
         borderRadius={8}
@@ -91,7 +90,7 @@ function Registration () {
         </Box>
         <form onSubmit={formik.handleSubmit}>
 
-          <FormControl>
+          <FormControl mt={6}>
             <FormLabel htmlFor='firstName'>First Name</FormLabel>
             {showAnyErrors('firstName')}
             <Input
@@ -124,24 +123,17 @@ function Registration () {
               mt={3}
               variant='outline'
               name='address'
-              onSelect={handleSelectedAddress}
+              onChange={handleSelectedAddress}
+              value="none"
+              autocomplete="off"
+              placeholder='Select your address'
             >
               {addresses?.map((address) => (
                 <>
-                  <option value={address}
-                    key={address.index}
+                  <option value={JSON.stringify(address)}
+                    key={address.formatted}
                     name='address'
                   >{address.formatted}</option>
-
-                  {/* <option disabled hidden onSelect={formik.handleChange} value={formik.values.street_number}>{address.street_number}</option>
-                  <option disabled hidden value={formik.values.street}>{address.street}</option>
-                  <option disabled hidden value={formik.values.locality}>{address.locality}</option>
-                  <option disabled hidden value={formik.values.city}>{address.city}</option>
-                  <option disabled hidden value={formik.values.region}>{address.region}</option>
-                  <option disabled hidden value={formik.values.postcode}>{address.postcode}</option>
-                  <option disabled hidden value={formik.values.meshblock}>{address.meshblock}</option>
-                  <option disabled hidden value={formik.values.lon}>{address.lon}</option>
-                <option disabled hidden value={formik.values.lat}>{address.lat}</option> */}
                 </>
               ))}
             </Select>

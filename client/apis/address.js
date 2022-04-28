@@ -12,7 +12,6 @@ export function getAddresses (query) {
     .send()
     .set('Accept', 'application/json')
     .then(res => {
-      console.log(res.body)
       return res.body
     })
     .catch(err => {
