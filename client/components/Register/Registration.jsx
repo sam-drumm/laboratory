@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { registerUser } from './registerHelper'
+import { getAddresses } from '../../apis/address'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +13,8 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Button
+  Button,
+  Select
 } from '@chakra-ui/react'
 
 const registerSchema = Yup.object().shape({
@@ -30,13 +32,38 @@ function Registration () {
   const authUser = useAuth0().user
   const navigate = useNavigate()
 
+  const [addresses, setAddresses] = useState([])
+  const [data, setData] = useState('')
+  const [selectedAddress, setSelectedAddress] = useState([])
+
+  async function handleChange (e) {
+    e.preventDefault()
+    if (e.target.value.length > 5) {
+      setData({
+        [e.target.name]: e.target.value
+      })
+    }
+  }
+
+  function handleSelectedAddress (e) {
+    e.preventDefault()
+    setSelectedAddress(e.target.value)
+  }
+
+  useEffect(() => {
+    const address = JSON.stringify(data.address)
+    getAddresses(address)
+      .then(addressList => setAddresses(addressList))
+      .catch(err => console.error(err))
+  }, [data])
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: ''
     },
     onSubmit: values => {
-      registerUser(values, authUser, navigate)
+      registerUser(values, selectedAddress, authUser, navigate)
     },
     validationSchema: registerSchema
   })
@@ -48,9 +75,10 @@ function Registration () {
   }
 
   return (
-    <Flex width="full" align="center" justifyContent="center" >
+    <Flex width="full" align="center" justifyContent="center" marginTop={10}>
       <Box
         p={8}
+        minWidth='500px'
         maxWidth="500px"
         borderWidth={2}
         borderRadius={8}
@@ -62,7 +90,7 @@ function Registration () {
         </Box>
         <form onSubmit={formik.handleSubmit}>
 
-          <FormControl>
+          <FormControl mt={6}>
             <FormLabel htmlFor='firstName'>First Name</FormLabel>
             {showAnyErrors('firstName')}
             <Input
@@ -82,6 +110,33 @@ function Registration () {
               onChange={formik.handleChange}
               placeholder="enter your last name"
             ></Input>
+          </FormControl>
+
+          <FormControl mt={3}>
+            <FormLabel htmlFor='address'>Address</FormLabel>
+            <Input
+              name='address'
+              onChange={handleChange}
+              placeholder="Search for your address here"
+            />
+            <Select
+              mt={3}
+              variant='outline'
+              name='address'
+              onChange={handleSelectedAddress}
+              value="none"
+              autocomplete="off"
+              placeholder='Select your address'
+            >
+              {addresses?.map((address) => (
+                <>
+                  <option value={JSON.stringify(address)}
+                    key={address.formatted}
+                    name='address'
+                  >{address.formatted}</option>
+                </>
+              ))}
+            </Select>
           </FormControl>
 
           <Button

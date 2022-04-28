@@ -7,7 +7,17 @@ function getUsers (db = connection) {
       'email',
       'first_name as firstName',
       'last_name as lastName',
-      'auth0_id as auth0Id'
+      'auth0_id as auth0Id',
+      'street_number as streetNumber',
+      'street',
+      'locality',
+      'city',
+      'region',
+      'postcode',
+      'meshblock',
+      'lon',
+      'lat',
+      'formatted'
     )
 }
 
@@ -18,7 +28,18 @@ function getUsersByAuth (auth0Id, db = connection) {
       'email',
       'first_name as firstName',
       'last_name as lastName',
-      'auth0_id as auth0Id'
+      'auth0_id as auth0Id',
+      'street_number as streetNumber',
+      'street',
+      'locality',
+      'city',
+      'region',
+      'postcode',
+      'meshblock',
+      'lon',
+      'lat',
+      'formatted'
+
     )
     .where('auth0_id', auth0Id)
     .first()
@@ -37,7 +58,17 @@ function createUser (user, db = connection) {
         first_name: user.firstName,
         last_name: user.lastName,
         email: user.email,
-        auth0_id: user.auth0Id
+        auth0_id: user.auth0Id,
+        street_number: user.streetNumber,
+        street: user.street,
+        locality: user.locality,
+        city: user.city,
+        region: user.region,
+        postcode: user.postcode,
+        meshblock: user.meshblock,
+        lon: user.lon,
+        lat: user.lat,
+        formatted: user.formatted
       })
     })
 }
@@ -52,15 +83,54 @@ function userExists (uid, db = connection) {
 }
 
 function addUser (input, db = connection) {
-  const { auth0Id, firstName, lastName, email } = input
-  const user = { auth0_id: auth0Id, first_name: firstName, last_name: lastName, email }
+  const {
+    auth0Id,
+    firstName,
+    lastName,
+    email,
+    streetNumber,
+    street,
+    locality,
+    city,
+    region,
+    postcode,
+    meshblock,
+    lon,
+    lat,
+    formatted
+  } = input
+  const user = {
+    auth0_id: auth0Id,
+    first_name: firstName,
+    last_name: lastName,
+    email,
+    street_number: streetNumber,
+    street,
+    locality,
+    city,
+    region,
+    postcode,
+    meshblock,
+    lon,
+    lat,
+    formatted
+  }
   return db('users')
     .insert(user)
 }
 
 function getUserById (id, db = connection) {
   return db('users')
-    .select('id', 'auth0_id as auth0Id', 'email', 'first_name as firstName', 'last_name as lastName')
+    .select('id', 'auth0_id as auth0Id', 'email', 'first_name as firstName', 'last_name as lastName', 'street_number: streetNumber',
+      'street',
+      'locality',
+      'city',
+      'region',
+      'postcode',
+      'meshblock',
+      'lon',
+      'lat',
+      'formatted')
     .where('id', id)
     .first()
 }

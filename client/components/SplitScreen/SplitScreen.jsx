@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import {
   Button,
@@ -12,6 +13,8 @@ import {
 } from '@chakra-ui/react'
 
 export default function SplitScreen (props) {
+  const navigate = useNavigate()
+
   return (
 
     <Stack minH={'50vh'} direction={{ base: 'column', md: 'row' }}>
@@ -43,6 +46,7 @@ export default function SplitScreen (props) {
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button
+              onClick={() => navigate(`${props.navOne}`)}
               rounded={'full'}
               bg={'blue.400'}
               color={'white'}
@@ -51,7 +55,10 @@ export default function SplitScreen (props) {
               }}>
               {props.buttonOne}
             </Button>
-            <Button rounded={'full'}>{props.buttonTwo}</Button>
+            <Button
+              onClick={() => navigate(`${props.navTwo}`)}
+              rounded={'full'}>{props.buttonTwo}
+            </Button>
           </Stack>
         </Stack>
       </Flex>

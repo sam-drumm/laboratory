@@ -10,6 +10,8 @@ exports.up = function (knex) {
     table.string('started')
     table.string('skill_type')
     table.string('skill_description')
+    table.string('region')
+    table.timestamp('created_at').defaultTo(knex.fn.now())
   })
 }
 

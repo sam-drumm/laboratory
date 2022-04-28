@@ -7,8 +7,39 @@ const router = express.Router()
 // const checkAdmin = jwtAuthz(['read:my_private_route'], { customScopeKey: 'permissions' })
 
 router.post('/', async (req, res) => {
-  const { auth0Id, firstName, lastName, email } = req.body
-  const user = { auth0Id, firstName, lastName, email }
+  const {
+    auth0Id,
+    firstName,
+    lastName,
+    email,
+    streetNumber,
+    street,
+    locality,
+    city,
+    region,
+    postcode,
+    meshblock,
+    lon,
+    lat,
+    formatted
+  } = req.body
+
+  const user = {
+    auth0Id,
+    firstName,
+    lastName,
+    email,
+    streetNumber,
+    street,
+    locality,
+    city,
+    region,
+    postcode,
+    meshblock,
+    lon,
+    lat,
+    formatted
+  }
 
   try {
     await db.createUser(user)

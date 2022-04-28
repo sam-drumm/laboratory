@@ -5,7 +5,17 @@ const emptyUser = {
   auth0Id: '',
   firstName: '',
   lastName: '',
-  token: ''
+  token: '',
+  streetNumber: '',
+  street: '',
+  locality: '',
+  city: '',
+  region: '',
+  postcode: '',
+  meshblock: '',
+  lon: null,
+  lat: null,
+  formatted: ''
 }
 
 export default function user (state = emptyUser, action) {

@@ -45,7 +45,7 @@ const Header = (props) => {
     <>
       <IfAuthenticated>
         <Flex
-          position="static"
+          position="sticky"
           width="100%"
           as="nav"
           align="center"
@@ -58,7 +58,7 @@ const Header = (props) => {
         >
           <Flex align="center" mr={5}>
             <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-              <a>Co_lab</a>
+              <a href='./'>Co_lab</a>
             </Heading>
           </Flex>
 
@@ -76,7 +76,7 @@ const Header = (props) => {
             mt={{ base: 4, md: 0 }}
           >
             <a href='/users' className='nav-link'>Find Teams 🧑🏽‍🤝‍🧑🏻</a>
-            <a href='/users' className='nav-link'>Pitch an Idea 🧠</a>
+            <a href='/projects/new' className='nav-link'>Pitch an Idea 🧠</a>
             <a href='/users' className='nav-link'>Favorites 💖</a>
 
           </Stack>

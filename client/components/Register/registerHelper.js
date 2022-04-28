@@ -4,10 +4,22 @@ import { setWaiting, clearWaiting } from '../../actions/waiting'
 import { setUser } from '../../actions/user'
 import { showError } from '../../actions/error'
 
-export function registerUser (user, authUser, navigateTo, consume = requestor) {
+export function registerUser (user, selectedAddress, authUser, navigateTo, consume = requestor) {
+  const address = (JSON.parse(selectedAddress))
+
   const newUser = {
     firstName: user.firstName,
     lastName: user.lastName,
+    streetNumber: address.street_number,
+    street: address.street,
+    locality: address.locality,
+    city: address.city,
+    region: address.region,
+    postcode: address.postcode,
+    meshblock: address.meshblock,
+    lon: address.lon,
+    lat: address.lat,
+    formatted: address.formatted,
     email: authUser.email,
     auth0Id: authUser.sub
   }

@@ -20,8 +20,8 @@ async function getProjects (db = connection) {
 }
 
 async function addProject (input, db = connection) {
-  const { auth0Id, category, projectTitle, description, seeking, purpose, started, skillType, skillDescription } = input
-  const project = { auth0_id: auth0Id, category, project_title: projectTitle, description, seeking, purpose, started, skill_type: skillType, skill_description: skillDescription }
+  const { auth0Id, category, projectTitle, description, seeking, purpose, started, skillType, skillDescription, region } = input
+  const project = { auth0_id: auth0Id, category, project_title: projectTitle, description, seeking, purpose, started, skill_type: skillType, skill_description: skillDescription, region }
   return db('projects')
     .insert(project)
     .then(() => db)
