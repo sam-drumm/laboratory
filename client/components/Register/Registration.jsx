@@ -97,7 +97,7 @@ function Registration () {
               name='firstName'
               value={formik.values.firstName}
               onChange={formik.handleChange}
-              placeholder="enter your first name"
+              // placeholder="enter your first name"
             ></Input>
           </FormControl>
 
@@ -108,12 +108,12 @@ function Registration () {
               name='lastName'
               value={formik.values.lastName}
               onChange={formik.handleChange}
-              placeholder="enter your last name"
+              // placeholder="enter your last name"
             ></Input>
           </FormControl>
 
           <FormControl mt={3}>
-            <FormLabel htmlFor='address'>Address</FormLabel>
+            <FormLabel htmlFor='address'>Address search</FormLabel>
             <Input
               name='address'
               onChange={handleChange}
@@ -124,17 +124,13 @@ function Registration () {
               variant='outline'
               name='address'
               onChange={handleSelectedAddress}
-              value="none"
-              autocomplete="off"
               placeholder='Select your address'
             >
               {addresses?.map((address) => (
-                <>
-                  <option value={JSON.stringify(address)}
-                    key={address.formatted}
-                    name='address'
-                  >{address.formatted}</option>
-                </>
+                <option value={JSON.stringify(address)}
+                  key={address.formatted}
+                  name='address'
+                >{address.formatted}</option>
               ))}
             </Select>
           </FormControl>
