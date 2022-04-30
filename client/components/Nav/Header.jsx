@@ -1,7 +1,6 @@
 import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
-import { useSelector } from 'react-redux'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
 
@@ -15,11 +14,11 @@ import {
   useDisclosure
 
 } from '@chakra-ui/react'
+import Waiting from '../Wait/Waiting'
 
-const Header = (props) => {
+export default function Header (props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleToggle = () => (isOpen ? onClose() : onOpen())
-  // const user = useSelector(state => state.user)
   const login = getLoginFn(useAuth0)
   const logout = getLogoutFn(useAuth0)
   const register = getRegisterFn(useAuth0)
@@ -86,8 +85,8 @@ const Header = (props) => {
             mt={{ base: 4, md: 0 }}
           >
 
-            {/* <p>Hey, {user.firstName} </p> */}
             <section className='sign'>
+
               <Button
                 variant="outline"
                 _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
@@ -140,6 +139,7 @@ const Header = (props) => {
             <Text>next</Text>
             <Text>quarri3</Text>
           </Stack>
+
           <section className='sign'>
             <Button
               variant="outline"
@@ -160,5 +160,3 @@ const Header = (props) => {
     </>
   )
 }
-
-export default Header

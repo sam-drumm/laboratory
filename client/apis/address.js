@@ -5,7 +5,6 @@ import request from 'superagent'
 export function getAddresses (query) {
   const keyAPI = 'XO9YG5MdhFek5S4qFzQxjg'
   const countryCode = 'nz'
-  console.log(`https://api.addressable.co.nz/v2/autocomplete?api_key=${keyAPI}&country_code=${countryCode}&q=${query}`)
 
   return request
     .get(`https://api.addressable.co.nz/v2/autocomplete?api_key=${keyAPI}&country_code=${countryCode}&q=${query}`)

@@ -74,6 +74,7 @@ function Registration () {
       : null
   }
 
+
   return (
     <Flex width="full" align="center" justifyContent="center" marginTop={10}>
       <Box

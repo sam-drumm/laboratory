@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProject } from '../../actions/project'
+import { clearWaiting, setWaiting } from '../../actions/waiting'
 
 import {
   Flex,
@@ -59,10 +60,13 @@ function NewProject () {
 
   async function handleSubmit (event) {
     event.preventDefault()
-    console.log(form)
+    dispatch(setWaiting())
     try {
-      dispatch(addProject(form, token))
-      navigate('/')
+      setTimeout(() => {
+        dispatch(addProject(form, token))
+        navigate('/')
+        dispatch(clearWaiting())
+      }, 10000)
     } catch (err) {
       console.error(err)
     }
@@ -77,7 +81,9 @@ function NewProject () {
     >
       <Box
         p={8}
-        minWidth="750px"
+        width="500px"
+        // minWidth="500px"
+        // maxWidth="750px"
         borderWidth={2}
         borderRadius={8}
         boxShadow="lg"
@@ -119,7 +125,7 @@ function NewProject () {
               name='region'
               onChange={(e) => setRegion(e.target.value)}>
 
-              {/* <option value="0">Please select</option> */}
+              <option value="0">Please select</option>
               <option value="4">Northland - Dargaville</option>
               <option value="2">Northland - Kaikohe</option>
               <option value="1">Northland - Kaitaia</option>
@@ -385,7 +391,7 @@ function NewProject () {
             <Textarea
               name='skillDescription'
               onChange={(e) => setSkillDescription(e.target.value)}
-              placeholder="What to want to do with those skills, how will they help acheive you goal?"
+              placeholder="How do you see these skills being used in your project?"
             ></Textarea>
           </FormControl>
 
