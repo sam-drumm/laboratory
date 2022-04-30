@@ -6,7 +6,7 @@ exports.up = function (knex) {
     table.string('category')
     table.string('description')
     table.string('seeking')
-    table.string('purpose')
+    table.string('success')
     table.string('started')
     table.string('skill_type')
     table.string('skill_description')

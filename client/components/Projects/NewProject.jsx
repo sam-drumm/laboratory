@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProject } from '../../actions/project'
+import { clearWaiting, setWaiting } from '../../actions/waiting'
 
 import {
   Flex,
@@ -29,6 +30,7 @@ function NewProject () {
   const [projectTitle, setProjectTitle] = useState('')
   const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
+  const [success, setSuccess] = useState('')
   const [seeking, setSeeking] = useState('')
   const [purpose, setPurpose] = useState('')
   const [teamEstablished, setTeamEstablished] = useState('')
@@ -46,6 +48,7 @@ function NewProject () {
     projectTitle,
     category,
     description,
+    success,
     seeking,
     purpose,
     teamEstablished,
@@ -57,20 +60,30 @@ function NewProject () {
 
   async function handleSubmit (event) {
     event.preventDefault()
-    console.log(form)
+    dispatch(setWaiting())
     try {
-      dispatch(addProject(form, token))
-      navigate('/')
+      setTimeout(() => {
+        dispatch(addProject(form, token))
+        navigate('/')
+        dispatch(clearWaiting())
+      }, 10000)
     } catch (err) {
       console.error(err)
     }
   }
 
   return (
-    <Flex width="full" align="center" justifyContent="center" >
+    <Flex
+      width="full"
+      align="center"
+      justifyContent="center"
+      marginTop={10}
+    >
       <Box
         p={8}
-        maxWidth="500px"
+        width="500px"
+        // minWidth="500px"
+        // maxWidth="750px"
         borderWidth={2}
         borderRadius={8}
         boxShadow="lg"
@@ -87,6 +100,8 @@ function NewProject () {
               name='projectTitle'
               onChange={(e) => setProjectTitle(e.target.value)}
               placeholder="e.g. Mural on K’rd, Build an app for Vege Delivery"
+              type="text"
+              maxLength={75}
             />
 
           </FormControl>
@@ -95,22 +110,22 @@ function NewProject () {
             <FormLabel htmlFor='category' >Category</FormLabel>
             <RadioGroup onChange={setCategory} value={category}>
               <Stack spacing={[1, 5]} direction={['column', 'row']}>
-                <Radio value='1'>Fun</Radio>
-                <Radio value='2'>Application</Radio>
+                <Radio value='1'>Just for Fun</Radio>
+                <Radio value='2'>Commercial</Radio>
                 <Radio value='3'>Community</Radio>
               </Stack>
             </RadioGroup>
           </FormControl>
 
-          <FormControl mt={3} isRequired>
+          <FormControl mt={6} isRequired>
             <FormLabel htmlFor='region'>Nearest Region</FormLabel>
             <Select
-              defaultValue={13}
+              defaultValue={0}
               placeholder='Select you nearest region'
               name='region'
               onChange={(e) => setRegion(e.target.value)}>
 
-              {/* <option value="0">Please select</option> */}
+              <option value="0">Please select</option>
               <option value="4">Northland - Dargaville</option>
               <option value="2">Northland - Kaikohe</option>
               <option value="1">Northland - Kaitaia</option>
@@ -290,37 +305,50 @@ function NewProject () {
           </FormControl>
 
           <Box textAlign="centre" mt={6}>
-            <Heading> Idea Details</Heading>
+            <Heading> Idea details</Heading>
           </Box>
 
           <FormControl mt={3} isRequired>
-            <FormLabel htmlFor='description'>Description</FormLabel>
+            <FormLabel htmlFor='description'>Pitch</FormLabel>
             <Textarea
               name='description'
               onChange={(e) => setDescription(e.target.value)}
-              placeholder='How would you describe your project if you only had 100 words'>
+              placeholder='How would you describe your project if you only had 100 words?'
+              maxLength={500}
+            >
             </Textarea>
           </FormControl>
 
-          <FormControl isRequired>
-            <FormLabel mt={6}htmlFor='seeking' >Looking for</FormLabel>
-            <RadioGroup onChange={setSeeking} value={seeking}>
-              <Stack direction='column'>
-                <Radio value='1'>Partners to develop the idea and share in any future rewards</Radio>
-                <Radio value='2'>Skilled people to develop idea at an agreed rate </Radio>
-                <Radio value='3'>Pro-bono or voluntary contributions</Radio>
-                <Radio value='4'>I just want some people to spitball with and figure out the rest later</Radio>
-              </Stack>
-            </RadioGroup>
+          <FormControl mt={3} isRequired>
+            <FormLabel htmlFor='success'>Sucessful outcome</FormLabel>
+            <Textarea
+              name='description'
+              onChange={(e) => setSuccess(e.target.value)}
+              placeholder='What would it look like to have a sucessful result from this phase of the project? Try to be as specific as possible here.'
+              maxLength={500}
+            >
+            </Textarea>
           </FormControl>
 
-          <FormControl isRequired>
+          {/* <FormControl isRequired>
             <FormLabel mt={6}htmlFor='purpose'>Purpose</FormLabel>
             <RadioGroup onChange={setPurpose} value={purpose}>
               <Stack direction='column'>
                 <Radio value='1'>Community benefit non profit</Radio>
                 <Radio value='2'>For commercialisation</Radio>
                 <Radio value='3'>Just for fun</Radio>
+              </Stack>
+            </RadioGroup>
+          </FormControl> */}
+
+          <FormControl isRequired>
+            <FormLabel mt={6}htmlFor='seeking' >Looking for</FormLabel>
+            <RadioGroup onChange={setSeeking} value={seeking}>
+              <Stack direction='column'>
+                <Radio value='4'>Like-minded people to spitball the idea with.</Radio>
+                <Radio value='3'>Pro-bono or voluntary contributions to help develop idea.</Radio>
+                <Radio value='1'>Commerical partners to develop the idea and take shareholding.</Radio>
+                <Radio value='2'>Skilled people to develop idea at an agreed rate.</Radio>
               </Stack>
             </RadioGroup>
           </FormControl>
@@ -350,7 +378,7 @@ function NewProject () {
           </Box>
 
           <FormControl mt={3}>
-            <FormLabel htmlFor='skillType'>Skill Category</FormLabel>
+            <FormLabel htmlFor='skillType'></FormLabel>
             <Category
               isRequired
               setSelectedItems={setSelectedItems}
@@ -363,7 +391,7 @@ function NewProject () {
             <Textarea
               name='skillDescription'
               onChange={(e) => setSkillDescription(e.target.value)}
-              placeholder="Someone to Build a Website"
+              placeholder="How do you see these skills being used in your project?"
             ></Textarea>
           </FormControl>
 
