@@ -6,7 +6,8 @@ module.exports = {
   updateProject,
   deleteProject,
   authorizeUpdate,
-  getProjectById
+  getProjectById,
+  getProjectByAuthId
 }
 
 function sort (projectArray) {
@@ -20,8 +21,8 @@ async function getProjects (db = connection) {
 }
 
 async function addProject (input, db = connection) {
-  const { auth0Id, category, projectTitle, description, seeking, started, skillType, skillDescription, region } = input
-  const project = { auth0_id: auth0Id, category, project_title: projectTitle, description, seeking, started, skill_type: skillType, skill_description: skillDescription, region }
+  const { auth0Id, category, projectTitle, description, seeking, started, skillType, skillDescription, region, success } = input
+  const project = { auth0_id: auth0Id, category, project_title: projectTitle, description, seeking, started, skill_type: skillType, skill_description: skillDescription, region, success }
   return db('projects')
     .insert(project)
     .then(() => db)
@@ -69,5 +70,13 @@ function getProjectById (id, db = connection) {
   return db('Projects')
     .where('id', id)
     .first()
+    // .select()
+}
+
+function getProjectByAuthId (auth0Id, db = connection) {
+  return db('projects')
+    .where('auth0_Id', auth0Id)
+    .select()
+    // .first()
     // .select()
 }

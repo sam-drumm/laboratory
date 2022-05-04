@@ -10,6 +10,7 @@ import Profile from './Register/Profile'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import Verification from './Register/Verification'
 import Category from './Projects/Category'
+import UserHome from './User/UserHome'
 
 function App () {
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ function App () {
           </>
         } />
         <Route path='/profile' element={<Profile/>} />
+        <Route path='/profile/home' element={<UserHome/>} />
         <Route path='/register' element={<Registration/>} />
         <Route path='/verification' element={<Verification/>} />
         <Route path='/projects/new' element={<NewProject />}/>
