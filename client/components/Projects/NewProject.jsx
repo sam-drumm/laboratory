@@ -78,6 +78,7 @@ function NewProject () {
       align="center"
       justifyContent="center"
       marginTop={10}
+      marginBottom={1000}
     >
       <Box
         p={8}

@@ -16,11 +16,11 @@ const Footer = (props) => {
 
   return (
     <Flex
-      marginTop={80}
-
+      flex="auto"
+      // marginTop={80}
       as="footer"
       width="100%"
-      position="sticky"
+      position="fixed"
       bottom={0}
       align="center"
       justify="space-between"
@@ -48,10 +48,10 @@ const Footer = (props) => {
         flexGrow={1}
         mt={{ base: 4, md: 0 }}
       >
-        <Text>Projects</Text>
-        <a href='/users' className='nav-link'>Users</a>
-        <Text>Examples</Text>
-        <Text>Blog</Text>
+        <Text>Example</Text>
+        <a href='/users' className='nav-link'>Example</a>
+        <Text>Example</Text>
+        <Text>Example</Text>
       </Stack>
 
       <Box
