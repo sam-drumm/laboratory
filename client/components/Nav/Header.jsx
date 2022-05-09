@@ -93,6 +93,14 @@ export default function Header (props) {
               >
                 <a href='/' onClick={handleLogoff} className='nav-link'>My Co_Lab</a>
               </Button>
+
+              <Button
+                variant="outline"
+                _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+              >
+                <a href='/' onClick={handleLogoff} className='nav-link'>Messages</a>
+              </Button>
+
               <Button
                 variant="outline"
                 _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}

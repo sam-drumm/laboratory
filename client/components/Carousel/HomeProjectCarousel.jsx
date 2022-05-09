@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react'
 import { getAllProjects } from '../Projects/projectsHelper'
 import { capsFirst } from '../utils'
+import CountdownTimer from '../Countdown/CountdownTimer'
 
 export default function HomeProjectCarousel () {
   const [data, setData] = useState([])
@@ -33,6 +34,8 @@ export default function HomeProjectCarousel () {
         return false
       })
   }, [])
+
+  const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
 
   return (
     <>
@@ -61,7 +64,7 @@ export default function HomeProjectCarousel () {
       </Flex> */}
 
       <Carousel gap={32}>
-        {data.slice(5, 15).map((post, index) => (
+        {data.slice(5, 15).map((project, index) => (
           <Flex
             key={index}
             boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
@@ -81,30 +84,36 @@ export default function HomeProjectCarousel () {
                 w="full"
                 mb={2}
               >
-                {capsFirst(post.project_title)}
+                {capsFirst(project.project_title)}
               </Heading>
               <Text w="full">
-                {capsFirst(post.description)}
+                {capsFirst(project.description)}
               </Text>
             </VStack>
+
+            <Flex justifyContent="space-around" mb={6}>
+              <CountdownTimer targetDate={
+                (new Date(project.created_at).getTime() + fourteenDaysMS)
+              }/>
+            </Flex>
 
             <Flex justifyContent="space-between">
               <HStack spacing={2}>
                 <Tag size="sm" variant="outline" colorScheme="green">
-                      Category: {post.category}
+                      Category: {project.category}
                 </Tag>
                 <Tag size="sm" variant="outline" colorScheme="cyan">
-                      Location: {post.region}
+                      Location: {project.region}
                 </Tag>
               </HStack>
               <Button
-                onClick={() => navigate(`./projects/${post.id}`)}
+                onClick={() => navigate(`./projects/${project.id}`)}
                 colorScheme="green"
                 fontWeight="bold"
                 color="gray.900"
                 size="sm"
               >
-                    More
+                    Find out more
               </Button>
             </Flex>
           </Flex>

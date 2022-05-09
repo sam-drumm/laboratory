@@ -11,6 +11,7 @@ export default function Project (props) {
   const { id } = useParams()
   const { token } = useSelector(state => state.user)
   const project = useSelector(state => state.project)
+
   const {
     project_title: projectTitle,
     region,
@@ -25,8 +26,8 @@ export default function Project (props) {
     created_at: createdAt
   } = project
 
-  const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
   const createdMS = new Date(createdAt).getTime()
+  const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
   const expiryMS = createdMS + fourteenDaysMS
 
   useEffect(() => {
