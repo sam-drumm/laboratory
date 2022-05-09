@@ -78,3 +78,13 @@ router.get('/', (req, res) => {
       return res.status(500).json({ message: 'Something went wrong' })
     })
 })
+
+router.get('/user/auth', async (req, res) => {
+  try {
+    const projectByUser = await db.getProjectByAuthId(req.query.query)
+    res.json({ projectByUser })
+  } catch (err) {
+    console.error('error bro')
+    res.status(500).send(err.message)
+  }
+})

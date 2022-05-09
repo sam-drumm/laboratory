@@ -1,19 +1,15 @@
-// carosel if authid === state.user.auth0-id
-
-import { getProjectByAuthId } from '../../../server/db/projects'
 import React, { useState, useEffect } from 'react'
-// import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { getProjectByAuthId } from '../../apis/projects'
 
 export default function UserHome () {
-  const [userprojects, setUserProjects] = useState([])
-  const auth0id = useSelector(state => state.user.auth0id)
-  //   const dispatch = useDispatch()
-  //   const navigate = useNavigate()
+  const [userProjects, setUserProjects] = useState([])
+  const { auth0Id, token } = useSelector(state => state.user)
 
   useEffect(() => {
-    getProjectByAuthId(auth0id)
+    getProjectByAuthId(auth0Id, token)
       .then(projects => {
+        // console.log(projects)
         setUserProjects(projects)
         return null
       })
@@ -21,16 +17,25 @@ export default function UserHome () {
         console.error(err)
         return false
       })
-  }, [])
+  }, [auth0Id])
 
-  return (
-    <>
-      {userprojects.map((project) => (
-        <>
-          {project.seeking}
-        </>)
-      )}
-    </>
+  console.log(userProjects.projectByUser)
 
-  )
+  if (auth0Id) {
+    return (
+      <>
+        <p>Holy Moley</p>
+        {userProjects.projectByUser.map(project => (
+          <>
+            {project.project_title}
+          </>)
+        )}
+      </>
+
+    )
+  } else {
+    return (
+      <p>Mole</p>
+    )
+  }
 }

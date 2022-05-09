@@ -60,23 +60,23 @@ async function deleteProject (id, auth0Id, db = connection) {
     .then(sort)
 }
 
-function authorizeUpdate (project, auth0Id) {
-  if (project.added_by_user !== auth0Id) {
-    throw new Error('Unauthorized')
-  }
-}
-
-function getProjectById (id, db = connection) {
+async function getProjectById (id, db = connection) {
   return db('Projects')
     .where('id', id)
     .first()
     // .select()
 }
 
-function getProjectByAuthId (auth0Id, db = connection) {
-  return db('projects')
-    .where('auth0_Id', auth0Id)
-    .select()
+async function getProjectByAuthId (auth0Id, db = connection) {
+  console.log('hello sam', auth0Id)
+  return db('Projects').select()
+    .where('auth0_id', auth0Id)
     // .first()
     // .select()
+}
+
+async function authorizeUpdate (project, auth0Id) {
+  if (project.added_by_user !== auth0Id) {
+    throw new Error('Unauthorized')
+  }
 }

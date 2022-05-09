@@ -11,8 +11,7 @@ const ShowCounter = ({ days, hours, minutes, seconds }) => {
       direction={['column', 'row']}
       borderWidth={2}
       borderRadius={8}
-      // boxShadow="lg"
-      >
+    >
 
       <h2 m={3}>Project pitch will be live for another:</h2>
 

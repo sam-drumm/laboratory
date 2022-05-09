@@ -11,8 +11,8 @@ import {
   Text,
   VStack,
   HStack,
-  Tag,
-  useBreakpointValue
+  Tag
+  // useBreakpointValue
 } from '@chakra-ui/react'
 import { getAllProjects } from '../Projects/projectsHelper'
 import { capsFirst } from '../utils'
