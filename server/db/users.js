@@ -73,6 +73,28 @@ function createUser (user, db = connection) {
     })
 }
 
+function updateUser (user, db = connection) {
+  return db('users')
+    .where('auth0_id', user.auth0Id)
+    .update({
+      first_name: user.firstName,
+      last_name: user.lastName,
+      email: user.email,
+      auth0_id: user.auth0Id,
+      street_number: user.streetNumber,
+      street: user.street,
+      locality: user.locality,
+      city: user.city,
+      region: user.region,
+      postcode: user.postcode,
+      meshblock: user.meshblock,
+      lon: user.lon,
+      lat: user.lat,
+      formatted: user.formatted
+    })
+    .then(() => getUsersByAuth(user.auth0Id, db))
+}
+
 function userExists (uid, db = connection) {
   return db('users')
     .count('id as n')
@@ -140,5 +162,6 @@ module.exports = {
   addUser,
   getUserById,
   createUser,
-  getUsersByAuth
+  getUsersByAuth,
+  updateUser
 }

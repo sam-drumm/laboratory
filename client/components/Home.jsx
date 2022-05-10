@@ -9,7 +9,9 @@ export default function Home () {
       <SplitScreen
         header="Connecting people"
         tag="to do awesome things"
-        message="Co_lab was made to connect people who to work with people who take cool ideas and make them happen"
+        message="Dreams are for free but finding the people and skills to make them happen.
+
+        Co_lab was built to connect people and turn cool ideas into reality."
         buttonOne="Pitch your idea"
         navOne='./projects/new'
         buttonTwo="How it works"
@@ -17,7 +19,10 @@ export default function Home () {
         image='https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
       />
       <HomeProjectCarousel/>
-      <Grid/>
+      <Grid
+        headline="Mole"
+        following="Next"
+      />
     </>
   )
 }

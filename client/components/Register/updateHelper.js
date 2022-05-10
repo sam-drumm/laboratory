@@ -4,7 +4,7 @@ import { setWaiting, clearWaiting } from '../../actions/waiting'
 import { setUser } from '../../actions/user'
 import { showError } from '../../actions/error'
 
-export function registerUser (user, selectedAddress, authUser, navigateTo, consume = requestor) {
+export function updateUser (user, selectedAddress, authUser, navigateTo, consume = requestor) {
   const address = (JSON.parse(selectedAddress))
 
   const newUser = {
@@ -28,12 +28,12 @@ export function registerUser (user, selectedAddress, authUser, navigateTo, consu
 
   dispatch(setWaiting())
 
-  return consume('/users', token, 'post', newUser)
+  return consume('/users', token, 'patch', newUser)
     .then((res) => {
       const newUser = res.body
       newUser.token = token
       dispatch(setUser(newUser))
-      navigateTo('/')
+      navigateTo('/profile/home')
       return newUser
     })
     .catch((err) => {

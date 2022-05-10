@@ -14,7 +14,6 @@ import {
   useDisclosure
 
 } from '@chakra-ui/react'
-import Waiting from '../Wait/Waiting'
 
 export default function Header (props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -91,14 +90,8 @@ export default function Header (props) {
                 variant="outline"
                 _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
               >
-                <a href='/' onClick={handleLogoff} className='nav-link'>My Co_Lab</a>
-              </Button>
-
-              <Button
-                variant="outline"
-                _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
-              >
-                <a href='/' onClick={handleLogoff} className='nav-link'>Messages</a>
+                <a href='/profile/home'
+                  className='nav-link'>My Co_Lab</a>
               </Button>
 
               <Button
