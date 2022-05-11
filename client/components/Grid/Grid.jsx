@@ -1,7 +1,10 @@
 import React from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
+import { getRegisterFn } from '../../auth0-utils'
 
 import {
   Box,
+  Button,
   Container,
   Heading,
   SimpleGrid,
@@ -12,8 +15,15 @@ import {
   VStack,
   useBreakpointValue
 } from '@chakra-ui/react'
+import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
 
 export default function Grid (props) {
+  const register = getRegisterFn(useAuth0)
+  function handleRegister (event) {
+    event.preventDefault()
+    register()
+  }
+
   return (
     <Box p={4} paddingBottom="250px">
       <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
@@ -46,12 +56,12 @@ export default function Grid (props) {
         </Text>
       </Stack>
 
-      <Container maxW={'6xl'} mt={10}>
+      <Container maxW={'6xl'} mt={10} paddingBottom="75px">
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
           {props.features.map((feature) => (
             <HStack key={feature.id} align={'top'}>
               <Box color={'green.400'} px={2}>
-                <Icon as={feature.icon} />
+                <Icon as={feature.icon} boxSize="2em"/>
               </Box>
               <VStack align={'start'}>
                 <Text fontWeight={600}>{feature.title}</Text>
@@ -61,6 +71,24 @@ export default function Grid (props) {
           ))}
         </SimpleGrid>
       </Container>
+      <Stack justify='center' direction='row' spacing={4} align='center' mt={8}>
+        <IfAuthenticated>
+          <Button>
+            <a href='./profile/home'> My Co_Lab</a>
+          </Button>
+        </IfAuthenticated>
+        <IfNotAuthenticated>
+          <Button onClick={handleRegister}>
+          Join Now
+          </Button>
+        </IfNotAuthenticated>
+        <Button>
+          Search Project Pitches
+        </Button>
+        <Button>
+          Pitch Your Project
+        </Button>
+      </Stack>
     </Box>
   )
 }

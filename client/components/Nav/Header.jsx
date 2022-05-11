@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useSelector } from 'react-redux'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
@@ -11,11 +12,14 @@ import {
   Flex,
   Text,
   Button,
-  useDisclosure
+  useDisclosure,
+  Icon
 
 } from '@chakra-ui/react'
+import { FcCollaboration, FcGlobe, FcLike } from 'react-icons/fc'
 
 export default function Header (props) {
+  const { firstName } = useSelector(state => state.user)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleToggle = () => (isOpen ? onClose() : onOpen())
   const login = getLoginFn(useAuth0)
@@ -73,9 +77,9 @@ export default function Header (props) {
             flexGrow={1}
             mt={{ base: 4, md: 0 }}
           >
-            <a href='/users' className='nav-link'>Find Teams 🧑🏽‍🤝‍🧑🏻</a>
-            <a href='/projects/new' className='nav-link'>Pitch an Idea 🧠</a>
-            <a href='/users' className='nav-link'>Favorites 💖</a>
+            <a href='/users' className='nav-link'>Find Teams <Icon as={FcCollaboration} boxSize="1.75em"/></a>
+            <a href='/projects/new' className='nav-link'>Pitch an Idea <Icon as={FcGlobe} boxSize="1.75em"/></a>
+            <a href='/users' className='nav-link'>Favorites <Icon as={FcLike} boxSize="1.75em"/></a>
 
           </Stack>
 
@@ -90,15 +94,14 @@ export default function Header (props) {
                 variant="outline"
                 _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
               >
-                <a href='/profile/home'
-                  className='nav-link'>My Co_Lab</a>
+                <a href='/profile/home'>{firstName}'s Co_Lab</a>
               </Button>
 
               <Button
                 variant="outline"
                 _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
               >
-                <a href='/' onClick={handleLogoff} className='nav-link'>Log out</a>
+                <a href='/' onClick={handleLogoff}>Log out</a>
               </Button>
             </section>
           </Box>
