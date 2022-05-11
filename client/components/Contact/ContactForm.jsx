@@ -11,7 +11,8 @@ import {
   Button,
   Textarea,
   InputLeftAddon,
-  InputGroup
+  InputGroup,
+  propNames
 } from '@chakra-ui/react'
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
@@ -32,8 +33,9 @@ const registerSchema = Yup.object().shape({
     .max(255)
 })
 
-function ContactForm () {
-  const navigate = useNavigate()
+function ContactForm (props) {
+
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -42,8 +44,8 @@ function ContactForm () {
       message: ''
     },
     onSubmit: values => {
-      feedbackForm(values, navigate)
-      navigate('./')
+      console.log(values)
+      return null
     },
     validationSchema: registerSchema
   })

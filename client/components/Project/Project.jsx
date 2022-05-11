@@ -5,8 +5,9 @@ import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
 import { Box, Heading, Flex, Button, HStack } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
+import regions from '../utils/regions'
 
-export default function Project (props) {
+export default function Project () {
   const dispatch = useDispatch()
   const { id } = useParams()
   const { token } = useSelector(state => state.user)
@@ -33,6 +34,12 @@ export default function Project (props) {
   useEffect(() => {
     dispatch(fetchProject(id, token))
   }, [])
+
+  function regionLookup ({ region }) {
+    return regions === region
+  }
+
+  console.log(regionLookup)
 
   return (
 
