@@ -17,7 +17,7 @@ const Footer = (props) => {
   return (
     <Flex
       flex="auto"
-      // marginTop={80}
+      marginTop={10}
       as="footer"
       width="100%"
       position="fixed"

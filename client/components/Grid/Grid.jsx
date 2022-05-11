@@ -9,48 +9,38 @@ import {
   Text,
   Stack,
   HStack,
-  VStack
+  VStack,
+  useBreakpointValue
 } from '@chakra-ui/react'
-import { CheckIcon } from '@chakra-ui/icons'
-
-// Replace test data with your own
-// const features = Array.apply(null, Array(8)).map(function (x, i) {
-//   return {
-//     id: i,
-//     title: 'Lorem ipsum dolor sit amet',
-//     text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.'
-//   }
-// })
-
-const features = [
-  {
-    id: 1,
-    title: 'Lorem ipsum dolor sit amet',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.'
-  },
-  {
-    id: 2,
-    title: 'Lorem ipsum dolor sit amet',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.'
-  },
-  {
-    id: 3,
-    title: 'Lorem ipsum dolor sit amet',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.'
-  },
-  {
-    id: 4,
-    title: 'Lorem ipsum dolor sit amet',
-    text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.'
-  }
-
-]
 
 export default function Grid (props) {
   return (
-    <Box p={4}>
+    <Box p={4} paddingBottom="250px">
       <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
-        <Heading fontSize={'3xl'}>{props.headline}</Heading>
+        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+          <Text
+            left={1}
+            as={'span'}
+            position={'relative'}
+            _after={{
+              content: "''",
+              width: 'full',
+              height: useBreakpointValue({ base: '20%', md: '30%' }),
+              position: 'absolute',
+              bottom: 1,
+              left: 0,
+              bg: 'blue.400',
+              zIndex: -1
+            }}
+          >
+            {props.headline}
+          </Text>
+          <br />{' '}
+          <Text color={'blue.400'} as={'span'}>
+            {props.tag}
+          </Text>{' '}
+        </Heading>
+
         <Text color={'gray.600'} fontSize={'xl'}>
           {props.following}
         </Text>
@@ -58,10 +48,10 @@ export default function Grid (props) {
 
       <Container maxW={'6xl'} mt={10}>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
-          {features.map((feature) => (
+          {props.features.map((feature) => (
             <HStack key={feature.id} align={'top'}>
               <Box color={'green.400'} px={2}>
-                <Icon as={CheckIcon} />
+                <Icon as={feature.icon} />
               </Box>
               <VStack align={'start'}>
                 <Text fontWeight={600}>{feature.title}</Text>
