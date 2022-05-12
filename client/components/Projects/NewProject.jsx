@@ -314,7 +314,7 @@ function NewProject () {
             <Textarea
               name='description'
               onChange={(e) => setDescription(e.target.value)}
-              placeholder='How would you describe your project if you only had 100 words?'
+              placeholder='How would you describe your project to others if you only had 100 words?'
               maxLength={500}
             >
             </Textarea>
@@ -325,7 +325,7 @@ function NewProject () {
             <Textarea
               name='description'
               onChange={(e) => setSuccess(e.target.value)}
-              placeholder='What would it look like to have a sucessful result from this phase of the project? Try to be as specific as possible here.'
+              placeholder='What would would end users get if this pitch was sucessful?'
               maxLength={500}
             >
             </Textarea>

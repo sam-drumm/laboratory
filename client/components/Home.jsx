@@ -2,7 +2,6 @@ import React from 'react'
 import SplitScreen from './SplitScreen/SplitScreen'
 import Grid from './Grid/Grid'
 import HomeProjectCarousel from './Carousel/HomeProjectCarousel'
-import { CheckIcon } from '@chakra-ui/icons'
 import { FcGlobe, FcBinoculars, FcAdvertising, FcBullish } from 'react-icons/fc'
 
 const features = [

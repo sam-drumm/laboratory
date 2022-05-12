@@ -38,6 +38,8 @@ export default function Projects (props) {
   //       })
   //   }, [props.auth0Id])
 
+
+
   return (
 <>
           <Flex p={8} flex={1} align={'left'} justify={'left'}>
@@ -94,7 +96,7 @@ export default function Projects (props) {
           <Flex justifyContent="space-between">
             <HStack spacing={2}>
               <Tag size="sm" variant="outline" colorScheme="green">
-            Category: {post.category}
+            Category: {post.category} 
               </Tag>
               <Tag size="sm" variant="outline" colorScheme="cyan">
             Location: {post.region}

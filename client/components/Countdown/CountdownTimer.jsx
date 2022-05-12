@@ -13,7 +13,7 @@ const ShowCounter = ({ days, hours, minutes, seconds }) => {
       borderRadius={8}
     >
 
-      <h2 m={3}>Project closing in:</h2>
+      <h2 m={3}>Pitch ends in:</h2>
 
       <HStack>
         <DateTimeDisplay value={days} type={'Days'} isDanger={days <= 3} />

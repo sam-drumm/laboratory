@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
 import { HamburgerIcon } from '@chakra-ui/icons'
@@ -25,6 +26,7 @@ export default function Header (props) {
   const login = getLoginFn(useAuth0)
   const logout = getLogoutFn(useAuth0)
   const register = getRegisterFn(useAuth0)
+  const navigate = useNavigate()
 
   function handleLogin (event) {
     event.preventDefault()
@@ -60,7 +62,7 @@ export default function Header (props) {
         >
           <Flex align="center" mr={5}>
             <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-              <a href='./'>Co_lab</a>
+              <a onClick={() => navigate('./')}>Co_lab</a>
             </Heading>
           </Flex>
 
@@ -94,7 +96,8 @@ export default function Header (props) {
                 variant="outline"
                 _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
               >
-                <a href='/profile/home'>{firstName}'s Co_Lab</a>
+                {(firstName ? <a href='/profile/home'>{firstName}'s Co_Lab</a> : <a href='/profile/home'>Co_Lab</a>) }
+
               </Button>
 
               <Button
@@ -121,7 +124,7 @@ export default function Header (props) {
         >
           <Flex align="center" mr={5}>
             <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-              <a>Co_lab</a>
+              <a onClick={() => navigate('./')}>Co_lab</a>
             </Heading>
           </Flex>
 

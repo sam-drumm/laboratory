@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { showError } from '../../actions/error'
-import regionLookup from '../utils/regionLookup'
+import { regionLookup, categoryLookup } from '../utils/lookup'
 
 import Carousel from './Carousel'
 import {
@@ -99,10 +99,10 @@ export default function HomeProjectCarousel () {
 
             <Flex justifyContent="space-between">
               <HStack spacing={2}>
-                <Tag size="sm" variant="outline" colorScheme="green">
-                      Category: {project.category}
+                <Tag size="lg" variant="outline" colorScheme="green">
+                  {categoryLookup(project.category)}
                 </Tag>
-                <Tag size="sm" variant="outline" colorScheme="cyan">
+                <Tag size="lg" variant="outline" colorScheme="cyan">
                   {regionLookup(project.region)}
                 </Tag>
               </HStack>
@@ -111,7 +111,7 @@ export default function HomeProjectCarousel () {
                 colorScheme="green"
                 fontWeight="bold"
                 color="gray.900"
-                size="sm"
+                size="lg"
               >
                     Find out more
               </Button>
