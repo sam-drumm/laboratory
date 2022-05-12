@@ -31,3 +31,7 @@ export function getProject (id, user, consume = requestor) {
       dispatch(showError(error.message))
     })
 }
+
+export function getRegion (id) {
+  dispatch(setWaiting())
+}

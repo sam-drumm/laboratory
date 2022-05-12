@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { showError } from '../../actions/error'
+import regionLookup from '../utils/regionLookup'
 
 import Carousel from './Carousel'
 import {
@@ -102,7 +103,7 @@ export default function HomeProjectCarousel () {
                       Category: {project.category}
                 </Tag>
                 <Tag size="sm" variant="outline" colorScheme="cyan">
-                      Location: {project.region}
+                  {regionLookup(project.region)}
                 </Tag>
               </HStack>
               <Button

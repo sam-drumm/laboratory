@@ -5,7 +5,7 @@ import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
 import { Box, Heading, Flex, Button, HStack } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
-import regions from '../utils/regions'
+import regionLookup from '../utils/regionLookup'
 
 export default function Project () {
   const dispatch = useDispatch()
@@ -35,11 +35,7 @@ export default function Project () {
     dispatch(fetchProject(id, token))
   }, [])
 
-  function regionLookup ({ region }) {
-    return regions === region
-  }
-
-  console.log(regionLookup)
+  const regionName = regionLookup(region)
 
   return (
 
@@ -65,7 +61,7 @@ export default function Project () {
           // boxShadow='2xl'
         >
           <Heading>{projectTitle}</Heading>
-          <p>{region}</p>
+          <p>{regionName}</p>
           <p>{category}</p>
           <p>{description}</p>
           <p>{seeking}</p>
