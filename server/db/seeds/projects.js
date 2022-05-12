@@ -15,7 +15,7 @@ exports.seed = function (knex) {
           seeking: 'dsfdsijf',
           success: 'fun',
           started: 'sdfljs',
-          skill_type: [2, 19],
+          skill_type: '2, 19',
           skill_description: 'dfljasdofi',
           region: 9
         },
@@ -28,7 +28,7 @@ exports.seed = function (knex) {
           seeking: 'slkfns',
           success: 'community',
           started: 'smfnsk',
-          skill_type: [10, 18, 1, 6, 8],
+          skill_type: '10, 18, 1, 6, 8',
           skill_description: 'sfnsj',
           region: 49
 
@@ -42,7 +42,7 @@ exports.seed = function (knex) {
           seeking: 'slfdsfdsijf',
           success: 'commerical',
           started: 'sdsldkfjsfljs',
-          skill_type: [10, 13],
+          skill_type: '10, 13',
           skill_description: 'fdsijosi',
           region: 48
 
@@ -56,7 +56,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'commerical',
           started: 'stuhwtwothw',
-          skill_type: [17, 2, 5, 1],
+          skill_type: '17, 2, 5, 1',
           skill_description: 'odsifjdoifj',
           region: 54
 
@@ -70,7 +70,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'community',
           started: 'stuhwtwothw',
-          skill_type: [10, 3, 11, 1],
+          skill_type: '10, 3, 11, 1',
           skill_description: 'odsifjdoifj',
           region: 17
 
@@ -84,7 +84,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'fun',
           started: 'stuhwtwothw',
-          skill_type: [10, 13, 1, 7, 19],
+          skill_type: '10, 13, 1, 7, 19',
           skill_description: 'odsifjdoifj',
           region: 1
 
@@ -98,7 +98,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'fun',
           started: 'stuhwtwothw',
-          skill_type: [1, 2, 4, 6, 13],
+          skill_type: '1, 2, 4, 6, 13',
           skill_description: 'odsifjdoifj',
           region: 23
 
@@ -112,7 +112,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'community',
           started: 'stuhwtwothw',
-          skill_type: [10, 13, 11, 1, 9],
+          skill_type: '10, 13, 11, 1, 9',
           skill_description: 'odsifjdoifj',
           region: 87
 
@@ -126,7 +126,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'community',
           started: 'stuhwtwothw',
-          skill_type: [9, 10, 12, 16],
+          skill_type: '9, 10, 12, 16',
           skill_description: 'odsifjdoifj',
           region: 32
 
@@ -140,7 +140,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'commerical',
           started: 'stuhwtwothw',
-          skill_type: [4, 7],
+          skill_type: '4, 7',
           skill_description: 'odsifjdoifj',
           region: 1
 
@@ -154,7 +154,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'fun',
           started: 'stuhwtwothw',
-          skill_type: [5, 19],
+          skill_type: '5, 19',
           skill_description: 'odsifjdoifj',
           region: 43
 
@@ -168,7 +168,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'fun',
           started: 'stuhwtwothw',
-          skill_type: [11, 14],
+          skill_type: '11, 14',
           skill_description: 'odsifjdoifj',
           region: 32
 
@@ -182,7 +182,7 @@ exports.seed = function (knex) {
           seeking: 'gkastj',
           success: 'commerical',
           started: 'stuhwtwothw',
-          skill_type: [1, 3],
+          skill_type: '1, 3',
           skill_description: 'odsifjdoifj',
           region: 88
         }

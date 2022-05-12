@@ -11,7 +11,7 @@ const emptyProject = {
   purpose: '',
   teamEstablished: '',
   started: '',
-  skillType: '',
+  skillType: [],
   skillDescription: '',
   region: ''
 }

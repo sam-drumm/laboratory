@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CountdownTimer from '../Countdown/CountdownTimer'
@@ -32,8 +32,6 @@ export default function Project () {
   // const skills = JSON.stringify(skillType)
   // console.log(skills)
 
-  console.log(typeof skillType)
-
   const createdMS = new Date(createdAt).getTime()
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
   const expiryMS = createdMS + fourteenDaysMS
@@ -41,6 +39,13 @@ export default function Project () {
   useEffect(() => {
     dispatch(fetchProject(id, token))
   }, [])
+
+  // console.log(skillType)
+  const stringi = JSON.stringify(skillType)
+  // console.log(typeof skillType)
+
+  const changes = stringi.split(',')
+  console.log(changes)
 
   return (
 
@@ -79,8 +84,9 @@ export default function Project () {
           {/* <p>Required skills: {...skills.map((item) => {
             <>{item}</>
           })}</p> */}
-          <p>{skillLookup.apply(skillType)}</p>
+          {/* <p>{skillLookup.apply(skillType)}</p> */}
           <p>{skillDescription}</p>
+          {/* {skillType} */}
 
         </Box>
         <CountdownTimer targetDate={expiryMS}/>
