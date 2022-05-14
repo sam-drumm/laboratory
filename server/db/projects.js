@@ -62,17 +62,25 @@ async function deleteProject (id, auth0Id, db = connection) {
 
 async function getProjectById (id, db = connection) {
   return db('Projects')
+    .select(
+      'id',
+      'project_title as projectTitle',
+      'region',
+      'category',
+      'description',
+      'seeking',
+      'started',
+      'skill_type as skillType',
+      'skill_description as skillDescription',
+      'created_at as createdAt'
+    )
     .where('id', id)
     .first()
-    // .select()
 }
 
 async function getProjectByAuthId (auth0Id, db = connection) {
-  console.log('hello sam', auth0Id)
   return db('Projects').select()
     .where('auth0_id', auth0Id)
-    // .first()
-    // .select()
 }
 
 async function authorizeUpdate (project, auth0Id) {

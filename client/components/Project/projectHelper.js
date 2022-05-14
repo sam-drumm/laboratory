@@ -32,6 +32,11 @@ export function getProject (id, user, consume = requestor) {
     })
 }
 
-export function getRegion (id) {
-  dispatch(setWaiting())
+export async function getRegion (input) {
+  try {
+    const arr = new Array(input.split(','))
+    return arr
+  } catch (error) {
+    console.error(error)
+  }
 }

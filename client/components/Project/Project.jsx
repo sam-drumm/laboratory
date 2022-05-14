@@ -8,29 +8,25 @@ import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
 import { regionLookup, categoryLookup, skillLookup } from '../utils/lookup'
 import { FcCollaboration } from 'react-icons/fc'
 import { capsFirst } from '../utils'
+import CategoryFinder from './CategoryFinder'
 
 export default function Project () {
   const dispatch = useDispatch()
   const { id } = useParams()
   const { token, firstName } = useSelector(state => state.user)
-  const project = useSelector(state => state.project)
+  const [skill, setSkill] = useState('')
 
   const {
-    project_title: projectTitle,
+    projectTitle,
     region,
     category,
     description,
     seeking,
-    purpose,
-    team_established: teamEstablished,
-    skill_type: skillType,
-    skill_description: skillDescription,
-    created_at: createdAt
-  } = project
-
-  // JSON.stringify(skillType)
-  // const skills = JSON.stringify(skillType)
-  // console.log(skills)
+    started,
+    skillType,
+    skillDescription,
+    createdAt
+  } = useSelector(state => state.project)
 
   const createdMS = new Date(createdAt).getTime()
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
@@ -38,19 +34,40 @@ export default function Project () {
 
   useEffect(() => {
     dispatch(fetchProject(id, token))
+    // setSkill(skillType.split(',').map(Number))
+    // const a = skillLookup(skillType)
   }, [])
 
+  useEffect(() => {
+    setSkill(skillType.split(',').map(Number))
+    // skillType.split(',').map(Number)
+    // setSkill(a)
+  }, [createdAt])
+
   // console.log(skillType)
-  const stringi = JSON.stringify(skillType)
   // console.log(typeof skillType)
 
-  const changes = stringi.split(',')
-  console.log(changes)
+  // var mole = a.map((skill) => {
+  //   skillLookup(skill)
+  // })
+
+  console.log(typeof skillType)
+  console.log(skill[0])
+
+  // const a = skill.forEach(element => console.log(element))
+  // console.log(a)
+
+  // function lookup()
+
+  // const c = skillLookup.apply(skill)
+
+  // console.log(c)
 
   return (
 
     <Flex width="full" align="center" justifyContent="center" marginTop={10} marginBottom={10} padding={10}
     >
+
       <Box
         p={8}
         maxWidth="750px"
@@ -77,17 +94,33 @@ export default function Project () {
               <p>Pitched by {firstName}, checkout their profile</p>
             </Button>
           </HStack>
-          <p>{capsFirst(description)}</p>
+          <>
+            <p>Hello{(skillLookup(skill[0]))}</p>
+            {/* {skill.map(skill => <>{skill}</>)} */}
+          </>
+          <p>{description}</p>
           <p>{seeking}</p>
-          <p>{purpose}</p>
-          <p>{teamEstablished}</p>
-          {/* <p>Required skills: {...skills.map((item) => {
+          <p>{started}</p>
+          {/* {skill} */}
+          /
+          {skillType}
+          {/* {
+            seeking.map(function (item, i) {
+              console.log('test')
+              return <p key={i}>Test</p>
+            })
+          } */}
+          {/* <p>{skill?.map((item) => {
             <>{item}</>
           })}</p> */}
-          {/* <p>{skillLookup.apply(skillType)}</p> */}
+          {/* <CategoryFinder
+            items = {skill}
+          /> */}
+          {/* <p>{skillLookup(skillType)}</p>
+          {skillType.map((item) => {
+            skillLookup(item)
+          })} */}
           <p>{skillDescription}</p>
-          {/* {skillType} */}
-
         </Box>
         <CountdownTimer targetDate={expiryMS}/>
         <Button

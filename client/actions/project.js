@@ -8,7 +8,7 @@ export const CLEAR_PROJECTS = 'CLEAR_PROJECTS'
 export function setProject (project) {
   return {
     type: SET_PROJECT,
-    project
+    project: project
   }
 }
 

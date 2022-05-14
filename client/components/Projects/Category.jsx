@@ -21,7 +21,7 @@ const skills = [
   { value: 17, label: 'Storytelling' },
   { value: 18, label: 'iOS Development' },
   { value: 19, label: 'Android Development' },
-  { value: 30, label: 'Neural Networks' }
+  { value: 20, label: 'Neural Networks' }
 ]
 
 export default function Category (props) {
