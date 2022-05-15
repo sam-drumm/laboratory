@@ -18,6 +18,7 @@ import {
 
 } from '@chakra-ui/react'
 import { FcCollaboration, FcGlobe, FcLike } from 'react-icons/fc'
+import Waiting from '../Wait/Waiting'
 
 export default function Header (props) {
   const { firstName } = useSelector(state => state.user)

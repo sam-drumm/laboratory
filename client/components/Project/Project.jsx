@@ -3,18 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
-import { Box, Heading, Tag, Flex, Button, HStack } from '@chakra-ui/react'
+import { Box, Heading, Tag, Flex, Button, HStack, Stack } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
 import { regionLookup, categoryLookup, skillLookup } from '../utils/lookup'
 import { FcCollaboration } from 'react-icons/fc'
-import { capsFirst } from '../utils'
-import CategoryFinder from './CategoryFinder'
 
 export default function Project () {
   const dispatch = useDispatch()
   const { id } = useParams()
   const { token, firstName } = useSelector(state => state.user)
-  const [skill, setSkill] = useState('')
+  const [skill, setSkill] = useState([])
 
   const {
     projectTitle,
@@ -34,34 +32,11 @@ export default function Project () {
 
   useEffect(() => {
     dispatch(fetchProject(id, token))
-    // setSkill(skillType.split(',').map(Number))
-    // const a = skillLookup(skillType)
   }, [])
 
   useEffect(() => {
     setSkill(skillType.split(',').map(Number))
-    // skillType.split(',').map(Number)
-    // setSkill(a)
-  }, [createdAt])
-
-  // console.log(skillType)
-  // console.log(typeof skillType)
-
-  // var mole = a.map((skill) => {
-  //   skillLookup(skill)
-  // })
-
-  console.log(typeof skillType)
-  console.log(skill[0])
-
-  // const a = skill.forEach(element => console.log(element))
-  // console.log(a)
-
-  // function lookup()
-
-  // const c = skillLookup.apply(skill)
-
-  // console.log(c)
+  }, [region])
 
   return (
 
@@ -75,7 +50,6 @@ export default function Project () {
         borderRadius={8}
         boxShadow="lg"
       >
-
         <Box
           textAlign="centre"
           width="full"
@@ -94,33 +68,17 @@ export default function Project () {
               <p>Pitched by {firstName}, checkout their profile</p>
             </Button>
           </HStack>
-          <>
-            <p>Hello{(skillLookup(skill[0]))}</p>
-            {/* {skill.map(skill => <>{skill}</>)} */}
-          </>
+
           <p>{description}</p>
           <p>{seeking}</p>
           <p>{started}</p>
-          {/* {skill} */}
-          /
-          {skillType}
-          {/* {
-            seeking.map(function (item, i) {
-              console.log('test')
-              return <p key={i}>Test</p>
-            })
-          } */}
-          {/* <p>{skill?.map((item) => {
-            <>{item}</>
-          })}</p> */}
-          {/* <CategoryFinder
-            items = {skill}
-          /> */}
-          {/* <p>{skillLookup(skillType)}</p>
-          {skillType.map((item) => {
-            skillLookup(item)
-          })} */}
-          <p>{skillDescription}</p>
+          <HStack mt={4}>
+            {skill.map((item, i) =>
+              <Tag variant='outline'
+                mr={2} size='lg' key={i}>{skillLookup(item)}</Tag>
+            )}
+          </HStack>
+
         </Box>
         <CountdownTimer targetDate={expiryMS}/>
         <Button

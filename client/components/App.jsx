@@ -20,13 +20,7 @@ function App () {
     <div className='app'>
       <Routes>
         <Route path='/' element={
-          <>
-            <Home/>
-            {/* <Carousel/> */}
-            {/* <Users/>
-            <PingRoutes/>
-            <Projects/> */}
-          </>
+          <Home/>
         } />
         <Route path='/profile' element={<Profile/>} />
         <Route path='/profile/home' element={<UserHome/>} />

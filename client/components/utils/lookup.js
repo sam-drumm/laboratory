@@ -169,7 +169,6 @@ function regionLookup (id) {
 }
 
 function skillLookup (skill) {
-  console.log(skill)
   const skills = [
     { value: 1, label: 'Social Media' },
     { value: 2, label: 'Blockchain' },
@@ -192,9 +191,13 @@ function skillLookup (skill) {
     { value: 19, label: 'Android Development' },
     { value: 20, label: 'Neural Networks' }
   ]
-  skills.find(obj => {
-    return obj.value === skill
+
+  const a = skills.map((obj) => {
+    if (obj.value === skill) {
+      return obj.label
+    }
   })
+  return a
 }
 
 module.exports = {
