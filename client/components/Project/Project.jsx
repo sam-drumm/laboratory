@@ -14,7 +14,6 @@ export default function Project () {
   const dispatch = useDispatch()
   const {
     isOpen: isVisible,
-    onClose,
     onOpen
   } = useDisclosure({ defaultIsOpen: false })
   const { id } = useParams()
@@ -34,10 +33,10 @@ export default function Project () {
     createdAt
   } = useSelector(state => state.project)
 
-  // function saveHandler (e) {
-  //   e.preventDefault()
-  //   setResource()
-  // }
+  function saveHandler (e) {
+    e.preventDefault()
+    onOpen()
+  }
 
   const createdMS = new Date(createdAt).getTime()
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
@@ -135,27 +134,18 @@ export default function Project () {
 
             {isVisible ? (
               <Alert status='success'
-                borderRadius={'md'}
-                >
+                borderRadius={'md'}>
                 <AlertIcon />
-                <Box
-                >
+                <Box>
                   <AlertDescription>
           Added to your favorites for later.
                   </AlertDescription>
                 </Box>
-                <CloseButton
-                  alignSelf='flex-start'
-                  position='relative'
-                  right={-1}
-                  top={-1}
-                  onClick={onClose}
-                />
               </Alert>
             )
 
               : <Button
-                onClick={onOpen}
+                onClick={saveHandler}
                 rightIcon={<FcLike/>}
                 size='lg'
                 width="full"
