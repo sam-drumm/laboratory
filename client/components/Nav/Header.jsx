@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
-import { ButtonGroup, Box, Stack, Heading, Flex, Text, Button, useDisclosure, Icon } from '@chakra-ui/react'
+import { ButtonGroup, Box, Stack, Heading, Flex, Button, useDisclosure, Icon } from '@chakra-ui/react'
 import { FcCollaboration, FcGlobe, FcLike } from 'react-icons/fc'
 import Waiting from '../Wait/Waiting'
 
@@ -48,7 +48,6 @@ export default function Header (props) {
           padding={6}
           bg="teal.500"
           color="white"
-          {...props}
         >
           <Flex align="center" mr={5}>
             <Heading as="h1" size="lg" letterSpacing={'tighter'}>
@@ -108,7 +107,6 @@ export default function Header (props) {
           padding={6}
           bg="teal.500"
           color="white"
-          {...props}
         >
           <Flex align="center" mr={5}>
             <Heading as="h1" size="lg" letterSpacing={'tighter'}>

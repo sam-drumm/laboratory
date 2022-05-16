@@ -34,8 +34,6 @@ const registerSchema = Yup.object().shape({
 })
 
 function ContactForm (props) {
-
-
   const formik = useFormik({
     initialValues: {
       name: '',

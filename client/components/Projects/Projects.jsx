@@ -1,44 +1,14 @@
-import React, { useState } from 'react'
-// import { useSelector } from 'react-redux'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-// import { getProjectByAuthId } from '../../apis/projects'
 import { capsFirst } from '../utils'
 
 import Carousel from '../Carousel/Carousel'
 
-import {
-  Button,
-  Flex,
-  Heading,
-  Text,
-  VStack,
-  HStack,
-  Tag,
-  useBreakpointValue
-} from '@chakra-ui/react'
+import {Button,Flex,Heading,Text,VStack,HStack,Tag,useBreakpointValue} from '@chakra-ui/react'
 
 export default function Projects (props) {
-  //   const { userProjects } = props
-  //   const [userProjects, setUserProjects] = useState([])
-  //   const { auth0Id, token } = useSelector(state => state.user)
   const navigate = useNavigate()
-  //   setUserProjects(props)
-
-  console.log(props.props)
   const data = props.props
-  //   useEffect(() => {
-  //     getProjectByAuthId(props.auth0Id, props.token)
-  //       .then(projects => {
-  //         setUserProjects(projects)
-  //         return null
-  //       })
-  //       .catch(err => {
-  //         console.error(err)
-  //         return false
-  //       })
-  //   }, [props.auth0Id])
-
-
 
   return (
 <>

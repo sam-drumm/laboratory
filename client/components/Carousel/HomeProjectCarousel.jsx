@@ -42,7 +42,7 @@ export default function HomeProjectCarousel () {
   return (
     <>
 
-      <Flex p={8} flex={1} align={'left'} justify={'left'}>
+      <Flex flex={1} align={'left'} justify={'left'}>
         <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
           <Text
             left={1}
@@ -84,6 +84,7 @@ export default function HomeProjectCarousel () {
                 textAlign="left"
                 w="full"
                 mb={2}
+                position="flex"
               >
                 {capsFirst(project.project_title)}
               </Heading>
@@ -100,7 +101,7 @@ export default function HomeProjectCarousel () {
 
             {/* <Flex justifyContent="space-between"> */}
 
-            <HStack spacing={2} justify={'center'}>
+            <HStack spacing={2} justify={'left'}>
               <Wrap>
 
                 <Tag padding={1} variant="outline" colorScheme="green">
@@ -110,16 +111,16 @@ export default function HomeProjectCarousel () {
                   {regionLookup(project.region)}
                 </Tag>
 
-                <Button
-                  onClick={() => navigate(`./projects/${project.id}`)}
-                  colorScheme="green"
-                  fontWeight="bold"
-                  color="gray.900"
-                >
-                    Find out more
-                </Button>
               </Wrap>
             </HStack>
+            <Button
+              onClick={() => navigate(`./projects/${project.id}`)}
+              colorScheme="green"
+              fontWeight="bold"
+              color="gray.900"
+            >
+                    Find out more
+            </Button>
           </Flex>
           // </Flex>
         ))}

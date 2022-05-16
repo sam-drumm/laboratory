@@ -3,15 +3,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
-import { TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack } from '@chakra-ui/react'
+import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertTitle, AlertDescription, CloseButton } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
-import { FcGlobe, FcBinoculars, FcBullish, FcCollaboration, FcSupport, FcIdea } from 'react-icons/fc'
+import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike } from 'react-icons/fc'
 import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../utils/lookup'
-import { FacebookShareButton } from 'react-share'
 import { capsFirst } from '../utils'
+import SendMessage from '../Messages/SendMessage'
 
 export default function Project () {
   const dispatch = useDispatch()
+  const {
+    isOpen: isVisible,
+    onClose,
+    onOpen
+  } = useDisclosure({ defaultIsOpen: false })
   const { id } = useParams()
   const { token, firstName } = useSelector(state => state.user)
   const [skill, setSkill] = useState([])
@@ -29,6 +34,11 @@ export default function Project () {
     createdAt
   } = useSelector(state => state.project)
 
+  // function saveHandler (e) {
+  //   e.preventDefault()
+  //   setResource()
+  // }
+
   const createdMS = new Date(createdAt).getTime()
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
   const expiryMS = createdMS + fourteenDaysMS
@@ -41,104 +51,138 @@ export default function Project () {
     setSkill(skillType.split(',').map(Number))
   }, [region])
 
+  // useEffect(() => {
+  // }, [resource])
+
   return (
+    <>
 
-    <Flex width="full" align="center" justifyContent="center" marginTop={10} marginBottom={10} padding={10}
-    >
-
-      <Box
-        p={8}
-        maxWidth="750px"
-        borderWidth={2}
-        borderRadius={8}
-        boxShadow="lg"
+      <Flex width="full" align="center" justifyContent="center" marginBottom={20} padding={10}
       >
+
         <Box
-          textAlign="centre"
-          width="full"
-          alignContent="center"
-          marginBottom={10}
+          p={8}
+          maxWidth="750px"
+          borderWidth={2}
+          borderRadius={8}
+          boxShadow="lg"
         >
-          <Heading>{projectTitle}</Heading>
+          <Box
+            textAlign="centre"
+            width="full"
+            alignContent="center"
+            marginBottom={10}
+          >
+            <Heading>{projectTitle}</Heading>
 
-          <Stack mb={4} mt={4} direction={['column', 'row']} >
-            <Wrap>
-              <Tag variant="outline" colorScheme="green">
-                <TagLeftIcon as={FcGlobe}/>
-                <TagLabel>Member located in {regionLookup(region)}</TagLabel>
-              </Tag>
-              {skill.map((item, i) =>
-                <Tooltip label='These are the skills the project is seeking' key={i} openDelay={1500} closeDelay={250}>
-                  <Tag variant='outline' colorScheme="pink">
-                    <TagLeftIcon as={FcSupport}/>
-                    <TagLabel>{skillLookup(item)}</TagLabel>
-                  </Tag>
-                </Tooltip>
-              )}
-              <Tag variant="outline" colorScheme="yellow">
-                <TagLeftIcon as={FcIdea}/>
-                <TagLabel>{startedLookup(started)}</TagLabel>
-              </Tag>
-              <Tag variant="outline" colorScheme="cyan">
+            <Stack mb={4} mt={4} direction={['column', 'row']} >
+              <Wrap>
+                <Tag variant="outline" colorScheme="green">
+                  <TagLeftIcon as={FcGlobe}/>
+                  <TagLabel>Member located in {regionLookup(region)}</TagLabel>
+                </Tag>
+                {skill.map((item, i) =>
+                  <Tooltip label='These are the skills the project is seeking' key={i} openDelay={1500} closeDelay={250}>
+                    <Tag variant='outline' colorScheme="pink">
+                      <TagLeftIcon as={FcSupport}/>
+                      <TagLabel>{skillLookup(item)}</TagLabel>
+                    </Tag>
+                  </Tooltip>
+                )}
+                <Tag variant="outline" colorScheme="yellow">
+                  <TagLeftIcon as={FcIdea}/>
+                  <TagLabel>{startedLookup(started)}</TagLabel>
+                </Tag>
+                <Tag variant="outline" colorScheme="cyan">
                 Purpose is {categoryLookup(category)}
-              </Tag>
-              <Tag variant='outline' colorScheme='gray'>
-                <TagLeftIcon as={FcBinoculars} />
-                <TagLabel>Seeking {seekingLookup(seeking)}</TagLabel>
-              </Tag>
-            </Wrap>
-          </Stack>
+                </Tag>
+                <Tag variant='outline' colorScheme='gray'>
+                  <TagLeftIcon as={FcBinoculars} />
+                  <TagLabel>Seeking {seekingLookup(seeking)}</TagLabel>
+                </Tag>
+              </Wrap>
+            </Stack>
 
-          <VStack mb={6}>
-            <div>
-              <p>My Pitch: {description}</p>
-            </div>
+            <VStack mb={6} className='project-text'>
+              <div>
+                <b>Project Pitch </b>
+                <h2>{capsFirst(description)}</h2>
+              </div>
 
-            <div>
-              <h2>Success looks like: {success} </h2>
-            </div>
+              <div>
+                <b>Skills will enable... </b>
+                <h2>{capsFirst(skillDescription)} </h2>
+              </div>
 
-            <div>
-              <h2>How could these skills be used: {skillDescription} </h2>
-            </div>
+              <div>
+                <b>Success would look like...</b>
+                <h2>{capsFirst(success)} </h2>
+              </div>
+            </VStack>
 
-          </VStack>
-
-          <VStack align={'left'} width='auto' >
             <Button rightIcon={<FcCollaboration/>}>
                 Pitched by {firstName}, checkout their profile
             </Button>
+          </Box>
 
-          </VStack>
+          <CountdownTimer targetDate={expiryMS}/>
+
+          <HStack>
+            <SendMessage
+              button="Great, this sounds like me!"
+              title={`Contact form for ${projectTitle}`}
+              hidden="false" />
+
+            {isVisible ? (
+              <Alert status='success'
+                borderRadius={'md'}
+                >
+                <AlertIcon />
+                <Box
+                >
+                  <AlertDescription>
+          Added to your favorites for later.
+                  </AlertDescription>
+                </Box>
+                <CloseButton
+                  alignSelf='flex-start'
+                  position='relative'
+                  right={-1}
+                  top={-1}
+                  onClick={onClose}
+                />
+              </Alert>
+            )
+
+              : <Button
+                onClick={onOpen}
+                rightIcon={<FcLike/>}
+                size='lg'
+                width="full"
+                alignContent="center"
+                marginTop={10}
+                marginBottom={10}
+                borderWidth={2}
+                boxShadow='sm'> Save for later
+              </Button>}
+          </HStack>
+
+          <HStack spacing="auto">
+            <Button colorScheme='facebook' leftIcon={<FaFacebook />}>
+    Facebook
+            </Button>
+            <Button colorScheme='twitter' leftIcon={<FaTwitter />}>
+    Twitter
+            </Button>
+            <Button colorScheme='blackAlpha' leftIcon={<FaGithub />}>
+    GitHub
+            </Button>
+          </HStack>
 
         </Box>
 
-        <CountdownTimer targetDate={expiryMS}/>
-        <Button
-          size='lg'
-          width="full"
-          alignContent="center"
-          marginTop={10}
-          marginBottom={10}
-          borderWidth={2}
-          boxShadow='sm'
-        >
-          <p>Count me in!</p>
-        </Button>
-        <HStack spacing="auto">
-          <Button colorScheme='facebook' leftIcon={<FaFacebook />}>
-    Facebook
-          </Button>
-          <Button colorScheme='twitter' leftIcon={<FaTwitter />}>
-    Twitter
-          </Button>
-          <Button colorScheme='blackAlpha' leftIcon={<FaGithub />}>
-    GitHub
-          </Button>
-        </HStack>
-
-      </Box>
-    </Flex>
+      </Flex>
+    </>
 
   )
 }
