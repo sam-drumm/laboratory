@@ -200,8 +200,30 @@ function skillLookup (skill) {
   return a
 }
 
+function seekingLookup (id) {
+  const seeking = {
+    1: 'commerical partners',
+    2: 'skilled people.',
+    3: 'pro-bono or voluntary contributions.',
+    4: 'like-minded people to brainstorm.'
+  }
+
+  return seeking[id]
+}
+
+function startedLookup (id) {
+  const seeking = {
+    1: 'Brand spanking new idea',
+    2: 'Project already in motion'
+  }
+
+  return seeking[id]
+}
+
 module.exports = {
   regionLookup,
   categoryLookup,
-  skillLookup
+  skillLookup,
+  seekingLookup,
+  startedLookup
 }

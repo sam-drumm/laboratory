@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
-import { Box, Heading, Tag, Flex, Button, HStack, Stack } from '@chakra-ui/react'
+import { TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
-import { regionLookup, categoryLookup, skillLookup } from '../utils/lookup'
-import { FcCollaboration } from 'react-icons/fc'
+import { FcGlobe, FcBinoculars, FcBullish, FcCollaboration, FcSupport, FcIdea } from 'react-icons/fc'
+import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../utils/lookup'
+import { FacebookShareButton } from 'react-share'
+import { capsFirst } from '../utils'
 
 export default function Project () {
   const dispatch = useDispatch()
@@ -21,6 +23,7 @@ export default function Project () {
     description,
     seeking,
     started,
+    success,
     skillType,
     skillDescription,
     createdAt
@@ -57,29 +60,59 @@ export default function Project () {
           marginBottom={10}
         >
           <Heading>{projectTitle}</Heading>
-          <HStack mb={4} mt={4}>
-            <Tag size="lg" variant="outline" colorScheme="green">
-              {regionLookup(region)}
-            </Tag>
-            <Tag size="lg" variant="outline" colorScheme="cyan">
-              {categoryLookup(category)}
-            </Tag>
-            <Button rightIcon={<FcCollaboration size={25}/>}>
-              <p>Pitched by {firstName}, checkout their profile</p>
-            </Button>
-          </HStack>
 
-          <p>{description}</p>
-          <p>{seeking}</p>
-          <p>{started}</p>
-          <HStack mt={4}>
-            {skill.map((item, i) =>
-              <Tag variant='outline'
-                mr={2} size='lg' key={i}>{skillLookup(item)}</Tag>
-            )}
-          </HStack>
+          <Stack mb={4} mt={4} direction={['column', 'row']} >
+            <Wrap>
+              <Tag variant="outline" colorScheme="green">
+                <TagLeftIcon as={FcGlobe}/>
+                <TagLabel>Member located in {regionLookup(region)}</TagLabel>
+              </Tag>
+              {skill.map((item, i) =>
+                <Tooltip label='These are the skills the project is seeking' key={i} openDelay={1500} closeDelay={250}>
+                  <Tag variant='outline' colorScheme="pink">
+                    <TagLeftIcon as={FcSupport}/>
+                    <TagLabel>{skillLookup(item)}</TagLabel>
+                  </Tag>
+                </Tooltip>
+              )}
+              <Tag variant="outline" colorScheme="yellow">
+                <TagLeftIcon as={FcIdea}/>
+                <TagLabel>{startedLookup(started)}</TagLabel>
+              </Tag>
+              <Tag variant="outline" colorScheme="cyan">
+                Purpose is {categoryLookup(category)}
+              </Tag>
+              <Tag variant='outline' colorScheme='gray'>
+                <TagLeftIcon as={FcBinoculars} />
+                <TagLabel>Seeking {seekingLookup(seeking)}</TagLabel>
+              </Tag>
+            </Wrap>
+          </Stack>
+
+          <VStack mb={6}>
+            <div>
+              <p>My Pitch: {description}</p>
+            </div>
+
+            <div>
+              <h2>Success looks like: {success} </h2>
+            </div>
+
+            <div>
+              <h2>How could these skills be used: {skillDescription} </h2>
+            </div>
+
+          </VStack>
+
+          <VStack align={'left'} width='auto' >
+            <Button rightIcon={<FcCollaboration/>}>
+                Pitched by {firstName}, checkout their profile
+            </Button>
+
+          </VStack>
 
         </Box>
+
         <CountdownTimer targetDate={expiryMS}/>
         <Button
           size='lg'

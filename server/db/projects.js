@@ -70,6 +70,7 @@ async function getProjectById (id, db = connection) {
       'description',
       'seeking',
       'started',
+      'success',
       'skill_type as skillType',
       'skill_description as skillDescription',
       'created_at as createdAt'

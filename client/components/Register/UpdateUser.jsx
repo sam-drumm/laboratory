@@ -79,97 +79,97 @@ function UpdateUser () {
   }
 
   return (
-<>
-<Flex p={8} flex={1} align={'left'} justify={'left'}>
-  <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
-    <Text
-      left={1}
-      as={'span'}
-      position={'relative'}
-      _after={{
-        content: "''",
-        width: 'full',
-        height: useBreakpointValue({ base: '20%', md: '30%' }),
-        position: 'absolute',
-        bottom: 1,
-        left: 0,
-        bg: 'blue.400',
-        zIndex: -1
-      }}>Update your Details</Text>
-  </Heading>
-</Flex>
+    <>
+      <Flex p={8} flex={1} align={'left'} justify={'center'}>
+        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+          <Text
+            left={1}
+            as={'span'}
+            position={'relative'}
+            _after={{
+              content: "''",
+              width: 'full',
+              height: useBreakpointValue({ base: '20%', md: '30%' }),
+              position: 'absolute',
+              bottom: 1,
+              left: 0,
+              bg: 'blue.400',
+              zIndex: -1
+            }}>Update your Details</Text>
+        </Heading>
+      </Flex>
 
-    <Flex width="full" align="center" justifyContent="center" marginTop={5}>
-      <Box
-        p={8}
-        minWidth='500px'
-        maxWidth="500px"
-        borderWidth={2}
-        borderRadius={8}
-        boxShadow="lg"
-      >
+      <Flex width="full" align="center" justifyContent="center" marginTop={5}>
+        <Box
+          p={8}
+          minWidth='500px'
+          maxWidth="500px"
+          borderWidth={2}
+          borderRadius={8}
+          boxShadow="lg"
+        >
 
-        {/* <Box textAlign="centre">
+          {/* <Box textAlign="centre">
           <Heading>Update your Details</Heading>
         </Box> */}
-        <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
 
-          <FormControl mt={6}>
-            <FormLabel htmlFor='firstName'>First Name</FormLabel>
-            {showAnyErrors('firstName')}
-            <Input
-              name='firstName'
-              value={formik.values.firstName}
-              onChange={formik.handleChange}
-              placeholder={firstName}
-            ></Input>
-          </FormControl>
+            <FormControl mt={6}>
+              <FormLabel htmlFor='firstName'>First Name</FormLabel>
+              {showAnyErrors('firstName')}
+              <Input
+                name='firstName'
+                value={formik.values.firstName}
+                onChange={formik.handleChange}
+                placeholder={firstName}
+              ></Input>
+            </FormControl>
 
-          <FormControl mt={6}>
-            <FormLabel htmlFor='lastName'>Surname</FormLabel>
-            {showAnyErrors('lastName')}
-            <Input
-              name='lastName'
-              value={formik.values.lastName}
-              onChange={formik.handleChange}
-              placeholder={lastName}
-            ></Input>
-          </FormControl>
+            <FormControl mt={6}>
+              <FormLabel htmlFor='lastName'>Surname</FormLabel>
+              {showAnyErrors('lastName')}
+              <Input
+                name='lastName'
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                placeholder={lastName}
+              ></Input>
+            </FormControl>
 
-          <FormControl mt={3}>
-            <FormLabel htmlFor='address'>Address search</FormLabel>
-            <Input
-              name='address'
-              onChange={handleChange}
-              placeholder={addressFormatted}
-            />
-            <Select
-              mt={3}
-              variant='outline'
-              name='address'
-              onChange={handleSelectedAddress}
-              placeholder='Select your address'
+            <FormControl mt={3}>
+              <FormLabel htmlFor='address'>Address search</FormLabel>
+              <Input
+                name='address'
+                onChange={handleChange}
+                placeholder={addressFormatted}
+              />
+              <Select
+                mt={3}
+                variant='outline'
+                name='address'
+                onChange={handleSelectedAddress}
+                placeholder='Select your address'
+              >
+                {addresses?.map((address) => (
+                  <option value={JSON.stringify(address)}
+                    key={address.formatted}
+                    name='address'
+                  >{address.formatted}</option>
+                ))}
+              </Select>
+            </FormControl>
+
+            <Button
+              width="full"
+              mt={8}
+              type='submit'
             >
-              {addresses?.map((address) => (
-                <option value={JSON.stringify(address)}
-                  key={address.formatted}
-                  name='address'
-                >{address.formatted}</option>
-              ))}
-            </Select>
-          </FormControl>
-
-          <Button
-            width="full"
-            mt={8}
-            type='submit'
-          >
           Update
-          </Button>
+            </Button>
 
-        </form>
-      </Box>
-    </Flex>
+          </form>
+        </Box>
+      </Flex>
     </>
   )
 }

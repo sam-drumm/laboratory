@@ -9,6 +9,7 @@ import {
   Button,
   Flex,
   Heading,
+  Wrap,
   Text,
   VStack,
   HStack,
@@ -87,7 +88,7 @@ export default function HomeProjectCarousel () {
                 {capsFirst(project.project_title)}
               </Heading>
               <Text w="full">
-                {capsFirst(project.description)}
+                {capsFirst(project.description.substring(0, 250))}...
               </Text>
             </VStack>
 
@@ -97,26 +98,30 @@ export default function HomeProjectCarousel () {
               }/>
             </Flex>
 
-            <Flex justifyContent="space-between">
-              <HStack spacing={2}>
-                <Tag size="lg" variant="outline" colorScheme="green">
+            {/* <Flex justifyContent="space-between"> */}
+
+            <HStack spacing={2} justify={'center'}>
+              <Wrap>
+
+                <Tag padding={1} variant="outline" colorScheme="green">
                   {categoryLookup(project.category)}
                 </Tag>
-                <Tag size="lg" variant="outline" colorScheme="cyan">
+                <Tag variant="outline" colorScheme="cyan">
                   {regionLookup(project.region)}
                 </Tag>
-              </HStack>
-              <Button
-                onClick={() => navigate(`./projects/${project.id}`)}
-                colorScheme="green"
-                fontWeight="bold"
-                color="gray.900"
-                size="lg"
-              >
+
+                <Button
+                  onClick={() => navigate(`./projects/${project.id}`)}
+                  colorScheme="green"
+                  fontWeight="bold"
+                  color="gray.900"
+                >
                     Find out more
-              </Button>
-            </Flex>
+                </Button>
+              </Wrap>
+            </HStack>
           </Flex>
+          // </Flex>
         ))}
       </Carousel>
 
