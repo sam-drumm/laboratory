@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
+import { updateFollowing } from '../Register/updateHelper'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
-import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertTitle, AlertDescription, CloseButton } from '@chakra-ui/react'
+import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertDescription } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
 import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike } from 'react-icons/fc'
 import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../utils/lookup'
@@ -12,13 +14,20 @@ import SendMessage from '../Messages/SendMessage'
 
 export default function Project () {
   const dispatch = useDispatch()
+
+  // something like if follow ! == project ID then is visable
   const {
     isOpen: isVisible,
     onOpen
   } = useDisclosure({ defaultIsOpen: false })
   const { id } = useParams()
-  const { token, firstName } = useSelector(state => state.user)
+  const { token, firstName, following } = useSelector(state => state.user)
+
+  const authUser = useAuth0().user
   const [skill, setSkill] = useState([])
+  const [follow, setFollow] = useState([])
+
+  console.log(following)
 
   const {
     projectTitle,
@@ -33,9 +42,15 @@ export default function Project () {
     createdAt
   } = useSelector(state => state.project)
 
-  function saveHandler (e) {
-    e.preventDefault()
-    onOpen()
+  function saveHandler () {
+    // const mole = following.split(',').map(Number)
+    // setFollow([...mole, id])
+    try {
+      updateFollowing(follow, authUser)
+      onOpen()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const createdMS = new Date(createdAt).getTime()
@@ -47,11 +62,10 @@ export default function Project () {
   }, [])
 
   useEffect(() => {
+    var moel = following.split(',').map(Number)
     setSkill(skillType.split(',').map(Number))
-  }, [region])
-
-  // useEffect(() => {
-  // }, [resource])
+    setFollow([...moel, id])
+  }, [setFollow])
 
   return (
     <>

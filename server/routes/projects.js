@@ -13,8 +13,8 @@ module.exports = router
 
 // POST /api/v1/users/protected
 router.post('/', async (req, res) => {
-  const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region } = req.body
-  const project = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region }
+  const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region, following } = req.body
+  const project = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region, following }
   try {
     await db.addProject(project)
   } catch (err) {

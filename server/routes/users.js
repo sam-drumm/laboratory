@@ -21,7 +21,8 @@ router.patch('/', async (req, res) => {
     meshblock,
     lon,
     lat,
-    formatted
+    formatted,
+    following
   } = req.body
 
   const user = {
@@ -38,7 +39,8 @@ router.patch('/', async (req, res) => {
     meshblock,
     lon,
     lat,
-    formatted
+    formatted,
+    following
   }
 
   try {
@@ -80,7 +82,8 @@ router.post('/', async (req, res) => {
     meshblock,
     lon,
     lat,
-    formatted
+    formatted,
+    following
   } = req.body
 
   const user = {
@@ -97,7 +100,8 @@ router.post('/', async (req, res) => {
     meshblock,
     lon,
     lat,
-    formatted
+    formatted,
+    following
   }
 
   try {

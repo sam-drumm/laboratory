@@ -3,7 +3,6 @@ import request from 'superagent'
 const rootUrl = '/api/v1'
 
 export function getProjectByAuthId (auth0Id, token) {
-  console.log(auth0Id, token)
   return request
     .get(`${rootUrl}/projects/user/auth`)
     .set('authorization', `Bearer ${token}`)

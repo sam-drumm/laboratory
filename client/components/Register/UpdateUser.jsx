@@ -80,7 +80,7 @@ function UpdateUser () {
 
   return (
     <>
-      <Flex p={8} flex={1} align={'left'} justify={'center'}>
+      <Flex flex={1} align={'left'} justify={'center'}>
         <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
           <Text
             left={1}
@@ -101,6 +101,7 @@ function UpdateUser () {
 
       <Flex width="full" align="center" justifyContent="center" marginTop={5}>
         <Box
+          mb={125}
           p={8}
           minWidth='500px'
           maxWidth="500px"
@@ -108,10 +109,6 @@ function UpdateUser () {
           borderRadius={8}
           boxShadow="lg"
         >
-
-          {/* <Box textAlign="centre">
-          <Heading>Update your Details</Heading>
-        </Box> */}
           <form onSubmit={formik.handleSubmit}>
 
             <FormControl mt={6}>

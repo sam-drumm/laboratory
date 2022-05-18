@@ -15,7 +15,8 @@ const emptyUser = {
   meshblock: '',
   lon: null,
   lat: null,
-  formatted: ''
+  formatted: '',
+  following: ''
 }
 
 export default function user (state = emptyUser, action) {

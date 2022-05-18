@@ -101,13 +101,13 @@ export default function HomeProjectCarousel () {
 
             {/* <Flex justifyContent="space-between"> */}
 
-            <HStack spacing={2} justify={'left'}>
+            <HStack spacing={2} justify={'left'} mb={2}>
               <Wrap>
 
-                <Tag padding={1} variant="outline" colorScheme="green">
+                <Tag padding={2} variant="outline" colorScheme="green">
                   {categoryLookup(project.category)}
                 </Tag>
-                <Tag variant="outline" colorScheme="cyan">
+                <Tag variant="outline" colorScheme="cyan" padding={1}>
                   {regionLookup(project.region)}
                 </Tag>
 
@@ -118,6 +118,7 @@ export default function HomeProjectCarousel () {
               colorScheme="green"
               fontWeight="bold"
               color="gray.900"
+
             >
                     Find out more
             </Button>

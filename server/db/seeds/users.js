@@ -21,6 +21,7 @@ exports.seed = function (knex) {
           meshblock: '4009482',
           lon: 172.664203,
           lat: -43.465657,
+          following: [1, 2],
           formatted: '102 Metehau Street, Marshland, Christchurch'
         },
         {
@@ -38,6 +39,7 @@ exports.seed = function (knex) {
           meshblock: '0559001',
           lon: 174.749051,
           lat: -36.892524,
+          following: [3, 4],
           formatted: '102 Marsden Avenue, Mount Eden, Auckland'
         },
         {
@@ -55,6 +57,7 @@ exports.seed = function (knex) {
           meshblock: '4005246',
           lon: 171.206931,
           lat: -42.467814,
+          following: [5, 6],
           formatted: '102 Marsden Road, Greymouth'
         },
         {
@@ -63,7 +66,6 @@ exports.seed = function (knex) {
           first_name: 'joe',
           last_name: 'smoking',
           email: 'joe@camel.usa',
-
           street_number: '102',
           street: 'Marlborough Ridge Drive',
           locality: 'Fairhall',
@@ -73,8 +75,8 @@ exports.seed = function (knex) {
           meshblock: '4016913',
           lon: 173.874434,
           lat: -41.537846,
+          following: [7, 8],
           formatted: '102 Marlborough Ridge Drive, Fairhall'
-
         }
       ])
     )

@@ -5,8 +5,8 @@ import { setUser } from '../../actions/user'
 import { showError } from '../../actions/error'
 
 export function updateUser (user, selectedAddress, authUser, navigateTo, consume = requestor) {
+  dispatch(setWaiting())
   const address = (JSON.parse(selectedAddress))
-
   const newUser = {
     firstName: user.firstName,
     lastName: user.lastName,
@@ -26,14 +26,38 @@ export function updateUser (user, selectedAddress, authUser, navigateTo, consume
   const storeState = getState()
   const { token } = storeState.user
 
-  dispatch(setWaiting())
-
   return consume('/users', token, 'patch', newUser)
     .then((res) => {
       const newUser = res.body
       newUser.token = token
       dispatch(setUser(newUser))
       navigateTo('/profile/home')
+      return newUser
+    })
+    .catch((err) => {
+      dispatch(showError(err.message))
+    })
+    .finally(() => {
+      dispatch(clearWaiting())
+    })
+}
+
+export function updateFollowing (follow, authUser, consume = requestor) {
+  dispatch(setWaiting())
+
+  const newUser = {
+    auth0Id: authUser.sub,
+    following: follow
+  }
+
+  const storeState = getState()
+  const { token } = storeState.user
+
+  return consume('/users', token, 'patch', newUser)
+    .then((res) => {
+      const newUser = res.body
+      newUser.token = token
+      dispatch(setUser(newUser))
       return newUser
     })
     .catch((err) => {

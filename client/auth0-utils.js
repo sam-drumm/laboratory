@@ -9,6 +9,7 @@ const emptyUser = {
   email: '',
   firstName: '',
   lastName: '',
+  following: '',
   token: ''
 }
 
@@ -22,14 +23,14 @@ export async function cacheUser (useAuth0, navigate) {
     try {
       const token = await getAccessTokenSilently()
       const res = await consume(`/users/${user.sub}`, token)
-      const { id, firstName, lastName, email } = res.body
+      const { id, firstName, lastName, email, following } = res.body
       if (id === undefined) {
         navigate('/register')
       }
       if (user.email_verified === false) {
         navigate('/verification')
       }
-      saveUser({ id, auth0Id: user.sub, firstName, lastName, email, token })
+      saveUser({ id, auth0Id: user.sub, firstName, lastName, email, token, following })
     } catch (err) {
       dispatch(showError('Unable to set the current user'))
     }
