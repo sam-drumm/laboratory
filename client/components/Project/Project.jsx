@@ -16,18 +16,15 @@ export default function Project () {
   const dispatch = useDispatch()
 
   // something like if follow ! == project ID then is visable
+  const [followed, setFollowed] = useState(false)
   const {
     isOpen: isVisible,
     onOpen
   } = useDisclosure({ defaultIsOpen: false })
   const { id } = useParams()
-  const { token, firstName, following } = useSelector(state => state.user)
 
   const authUser = useAuth0().user
   const [skill, setSkill] = useState([])
-  const [follow, setFollow] = useState([])
-
-  console.log(following)
 
   const {
     projectTitle,
@@ -42,15 +39,11 @@ export default function Project () {
     createdAt
   } = useSelector(state => state.project)
 
-  function saveHandler () {
-    // const mole = following.split(',').map(Number)
-    // setFollow([...mole, id])
-    try {
-      updateFollowing(follow, authUser)
-      onOpen()
-    } catch (error) {
-      console.error(error)
-    }
+  const { token, firstName, following } = useSelector(state => state.user)
+
+  async function saveHandler () {
+    await updateFollowing(following, Number(id), authUser)
+    onOpen()
   }
 
   const createdMS = new Date(createdAt).getTime()
@@ -62,10 +55,17 @@ export default function Project () {
   }, [])
 
   useEffect(() => {
-    var moel = following.split(',').map(Number)
     setSkill(skillType.split(',').map(Number))
-    setFollow([...moel, id])
-  }, [setFollow])
+  }, [region])
+
+  useEffect(() => {
+    if (following.includes(id)) {
+      setFollowed(true)
+      onOpen()
+    }
+  }, [following])
+
+  console.log(followed)
 
   return (
     <>

@@ -42,12 +42,12 @@ export function updateUser (user, selectedAddress, authUser, navigateTo, consume
     })
 }
 
-export function updateFollowing (follow, authUser, consume = requestor) {
+export function updateFollowing (following, follow, authUser, consume = requestor) {
   dispatch(setWaiting())
 
   const newUser = {
     auth0Id: authUser.sub,
-    following: follow
+    following: [follow, following]
   }
 
   const storeState = getState()
