@@ -80,7 +80,7 @@ function UpdateUser () {
 
   return (
     <>
-      <Flex flex={1} align={'left'} justify={'center'}>
+      <Flex p={8} flex={1} align={'left'} justify={'left'}>
         <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
           <Text
             left={1}
@@ -95,11 +95,14 @@ function UpdateUser () {
               left: 0,
               bg: 'blue.400',
               zIndex: -1
-            }}>Update your Details</Text>
+            }}
+          >
+            Update your details.
+          </Text>
         </Heading>
       </Flex>
 
-      <Flex width="full" align="center" justifyContent="center" marginTop={5}>
+      <Flex width="full" align="center" justifyContent="center">
         <Box
           mb={125}
           p={8}

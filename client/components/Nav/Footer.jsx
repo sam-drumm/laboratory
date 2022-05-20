@@ -21,7 +21,7 @@ const Footer = () => {
       justify="space-between"
       wrap="wrap"
       padding={6}
-      bg="teal.500"
+      bg="blue.400"
       color="white"
     >
       <Stack

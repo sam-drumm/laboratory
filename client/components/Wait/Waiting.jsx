@@ -17,26 +17,18 @@ export default function Waiting () {
               speed='.5s'
               emptyColor='gray.200'
               color='blue.500'
-              size='md'
-
+              size='lg'
               alignContent='centre'
               justifyContent='centre'
               display= 'flex'
-              height= "inherit"
               background-color= "white"
               align-items= "center"
               position= "absolute"
-              // left= "50%"
-              // top= "50%"
-              // height="60px"
-              // width="60px"
-              // margin="0px auto"
-              // animation= "rotation .6s infinite linear"
-              //  border-left=6px solid rgba(0,174,239,.15);
-              //  border-right=6px solid rgba(0,174,239,.15);
-              //  border-bottom=6px solid rgba(0,174,239,.15);
-              //  border-top=6px solid rgba(0,174,239,.8);
-              //  border-radius=100%;
+              left= "50%"
+              top= "50%"
+              height="100px"
+              width="100px"
+
             />
           </>
           : '\u00a0' }

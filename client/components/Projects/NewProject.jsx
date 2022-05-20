@@ -39,7 +39,6 @@ function NewProject () {
   const [region, setRegion] = useState('')
   const [selectedItems, setSelectedItems] = useState([])
 
-  console.log(selectedItems)
 
   const skillType = selectedItems.map(skill =>
     skill.value

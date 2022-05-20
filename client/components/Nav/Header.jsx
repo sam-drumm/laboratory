@@ -5,9 +5,8 @@ import { useSelector } from 'react-redux'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
-import { ButtonGroup, Box, Stack, Heading, Flex, Button, useDisclosure, Icon } from '@chakra-ui/react'
+import { ButtonGroup, Box, Skeleton, Stack, Heading, Flex, Button, useDisclosure, Icon } from '@chakra-ui/react'
 import { FcCollaboration, FcGlobe, FcLike } from 'react-icons/fc'
-import Waiting from '../Wait/Waiting'
 
 export default function Header (props) {
   const { firstName } = useSelector(state => state.user)
@@ -46,12 +45,12 @@ export default function Header (props) {
           justify="space-between"
           wrap="wrap"
           padding={6}
-          bg="teal.500"
+          bg="blue.400"
           color="white"
         >
           <Flex align="center" mr={5}>
-            <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-              <a onClick={() => navigate('./')}>Co_lab</a>
+            <Heading as="h1" size="lg" letterSpacing={'tighter'}
+              onClick={() => navigate('./')}>Co_lab
             </Heading>
           </Flex>
 
@@ -72,13 +71,13 @@ export default function Header (props) {
             <a href='/projects/new' className='nav-link'>Pitch an Idea <Icon as={FcGlobe} boxSize="1.75em"/></a>
             <a href='/users' className='nav-link'>Favorites <Icon as={FcLike} boxSize="1.75em"/></a>
 
-            <Waiting />
           </Stack>
           <Box
             display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
             mt={{ base: 4, md: 0 }}
           >
             <ButtonGroup spacing={4}>
+
               <Button
                 variant="outline"
                 _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
@@ -105,7 +104,7 @@ export default function Header (props) {
           justify="space-between"
           wrap="wrap"
           padding={6}
-          bg="teal.500"
+          bg="blue.400"
           color="white"
         >
           <Flex align="center" mr={5}>
@@ -118,7 +117,6 @@ export default function Header (props) {
             <HamburgerIcon />
           </Box>
 
-          <Waiting />
           <ButtonGroup spacing={4}>
             <Button
               variant="outline"

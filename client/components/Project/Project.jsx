@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { updateFollowing } from '../Register/updateHelper'
+import { addFollowing, removeFollowing } from '../Register/updateHelper'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
-import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertDescription } from '@chakra-ui/react'
+import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertDescription, CloseButton, useToast } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
 import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike } from 'react-icons/fc'
 import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../utils/lookup'
@@ -14,12 +14,13 @@ import SendMessage from '../Messages/SendMessage'
 
 export default function Project () {
   const dispatch = useDispatch()
+  const toast = useToast()
 
-  // something like if follow ! == project ID then is visable
   const [followed, setFollowed] = useState(false)
   const {
     isOpen: isVisible,
-    onOpen
+    onOpen,
+    onClose
   } = useDisclosure({ defaultIsOpen: false })
   const { id } = useParams()
 
@@ -42,8 +43,29 @@ export default function Project () {
   const { token, firstName, following } = useSelector(state => state.user)
 
   async function saveHandler () {
-    await updateFollowing(following, Number(id), authUser)
+    await addFollowing(following, Number(id), authUser)
     onOpen()
+    toast({
+      title: 'Added!',
+      description: 'We\'ve added this pitch to your follow list.',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+      position: 'top'
+    })
+  }
+
+  async function removeHandler () {
+    await removeFollowing(following, Number(id), authUser)
+    onClose()
+    toast({
+      title: 'Removed',
+      description: 'We\'ve removed this pitch from your follow list.',
+      status: 'error',
+      duration: 9000,
+      isClosable: true,
+      position: 'top'
+    })
   }
 
   const createdMS = new Date(createdAt).getTime()
@@ -86,7 +108,7 @@ export default function Project () {
             alignContent="center"
             marginBottom={10}
           >
-            <Heading>{projectTitle}</Heading>
+            <Heading>{capsFirst(projectTitle)}</Heading>
 
             <Stack mb={4} mt={4} direction={['column', 'row']} >
               <Wrap>
@@ -155,6 +177,13 @@ export default function Project () {
           Added to your favorites for later.
                   </AlertDescription>
                 </Box>
+                <CloseButton
+                  alignSelf='flex-start'
+                  position='relative'
+                  right={-1}
+                  top={-1}
+                  onClick={removeHandler}
+                />
               </Alert>
             )
 

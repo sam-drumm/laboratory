@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { getProjectByAuthId } from '../../apis/projects'
+import { getProjectByAuthId, getProjectById } from '../../apis/projects'
 import { clearWaiting, setWaiting } from '../../actions/waiting'
 import { dispatch } from '../../store'
 import UpdateUser from '../Register/UpdateUser'
 import Grid from '../Grid/Grid'
 import Projects from '../Projects/Projects'
+import Following from '../Following/Following'
 import NoProjects from './NoProjects'
 import { featureData } from '../Grid/gridData'
 import { Button, HStack } from '@chakra-ui/react'
 
 export default function UserHome () {
   const [userProjects, setUserProjects] = useState([])
-  const [resource, setResource] = useState(<Grid
-    features = {featureData}
-  />)
-  const { auth0Id, token } = useSelector(state => state.user)
+  const { auth0Id, token, following } = useSelector(state => state.user)
+  const projectId = following.split(',').map(Number)
+  const projectArray = []
+  const [resource, setResource] = useState(
+
+    <Grid
+      features = {featureData}
+    />
+
+  )
 
   useEffect(() => {
   }, [resource])
@@ -34,37 +41,51 @@ export default function UserHome () {
       })
   }, [auth0Id])
 
-  if (auth0Id) {
-    return (
-      <>
-        <HStack m={8} spacing={4} justify={'center'}>
-          <Button onClick={() => setResource(<Grid feature={featureData}/>)}>
+  projectId?.map((id) => {
+    dispatch(setWaiting)
+    getProjectById(id)
+      .then(project => (
+        projectArray.push(project)
+      ))
+      .then(
+        dispatch(clearWaiting)
+      )
+      .catch(err => {
+        console.error(err)
+      })
+  })
+
+  return (
+    <>
+      <HStack m={8} spacing={4} justify={'center'}>
+        <Button onClick={() => setResource(<Grid feature={featureData}/>)}>
             Messages
-          </Button>
-          <Button onClick={() => setResource(<Grid />)}>
+        </Button>
+        <Button onClick={() => setResource(
+          (following != null ? <Following
+            following = {following}
+            data={projectArray}
+          />
+            : <NoProjects/>
+          )
+        )}>
             Following
-          </Button>
-          <Button onClick={() => setResource(
-            (userProjects.projectByUser === null ? <Projects
-              props = {userProjects.projectByUser}/>
-              : <> <NoProjects/>
-              </>)
-          )}>
+        </Button>
+        <Button onClick={() => setResource(
+          (userProjects.projectByUser != null ? <Projects
+            props = {userProjects.projectByUser}/>
+            : <NoProjects/>)
+        )}>
             Your Projects
-          </Button>
-          <Button onClick={() => setResource(<UpdateUser />)}>
+        </Button>
+        <Button onClick={() => setResource(<UpdateUser />)}>
           Update your Profile
-          </Button>
-        </HStack>
+        </Button>
+      </HStack>
 
-        {resource}
+      {resource}
 
-      </>
+    </>
 
-    )
-  } else {
-    return (
-      <p>Mole</p>
-    )
-  }
+  )
 }

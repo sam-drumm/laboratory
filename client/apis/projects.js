@@ -29,5 +29,7 @@ export function getProjectById (id, token) {
   return request
     .get(`${rootUrl}/projects/${id}`)
     .set('authorization', `Bearer ${token}`)
-    .then(res => res.body)
+    .then(res => {
+      return res.body
+    })
 }

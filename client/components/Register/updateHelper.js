@@ -42,12 +42,40 @@ export function updateUser (user, selectedAddress, authUser, navigateTo, consume
     })
 }
 
-export function updateFollowing (following, follow, authUser, consume = requestor) {
+export function addFollowing (following, follow, authUser, consume = requestor) {
   dispatch(setWaiting())
 
   const newUser = {
     auth0Id: authUser.sub,
     following: [follow, following]
+  }
+
+  const storeState = getState()
+  const { token } = storeState.user
+
+  return consume('/users', token, 'patch', newUser)
+    .then((res) => {
+      const newUser = res.body
+      newUser.token = token
+      dispatch(setUser(newUser))
+      return newUser
+    })
+    .catch((err) => {
+      dispatch(showError(err.message))
+    })
+    .finally(() => {
+      dispatch(clearWaiting())
+    })
+}
+export function removeFollowing (following, follow, authUser, consume = requestor) {
+  dispatch(setWaiting())
+
+  const arraz = following.split(',').map(Number)
+  const filtered = arraz.filter(element => element !== follow)
+
+  const newUser = {
+    auth0Id: authUser.sub,
+    following: [filtered]
   }
 
   const storeState = getState()

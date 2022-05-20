@@ -11,6 +11,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import Verification from './Register/Verification'
 import Category from './Projects/Category'
 import UserHome from './User/UserHome'
+import Waiting from './Wait/Waiting'
 
 function App () {
   const navigate = useNavigate()
@@ -18,6 +19,7 @@ function App () {
 
   return (
     <div className='app'>
+      <Waiting/>
       <Routes>
         <Route path='/' element={
           <Home/>
