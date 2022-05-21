@@ -80,14 +80,14 @@ export default function Header (props) {
 
               <Button
                 variant="outline"
-                _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+                _hover={{ bg: 'blue.200', borderColor: 'white' }}
               >
                 {(firstName ? <a href='/profile/home'>{firstName}'s Co_Lab</a> : <a href='/profile/home'>Co_Lab</a>) }
               </Button>
 
               <Button
                 variant="outline"
-                _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+                _hover={{ bg: 'blue.200', borderColor: 'white' }}
               >
                 <a href='/' onClick={handleLogoff}>Log out</a>
               </Button>

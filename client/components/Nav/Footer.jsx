@@ -32,12 +32,16 @@ const Footer = () => {
         mt={{ base: 4, md: 0 }}
       >
         <ModalBox
+          bc = "white"
+          bg = "blue.200"
           button="Contact"
           title="Contact"
           body= {<ContactForm />}
           hidden= {true}
         />
         <ModalBox
+          bc = "white"
+          bg = "blue.200"
           button="Legal"
           title="Legal Information"
           body= {<LoremIpsum p='1' />}

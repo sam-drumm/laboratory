@@ -14,7 +14,7 @@ export default function Following (props) {
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
 
   useEffect(() => {
-    setFollow(props.data)
+    setFollow(props.data.filter(follow => follow !== 0))
   }, [])
 
   return (

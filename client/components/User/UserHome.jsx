@@ -14,7 +14,9 @@ import { Button, HStack } from '@chakra-ui/react'
 export default function UserHome () {
   const [userProjects, setUserProjects] = useState([])
   const { auth0Id, token, following } = useSelector(state => state.user)
-  const projectId = following.split(',').map(Number)
+
+  const projectId = following.split(',').map(Number).filter(filtered => filtered !== 0)
+
   const projectArray = []
   const [resource, setResource] = useState(
 
@@ -55,6 +57,8 @@ export default function UserHome () {
       })
   })
 
+  console.log(userProjects.projectByUser)
+
   return (
     <>
       <HStack m={8} spacing={4} justify={'center'}>
@@ -72,7 +76,7 @@ export default function UserHome () {
             Following
         </Button>
         <Button onClick={() => setResource(
-          (userProjects.projectByUser != null ? <Projects
+          (userProjects.projectByUser === null ? <Projects
             props = {userProjects.projectByUser}/>
             : <NoProjects/>)
         )}>

@@ -16,7 +16,7 @@ const emptyUser = {
   lon: null,
   lat: null,
   formatted: '',
-  following: ''
+  following: [0, 0]
 }
 
 export default function user (state = emptyUser, action) {

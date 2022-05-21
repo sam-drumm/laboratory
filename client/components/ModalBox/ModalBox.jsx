@@ -8,7 +8,7 @@ export default function ModalBox (props) {
     <>
       <Button
         variant="outline"
-        _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+        _hover={{ bg: props.bg, borderColor: props.bc }}
         onClick={onOpen}>{props.button}
       </Button>
 

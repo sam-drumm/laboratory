@@ -87,8 +87,6 @@ export default function Project () {
     }
   }, [following])
 
-  console.log(followed)
-
   return (
     <>
 
