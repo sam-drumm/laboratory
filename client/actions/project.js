@@ -1,4 +1,4 @@
-import { addProjects, getProjectById, getProjects } from '../apis/projects'
+import { addProjects, getProjectById, getProjects, editProject } from '../apis/projects'
 
 export const SET_PROJECT = 'SET_PROJECT'
 export const SET_PROJECTS = 'SET_PROJECTS'
@@ -59,6 +59,19 @@ export function fetchProject (id, token) {
 export function addProject (project, token) {
   return dispatch => {
     return addProjects(project, token)
+      .then(project => {
+        dispatch(setProject(project))
+        return null
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}
+
+export function editProjects (project, token) {
+  return dispatch => {
+    return editProject(project, token)
       .then(project => {
         dispatch(setProject(project))
         return null

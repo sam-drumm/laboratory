@@ -97,7 +97,6 @@ function Registration () {
               name='firstName'
               value={formik.values.firstName}
               onChange={formik.handleChange}
-              // placeholder="enter your first name"
             ></Input>
           </FormControl>
 
@@ -108,7 +107,6 @@ function Registration () {
               name='lastName'
               value={formik.values.lastName}
               onChange={formik.handleChange}
-              // placeholder="enter your last name"
             ></Input>
           </FormControl>
 

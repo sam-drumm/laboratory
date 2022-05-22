@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { addFollowing, removeFollowing } from '../Register/updateHelper'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
 import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertDescription, CloseButton, useToast } from '@chakra-ui/react'
@@ -10,39 +10,26 @@ import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
 import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRedo } from 'react-icons/fc'
 import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../utils/lookup'
 import { capsFirst } from '../utils'
-import { getProjectByAuthId } from '../../apis/projects'
 
 import SendMessage from '../Messages/SendMessage'
 
 export default function Project () {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const toast = useToast()
   const [userProject, setUserProject] = useState(false)
   const [followed, setFollowed] = useState(false)
+  const [skill, setSkill] = useState([])
+  const authUser = useAuth0().user
+  const { id } = useParams()
   const {
     isOpen: isVisible,
     onOpen,
     onClose
   } = useDisclosure({ defaultIsOpen: false })
-  const { id } = useParams()
 
-  const authUser = useAuth0().user
-  const [skill, setSkill] = useState([])
-
-  const {
-    projectTitle,
-    region,
-    category,
-    description,
-    seeking,
-    started,
-    success,
-    skillType,
-    skillDescription,
-    createdAt,
-    authId
-  } = useSelector(state => state.project)
-
+  const { projectTitle, region, category, description, seeking, started, success, skillType, skillDescription, createdAt, authId } = useSelector(state => state.project)
+ 
   const { token, firstName, following, auth0Id } = useSelector(state => state.user)
 
   async function saveHandler () {
@@ -71,17 +58,10 @@ export default function Project () {
     })
   }
 
+
   const createdMS = new Date(createdAt).getTime()
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
   const expiryMS = createdMS + fourteenDaysMS
-
-  useEffect(() => {
-    if (authId === auth0Id) {
-      setUserProject(true)
-    }
-  }, [auth0Id])
-
-  console.log(userProject)
 
   useEffect(() => {
     dispatch(fetchProject(id, token))
@@ -97,6 +77,15 @@ export default function Project () {
       onOpen()
     }
   }, [following])
+
+  useEffect(() => {
+    if (auth0Id === authId) {
+      setUserProject(true)
+    }
+    if (auth0Id !== authId) {
+      setUserProject(false)
+    }
+  })
 
   return (
     <>
@@ -178,7 +167,7 @@ export default function Project () {
           {userProject ? (
             <HStack>
               <Button
-              // onClick={saveHandler}
+                onClick={() => navigate(`/projects/edit/${id}`)}
                 rightIcon={<FcRedo/>}
                 size='lg'
                 width="full"

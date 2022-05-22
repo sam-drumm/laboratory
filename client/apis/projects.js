@@ -25,6 +25,12 @@ export function addProjects (project) {
     .send(project)
 }
 
+export function editProject (project) {
+  return request
+    .patch(rootUrl + '/projects/edit')
+    .send(project)
+}
+
 export function getProjectById (id, token) {
   return request
     .get(`${rootUrl}/projects/${id}`)

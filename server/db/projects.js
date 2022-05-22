@@ -30,16 +30,18 @@ async function addProject (input, db = connection) {
     .then(sort)
 }
 
-async function updateProject (newProject, auth0Id, db = connection) {
+async function updateProject (newProject,
+  // auth0Id,
+  db = connection) {
+  console.log(newProject)
+  // return db('projects')
+  //   .where('id', newProject.id)
+  //   .first()
+  //   // .then(project => authorizeUpdate(project, auth0Id))
+  //   .then(() => {
   return db('projects')
     .where('id', newProject.id)
-    .first()
-    .then(project => authorizeUpdate(project, auth0Id))
-    .then(() => {
-      return db('projects')
-        .where('id', newProject.id)
-        .update(newProject)
-    })
+    .update(newProject)
     .then(() => db)
     .then(getProjects)
     .then(sort)

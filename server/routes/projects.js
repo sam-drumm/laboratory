@@ -1,10 +1,7 @@
 const express = require('express')
-// const jwtAuthz = require('express-jwt-authz')
 const {
-  // getUserRoles,
   checkJwt
 } = require('../auth0')
-
 const db = require('../db/projects')
 const router = express.Router()
 const log = require('../logger')
@@ -27,6 +24,30 @@ router.post('/', async (req, res) => {
   }
 })
 
+// Update project
+
+router.patch('/edit',
+// checkJwt,
+  (req, res) => {
+    const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region, following } = req.body
+    const updatedProject = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region, following }
+
+
+    db.updateProject(updatedProject)
+      .then((project) => {
+        res.status(200).json(project)
+        return null
+      })
+      .catch((err) => {
+        log(err.message)
+        res.status(500).json({
+          error: {
+            title: 'Unable to update project'
+          }
+        })
+      })
+  })
+
 // get by project id
 
 router.get('/:id', async (req, res) => {
@@ -43,28 +64,6 @@ router.get('/:id', async (req, res) => {
       }
     })
   }
-})
-
-// Update project
-
-router.patch('/:id', checkJwt, (req, res) => {
-  const { next } = req.body
-  // update to page vars
-
-  const updatedProject = { next }
-  db.updateProject(updatedProject)
-    .then((project) => {
-      res.status(200).json(project)
-      return null
-    })
-    .catch((err) => {
-      log(err.message)
-      res.status(500).json({
-        error: {
-          title: 'Unable to update project'
-        }
-      })
-    })
 })
 
 router.get('/', (req, res) => {

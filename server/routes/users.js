@@ -3,9 +3,6 @@ const { getUserRoles } = require('../auth0')
 const db = require('../db/users')
 const router = express.Router()
 
-// middleware for checking permissions (authorization)
-// const checkAdmin = jwtAuthz(['read:my_private_route'], { customScopeKey: 'permissions' })
-
 router.patch('/', async (req, res) => {
   const {
     auth0Id,

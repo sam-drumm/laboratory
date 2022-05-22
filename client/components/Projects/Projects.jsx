@@ -5,6 +5,7 @@ import CountdownTimer from '../Countdown/CountdownTimer'
 import Carousel from '../Carousel/Carousel'
 import { categoryLookup, regionLookup } from '../utils/lookup'
 import { Wrap, Button, Flex, Heading, Text, VStack, HStack, Tag, useBreakpointValue } from '@chakra-ui/react'
+import { FcRedo } from 'react-icons/fc'
 
 export default function Projects (props) {
   const navigate = useNavigate()
@@ -84,12 +85,11 @@ export default function Projects (props) {
             </HStack>
             <Button
               onClick={() => navigate(`/projects/${project.id}`)}
-              colorScheme="green"
               fontWeight="bold"
-              color="gray.900"
-
+              rightIcon={<FcRedo/>}
+              // color="gray.900"
             >
-                    Find out more
+              Edit your Pitch
             </Button>
           </Flex>
 

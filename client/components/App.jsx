@@ -12,6 +12,7 @@ import Verification from './Register/Verification'
 import Category from './Projects/Category'
 import UserHome from './User/UserHome'
 import Waiting from './Wait/Waiting'
+import UpdateProject from './Project/UpdateProject'
 
 function App () {
   const navigate = useNavigate()
@@ -30,6 +31,7 @@ function App () {
         <Route path='/verification' element={<Verification/>} />
         <Route path='/projects/new' element={<NewProject />}/>
         <Route path='/projects/:id' element={<Project />}/>
+        <Route path='/projects/edit/:id' element={<UpdateProject />}/>
         <Route path='/category' element={<Category />}/>
       </Routes>
     </div>
