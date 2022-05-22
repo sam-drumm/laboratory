@@ -10,8 +10,8 @@ module.exports = router
 
 // POST /api/v1/users/protected
 router.post('/', async (req, res) => {
-  const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region, following } = req.body
-  const project = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region, following }
+  const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region } = req.body
+  const project = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region }
   try {
     await db.addProject(project)
   } catch (err) {
@@ -26,13 +26,12 @@ router.post('/', async (req, res) => {
 
 // Update project
 
-router.patch('/edit',
+router.patch('/edit/:id',
 // checkJwt,
   (req, res) => {
-    const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region, following } = req.body
-    const updatedProject = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region, following }
-
-
+    const { auth0Id, category, projectTitle, description, seeking, started, skillType, skillDescription, region, success } = req.body
+    const updatedProject = { auth0Id, category, projectTitle, description, seeking, started, skillType, skillDescription, region, success }
+    console.log(updatedProject)
     db.updateProject(updatedProject)
       .then((project) => {
         res.status(200).json(project)
