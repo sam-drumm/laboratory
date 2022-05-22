@@ -64,6 +64,7 @@ async function getProjectById (id, db = connection) {
   return db('Projects')
     .select(
       'id',
+      'auth0_id as authId',
       'project_title as projectTitle',
       'region',
       'category',

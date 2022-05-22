@@ -17,7 +17,6 @@ exports.seed = function (knex) {
           started: 1,
           skill_type: [2, 19],
           skill_description: ' Aliquam id condimentum quam, eget convallis magna. Suspendisse lacinia turpis hendrerit ligula sollicitudin, sit amet placerat nibh iaculis. Sed sit amet maximus felis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc diam tellus, gravida ut nibh nec, vestibulum vehicula metus. Duis elementum massa eu elit porta, ac facilisis enim finibus. Curabitur ut mi libero. ',
-          status: 1,
           region: 9
         },
         {
@@ -31,7 +30,6 @@ exports.seed = function (knex) {
           started: 2,
           skill_type: [10, 18, 1, 6, 8],
           skill_description: ' Integer egestas nisi eros, sit amet gravida neque posuere quis. Duis sagittis nunc nulla, vitae interdum leo elementum a. Quisque tellus sapien, pellentesque a suscipit a, interdum quis leo. Sed commodo at felis sed varius. Donec laoreet est ut tellus dapibus gravida. Sed placerat metus nulla, at imperdiet justo fringilla et. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at sodales mi. Maecenas finibus nisl a libero tincidunt eleifend. ',
-          status: 2,
           region: 49
 
         },
@@ -46,7 +44,6 @@ exports.seed = function (knex) {
           started: 2,
           skill_type: [10, 13],
           skill_description: 'Maecenas efficitur gravida consequat. Morbi leo arcu, convallis sed nunc eu, hendrerit hendrerit mi. Cras fringilla varius elementum. Donec in condimentum leo. Proin quis massa in dui ullamcorper rutrum et et neque. Pellentesque cursus egestas elit at tempus. Pellentesque in dolor maximus, sollicitudin dolor quis, auctor arcu. Aenean a enim et purus elementum tristique sit amet at augue. Nam non elit et leo consequat consequat. Curabitur nec feugiat mi, et sollicitudin neque. Donec vel est iaculis, placerat velit eu, interdum velit. Aenean faucibus tristique elit, a convallis sapien. Cras interdum metus felis, euismod interdum nunc gravida vitae. Ut euismod dignissim.',
-          status: 1,
           region: 48
 
         },
@@ -61,7 +58,6 @@ exports.seed = function (knex) {
           started: 2,
           skill_type: [17, 2, 5, 1],
           skill_description: 'Nulla gravida et quam in pulvinar. Maecenas consequat ante ut ligula maximus, ultrices aliquet enim suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut placerat tristique tortor auctor tempus. Vivamus in felis commodo, congue nibh at, suscipit elit. Vestibulum ac purus sed mi faucibus malesuada facilisis eget dui. Aliquam sem neque, aliquam quis mollis at, molestie ut orci. Aenean fringilla elit fringilla massa commodo, ac aliquet justo aliquam. Vivamus vulputate pellentesque odio et luctus. Proin pellentesque facilisis finibus. In suscipit leo id malesuada condimentum. Aliquam ut eros ut nulla tristique hendrerit. Pellentesque sit amet.',
-          status: 1,
           region: 54
 
         },
@@ -76,7 +72,6 @@ exports.seed = function (knex) {
           started: 1,
           skill_type: [10, 3, 11, 1],
           skill_description: ' Suspendisse potenti. Aliquam eget sapien tempus, feugiat lorem sed, tempus ex. Aliquam porta, ligula quis scelerisque elementum, ligula justo vehicula quam, at interdum augue magna a lectus. Suspendisse gravida mauris eget ligula mattis auctor. Maecenas tincidunt eleifend lobortis. Nullam velit purus, convallis quis sodales et, sodales vitae tortor. Proin vel. ',
-          status: 1,
           region: 17
 
         },
@@ -91,8 +86,7 @@ exports.seed = function (knex) {
           started: 1,
           skill_type: [10, 13, 1, 7, 19],
           skill_description: 'Duis porta volutpat nunc, aliquet luctus turpis aliquam eget. Suspendisse sit amet dolor at nisi tempor gravida nec eu leo. Suspendisse eu molestie quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce venenatis dolor fringilla vehicula condimentum. Aliquam dictum tempor ipsum, vitae ornare erat imperdiet ac. Sed viverra semper lorem et tristique. Suspendisse cursus ornare turpis, imperdiet pellentesque quam accumsan id. Pellentesque molestie neque non fringilla placerat. Donec vel mollis augue. Curabitur nec tincidunt massa. Mauris vel efficitur ex. Nunc malesuada risus urna, non eleifend nibh laoreet sed. Sed facilisis bibendum metus nec dignissim. Donec. ',
-          region: 1,
-          status: 2
+          region: 1
 
         },
         {
@@ -106,8 +100,7 @@ exports.seed = function (knex) {
           started: 1,
           skill_type: [1, 2, 4, 6, 13],
           skill_description: 'Duis porta volutpat nunc, aliquet luctus turpis aliquam eget. Suspendisse sit amet dolor at nisi tempor gravida nec eu leo. Suspendisse eu molestie quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce venenatis dolor fringilla vehicula condimentum. Aliquam dictum tempor ipsum, vitae ornare erat imperdiet ac. Sed viverra semper lorem et tristique. Suspendisse cursus ornare turpis, imperdiet pellentesque quam accumsan id. Pellentesque molestie neque non fringilla placerat. Donec vel mollis augue. Curabitur nec tincidunt massa. Mauris vel efficitur ex. Nunc malesuada risus urna, non eleifend nibh laoreet sed. Sed facilisis bibendum metus nec dignissim. Donec. ',
-          region: 23,
-          status: 2
+          region: 23
 
         },
         {
@@ -121,9 +114,7 @@ exports.seed = function (knex) {
           started: 2,
           skill_type: [10, 13, 11, 1, 9],
           skill_description: 'Nullam ac nunc condimentum, hendrerit urna eget, tempor massa. Nulla commodo massa enim, eget lobortis est pulvinar at. In consectetur, nisl eu molestie pretium, sem leo sagittis felis, et elementum nulla felis vitae mi. Ut non sollicitudin ipsum, a placerat felis. Donec tempus ut magna tincidunt accumsan. In ultricies at leo vel porttitor. Etiam mattis libero nec interdum dapibus. Phasellus porttitor in arcu eget luctus. Nullam metus nulla, tristique at tellus ac, semper tempus mauris. Suspendisse ultrices est vel blandit lacinia. Nunc ac dignissim arcu. Curabitur sit amet malesuada nunc, ac euismod ex. Quisque eu blandit lacus. Donec in sem. ',
-          region: 87,
-          status: 2
-
+          region: 87
         },
         {
           id: 9,
@@ -136,8 +127,7 @@ exports.seed = function (knex) {
           started: 1,
           skill_type: [9, 10, 12, 16],
           skill_description: ' Nullam tincidunt vulputate ornare. Nunc vehicula sapien arcu, sit amet auctor mi porta non. Praesent eget purus enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet urna sit amet rutrum accumsan. Duis et sodales nisi. Fusce dapibus id ante quis gravida. Suspendisse aliquam erat id enim aliquam, vitae suscipit enim suscipit. Vivamus lacinia nisi urna, eget iaculis arcu porta vitae. Phasellus non eros risus. Morbi justo lacus, commodo nec pulvinar nec, lobortis et mauris.  ',
-          region: 32,
-          status: 2
+          region: 32
 
         },
         {
@@ -151,8 +141,7 @@ exports.seed = function (knex) {
           started: 1,
           skill_type: [4, 7],
           skill_description: 'In condimentum eu augue sit amet congue. Donec in ullamcorper leo, vel facilisis massa. Sed elit quam, maximus a ligula sed, iaculis semper ante.  ',
-          region: 1,
-          status: 1
+          region: 1
 
         },
         {
@@ -166,8 +155,8 @@ exports.seed = function (knex) {
           started: 1,
           skill_type: [5, 19],
           skill_description: ' Quisque vitae aliquam ipsum, ac iaculis sapien. Nulla sodales metus vel maximus euismod. Mauris tincidunt viverra mi, non ultrices dui bibendum sit amet. Fusce sed odio vel nisi efficitur pharetra. Quisque vestibulum sagittis ligula, at sagittis eros accumsan nec. Fusce a neque eget dui suscipit laoreet. Donec risus risus, consequat ullamcorper commodo nec, auctor in tellus. Aenean malesuada eget felis quis maximus. Vestibulum nulla urna, accumsan quis tortor et, sodales ornare ipsum. Donec felis nisi, hendrerit eget lectus eu, consectetur pharetra nisl. Cras vel eleifend libero, ac suscipit arcu. Integer volutpat lobortis dui et ullamcorper. Aliquam accumsan lacus vitae enim. ',
-          region: 43,
-          status: 1
+          region: 43
+  
 
         },
         {
@@ -181,8 +170,8 @@ exports.seed = function (knex) {
           started: 1,
           skill_type: [11, 14],
           skill_description: 'Proin tellus sem, ultricies vitae rutrum sit amet, rutrum quis urna. Duis sagittis laoreet felis quis efficitur. Nullam non neque odio. Integer sagittis eget justo ac mollis. Maecenas nec mauris purus. Pellentesque lobortis orci quis erat hendrerit, condimentum efficitur arcu sagittis. In efficitur eros libero, in dictum quam malesuada in. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam feugiat volutpat metus quis sollicitudin. Praesent bibendum, quam at feugiat facilisis, erat purus ornare risus, a porta leo quam sit amet leo. Proin sed congue est, quis sagittis nisi. Morbi malesuada dui urna, ac auctor neque. ',
-          region: 32,
-          status: 1
+          region: 32
+    
 
         },
         {
@@ -195,7 +184,6 @@ exports.seed = function (knex) {
           success: 'Nullam quis odio sed leo condimentum sagittis. Mauris diam leo, porta at ante feugiat, sagittis laoreet felis. Morbi pulvinar velit in fermentum dapibus. Nunc aliquam.',
           seeking: 1,
           started: 1,
-          status: 2,
           skill_type: [1, 3],
           skill_description: 'Quisque finibus ac neque eu cursus. Mauris at ultricies urna, in bibendum augue. Nullam interdum in tortor quis commodo. Ut a risus vestibulum, molestie ligula fringilla, consectetur magna. Quisque vitae massa erat. Integer aliquet diam lorem, vitae facilisis risus venenatis quis. Mauris est urna, commodo non felis eu, viverra pulvinar sem. Fusce lorem ipsum, bibendum eu velit eu, pharetra vehicula enim. Nullam id lorem sit amet lacus dignissim eleifend.'
         }

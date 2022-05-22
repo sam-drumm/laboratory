@@ -16,12 +16,14 @@ import {
   Radio,
   RadioGroup,
   Textarea,
-  Select
+  Select,
+  useToast
 
 } from '@chakra-ui/react'
 import Category from './Category'
 
 function NewProject () {
+  const toast = useToast()
   const { auth0Id, token } = useSelector(state => state.user)
 
   const navigate = useNavigate()
@@ -38,7 +40,6 @@ function NewProject () {
   const [skillDescription, setSkillDescription] = useState('')
   const [region, setRegion] = useState('')
   const [selectedItems, setSelectedItems] = useState([])
-
 
   const skillType = selectedItems.map(skill =>
     skill.value
@@ -62,14 +63,25 @@ function NewProject () {
   async function handleSubmit (event) {
     event.preventDefault()
     dispatch(setWaiting())
-    try {
-      setTimeout(() => {
+    if (skillType.length >= 2) {
+      try {
         dispatch(addProject(form, token))
-        navigate('/')
+        navigate('/profile/home')
         dispatch(clearWaiting())
-      }, 10000)
-    } catch (err) {
-      console.error(err)
+      } catch (err) {
+        console.error(err)
+      }
+    } else {
+      toast({
+        title: 'Double-check the skills section.',
+        description: 'You need to add at least two skills that you\'re seeking.',
+        status: 'warning',
+        duration: 9000,
+        isClosable: true,
+        position: 'top'
+      })
+      dispatch(clearWaiting())
+      return null
     }
   }
 
@@ -84,8 +96,6 @@ function NewProject () {
       <Box
         p={8}
         width="500px"
-        // minWidth="500px"
-        // maxWidth="750px"
         borderWidth={2}
         borderRadius={8}
         boxShadow="lg"
@@ -123,11 +133,10 @@ function NewProject () {
             <FormLabel htmlFor='region'>Nearest Region</FormLabel>
             <Select
               defaultValue={0}
-              placeholder='Select you nearest region'
               name='region'
               onChange={(e) => setRegion(e.target.value)}>
 
-              <option value="0">Please select</option>
+              <option value="0">Select you nearest region</option>
               <option value="4">Northland - Dargaville</option>
               <option value="2">Northland - Kaikohe</option>
               <option value="1">Northland - Kaitaia</option>
@@ -332,17 +341,6 @@ function NewProject () {
             </Textarea>
           </FormControl>
 
-          {/* <FormControl isRequired>
-            <FormLabel mt={6}htmlFor='purpose'>Purpose</FormLabel>
-            <RadioGroup onChange={setPurpose} value={purpose}>
-              <Stack direction='column'>
-                <Radio value='1'>Community benefit non profit</Radio>
-                <Radio value='2'>For commercialisation</Radio>
-                <Radio value='3'>Just for fun</Radio>
-              </Stack>
-            </RadioGroup>
-          </FormControl> */}
-
           <FormControl isRequired>
             <FormLabel mt={6}htmlFor='seeking' >Looking for</FormLabel>
             <RadioGroup onChange={setSeeking} value={seeking}>
@@ -356,7 +354,7 @@ function NewProject () {
           </FormControl>
 
           <FormControl isRequired>
-            <FormLabel mt={6}htmlFor='teamEstablished'>Team</FormLabel>
+            <FormLabel mt={6} htmlFor='teamEstablished'>Team</FormLabel>
             <RadioGroup onChange={setTeamEstablished} value={teamEstablished}>
               <Stack direction='column'>
                 <Radio value='1'>I’m looking to add to an established team</Radio>
@@ -366,8 +364,8 @@ function NewProject () {
           </FormControl>
 
           <FormControl isRequired>
-            <FormLabel mt={6}htmlFor='started'>Status</FormLabel>
-            <RadioGroup onChange={setStarted} value={started} placeholder="Select a post type">
+            <FormLabel mt={6} htmlFor='started'>Started</FormLabel>
+            <RadioGroup onChange={setStarted} value={started}>
               <Stack direction='column'>
                 <Radio value='1'>Brand spanking new idea</Radio>
                 <Radio value='2'>Already in motion</Radio>

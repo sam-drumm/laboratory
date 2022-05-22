@@ -7,15 +7,17 @@ import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
 import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertDescription, CloseButton, useToast } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
-import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike } from 'react-icons/fc'
+import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRedo } from 'react-icons/fc'
 import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../utils/lookup'
 import { capsFirst } from '../utils'
+import { getProjectByAuthId } from '../../apis/projects'
+
 import SendMessage from '../Messages/SendMessage'
 
 export default function Project () {
   const dispatch = useDispatch()
   const toast = useToast()
-
+  const [userProject, setUserProject] = useState(false)
   const [followed, setFollowed] = useState(false)
   const {
     isOpen: isVisible,
@@ -37,10 +39,11 @@ export default function Project () {
     success,
     skillType,
     skillDescription,
-    createdAt
+    createdAt,
+    authId
   } = useSelector(state => state.project)
 
-  const { token, firstName, following } = useSelector(state => state.user)
+  const { token, firstName, following, auth0Id } = useSelector(state => state.user)
 
   async function saveHandler () {
     await addFollowing(following, Number(id), authUser)
@@ -71,6 +74,14 @@ export default function Project () {
   const createdMS = new Date(createdAt).getTime()
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
   const expiryMS = createdMS + fourteenDaysMS
+
+  useEffect(() => {
+    if (authId === auth0Id) {
+      setUserProject(true)
+    }
+  }, [auth0Id])
+
+  console.log(userProject)
 
   useEffect(() => {
     dispatch(fetchProject(id, token))
@@ -153,50 +164,79 @@ export default function Project () {
               </div>
             </VStack>
 
-            <Button rightIcon={<FcCollaboration/>}>
+            {userProject ? (
+              (null)
+            )
+              : <Button rightIcon={<FcCollaboration/>}>
                 Pitched by {firstName}, checkout their profile
-            </Button>
+              </Button>
+            }
           </Box>
 
           <CountdownTimer targetDate={expiryMS}/>
 
-          <HStack>
-            <SendMessage
-              button="Great, this sounds like me!"
-              title={`Contact form for ${projectTitle}`}
-              hidden="false" />
-
-            {isVisible ? (
-              <Alert status='success'
-                borderRadius={'md'}>
-                <AlertIcon />
-                <Box>
-                  <AlertDescription>
-          Added to your favorites for later.
-                  </AlertDescription>
-                </Box>
-                <CloseButton
-                  alignSelf='flex-start'
-                  position='relative'
-                  right={-1}
-                  top={-1}
-                  onClick={removeHandler}
-                />
-              </Alert>
-            )
-
-              : <Button
-                onClick={saveHandler}
-                rightIcon={<FcLike/>}
+          {userProject ? (
+            <HStack>
+              <Button
+              // onClick={saveHandler}
+                rightIcon={<FcRedo/>}
                 size='lg'
                 width="full"
                 alignContent="center"
                 marginTop={10}
                 marginBottom={10}
                 borderWidth={2}
-                boxShadow='sm'> Save for later
-              </Button>}
-          </HStack>
+                boxShadow='sm'>
+                Edit your Pitch
+              </Button>
+            </HStack>
+
+          )
+            : (
+
+              <HStack>
+                <SendMessage
+                  button="Great, this sounds like me!"
+                  title={`Contact form for ${projectTitle}`}
+                  hidden="false" />
+
+                {isVisible ? (
+                  <Alert status='success'
+                    borderRadius={'md'}>
+                    <AlertIcon />
+                    <Box>
+                      <AlertDescription>
+          Added to your favorites for later.
+                      </AlertDescription>
+                    </Box>
+
+                    <CloseButton
+                      alignSelf='flex-start'
+                      position='relative'
+                      right={-1}
+                      top={-1}
+                      onClick={removeHandler}
+                    />
+                  </Alert>
+
+                )
+
+                  : (
+                    <Button
+                      onClick={saveHandler}
+                      rightIcon={<FcLike/>}
+                      size='lg'
+                      width="full"
+                      alignContent="center"
+                      marginTop={10}
+                      marginBottom={10}
+                      borderWidth={2}
+                      boxShadow='sm'> Save for later
+                    </Button>
+                  )}
+              </HStack>
+
+            )}
 
           <HStack spacing="auto">
             <Button colorScheme='facebook' leftIcon={<FaFacebook />}>
