@@ -3,10 +3,7 @@ const { getUserRoles } = require('../auth0')
 const db = require('../db/users')
 const router = express.Router()
 
-// middleware for checking permissions (authorization)
-// const checkAdmin = jwtAuthz(['read:my_private_route'], { customScopeKey: 'permissions' })
-
-router.post('/', async (req, res) => {
+router.patch('/', async (req, res) => {
   const {
     auth0Id,
     firstName,
@@ -21,7 +18,8 @@ router.post('/', async (req, res) => {
     meshblock,
     lon,
     lat,
-    formatted
+    formatted,
+    following
   } = req.body
 
   const user = {
@@ -38,7 +36,69 @@ router.post('/', async (req, res) => {
     meshblock,
     lon,
     lat,
-    formatted
+    formatted,
+    following
+  }
+
+  try {
+    await db.updateUser(user)
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).json({
+      error: {
+        title: 'failed to update user'
+      }
+    })
+  }
+
+  try {
+    const addedUser = await db.getUsersByAuth(user.auth0Id)
+    res.json(addedUser)
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).json({
+      error: {
+        title: 'failed to retrieve added user'
+      }
+    })
+  }
+})
+
+router.post('/', async (req, res) => {
+  const {
+    auth0Id,
+    firstName,
+    lastName,
+    email,
+    streetNumber,
+    street,
+    locality,
+    city,
+    region,
+    postcode,
+    meshblock,
+    lon,
+    lat,
+    formatted,
+    following
+  } = req.body
+
+  const user = {
+    auth0Id,
+    firstName,
+    lastName,
+    email,
+    streetNumber,
+    street,
+    locality,
+    city,
+    region,
+    postcode,
+    meshblock,
+    lon,
+    lat,
+    formatted,
+    following
   }
 
   try {

@@ -6,7 +6,8 @@ module.exports = {
   updateProject,
   deleteProject,
   authorizeUpdate,
-  getProjectById
+  getProjectById,
+  getProjectByAuthId
 }
 
 function sort (projectArray) {
@@ -20,8 +21,8 @@ async function getProjects (db = connection) {
 }
 
 async function addProject (input, db = connection) {
-  const { auth0Id, category, projectTitle, description, seeking, started, skillType, skillDescription, region } = input
-  const project = { auth0_id: auth0Id, category, project_title: projectTitle, description, seeking, started, skill_type: skillType, skill_description: skillDescription, region }
+  const { auth0Id, category, projectTitle, description, seeking, started, skillType, skillDescription, region, success } = input
+  const project = { auth0_id: auth0Id, category, project_title: projectTitle, description, seeking, started, skill_type: skillType, skill_description: skillDescription, region, success }
   return db('projects')
     .insert(project)
     .then(() => db)
@@ -29,15 +30,26 @@ async function addProject (input, db = connection) {
     .then(sort)
 }
 
-async function updateProject (newProject, auth0Id, db = connection) {
+async function updateProject (newProject,
+  db = connection) {
+  // return db('projects')
+  //   .where('id', newProject.id)
+  //   .first()
+  //   // .then(project => authorizeUpdate(project, auth0Id))
+  //   .then(() => {
   return db('projects')
     .where('id', newProject.id)
-    .first()
-    .then(project => authorizeUpdate(project, auth0Id))
-    .then(() => {
-      return db('projects')
-        .where('id', newProject.id)
-        .update(newProject)
+    // .first()
+    // .then(project => authorizeUpdate(project))
+    .update({
+      category: newProject.category,
+      description: newProject.description,
+      seeking: newProject.seeking,
+      started: newProject.started,
+      skill_type: newProject.skillType,
+      skill_description: newProject.skillDescription,
+      region: newProject.region,
+      success: newProject.success
     })
     .then(() => db)
     .then(getProjects)
@@ -59,15 +71,33 @@ async function deleteProject (id, auth0Id, db = connection) {
     .then(sort)
 }
 
-function authorizeUpdate (project, auth0Id) {
-  if (project.added_by_user !== auth0Id) {
-    throw new Error('Unauthorized')
-  }
-}
-
-function getProjectById (id, db = connection) {
+async function getProjectById (id, db = connection) {
   return db('Projects')
+    .select(
+      'id',
+      'auth0_id as authId',
+      'project_title as projectTitle',
+      'region',
+      'category',
+      'description',
+      'seeking',
+      'started',
+      'success',
+      'skill_type as skillType',
+      'skill_description as skillDescription',
+      'created_at as createdAt'
+    )
     .where('id', id)
     .first()
-    // .select()
+}
+
+async function getProjectByAuthId (auth0Id, db = connection) {
+  return db('Projects').select()
+    .where('auth0_id', auth0Id)
+}
+
+async function authorizeUpdate (project, auth0Id) {
+  if (project.auth0_id !== auth0Id) {
+    throw new Error('Unauthorized')
+  }
 }

@@ -1,5 +1,6 @@
 import consume from './consume'
 import { setUser } from './actions/user'
+import { setWaiting, clearWaiting } from './actions/waiting'
 import { dispatch } from './store'
 import { showError } from './actions/error'
 
@@ -9,6 +10,7 @@ const emptyUser = {
   email: '',
   firstName: '',
   lastName: '',
+  following: '',
   token: ''
 }
 
@@ -17,21 +19,24 @@ function saveUser (user = emptyUser) {
 }
 
 export async function cacheUser (useAuth0, navigate) {
+  dispatch(setWaiting())
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
   if (isAuthenticated) {
     try {
       const token = await getAccessTokenSilently()
       const res = await consume(`/users/${user.sub}`, token)
-      const { id, firstName, lastName, email } = res.body
+      const { id, firstName, lastName, email, following } = res.body
       if (id === undefined) {
         navigate('/register')
       }
       if (user.email_verified === false) {
         navigate('/verification')
       }
-      saveUser({ id, auth0Id: user.sub, firstName, lastName, email, token })
+      saveUser({ id, auth0Id: user.sub, firstName, lastName, email, token, following })
     } catch (err) {
       dispatch(showError('Unable to set the current user'))
+    } finally {
+      dispatch(clearWaiting())
     }
   } else {
     saveUser()

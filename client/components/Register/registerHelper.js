@@ -21,7 +21,8 @@ export function registerUser (user, selectedAddress, authUser, navigateTo, consu
     lat: address.lat,
     formatted: address.formatted,
     email: authUser.email,
-    auth0Id: authUser.sub
+    auth0Id: authUser.sub,
+    following: [0, 0]
   }
   const storeState = getState()
   const { token } = storeState.user
@@ -33,7 +34,6 @@ export function registerUser (user, selectedAddress, authUser, navigateTo, consu
       const newUser = res.body
       newUser.token = token
       dispatch(setUser(newUser))
-      // navigateTo(`/gardens/${user.gardenId}`)
       navigateTo('/')
       return newUser
     })

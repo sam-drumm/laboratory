@@ -2,26 +2,26 @@ import React, { useState } from 'react'
 import { CUIAutoComplete } from 'chakra-ui-autocomplete'
 
 const skills = [
-  { value: 'socialMedia', label: 'Social Media' },
-  { value: 'blockchain', label: 'Blockchain' },
-  { value: 'webDevelopment', label: 'Web Development' },
-  { value: 'machineLearning', label: 'Machine Learning' },
-  { value: 'copyWriting', label: 'Copywriting' },
-  { value: 'digitalCommunication', label: 'Digital Communication' },
-  { value: 'dataMining', label: 'Data Mining' },
-  { value: 'databaseManagement', label: 'Database Management' },
-  { value: 'dataAnalysis', label: 'Data Analysis' },
-  { value: 'dataMining', label: 'Data Mining' },
-  { value: 'SEO', label: 'Search Engine Optimization (SEO)' },
-  { value: 'marketingAutomation', label: 'Marketing Automation & EMS' },
-  { value: 'finance', label: 'Finance' },
-  { value: 'budget', label: 'Budgeting and Accounts' },
-  { value: 'UI', label: 'UI and UX Design' },
-  { value: 'design', label: 'Visual Design' },
-  { value: 'story', label: 'Storytelling' },
-  { value: 'iOS', label: 'iOS Development' },
-  { value: 'android', label: 'Android Development' }
-
+  { value: 1, label: 'Social Media' },
+  { value: 2, label: 'Blockchain' },
+  { value: 3, label: 'Web Development' },
+  { value: 4, label: 'Machine Learning' },
+  { value: 5, label: 'Copywriting' },
+  { value: 6, label: 'Digital Communication' },
+  { value: 7, label: 'Basic' },
+  { value: 8, label: 'Database Management' },
+  { value: 9, label: 'Data Analysis' },
+  { value: 10, label: 'Data Mining' },
+  { value: 11, label: 'Search Engine Optimization (SEO)' },
+  { value: 12, label: 'Marketing Automation & EMS' },
+  { value: 13, label: 'Finance' },
+  { value: 14, label: 'Budgeting and Accounts' },
+  { value: 15, label: 'UI and UX Design' },
+  { value: 16, label: 'Visual Design' },
+  { value: 17, label: 'Storytelling' },
+  { value: 18, label: 'iOS Development' },
+  { value: 19, label: 'Android Development' },
+  { value: 20, label: 'Neural Networks' }
 ]
 
 export default function Category (props) {

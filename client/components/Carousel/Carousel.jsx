@@ -1,5 +1,3 @@
-// TODO: Properly handle user tabbing
-
 import React, {
   useLayoutEffect,
   useCallback,
@@ -16,7 +14,9 @@ import {
   VStack,
   Button,
   Flex,
-  Box
+  Box,
+  HStack,
+  Stack
 } from '@chakra-ui/react'
 
 import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons'
@@ -161,6 +161,7 @@ const Slider = ({
 
   return (
     <>
+
       <Box
         ref={ref}
         w={{ base: '90%', md: `calc(90% + ${gap}px)` }}
@@ -189,51 +190,53 @@ const Slider = ({
           top: 0
         }}
       >
+
         {children}
+        <Flex
+          w={`${itemWidth}px`}
+          mt={`${gap / 2}px`}
+          mx="auto"
+          mb={10}
+        >
+          <Button
+            onClick={handleDecrementClick}
+            onFocus={handleFocus}
+            mr={`${gap / 3}px`}
+            color="gray.200"
+            variant="link"
+            minW={0}
+          >
+            <ChevronLeftIcon boxSize={9} />
+          </Button>
+
+          <Progress
+            value={percentage(activeItem, positions.length - constraint)}
+            alignSelf="center"
+            borderRadius="2px"
+            bg="base.d100"
+            flex={1}
+            h="3px"
+            sx={{
+              '> div': {
+                backgroundColor: 'gray.400'
+              }
+            }}
+          />
+
+          <Button
+            onClick={handleIncrementClick}
+            onFocus={handleFocus}
+            ml={`${gap / 3}px`}
+            color="gray.200"
+            variant="link"
+            zIndex={2}
+            minW={0}
+          >
+            <ChevronRightIcon boxSize={9} />
+          </Button>
+        </Flex>
       </Box>
 
-      <Flex
-        w={`${itemWidth}px`}
-        mt={`${gap / 2}px`}
-        mx="auto"
-      >
-        <Button
-          onClick={handleDecrementClick}
-          onFocus={handleFocus}
-          mr={`${gap / 3}px`}
-          color="gray.200"
-          variant="link"
-          minW={0}
-        >
-          <ChevronLeftIcon boxSize={9} />
-        </Button>
-
-        <Progress
-          value={percentage(activeItem, positions.length - constraint)}
-          alignSelf="center"
-          borderRadius="2px"
-          bg="base.d100"
-          flex={1}
-          h="3px"
-          sx={{
-            '> div': {
-              backgroundColor: 'gray.400'
-            }
-          }}
-        />
-
-        <Button
-          onClick={handleIncrementClick}
-          onFocus={handleFocus}
-          ml={`${gap / 3}px`}
-          color="gray.200"
-          variant="link"
-          zIndex={2}
-          minW={0}
-        >
-          <ChevronRightIcon boxSize={9} />
-        </Button>
-      </Flex>
     </>
   )
 }

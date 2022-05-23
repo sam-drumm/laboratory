@@ -6,15 +6,15 @@ import { useCountdown } from './useCountdown'
 const ShowCounter = ({ days, hours, minutes, seconds }) => {
   return (
     <Stack
-      spacing={8}
+      spacing={6}
       p={8}
       direction={['column', 'row']}
       borderWidth={2}
       borderRadius={8}
-      // boxShadow="lg"
-      >
+      justify={'left'}
+    >
 
-      <h2 m={3}>Project pitch will be live for another:</h2>
+      <h2>Pitch ends in:</h2>
 
       <HStack>
         <DateTimeDisplay value={days} type={'Days'} isDanger={days <= 3} />

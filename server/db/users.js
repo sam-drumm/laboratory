@@ -17,7 +17,8 @@ function getUsers (db = connection) {
       'meshblock',
       'lon',
       'lat',
-      'formatted'
+      'formatted',
+      'following'
     )
 }
 
@@ -38,8 +39,8 @@ function getUsersByAuth (auth0Id, db = connection) {
       'meshblock',
       'lon',
       'lat',
-      'formatted'
-
+      'formatted',
+      'following'
     )
     .where('auth0_id', auth0Id)
     .first()
@@ -68,9 +69,33 @@ function createUser (user, db = connection) {
         meshblock: user.meshblock,
         lon: user.lon,
         lat: user.lat,
-        formatted: user.formatted
+        formatted: user.formatted,
+        following: user.following
       })
     })
+}
+
+function updateUser (user, db = connection) {
+  return db('users')
+    .where('auth0_id', user.auth0Id)
+    .update({
+      first_name: user.firstName,
+      last_name: user.lastName,
+      email: user.email,
+      auth0_id: user.auth0Id,
+      street_number: user.streetNumber,
+      street: user.street,
+      locality: user.locality,
+      city: user.city,
+      region: user.region,
+      postcode: user.postcode,
+      meshblock: user.meshblock,
+      lon: user.lon,
+      lat: user.lat,
+      formatted: user.formatted,
+      following: user.following
+    })
+    .then(() => getUsersByAuth(user.auth0Id, db))
 }
 
 function userExists (uid, db = connection) {
@@ -97,7 +122,8 @@ function addUser (input, db = connection) {
     meshblock,
     lon,
     lat,
-    formatted
+    formatted,
+    following
   } = input
   const user = {
     auth0_id: auth0Id,
@@ -113,7 +139,8 @@ function addUser (input, db = connection) {
     meshblock,
     lon,
     lat,
-    formatted
+    formatted,
+    following
   }
   return db('users')
     .insert(user)
@@ -121,7 +148,12 @@ function addUser (input, db = connection) {
 
 function getUserById (id, db = connection) {
   return db('users')
-    .select('id', 'auth0_id as auth0Id', 'email', 'first_name as firstName', 'last_name as lastName', 'street_number: streetNumber',
+    .select('id',
+      'auth0_id as auth0Id',
+      'email',
+      'first_name as firstName',
+      'last_name as lastName',
+      'street_number: streetNumber',
       'street',
       'locality',
       'city',
@@ -130,7 +162,9 @@ function getUserById (id, db = connection) {
       'meshblock',
       'lon',
       'lat',
-      'formatted')
+      'formatted',
+      'following'
+    )
     .where('id', id)
     .first()
 }
@@ -140,5 +174,6 @@ module.exports = {
   addUser,
   getUserById,
   createUser,
-  getUsersByAuth
+  getUsersByAuth,
+  updateUser
 }

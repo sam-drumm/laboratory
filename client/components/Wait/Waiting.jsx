@@ -12,13 +12,23 @@ export default function Waiting () {
       <div>
         { waiting
           ? <>
-            <img src='./images/Mr_Robot_Logo.png' />
             <Spinner
-              thickness='500px'
-              speed='0.65s'
+              thickness='15px'
+              speed='.5s'
               emptyColor='gray.200'
               color='blue.500'
-              size='xl'
+              size='lg'
+              alignContent='centre'
+              justifyContent='centre'
+              display= 'flex'
+              background-color= "white"
+              align-items= "center"
+              position= "absolute"
+              left= "50%"
+              top= "50%"
+              height="100px"
+              width="100px"
+
             />
           </>
           : '\u00a0' }

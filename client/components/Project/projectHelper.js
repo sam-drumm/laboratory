@@ -1,6 +1,6 @@
 import requestor from '../../consume'
 import { dispatch } from '../../store'
-import { setWaiting } from '../../actions/waiting'
+import { clearWaiting, setWaiting } from '../../actions/waiting'
 import { showError } from '../../actions/error'
 import { setProject } from '../../actions/project'
 
@@ -13,6 +13,7 @@ export function getProject (id, user, consume = requestor) {
 
   return consume(`/projects/${id}`, '', 'get', {}, headers)
     .then((res) => {
+      dispatch(clearWaiting())
       const project = res.body
       dispatch(setProject({
         projectTitle: project.projectTitle,
@@ -22,6 +23,7 @@ export function getProject (id, user, consume = requestor) {
         purpose: project.purpose,
         teamEstablished: project.teamEstablished,
         started: project.started,
+        success: project.success,
         skillType: project.skillType,
         skillDescription: project.skillDescription
       }))
@@ -30,4 +32,13 @@ export function getProject (id, user, consume = requestor) {
     .catch((error) => {
       dispatch(showError(error.message))
     })
+}
+
+export async function getRegion (input) {
+  try {
+    const arr = new Array(input.split(','))
+    return arr
+  } catch (error) {
+    console.error(error)
+  }
 }

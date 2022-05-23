@@ -7,7 +7,6 @@ import { Auth0Provider } from '@auth0/auth0-react'
 
 import Header from './components/Nav/Header'
 import Footer from './components/Nav/Footer'
-import Waiting from './components/Wait/Waiting'
 import App from './components/App'
 import store from './store'
 import config from './auth_config.json'
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <Provider store={store}>
           <Router>
             <Header/>
-            <Waiting />
             <App />
             <Footer />
           </Router>

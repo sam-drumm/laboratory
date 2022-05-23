@@ -1,65 +1,52 @@
 import React from 'react'
+import ModalBox from '../ModalBox/ModalBox'
+import ContactForm from '../Contact/ContactForm'
+
+import { LoremIpsum } from 'react-lorem-ipsum'
 import {
-  Box,
   Stack,
-  Heading,
-  Flex,
-  Text,
-  useDisclosure
+  Flex
 } from '@chakra-ui/react'
 
-import { HamburgerIcon } from '@chakra-ui/icons'
-
-const Footer = (props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const handleToggle = () => (isOpen ? onClose() : onOpen())
-
+const Footer = () => {
   return (
     <Flex
-      marginTop={80}
-
+      flex="auto"
+      marginTop={10}
       as="footer"
       width="100%"
-      position="sticky"
+      position="fixed"
       bottom={0}
       align="center"
       justify="space-between"
       wrap="wrap"
       padding={6}
-      bg="teal.500"
+      bg="blue.400"
       color="white"
-      {...props}
     >
-      <Flex align="center" mr={5}>
-        <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-          <a>Co_lab</a>
-        </Heading>
-      </Flex>
-
-      <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
-        <HamburgerIcon />
-      </Box>
-
       <Stack
-        direction={{ base: 'column', md: 'row' }}
-        display={{ base: isOpen ? 'block' : 'none', md: 'flex' }}
+        direction='row'
         width={{ base: 'full', md: 'auto' }}
         alignItems="center"
         flexGrow={1}
         mt={{ base: 4, md: 0 }}
       >
-        <Text>Projects</Text>
-        <a href='/users' className='nav-link'>Users</a>
-        <Text>Examples</Text>
-        <Text>Blog</Text>
+        <ModalBox
+          bc = "white"
+          bg = "blue.200"
+          button="Contact"
+          title="Contact"
+          body= {<ContactForm />}
+          hidden= {true}
+        />
+        <ModalBox
+          bc = "white"
+          bg = "blue.200"
+          button="Legal"
+          title="Legal Information"
+          body= {<LoremIpsum p='1' />}
+        />
       </Stack>
-
-      <Box
-        display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
-        mt={{ base: 4, md: 0 }}
-      >
-
-      </Box>
     </Flex>
   )
 }

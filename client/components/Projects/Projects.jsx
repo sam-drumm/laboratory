@@ -1,50 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { showError } from '../../actions/error'
-import { regionLookup, categoryLookup } from '../utils/lookup'
-
-import Carousel from './Carousel'
-import {
-  Button,
-  Flex,
-  Heading,
-  Wrap,
-  Text,
-  VStack,
-  HStack,
-  Tag,
-  useBreakpointValue
-
-} from '@chakra-ui/react'
-import { getAllProjects } from '../Projects/projectsHelper'
 import { capsFirst } from '../utils'
 import CountdownTimer from '../Countdown/CountdownTimer'
+import Carousel from '../Carousel/Carousel'
+import { categoryLookup, regionLookup } from '../utils/lookup'
+import { Wrap, Button, Flex, Heading, Text, VStack, HStack, Tag, useBreakpointValue } from '@chakra-ui/react'
+import { FcRedo } from 'react-icons/fc'
 
-export default function HomeProjectCarousel () {
-  const [data, setData] = useState([])
-
-  const dispatch = useDispatch()
+export default function Projects (props) {
   const navigate = useNavigate()
-
-  useEffect(() => {
-    getAllProjects()
-      .then(projects => {
-        setData(projects)
-        return null
-      })
-      .catch(err => {
-        dispatch(showError(err.message))
-        return false
-      })
-  }, [])
-
+  const data = props.props
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
 
   return (
     <>
-
-      <Flex flex={1} align={'left'} justify={'left'}>
+      <Flex p={8} flex={1} align={'left'} justify={'left'}>
         <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
           <Text
             left={1}
@@ -61,9 +31,8 @@ export default function HomeProjectCarousel () {
               zIndex: -1
             }}
           >
-          Live Projects
+          Your projects.
           </Text>
-
         </Heading>
       </Flex>
 
@@ -102,8 +71,6 @@ export default function HomeProjectCarousel () {
               }/>
             </Flex>
 
-            {/* <Flex justifyContent="space-between"> */}
-
             <HStack spacing={2} justify={'left'} mb={2}>
               <Wrap>
 
@@ -117,18 +84,18 @@ export default function HomeProjectCarousel () {
               </Wrap>
             </HStack>
             <Button
-              onClick={() => navigate(`./projects/${project.id}`)}
-              colorScheme="gray"
+              onClick={() => navigate(`/projects/${project.id}`)}
               fontWeight="bold"
-              color="gray.900"
+              rightIcon={<FcRedo/>}
+              // color="gray.900"
             >
-                    Find out more
+              Edit your Pitch
             </Button>
           </Flex>
-          // </Flex>
+
         ))}
       </Carousel>
-
     </>
+
   )
 }

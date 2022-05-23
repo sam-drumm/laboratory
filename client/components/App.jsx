@@ -10,6 +10,9 @@ import Profile from './Register/Profile'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import Verification from './Register/Verification'
 import Category from './Projects/Category'
+import UserHome from './User/UserHome'
+import Waiting from './Wait/Waiting'
+import UpdateProject from './Project/UpdateProject'
 
 function App () {
   const navigate = useNavigate()
@@ -17,21 +20,18 @@ function App () {
 
   return (
     <div className='app'>
+      <Waiting/>
       <Routes>
         <Route path='/' element={
-          <>
-            <Home/>
-            {/* <Carousel/> */}
-            {/* <Users/>
-            <PingRoutes/>
-            <Projects/> */}
-          </>
+          <Home/>
         } />
         <Route path='/profile' element={<Profile/>} />
+        <Route path='/profile/home' element={<UserHome/>} />
         <Route path='/register' element={<Registration/>} />
         <Route path='/verification' element={<Verification/>} />
         <Route path='/projects/new' element={<NewProject />}/>
         <Route path='/projects/:id' element={<Project />}/>
+        <Route path='/projects/edit/:id' element={<UpdateProject />}/>
         <Route path='/category' element={<Category />}/>
       </Routes>
     </div>
