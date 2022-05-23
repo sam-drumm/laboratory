@@ -69,9 +69,9 @@ export function addProject (project, token) {
   }
 }
 
-export function editProjects (project, token) {
+export function editProjects (project, token, auth0Id) {
   return dispatch => {
-    return editProject(project, token)
+    return editProject(project, token, auth0Id)
       .then(project => {
         dispatch(setProject(project))
         return null

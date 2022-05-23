@@ -25,27 +25,27 @@ router.post('/', async (req, res) => {
 })
 
 // Update project
+// checkJwt - need to add back in
 
-router.patch('/edit/:id',
-// checkJwt,
-  (req, res) => {
-    const { auth0Id, category, projectTitle, description, seeking, started, skillType, skillDescription, region, success } = req.body
-    const updatedProject = { auth0Id, category, projectTitle, description, seeking, started, skillType, skillDescription, region, success }
-    console.log(updatedProject)
-    db.updateProject(updatedProject)
-      .then((project) => {
-        res.status(200).json(project)
-        return null
-      })
-      .catch((err) => {
-        log(err.message)
-        res.status(500).json({
-          error: {
-            title: 'Unable to update project'
-          }
-        })
-      })
-  })
+router.patch('/edit', async (req, res) => {
+  const { id, auth0Id, category, description, seeking, started, skillType, skillDescription, region, success } = req.body
+  const updatedProject = { id, auth0Id, category, description, seeking, started, skillType, skillDescription, region, success }
+
+  // console.log(updatedProject)
+  try {
+    await db.updateProject(updatedProject)
+    // .then((project) => {
+    // res.status(200).json(project)
+    // return null
+  } catch (err) {
+    log(err.message)
+    res.status(500).json({
+      error: {
+        title: 'Unable to update project'
+      }
+    })
+  }
+})
 
 // get by project id
 

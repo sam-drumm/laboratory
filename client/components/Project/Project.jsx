@@ -29,7 +29,7 @@ export default function Project () {
   } = useDisclosure({ defaultIsOpen: false })
 
   const { projectTitle, region, category, description, seeking, started, success, skillType, skillDescription, createdAt, authId } = useSelector(state => state.project)
- 
+
   const { token, firstName, following, auth0Id } = useSelector(state => state.user)
 
   async function saveHandler () {
@@ -57,7 +57,6 @@ export default function Project () {
       position: 'top'
     })
   }
-
 
   const createdMS = new Date(createdAt).getTime()
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
@@ -186,8 +185,10 @@ export default function Project () {
               <HStack>
                 <SendMessage
                   button="Great, this sounds like me!"
-                  title={`Contact form for ${projectTitle}`}
-                  hidden="false" />
+                  title={`Keen to connect with ${firstName}, who's leading: ${projectTitle}?`}
+                  hidden="false"
+                  firstname={firstName}
+                />
 
                 {isVisible ? (
                   <Alert status='success'

@@ -25,10 +25,12 @@ export function addProjects (project) {
     .send(project)
 }
 
-export function editProject (project) {
+export function editProject (project, token, auth0Id) {
   return request
     .patch(rootUrl + '/projects/edit')
-    .send(project)
+    .set('authorization', `Bearer ${token}`)
+    .send(project, auth0Id)
+    .catch(console.error('error'))
 }
 
 export function getProjectById (id, token) {

@@ -26,13 +26,11 @@ function UpdateProject () {
   const toast = useToast()
   const { id } = useParams()
   const { auth0Id, token } = useSelector(state => state.user)
-
   const savedProject = useSelector(state => state.project)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [projectTitle, setProjectTitle] = useState('')
   const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
   const [success, setSuccess] = useState('')
@@ -51,7 +49,6 @@ function UpdateProject () {
   const form = ({
     id,
     auth0Id,
-    projectTitle,
     category,
     description,
     success,
@@ -73,7 +70,7 @@ function UpdateProject () {
     dispatch(setWaiting())
     if (skillType.length >= 2) {
       try {
-        dispatch(editProjects(form, token))
+        dispatch(editProjects(form, token, auth0Id))
         navigate('/profile/home')
         dispatch(clearWaiting())
       } catch (err) {
@@ -103,37 +100,22 @@ function UpdateProject () {
     >
       <Box
         p={8}
-        width="500px"
+        // minWidth="500px"
+        minWidth="750px"
         borderWidth={2}
         borderRadius={8}
         boxShadow="lg"
       >
 
-        <Box textAlign="centre">
-          <Tooltip
-            label="Sorry, you can't edit the title" openDelay={1500} closeDelay={250}>
-            <Heading> Edit Details:<div></div><p>{savedProject.projectTitle}</p></Heading>
-          </Tooltip>
+        <Box textAlign="centre" width="full" alignContent="center">
+          <Heading> Edit Details: {savedProject.projectTitle}</Heading>
         </Box>
+
         <form onSubmit={handleSubmit}>
 
-          <FormControl mt={3}>
-            <FormLabel htmlFor='projectTitle'>Project Title</FormLabel>
-            <Input
-              isReadOnly={true}
-
-              name='projectTitle'
-              onChange={(e) => setProjectTitle(e.target.value)}
-              placeholder={savedProject.projectTitle}
-              type="text"
-              maxLength={75}
-            />
-
-          </FormControl>
-
-          <FormControl mt={6} >
+          <FormControl mt={6} isRequired={true}>
             <FormLabel htmlFor='category' >Category</FormLabel>
-            <RadioGroup onChange={setCategory} value={category} defaultValue={JSON.stringify(savedProject.category)}>
+            <RadioGroup onChange={setCategory} >
               <Stack spacing={[1, 5]} direction={['column', 'row']}>
                 <Radio value='1'>Just for Fun</Radio>
                 <Radio value='2'>Commercial</Radio>
@@ -145,7 +127,7 @@ function UpdateProject () {
           <FormControl mt={6} >
             <FormLabel htmlFor='region'>Nearest Region</FormLabel>
             <Select
-              value={savedProject.region}
+              defaultValue={savedProject.region}
               name='region'
               onChange={(e) => setRegion(e.target.value)}>
 
@@ -334,15 +316,15 @@ function UpdateProject () {
 
           <FormControl mt={3}>
             <FormLabel htmlFor='description'>Pitch</FormLabel>
-            <Tooltip label='How would you describe your project to others if you only had 100 words?' openDelay={1500} closeDelay={250}>
-              <Textarea
-                name='description'
-                onChange={(e) => setDescription(e.target.value)}
-                maxLength={500}
-                placeholder={savedProject.description}
-              >
-              </Textarea>
-            </Tooltip>
+            {/* <Tooltip label='How would you describe your project to others if you only had 100 words?' openDelay={1500} closeDelay={250}> */}
+            <Textarea
+              name='description'
+              onChange={(e) => setDescription(e.target.value)}
+              defaultValue={savedProject.description}
+              maxLength={500}
+            >
+            </Textarea>
+            {/* </Tooltip> */}
           </FormControl>
 
           <FormControl mt={3}>
@@ -351,7 +333,7 @@ function UpdateProject () {
               <Textarea
                 name='success'
                 onChange={(e) => setSuccess(e.target.value)}
-                placeholder={savedProject.success}
+                defaultValue={savedProject.success}
                 maxLength={500}
               >
               </Textarea>
@@ -399,6 +381,7 @@ function UpdateProject () {
             <Category
               setSelectedItems={setSelectedItems}
               selectedItems={selectedItems}
+              defaultValue={savedProject.skillType}
             />
           </FormControl>
 
@@ -408,8 +391,8 @@ function UpdateProject () {
               <Textarea
                 name='skillDescription'
                 onChange={(e) => setSkillDescription(e.target.value)}
-                placeholder={savedProject.skillDescription}
-              ></Textarea>
+                defaultValue={savedProject.skillDescription}
+              />
             </Tooltip>
           </FormControl>
 

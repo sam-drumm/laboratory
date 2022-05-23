@@ -22,6 +22,9 @@ export default function UserHome () {
 
     <Grid
       features = {featureData}
+      // headline="We're building a unique collective of"
+      // tag="people, passion and skills."
+      following="Dreams are for free but where can you find the people that can help to make them happen? Co_lab was built to connect people and turn ideas into reality."
     />
 
   )
@@ -60,8 +63,9 @@ export default function UserHome () {
   return (
     <>
       <HStack m={8} spacing={4} justify={'center'}>
-        <Button onClick={() => setResource(<Grid feature={featureData}/>)}>
-            Messages
+        <Button>
+          {/* onClick={() => setResource(<Grid feature={featureData}/>)} */}
+          Messages
         </Button>
         <Button onClick={() => setResource(
           (following.length >= 4 ? <Following

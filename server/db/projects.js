@@ -31,9 +31,7 @@ async function addProject (input, db = connection) {
 }
 
 async function updateProject (newProject,
-  // auth0Id,
   db = connection) {
-  console.log(newProject)
   // return db('projects')
   //   .where('id', newProject.id)
   //   .first()
@@ -41,7 +39,18 @@ async function updateProject (newProject,
   //   .then(() => {
   return db('projects')
     .where('id', newProject.id)
-    .update(newProject)
+    // .first()
+    // .then(project => authorizeUpdate(project))
+    .update({
+      category: newProject.category,
+      description: newProject.description,
+      seeking: newProject.seeking,
+      started: newProject.started,
+      skill_type: newProject.skillType,
+      skill_description: newProject.skillDescription,
+      region: newProject.region,
+      success: newProject.success
+    })
     .then(() => db)
     .then(getProjects)
     .then(sort)
@@ -88,7 +97,7 @@ async function getProjectByAuthId (auth0Id, db = connection) {
 }
 
 async function authorizeUpdate (project, auth0Id) {
-  if (project.added_by_user !== auth0Id) {
+  if (project.auth0_id !== auth0Id) {
     throw new Error('Unauthorized')
   }
 }

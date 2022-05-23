@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import { getRegisterFn } from '../../auth0-utils'
 
@@ -19,6 +20,8 @@ import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
 
 export default function Grid (props) {
   const register = getRegisterFn(useAuth0)
+  const navigate = useNavigate()
+
   function handleRegister (event) {
     event.preventDefault()
     register()
@@ -73,8 +76,9 @@ export default function Grid (props) {
       </Container>
       <Stack justify='center' direction='row' spacing={4} align='center' mt={8}>
         <IfAuthenticated>
-          <Button>
-            <a href='./profile/home'> My Co_Lab</a>
+          <Button
+            onClick={() => navigate('/profile/home')}>
+        My Co_Lab
           </Button>
         </IfAuthenticated>
         <IfNotAuthenticated>
@@ -85,7 +89,9 @@ export default function Grid (props) {
         <Button>
           Search Project Pitches
         </Button>
-        <Button>
+        <Button
+          onClick={() => navigate('/projects/new')
+          }>
           Pitch Your Project
         </Button>
       </Stack>
