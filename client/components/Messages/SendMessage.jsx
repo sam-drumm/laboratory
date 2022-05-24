@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   Flex, FormControl, FormLabel, Button, Textarea, useDisclosure, Modal, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, ModalContent, List, ListItem, ListIcon, Tooltip, VStack, useToast
 } from '@chakra-ui/react'
-import { FcCollaboration, FcMakeDecision, FcReadingEbook, FcShare } from 'react-icons/fc'
+import { RiNumber1, RiNumber2, RiNumber3, RiNumber4 } from "react-icons/ri";
 import { addMessage } from '../../actions/message'
 
 function SendMessage (props) {
@@ -75,20 +75,20 @@ function SendMessage (props) {
 
                   <Tooltip label = "*Why anonymised? We want to build a community that's little less reliant on labels. So we don't share information like age, gender, ethnicity or other identifying info unless you explicitly want to." openDelay={1500} closeDelay={250}>
                     <ListItem>
-                      <ListIcon as={FcShare} color='green.500'/>
+                      <ListIcon as={RiNumber1} color='green.300' />
                 We'll share your anonymised* profile details with {props.firstname}. This helps to better see if your skills, personality and interests fit with the project and the team.</ListItem>
                   </Tooltip>
 
                   <ListItem>
-                    <ListIcon as={FcReadingEbook} />
-                You'll get {props.firstname}'s profile details, to build a better sense of if you think you would work well together.
+                    <ListIcon as={RiNumber2} color='green.400'/>
+                You'll also get {props.firstname}'s profile details, to build a better sense of if you think you would work well together.
                   </ListItem>
                   <ListItem>
-                    <ListIcon as={FcMakeDecision} color='green.500' />
+                    <ListIcon as={RiNumber3} color='green.500' />
                 If you both indicate that you're keen to move forward, then we'll unlock profile information so you can meet up online or in real life.
                   </ListItem>
                   <ListItem>
-                    <ListIcon as={FcCollaboration} color='green.500' />
+                    <ListIcon as={RiNumber4} color='green.600' />
                 We have a bunch of collaboration tools that you can explore and choose to use if you go forward.
                   </ListItem>
                 </List>
@@ -107,7 +107,7 @@ function SendMessage (props) {
                   </FormControl>
 
                   <FormControl mt={3} width='full'>
-                    <FormLabel htmlFor='bring'>Why do you think you might be able to bring?</FormLabel>
+                    <FormLabel htmlFor='bring'>What might be able to bring to the project?</FormLabel>
                     <Textarea
                       name='bring'
                       size='lg'
@@ -118,7 +118,7 @@ function SendMessage (props) {
                   </FormControl>
 
                   <FormControl mt={3} >
-                    <FormLabel htmlFor='share'>Anything else you want to share?</FormLabel>
+                    <FormLabel htmlFor='share'>Anything else that you want to share?</FormLabel>
                     <Textarea
                       size='lg'
                       name='share'

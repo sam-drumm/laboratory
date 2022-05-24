@@ -91,8 +91,6 @@ export default function Project () {
     dispatch(fetchUsers())
   }, [])
 
-  console.log(name)
-
   return (
     <>
 
@@ -192,9 +190,9 @@ export default function Project () {
               <HStack>
                 <SendMessage
                   button="Great, this sounds like me!"
-                  title={`Keen to connect with ${firstName}, who's leading: ${projectTitle}?`}
+                  title={`Keen to connect with ${name?.firstName}, who's leading: ${projectTitle}?`}
                   hidden={true}
-                  firstname={firstName}
+                  firstname={name?.firstName}
                 />
 
                 {isVisible ? (
