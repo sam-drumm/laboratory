@@ -27,7 +27,7 @@ exports.seed = function (knex) {
         {
           id: 2,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
-          first_name: 'watch',
+          first_name: 'Hermione',
           last_name: 'butachican',
           email: 'peach@email.nz',
           street_number: '102',
@@ -63,7 +63,7 @@ exports.seed = function (knex) {
         {
           id: 4,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
-          first_name: 'joe',
+          first_name: 'Joe',
           last_name: 'smoking',
           email: 'joe@camel.usa',
           street_number: '102',

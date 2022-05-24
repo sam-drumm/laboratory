@@ -8,7 +8,7 @@ import Grid from '../Grid/Grid'
 import Projects from '../Projects/Projects'
 import Following from '../Following/Following'
 import NoProjects from './NoProjects'
-import { featureData } from '../Grid/gridData'
+import { userHomeData } from '../Grid/gridData'
 import { Button, HStack } from '@chakra-ui/react'
 
 export default function UserHome () {
@@ -21,9 +21,8 @@ export default function UserHome () {
   const [resource, setResource] = useState(
 
     <Grid
-      features = {featureData}
-      // headline="We're building a unique collective of"
-      // tag="people, passion and skills."
+      features = {userHomeData}
+      tag="Your Co_Lab Home"
       following="Dreams are for free but where can you find the people that can help to make them happen? Co_lab was built to connect people and turn ideas into reality."
     />
 
