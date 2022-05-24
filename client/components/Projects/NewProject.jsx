@@ -62,12 +62,12 @@ function NewProject () {
 
   async function handleSubmit (event) {
     event.preventDefault()
-    dispatch(setWaiting())
+    // dispatch(setWaiting())
     if (skillType.length >= 2) {
       try {
         dispatch(addProject(form, token))
         navigate('/profile/home')
-        dispatch(clearWaiting())
+        // dispatch(clearWaiting())
       } catch (err) {
         console.error(err)
       }

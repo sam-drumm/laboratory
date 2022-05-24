@@ -5,6 +5,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') })
 
 const usersRoutes = require('./routes/users')
 const projectsRoutes = require('./routes/projects')
+const messagesRoutes = require('./routes/messages')
 
 const server = express()
 
@@ -13,6 +14,7 @@ server.use(express.json())
 
 server.use('/api/v1/users', usersRoutes)
 server.use('/api/v1/projects', projectsRoutes)
+server.use('/api/v1/messages', messagesRoutes)
 
 server.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'))

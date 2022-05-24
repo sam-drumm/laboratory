@@ -120,13 +120,13 @@ export default function Header (props) {
           <ButtonGroup spacing={4}>
             <Button
               variant="outline"
-              _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+              _hover={{ bg: 'blue.200', borderColor: 'white' }}
             >
               <a href='/' onClick={handleLogin} className='nav-link'>Sign in</a>
             </Button>
             <Button
               variant="outline"
-              _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+              _hover={{ bg: 'blue.200', borderColor: 'white' }}
             >
               <a href='/' onClick={handleRegister} className='nav-link'>Register</a>
             </Button>

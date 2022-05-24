@@ -10,8 +10,8 @@ import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
 import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRedo } from 'react-icons/fc'
 import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../utils/lookup'
 import { capsFirst } from '../utils'
-
 import SendMessage from '../Messages/SendMessage'
+import { fetchUsers } from '../../actions/user'
 
 export default function Project () {
   const navigate = useNavigate()
@@ -29,8 +29,9 @@ export default function Project () {
   } = useDisclosure({ defaultIsOpen: false })
 
   const { projectTitle, region, category, description, seeking, started, success, skillType, skillDescription, createdAt, authId } = useSelector(state => state.project)
-
   const { token, firstName, following, auth0Id } = useSelector(state => state.user)
+  const users = useSelector(state => state.users)
+  const name = users.find(({ auth0Id }) => auth0Id === authId)
 
   async function saveHandler () {
     await addFollowing(following, Number(id), authUser)
@@ -39,9 +40,9 @@ export default function Project () {
       title: 'Added!',
       description: 'We\'ve added this pitch to your follow list.',
       status: 'success',
-      duration: 9000,
+      duration: 10000,
       isClosable: true,
-      position: 'top'
+      position: 'top-end'
     })
   }
 
@@ -85,6 +86,10 @@ export default function Project () {
       setUserProject(false)
     }
   })
+
+  useEffect(() => {
+    dispatch(fetchUsers())
+  }, [])
 
   return (
     <>
@@ -156,7 +161,7 @@ export default function Project () {
               (null)
             )
               : <Button rightIcon={<FcCollaboration/>}>
-                Pitched by {firstName}, checkout their profile
+                Pitched by {name?.firstName}, checkout their profile
               </Button>
             }
           </Box>
@@ -185,9 +190,9 @@ export default function Project () {
               <HStack>
                 <SendMessage
                   button="Great, this sounds like me!"
-                  title={`Keen to connect with ${firstName}, who's leading: ${projectTitle}?`}
-                  hidden="false"
-                  firstname={firstName}
+                  title={`Keen to connect with ${name?.firstName}, who's leading: ${projectTitle}?`}
+                  hidden={true}
+                  firstname={name?.firstName}
                 />
 
                 {isVisible ? (
