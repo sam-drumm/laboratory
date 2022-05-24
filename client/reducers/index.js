@@ -5,11 +5,15 @@ import user from './user'
 import project from './project'
 import projects from './projects'
 import waiting from './waiting'
+import message from './message'
+import messages from './messages'
 
 export default combineReducers({
   users,
   user,
   projects,
   project,
-  waiting
+  waiting,
+  message,
+  messages
 })

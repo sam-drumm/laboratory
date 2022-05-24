@@ -186,7 +186,7 @@ export default function Project () {
                 <SendMessage
                   button="Great, this sounds like me!"
                   title={`Keen to connect with ${firstName}, who's leading: ${projectTitle}?`}
-                  hidden="false"
+                  hidden={true}
                   firstname={firstName}
                 />
 
