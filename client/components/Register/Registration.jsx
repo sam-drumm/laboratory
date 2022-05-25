@@ -43,6 +43,7 @@ function Registration () {
         [e.target.name]: e.target.value
       })
     }
+    return () => (setData(''))
   }
 
   function handleSelectedAddress (e) {

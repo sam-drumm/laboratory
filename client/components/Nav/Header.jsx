@@ -34,6 +34,11 @@ export default function Header (props) {
     register()
   }
 
+  function handleHome (e) {
+    e.preventDefault()
+    firstName ? navigate('./profile/home') : navigate('./')
+  }
+
   return (
     <>
       <IfAuthenticated>
@@ -81,15 +86,15 @@ export default function Header (props) {
               <Button
                 variant="outline"
                 _hover={{ bg: 'blue.200', borderColor: 'white' }}
-              >
-                {(firstName ? <a href='/profile/home'>{firstName}'s Co_Lab</a> : <a href='/profile/home'>Co_Lab</a>) }
+                onClick = {handleHome}>
+                {(firstName ? `${firstName}'s Co_Lab` : 'Co_Lab') }
               </Button>
 
               <Button
+                onClick={handleLogoff}
+                href='./'
                 variant="outline"
-                _hover={{ bg: 'blue.200', borderColor: 'white' }}
-              >
-                <a href='/' onClick={handleLogoff}>Log out</a>
+                _hover={{ bg: 'blue.200', borderColor: 'white' }}>Log out
               </Button>
             </ButtonGroup>
 
