@@ -6,7 +6,7 @@ export const CLEAR_ADDRESS = 'CLEAR_ADDRESS'
 export function setAddress (address) {
   return {
     type: SET_ADDRESS,
-    address
+    address: address
   }
 }
 

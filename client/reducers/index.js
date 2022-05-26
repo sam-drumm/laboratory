@@ -7,6 +7,7 @@ import projects from './projects'
 import waiting from './waiting'
 import message from './message'
 import messages from './messages'
+import address from './address'
 
 export default combineReducers({
   users,
@@ -15,5 +16,6 @@ export default combineReducers({
   project,
   waiting,
   message,
-  messages
+  messages,
+  address
 })
