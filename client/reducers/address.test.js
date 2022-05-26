@@ -31,7 +31,7 @@ describe('address reducer', () => {
       CLEAR_ADDRESS
     }
     const newState = addressReducer(oldAddress, action)
-    expect(newState.street).toBe('')
+    expect(newState.street).toBeNull()
     expect(newState).not.toBe(oldAddress)
   })
 
