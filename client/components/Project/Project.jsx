@@ -27,11 +27,13 @@ export default function Project () {
     onOpen,
     onClose
   } = useDisclosure({ defaultIsOpen: false })
-
   const { projectTitle, region, category, description, seeking, started, success, skillType, skillDescription, createdAt, authId } = useSelector(state => state.project)
-  const { token, firstName, following, auth0Id } = useSelector(state => state.user)
+  const { token, following, auth0Id } = useSelector(state => state.user)
   const users = useSelector(state => state.users)
   const name = users.find(({ auth0Id }) => auth0Id === authId)
+  const createdMS = new Date(createdAt).getTime()
+  const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
+  const expiryMS = createdMS + fourteenDaysMS
 
   async function saveHandler () {
     await addFollowing(following, Number(id), authUser)
@@ -42,7 +44,7 @@ export default function Project () {
       status: 'success',
       duration: 10000,
       isClosable: true,
-      position: 'top-end'
+      position: 'top'
     })
   }
 
@@ -59,37 +61,41 @@ export default function Project () {
     })
   }
 
-  const createdMS = new Date(createdAt).getTime()
-  const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
-  const expiryMS = createdMS + fourteenDaysMS
 
-  useEffect(() => {
-    dispatch(fetchProject(id, token))
-  }, [])
-
-  useEffect(() => {
-    setSkill(skillType.split(',').map(Number))
-  }, [region])
-
-  useEffect(() => {
-    if (following.includes(id)) {
-      setFollowed(true)
-      onOpen()
-    }
-  }, [following])
-
-  useEffect(() => {
-    if (auth0Id === authId) {
-      setUserProject(true)
-    }
-    if (auth0Id !== authId) {
-      setUserProject(false)
-    }
-  })
-
-  useEffect(() => {
+  function setPage () {
     dispatch(fetchUsers())
-  }, [])
+      .then(
+        dispatch(fetchProject(id, token))
+      )
+      .then(
+        setSkill(skillType.split(',').map(Number))
+      )
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
+  function setOwner () {
+    try {
+      if (auth0Id === authId) {
+        setUserProject(true)
+      }
+      if (auth0Id !== authId) {
+        setUserProject(false)
+      }
+      if (following.includes(id)) {
+        setFollowed(true)
+        onOpen()
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    setPage()
+    setOwner()
+  }, [token])
 
   return (
     <>

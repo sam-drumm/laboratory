@@ -23,11 +23,10 @@ import CountdownTimer from '../Countdown/CountdownTimer'
 
 export default function HomeProjectCarousel () {
   const [data, setData] = useState([])
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  useEffect(() => {
+  function getProjects () {
     getAllProjects()
       .then(projects => {
         setData(projects)
@@ -37,6 +36,10 @@ export default function HomeProjectCarousel () {
         dispatch(showError(err.message))
         return false
       })
+  }
+
+  useEffect(() => {
+    getProjects()
   }, [])
 
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000

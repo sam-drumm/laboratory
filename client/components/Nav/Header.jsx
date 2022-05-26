@@ -41,6 +41,7 @@ export default function Header (props) {
 
   return (
     <>
+
       <IfAuthenticated>
         <Flex
           position="sticky"

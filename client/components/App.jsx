@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { cacheUser } from '../auth0-utils'
 import NewProject from './Projects/NewProject'
@@ -11,8 +11,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import Verification from './Register/Verification'
 import Category from './Projects/Category'
 import UserHome from './User/UserHome'
-import Waiting from './Wait/Waiting'
 import UpdateProject from './Project/UpdateProject'
+
 
 function App () {
   const navigate = useNavigate()
@@ -20,10 +20,11 @@ function App () {
 
   return (
     <div className='app'>
-      <Waiting/>
       <Routes>
         <Route path='/' element={
-          <Home/>
+          <>
+            <Home/>
+          </>
         } />
         <Route path='/profile' element={<Profile/>} />
         <Route path='/profile/home' element={<UserHome/>} />
