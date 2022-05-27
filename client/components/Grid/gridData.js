@@ -1,5 +1,5 @@
 import { FcGlobe, FcBinoculars, FcAdvertising, FcBullish, FcCollaboration, FcLike, FcInfo, FcProcess } from 'react-icons/fc'
-import { RiNumber1, RiNumber2, RiNumber3, RiNumber4 } from "react-icons/ri";
+import { RiNumber1, RiNumber2, RiNumber3, RiNumber4 } from 'react-icons/ri'
 
 export const featureData = [
   {

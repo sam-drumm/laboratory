@@ -91,6 +91,13 @@ export default function Project () {
       if (auth0Id !== authId) {
         setUserProject(false)
       }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  function followingSet () {
+    try {
       if (following.includes(id)) {
         setFollowed(true)
         onOpen()
@@ -108,6 +115,10 @@ export default function Project () {
     pageSet()
     ownerSet()
   }, [skillType])
+
+  useEffect(() => {
+    followingSet()
+  }, [following])
 
   return (
     <>
@@ -158,7 +169,7 @@ export default function Project () {
               </Wrap>
             </Stack>
 
-            <VStack mb={6} className='project-text'>
+            <Flex direction={'column'} mb={6} className='project-text'>
               <div>
                 <b>Project Pitch </b>
                 <h2>{capsFirst(description)}</h2>
@@ -173,7 +184,7 @@ export default function Project () {
                 <b>Success would look like...</b>
                 <h2>{capsFirst(success)} </h2>
               </div>
-            </VStack>
+            </Flex>
 
             {userProject ? (
               (null)
@@ -185,8 +196,7 @@ export default function Project () {
           </Box>
           {expiry ? (
             <CountdownTimer targetDate={expiry}/>
-          ): <Skeleton/>}
-
+          ) : <Skeleton/>}
 
           {userProject ? (
             <HStack>
