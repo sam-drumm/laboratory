@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
 import CountdownTimer from '../Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
-import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertDescription, CloseButton, useToast } from '@chakra-ui/react'
+import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertDescription, CloseButton, useToast, Skeleton } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
 import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRedo } from 'react-icons/fc'
 import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../utils/lookup'
@@ -20,6 +20,7 @@ export default function Project () {
   const [userProject, setUserProject] = useState(false)
   const [followed, setFollowed] = useState(false)
   const [skill, setSkill] = useState([])
+  const [expiry, setExpiry] = useState()
   const authUser = useAuth0().user
   const { id } = useParams()
   const {
@@ -31,9 +32,17 @@ export default function Project () {
   const { token, following, auth0Id } = useSelector(state => state.user)
   const users = useSelector(state => state.users)
   const name = users.find(({ auth0Id }) => auth0Id === authId)
-  const createdMS = new Date(createdAt).getTime()
-  const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
-  const expiryMS = createdMS + fourteenDaysMS
+
+  function getExpiry () {
+    const createdMS = new Date(createdAt).getTime()
+    const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
+    const expiryMS = createdMS + fourteenDaysMS
+    try {
+      setExpiry(expiryMS)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   async function saveHandler () {
     await addFollowing(following, Number(id), authUser)
@@ -61,8 +70,7 @@ export default function Project () {
     })
   }
 
-
-  function setPage () {
+  function pageSet () {
     dispatch(fetchUsers())
       .then(
         dispatch(fetchProject(id, token))
@@ -75,7 +83,7 @@ export default function Project () {
       })
   }
 
-  function setOwner () {
+  function ownerSet () {
     try {
       if (auth0Id === authId) {
         setUserProject(true)
@@ -93,9 +101,13 @@ export default function Project () {
   }
 
   useEffect(() => {
-    setPage()
-    setOwner()
-  }, [token])
+    getExpiry()
+  }, [createdAt])
+
+  useEffect(() => {
+    pageSet()
+    ownerSet()
+  }, [skillType])
 
   return (
     <>
@@ -171,8 +183,10 @@ export default function Project () {
               </Button>
             }
           </Box>
+          {expiry ? (
+            <CountdownTimer targetDate={expiry}/>
+          ): <Skeleton/>}
 
-          <CountdownTimer targetDate={expiryMS}/>
 
           {userProject ? (
             <HStack>

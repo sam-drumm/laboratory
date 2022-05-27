@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
-import { ButtonGroup, Box, Skeleton, Stack, Heading, Flex, Button, useDisclosure, Icon } from '@chakra-ui/react'
+import { ButtonGroup, Box, Stack, Heading, Flex, Button, useDisclosure, Icon } from '@chakra-ui/react'
 import { FcCollaboration, FcGlobe, FcLike } from 'react-icons/fc'
 
 export default function Header (props) {
