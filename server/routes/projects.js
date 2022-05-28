@@ -86,3 +86,21 @@ router.get('/user/auth', async (req, res) => {
     res.status(500).send(err.message)
   }
 })
+
+// search projects
+
+router.get('/search/:query', async (req, res) => {
+  const data = (req.params.query)
+  console.log(query)
+  try {
+    const search = await db.searchProjects(data)
+    res.json(search)
+  } catch (err) {
+    log(err.message)
+    res.status(500).json({
+      error: {
+        title: 'Yo'
+      }
+    })
+  }
+})
