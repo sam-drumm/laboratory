@@ -19,8 +19,7 @@ export default function UserHome () {
   const [resource, setResource] = useState(
     <Grid
       features = {userHomeData}
-      headline = "Home"
-      tag="Your Co_Lab Home"
+      headline = "Your Co_Lab Home"
       following="Dreams are for free but where can you find the people that can help to make them happen? Co_lab was built to connect people and turn ideas into reality."
     />
   )
@@ -72,8 +71,7 @@ export default function UserHome () {
           onClick={() => setResource(
             <Grid
               features = {userHomeData}
-              headline = "Home"
-              tag="Your Co_Lab Home"
+              headline = "Your Co_Lab Home"
               following="Dreams are for free but where can you find the people that can help to make them happen? Co_lab was built to connect people and turn ideas into reality."
             />
           )}

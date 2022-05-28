@@ -54,7 +54,7 @@ export default function MessageHome (props) {
           Inbox (for your projects)
         </Heading>
         <Heading>
-          Outbox (Pitches your've contacted )
+          Outbox (Pitches you've contacted )
         </Heading>
       </Box>
 
