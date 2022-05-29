@@ -15,6 +15,7 @@ import {
 export default function SplitScreen (props) {
   const navigate = useNavigate()
 
+
   return (
 
     <Stack minH={'50vh'} direction={{ base: 'column', md: 'row' }}>
@@ -56,7 +57,7 @@ export default function SplitScreen (props) {
               {props.buttonOne}
             </Button>
             <Button
-              onClick={() => navigate(`${props.navTwo}`)}
+              // onClick={() => executeScroll()}
               rounded={'full'}>{props.buttonTwo}
             </Button>
           </Stack>

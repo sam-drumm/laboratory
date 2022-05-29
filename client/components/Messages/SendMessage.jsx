@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   Flex, FormControl, FormLabel, Button, Textarea, useDisclosure, Modal, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, ModalContent, List, ListItem, ListIcon, Tooltip, VStack, useToast
 } from '@chakra-ui/react'
-import { RiNumber1, RiNumber2, RiNumber3, RiNumber4 } from "react-icons/ri";
+import { RiNumber1, RiNumber2, RiNumber3, RiNumber4 } from 'react-icons/ri'
 import { addMessage } from '../../actions/message'
 
 function SendMessage (props) {

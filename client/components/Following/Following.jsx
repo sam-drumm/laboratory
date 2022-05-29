@@ -13,8 +13,12 @@ export default function Following (props) {
   const [follow, setFollow] = useState([])
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
 
-  useEffect(() => {
+  function findFollowing () {
     setFollow(props.data.filter(follow => follow !== 0))
+  }
+
+  useEffect(() => {
+    findFollowing()
   }, [])
 
   return (
@@ -91,7 +95,7 @@ export default function Following (props) {
             </HStack>
             <Button
               onClick={() => navigate(`/projects/${project.id}`)}
-              colorScheme="green"
+              colorScheme="grey"
               fontWeight="bold"
               color="gray.900"
 

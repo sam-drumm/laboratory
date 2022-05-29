@@ -96,6 +96,8 @@ async function getProjectByAuthId (auth0Id, db = connection) {
     .where('auth0_id', auth0Id)
 }
 
+/// is project owned by user?
+
 async function authorizeUpdate (project, auth0Id) {
   if (project.auth0_id !== auth0Id) {
     throw new Error('Unauthorized')

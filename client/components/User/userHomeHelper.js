@@ -36,22 +36,3 @@ export function updateProject (projectId, project, navigateTo, consume = request
       dispatch(clearWaiting())
     })
 }
-
-// export function cancelEvent (id, navigateTo, consume = requestor) {
-//   const storeState = getState()
-//   const { token } = storeState.user
-//   const eventToUpdate = {
-//     id: Number(id)
-//   }
-//   return consume(`/events/${id}/cancel`, token, 'patch', eventToUpdate)
-//     .then(() => {
-//       navigateTo()
-//       return null
-//     })
-//     .catch((err) => {
-//       dispatch(showError(err.message))
-//     })
-//     .finally(() => {
-//       dispatch(clearWaiting())
-//     })
-// }

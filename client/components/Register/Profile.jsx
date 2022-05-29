@@ -8,7 +8,6 @@ export default function Profile () {
   return (
     <>
       {
-
         (<Registration user={user}/>)
       }
     </>

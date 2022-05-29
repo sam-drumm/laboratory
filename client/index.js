@@ -12,6 +12,7 @@ import store from './store'
 import config from './auth_config.json'
 
 import colabTheme from './styles/colabTheme'
+import Waiting from './components/Wait/Waiting'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <Provider store={store}>
           <Router>
             <Header/>
+            <Waiting />
             <App />
             <Footer />
           </Router>

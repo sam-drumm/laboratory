@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
-import { ButtonGroup, Box, Skeleton, Stack, Heading, Flex, Button, useDisclosure, Icon } from '@chakra-ui/react'
+import { ButtonGroup, Box, Stack, Heading, Flex, Button, useDisclosure, Icon } from '@chakra-ui/react'
 import { FcCollaboration, FcGlobe, FcLike } from 'react-icons/fc'
 
 export default function Header (props) {
@@ -41,6 +41,7 @@ export default function Header (props) {
 
   return (
     <>
+
       <IfAuthenticated>
         <Flex
           position="sticky"
@@ -72,7 +73,7 @@ export default function Header (props) {
             flexGrow={1}
             mt={{ base: 4, md: 0 }}
           >
-            <a href='/' className='nav-link'>Find Projects <Icon as={FcCollaboration} boxSize="1.75em"/></a>
+            <a href='/projects/search' className='nav-link'>Find Projects <Icon as={FcCollaboration} boxSize="1.75em"/></a>
             <a href='/projects/new' className='nav-link'>Pitch an Idea <Icon as={FcGlobe} boxSize="1.75em"/></a>
             <a href='/' className='nav-link'>Favorites <Icon as={FcLike} boxSize="1.75em"/></a>
 

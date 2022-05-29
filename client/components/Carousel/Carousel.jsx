@@ -14,9 +14,7 @@ import {
   VStack,
   Button,
   Flex,
-  Box,
-  HStack,
-  Stack
+  Box
 } from '@chakra-ui/react'
 
 import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons'

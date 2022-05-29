@@ -11,8 +11,9 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import Verification from './Register/Verification'
 import Category from './Projects/Category'
 import UserHome from './User/UserHome'
-import Waiting from './Wait/Waiting'
 import UpdateProject from './Project/UpdateProject'
+import Search from './Search/Search'
+import SearchBar from './Search/SearchBar'
 
 function App () {
   const navigate = useNavigate()
@@ -20,10 +21,11 @@ function App () {
 
   return (
     <div className='app'>
-      <Waiting/>
       <Routes>
         <Route path='/' element={
-          <Home/>
+          <>
+            <Home/>
+          </>
         } />
         <Route path='/profile' element={<Profile/>} />
         <Route path='/profile/home' element={<UserHome/>} />
@@ -32,6 +34,8 @@ function App () {
         <Route path='/projects/new' element={<NewProject />}/>
         <Route path='/projects/:id' element={<Project />}/>
         <Route path='/projects/edit/:id' element={<UpdateProject />}/>
+        <Route path='/projects/search/:query' element={<Search />} />
+        <Route path='/projects/search' element={<SearchBar />} />
         <Route path='/category' element={<Category />}/>
       </Routes>
     </div>
