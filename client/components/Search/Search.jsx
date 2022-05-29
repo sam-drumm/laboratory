@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Stack, Center, Spinner, Text, Container, Heading, HStack, Input, Button, VStack } from '@chakra-ui/react'
+import { Box, Stack, Center, Spinner, Text, Container, Heading, HStack, Input, Button, Wrap,VStack, Tag, Flex } from '@chakra-ui/react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchProjects } from '../../actions/project'
+import { capsFirst } from '../utils'
+import { regionLookup, categoryLookup } from '../utils/lookup'
+
 
 export default function Search () {
   const dispatch = useDispatch()
@@ -51,15 +54,15 @@ export default function Search () {
   } else {
     return (
 
-      <VStack>
-        <HStack>
+      <VStack ml={8} mr={8} mb={150}>
+        <HStack p={10}>
           <Input
             value={searchParams}
             type={'text'}
             onChange={(e) => {
               setSearchParams(e.target.value)
             }}
-            placeholder={'Search for anything'}
+            placeholder={'Search for a Project'}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 handleSubmit()
@@ -72,10 +75,8 @@ export default function Search () {
           }} >Search</Button>
         </HStack>
 
-        <Container maxW='container.xl'>
-          <Box>
-            <Stack spacing='6'>
-              <Box >
+          {/* <Box border='8px' p={8}> */}
+            <VStack direction={['column', 'row']} spacing='24px' ml={8} mr={8}>
                 {
                   projects?.filter(post => {
                     if (query === '') {
@@ -87,22 +88,60 @@ export default function Search () {
                     }
                   }).map((post, index) => {
                     return <Box
-                      p={3}
-                      maxW='sm'
-                      borderWidth='1px'
-                      borderRadius='lg'
-                      overflow='hidden'
-                      display='flex'
-                      alignItems='baseline'
-                      key={index}>
-                      {post.project_title}
+                    key={index}
+                    maxWidth={{ base: "350px", md: "575px", lg: "750px" }}
+                    boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
+                    justifyContent="space-between"
+                    flexDirection="row"
+                    overflow='auto'
+                    bg="base.d100"
+                    rounded={5}
+                    flex={1}
+                    p={5}
+                      >
+
+                      <VStack mb={6}>
+                        <Heading
+                          fontSize={{ base: 'xl', md: '2xl' }}
+                          textAlign="left"
+                          w="full"
+                          mb={2}
+                          position="flex"
+                        >
+                          {capsFirst(post.project_title)}
+                        </Heading>
+
+              <HStack spacing={2} justify={'left'} mb={2}>
+              <Wrap >
+
+                <Tag padding={2} variant="outline" colorScheme="green">
+                  {categoryLookup(post.category)}
+                </Tag>
+                <Tag variant="outline" colorScheme="cyan" padding={1}>
+                  {regionLookup(post.region)}
+                </Tag>
+
+              </Wrap>
+            </HStack>
+                        <Text w="full">
+                          {capsFirst(post.description.substring(0, 250))}...
+                        </Text>
+            <Button
+              onClick={() => navigate(`/projects/${post.id}`)}
+              colorScheme="gray"
+              fontWeight="bold"
+              color="gray.900"
+              width="full"
+              >
+                    Find out more
+            </Button>
+              </VStack>
+
                     </Box>
                   })
                 }
-              </Box>
-            </Stack>
-          </Box>
-        </Container>
+            </VStack>
+          {/* </Box> */}
       </VStack>
     )
   }

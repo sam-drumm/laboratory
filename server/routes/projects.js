@@ -86,22 +86,3 @@ router.get('/user/auth', async (req, res) => {
     res.status(500).send(err.message)
   }
 })
-
-// search projects
-
-router.get('/search/:query', async (req, res) => {
-  db.searchProjects(req.params.query)
-    .then(projects => {
-      res.json({ projects })
-      return null
-    })
-
-    .catch(err => {
-      log(err.message)
-      res.status(500).json({
-        error: {
-          title: 'Yo'
-        }
-      })
-    })
-})

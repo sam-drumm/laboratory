@@ -7,8 +7,7 @@ module.exports = {
   deleteProject,
   authorizeUpdate,
   getProjectById,
-  getProjectByAuthId,
-  searchProjects
+  getProjectByAuthId
 }
 
 function sort (projectArray) {
@@ -97,19 +96,10 @@ async function getProjectByAuthId (auth0Id, db = connection) {
     .where('auth0_id', auth0Id)
 }
 
+/// is project owned by user?
+
 async function authorizeUpdate (project, auth0Id) {
   if (project.auth0_id !== auth0Id) {
     throw new Error('Unauthorized')
   }
 }
-
-async function searchProjects (query, db = connection) {
-  console.log('db', query)
-  return db('Projects').select()
-    .query({ description: query })
-    .then(sort)
-}
-
-// async function getProjects (db = connection) {
-//   return db('projects').select().then(sort)
-// }

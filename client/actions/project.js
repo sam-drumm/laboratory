@@ -82,15 +82,4 @@ export function editProjects (project, token, auth0Id) {
   }
 }
 
-export function searchInProjects (query, token) {
-  return dispatch => {
-    return searchProjects(query, token)
-      .then(projects => {
-        dispatch(setProjects(projects))
-        return null
-      })
-      .catch(err => {
-        console.error(err)
-      })
-  }
-}
+

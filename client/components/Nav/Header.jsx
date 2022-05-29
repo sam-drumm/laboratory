@@ -73,7 +73,7 @@ export default function Header (props) {
             flexGrow={1}
             mt={{ base: 4, md: 0 }}
           >
-            <a href='/' className='nav-link'>Find Projects <Icon as={FcCollaboration} boxSize="1.75em"/></a>
+            <a href='/projects/search' className='nav-link'>Find Projects <Icon as={FcCollaboration} boxSize="1.75em"/></a>
             <a href='/projects/new' className='nav-link'>Pitch an Idea <Icon as={FcGlobe} boxSize="1.75em"/></a>
             <a href='/' className='nav-link'>Favorites <Icon as={FcLike} boxSize="1.75em"/></a>
 

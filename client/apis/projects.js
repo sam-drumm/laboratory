@@ -13,8 +13,9 @@ export function getProjectByAuthId (auth0Id, token) {
     .catch(console.error('error'))
 }
 
-export function getProjects () {
+export function getProjects (token) {
   return request.get(rootUrl + '/projects')
+    .set('authorization', `Bearer ${token}`)
     .then(res => {
       return res.body.projects
     })
@@ -23,8 +24,9 @@ export function getProjects () {
     })
 }
 
-export function addProjects (project) {
+export function addProjects (project, token) {
   return request.post(rootUrl + '/projects')
+    .set('authorization', `Bearer ${token}`)
     .send(project)
     .catch(err => {
       console.error(err.message)
@@ -43,18 +45,6 @@ export function getProjectById (id, token) {
   return request
     .get(`${rootUrl}/projects/${id}`)
     .set('authorization', `Bearer ${token}`)
-    .then(res => {
-      return res.body
-    })
-    .catch(err => {
-      console.error(err.message)
-    })
-}
-
-export function searchProjects (query, token) {
-  return request.get(`${rootUrl}/projects/search/${query}`)
-    .set('authorization', `Bearer ${token}`)
-    .query({ description: query })
     .then(res => {
       return res.body
     })
