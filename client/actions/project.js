@@ -1,4 +1,4 @@
-import { addProjects, getProjectById, getProjects, editProject } from '../apis/projects'
+import { addProjects, getProjectById, getProjects, editProject, searchProjects} from '../apis/projects'
 
 export const SET_PROJECT = 'SET_PROJECT'
 export const SET_PROJECTS = 'SET_PROJECTS'
@@ -74,6 +74,19 @@ export function editProjects (project, token, auth0Id) {
     return editProject(project, token, auth0Id)
       .then(project => {
         dispatch(setProject(project))
+        return null
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}
+
+export function searchInProjects (query, token) {
+  return dispatch => {
+    return searchProjects(query, token)
+      .then(projects => {
+        dispatch(setProjects(projects))
         return null
       })
       .catch(err => {

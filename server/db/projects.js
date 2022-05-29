@@ -103,7 +103,13 @@ async function authorizeUpdate (project, auth0Id) {
   }
 }
 
-async function searchProjects (db = connection) {
-  return db('Projects')
-    .select()
+async function searchProjects (query, db = connection) {
+  console.log('db', query)
+  return db('Projects').select()
+    .query({ description: query })
+    .then(sort)
 }
+
+// async function getProjects (db = connection) {
+//   return db('projects').select().then(sort)
+// }

@@ -52,9 +52,9 @@ export function getProjectById (id, token) {
 }
 
 export function searchProjects (query, token) {
-  return request
-    .get(`${rootUrl}/projects/search/${query}`)
+  return request.get(`${rootUrl}/projects/search/${query}`)
     .set('authorization', `Bearer ${token}`)
+    .query({ description: query })
     .then(res => {
       return res.body
     })

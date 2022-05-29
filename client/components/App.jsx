@@ -12,7 +12,7 @@ import Verification from './Register/Verification'
 import Category from './Projects/Category'
 import UserHome from './User/UserHome'
 import UpdateProject from './Project/UpdateProject'
-import Search from './Search/SearchBar'
+import Search from './Search/Search'
 
 function App () {
   const navigate = useNavigate()
@@ -33,7 +33,7 @@ function App () {
         <Route path='/projects/new' element={<NewProject />}/>
         <Route path='/projects/:id' element={<Project />}/>
         <Route path='/projects/edit/:id' element={<UpdateProject />}/>
-        <Route path='projects/search/:query' element={<Search />} />
+        <Route path='/projects/search/:query' element={<Search />} />
         <Route path='/category' element={<Category />}/>
       </Routes>
     </div>

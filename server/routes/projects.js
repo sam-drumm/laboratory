@@ -90,17 +90,18 @@ router.get('/user/auth', async (req, res) => {
 // search projects
 
 router.get('/search/:query', async (req, res) => {
-  const data = (req.params.query)
-  console.log(query)
-  try {
-    const search = await db.searchProjects(data)
-    res.json(search)
-  } catch (err) {
-    log(err.message)
-    res.status(500).json({
-      error: {
-        title: 'Yo'
-      }
+  db.searchProjects(req.params.query)
+    .then(projects => {
+      res.json({ projects })
+      return null
     })
-  }
+
+    .catch(err => {
+      log(err.message)
+      res.status(500).json({
+        error: {
+          title: 'Yo'
+        }
+      })
+    })
 })
