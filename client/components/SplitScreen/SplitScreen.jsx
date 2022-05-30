@@ -15,7 +15,6 @@ import {
 export default function SplitScreen (props) {
   const navigate = useNavigate()
 
-
   return (
 
     <Stack minH={'50vh'} direction={{ base: 'column', md: 'row' }}>

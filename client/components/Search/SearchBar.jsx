@@ -1,5 +1,5 @@
 import { Input, Button, HStack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function SearchBar () {
@@ -10,10 +10,6 @@ export default function SearchBar () {
     navigate(`/projects/search/${searchParams}`)
     setSearchParams('')
   }
-
-  // useEffect(() => {
-  //   console.log(searchParams)
-  // }, [searchParams])
 
   return (
     <>
