@@ -1,6 +1,5 @@
 import consume from './consume'
 import { setUser } from './actions/user'
-// import { setWaiting, clearWaiting } from './actions/waiting'
 import { dispatch } from './store'
 import { showError } from './actions/error'
 
@@ -19,7 +18,6 @@ function saveUser (user = emptyUser) {
 }
 
 export async function cacheUser (useAuth0, navigate) {
-  // dispatch(setWaiting())
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
   if (isAuthenticated) {
     try {
@@ -35,8 +33,6 @@ export async function cacheUser (useAuth0, navigate) {
       saveUser({ id, auth0Id: user.sub, firstName, lastName, email, token, following })
     } catch (err) {
       dispatch(showError('Unable to set the current user'))
-    } finally {
-      // dispatch(clearWaiting())
     }
   } else {
     saveUser()

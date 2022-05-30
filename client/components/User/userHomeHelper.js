@@ -7,23 +7,25 @@ export function getProject (id, consume = requestor) {
   dispatch(setWaiting())
   return consume(`/projects/${id}`)
     .then((res) => {
-      dispatch(clearWaiting())
       const { title, date, volunteersNeeded, description } = res.body
       return { title, date, description, volunteersNeeded }
     })
     .catch((err) => {
       dispatch(showError(err.message))
     })
+    .finally(() => {
+      dispatch(clearWaiting())
+    })
 }
 
 export function updateProject (projectId, project, navigateTo, consume = requestor) {
+  dispatch(setWaiting())
   const storeState = getState()
   const { token } = storeState.user
   const projectToUpdate = {
     id: Number(project.id),
     ...project
   }
-  dispatch(setWaiting())
   return consume(`/projects/${project.id}`, token, 'patch', projectToUpdate)
     .then(() => {
       navigateTo(`/projects/${projectId}`)

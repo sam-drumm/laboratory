@@ -44,12 +44,10 @@ export function updateUser (user, selectedAddress, authUser, navigateTo, consume
 
 export function addFollowing (following, follow, authUser, consume = requestor) {
   dispatch(setWaiting())
-
   const newUser = {
     auth0Id: authUser.sub,
     following: [follow, following]
   }
-
   const storeState = getState()
   const { token } = storeState.user
 
@@ -67,17 +65,15 @@ export function addFollowing (following, follow, authUser, consume = requestor) 
       dispatch(clearWaiting())
     })
 }
+
 export function removeFollowing (following, follow, authUser, consume = requestor) {
   dispatch(setWaiting())
-
   const arraz = following.split(',').map(Number)
   const filtered = arraz.filter(element => element !== follow)
-
   const newUser = {
     auth0Id: authUser.sub,
     following: [filtered]
   }
-
   const storeState = getState()
   const { token } = storeState.user
 

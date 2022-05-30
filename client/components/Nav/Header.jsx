@@ -3,10 +3,9 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
-import { HamburgerIcon } from '@chakra-ui/icons'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
 import { ButtonGroup, Box, Stack, Heading, Flex, Button, useDisclosure, Icon } from '@chakra-ui/react'
-import { FcCollaboration, FcGlobe, FcLike } from 'react-icons/fc'
+import { FcCollaboration, FcGlobe, FcLike, FcMenu } from 'react-icons/fc'
 
 export default function Header (props) {
   const { firstName } = useSelector(state => state.user)
@@ -41,7 +40,6 @@ export default function Header (props) {
 
   return (
     <>
-
       <IfAuthenticated>
         <Flex
           position="sticky"
@@ -61,7 +59,7 @@ export default function Header (props) {
           </Flex>
 
           <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
-            <HamburgerIcon />
+            <FcMenu />
           </Box>
 
           <Stack
@@ -105,6 +103,8 @@ export default function Header (props) {
 
       <IfNotAuthenticated>
         <Flex
+          position="sticky"
+          width="100%"
           as="nav"
           align="center"
           justify="space-between"
@@ -120,7 +120,7 @@ export default function Header (props) {
           </Flex>
 
           <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
-            <HamburgerIcon />
+            <FcMenu />
           </Box>
 
           <ButtonGroup spacing={4}>

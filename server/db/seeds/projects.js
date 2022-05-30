@@ -176,7 +176,7 @@ exports.seed = function (knex) {
         },
         {
           id: 13,
-          auth0_id: 'auth0|oiuafoiu9789',
+          auth0_id: 'auth0|61414f84d35ac900717bc280',
           project_title: 'Build a local electric scooter',
           category: 1,
           region: 88,
