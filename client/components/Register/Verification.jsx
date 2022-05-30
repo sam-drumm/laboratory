@@ -3,7 +3,7 @@ import React from 'react'
 export default function Verification () {
   return (
     <div>
-      <p>please check your inbox and verify link</p>
+      <p>Please check your inbox and verify your email.</p>
     </div>
   )
 }

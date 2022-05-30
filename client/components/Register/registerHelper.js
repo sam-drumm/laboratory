@@ -5,8 +5,8 @@ import { setUser } from '../../actions/user'
 import { showError } from '../../actions/error'
 
 export function registerUser (user, selectedAddress, authUser, navigateTo, consume = requestor) {
+  dispatch(setWaiting())
   const address = (JSON.parse(selectedAddress))
-
   const newUser = {
     firstName: user.firstName,
     lastName: user.lastName,
@@ -26,8 +26,6 @@ export function registerUser (user, selectedAddress, authUser, navigateTo, consu
   }
   const storeState = getState()
   const { token } = storeState.user
-
-  dispatch(setWaiting())
 
   return consume('/users', token, 'post', newUser)
     .then((res) => {

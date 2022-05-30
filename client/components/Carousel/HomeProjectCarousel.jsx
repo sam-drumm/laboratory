@@ -20,6 +20,7 @@ import {
 import { getAllProjects } from '../Projects/projectsHelper'
 import { capsFirst } from '../utils'
 import CountdownTimer from '../Countdown/CountdownTimer'
+import { clearWaiting, setWaiting } from '../../actions/waiting'
 
 export default function HomeProjectCarousel () {
   const [data, setData] = useState([])
@@ -27,14 +28,18 @@ export default function HomeProjectCarousel () {
   const navigate = useNavigate()
 
   function getProjects () {
-    getAllProjects()
+    dispatch(setWaiting)
+    return getAllProjects()
       .then(projects => {
         setData(projects)
         return null
       })
       .catch(err => {
         dispatch(showError(err.message))
-        return false
+        // return false
+      })
+      .finally(() => {
+        dispatch(clearWaiting)
       })
   }
 

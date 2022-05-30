@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Stack, Center, Spinner, Text, Container, Heading, HStack, Input, Button, Wrap,VStack, Tag, Flex } from '@chakra-ui/react'
+import { Box, Stack, Center, Select, Spinner, Text, Container, Heading, HStack, Input, Button, Wrap,VStack, Tag, Flex, TagLeftIcon, TagLabel } from '@chakra-ui/react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchProjects } from '../../actions/project'
 import { capsFirst } from '../utils'
-import { regionLookup, categoryLookup } from '../utils/lookup'
+import { regionLookup, categoryLookup, seekingLookup } from '../utils/lookup'
+import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRedo } from 'react-icons/fc'
 
 
 export default function Search () {
@@ -14,9 +15,12 @@ export default function Search () {
   const { query } = useParams()
   const projects = useSelector(state => state.projects)
   const [data, setData] = useState()
+  const [filterCategory, setFilterCategory] = useState(['All'])
+  const [filterSeeking, setFilterSeeking] = useState(['All'])
 
   const [searchParams, setSearchParams] = useState('')
   const navigate = useNavigate()
+  
 
   async function handleSubmit () {
     navigate(`/projects/search/${searchParams}`)
@@ -56,29 +60,56 @@ export default function Search () {
 
       <VStack ml={8} mr={8} mb={150}>
         <HStack p={10}>
+
+        <VStack>
+        <HStack width='full'>
           <Input
             value={searchParams}
             type={'text'}
             onChange={(e) => {
               setSearchParams(e.target.value)
             }}
-            placeholder={'Search for a Project'}
+            placeholder={'Search for projects'}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 handleSubmit()
               }
             }}
           />
-
           <Button onClick={() => {
             handleSubmit()
           }} >Search</Button>
         </HStack>
 
-          {/* <Box border='8px' p={8}> */}
+        <HStack>
+          <Select
+          name='category'
+            onChange={(e) => {
+              setFilterCategory(e.target.value)}}>
+            <option value ='All'>Purpose</option>
+            <option value='1'>Just for Fun</option>
+            <option value='2'>Commercial</option>
+            <option value='3'>Community</option>
+          </Select>
+          
+          <Select 
+          name='seeking'
+          onChange={(e) => {setFilterSeeking(e.target.value)}} >
+            <option value='All'>Looking for</option>
+            <option value='1'>Commerical partners to develop the idea and take shareholding.</option>
+            <option value='2'>Skilled people to develop idea at an agreed rate.</option>
+            <option value='3'>Pro-bono or voluntary contributions to help develop idea.</option>
+            <option value='4'>Like-minded people to spitball the idea with.</option>
+          </Select>
+        </HStack>
+
+      </VStack>
+        </HStack>
+
+      
             <VStack direction={['column', 'row']} spacing='24px' ml={8} mr={8}>
-                {
-                  projects?.filter(post => {
+        
+                  { projects?.filter(post => {
                     if (query === '') {
                       return post
                     } if (post.description.toLowerCase().includes(query.toLowerCase())) {
@@ -86,6 +117,18 @@ export default function Search () {
                     } else if (post.project_title.toLowerCase().includes(query.toLowerCase())) {
                       return post
                     }
+                  }).filter(post => {
+                    console.log(post.category, post.seeking)
+                    if (post.seeking == filterSeeking) {
+                    return post
+                    } if (filterSeeking == 'All') {
+                    return post 
+                    } if (post.category == filterCategory) {
+                      return post
+                    }
+                    // } else if (filterCategory == 'All') {
+                    //   return post
+                    // }
                   }).map((post, index) => {
                     return <Box
                     key={index}
@@ -116,6 +159,10 @@ export default function Search () {
 
                 <Tag padding={2} variant="outline" colorScheme="green">
                   {categoryLookup(post.category)}
+                </Tag>
+                <Tag variant='outline' colorScheme='gray'>
+                  <TagLeftIcon as={FcBinoculars} />
+                  <TagLabel>Seeking {seekingLookup(post.seeking)}</TagLabel>
                 </Tag>
                 <Tag variant="outline" colorScheme="cyan" padding={1}>
                   {regionLookup(post.region)}

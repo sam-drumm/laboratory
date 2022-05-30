@@ -13,7 +13,6 @@ export function getProject (id, user, consume = requestor) {
 
   return consume(`/projects/${id}`, '', 'get', {}, headers)
     .then((res) => {
-      dispatch(clearWaiting())
       const project = res.body
       dispatch(setProject({
         projectTitle: project.projectTitle,
@@ -32,13 +31,7 @@ export function getProject (id, user, consume = requestor) {
     .catch((error) => {
       dispatch(showError(error.message))
     })
-}
-
-export async function getRegion (input) {
-  try {
-    const arr = new Array(input.split(','))
-    return arr
-  } catch (error) {
-    console.error(error)
-  }
+    .finally(() => {
+      dispatch(clearWaiting())
+    })
 }

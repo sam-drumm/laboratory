@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProject } from '../../actions/project'
-import { useAuth0 } from '@auth0/auth0-react'
-import { getRegisterFn } from '../../auth0-utils'
 
 import {
   Flex,
@@ -41,7 +39,6 @@ function NewProject () {
   const [skillDescription, setSkillDescription] = useState('')
   const [region, setRegion] = useState('')
   const [selectedItems, setSelectedItems] = useState([])
-  const register = getRegisterFn(useAuth0)
 
   const skillType = selectedItems.map(skill =>
     skill.value
