@@ -65,6 +65,25 @@ function NewProject () {
       try {
         dispatch(addProject(form, token))
         navigate('/profile/home')
+        toast({
+          title: 'Your pitch is live',
+          description: 'You can find your pitch in your user home, under your projects tab.',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+          position: 'top'
+        })
+        setProjectTitle('')
+        setCategory('')
+        setDescription('')
+        setSuccess('')
+        setSeeking('')
+        setPurpose('')
+        setTeamEstablished('')
+        setStarted('')
+        setSkillDescription('')
+        setRegion('')
+        setSelectedItems([])
       } catch (err) {
         console.error(err)
       }

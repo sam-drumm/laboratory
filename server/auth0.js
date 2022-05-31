@@ -4,18 +4,18 @@ const path = require('path')
 const request = require('superagent')
 require('dotenv').config({ path: path.join(__dirname, '.env') })
 
-const domain = process.env.AUTH0_DOMAIN
-const ssoAudience = process.env.AUTH0_SSO_AUDIENCE
-const machine2machineClientId = process.env.AUTH0_MACHINE_2_MACHINE_CLIENT_ID
-const machine2machineSecret = process.env.AUTH0_MACHINE_2_MACHINE_SECRET
+const domain = process.env.AUTH0_DOMAIN || 'https://laboratory.au.auth0.com'
+const ssoAudience = process.env.AUTH0_SSO_AUDIENCE || 'some_sso_audience'
+const machine2machineClientId = process.env.AUTH0_MACHINE_2_MACHINE_CLIENT_ID || 'some_client_id'
+const machine2machineSecret = process.env.AUTH0_MACHINE_2_MACHINE_SECRET || 'some_secret'
 
-const getUserRoles = async (uid) => {
-  const accessToken = await getAccessToken()
-  const { body } = await request(`${domain}/api/v2/users/${uid}/roles`)
-    .set({ authorization: `Bearer ${accessToken}` })
+// const getUserRoles = async (uid) => {
+//   const accessToken = await getAccessToken()
+//   const { body } = await request(`${domain}/api/v2/users/${uid}/roles`)
+//     .set({ authorization: `Bearer ${accessToken}` })
 
-  return body[0]?.name
-}
+//   return body[0]?.name
+// }
 
 const getAccessToken = async () => {
   const data = {
@@ -45,6 +45,5 @@ const checkJwt = jwt({
 
 module.exports = {
   checkJwt,
-  getUserRoles,
   getAccessToken
 }

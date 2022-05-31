@@ -3,7 +3,7 @@ import { dispatch } from '../../store'
 import { clearWaiting, setWaiting } from '../../actions/waiting'
 import { showError } from '../../actions/error'
 
-export function getAllProjects (consume = requestor) {
+export async function getAllProjects (consume = requestor) {
   dispatch(setWaiting())
   return consume('/projects')
     .then((res) => {
@@ -18,7 +18,7 @@ export function getAllProjects (consume = requestor) {
     })
 }
 
-export function getProjectsByAuthID (consume = requestor) {
+export async function getProjectsByAuthID (consume = requestor) {
   dispatch(setWaiting())
   return consume('/projects')
     .then((res) => {

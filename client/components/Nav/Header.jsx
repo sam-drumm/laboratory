@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { getLoginFn, getLogoutFn, getRegisterFn } from '../../auth0-utils'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
-import { ButtonGroup, Box, Stack, Heading, Flex, Button, useDisclosure, Icon } from '@chakra-ui/react'
+import { ButtonGroup, Box, Stack, Heading, Flex, Button, useDisclosure, Icon, Link } from '@chakra-ui/react'
 import { FcCollaboration, FcGlobe, FcLike, FcMenu } from 'react-icons/fc'
 
 export default function Header (props) {
@@ -71,9 +71,9 @@ export default function Header (props) {
             flexGrow={1}
             mt={{ base: 4, md: 0 }}
           >
-            <a href='/projects/search' className='nav-link'>Find Projects <Icon as={FcCollaboration} boxSize="1.75em"/></a>
-            <a href='/projects/new' className='nav-link'>Pitch an Idea <Icon as={FcGlobe} boxSize="1.75em"/></a>
-            <a href='/' className='nav-link'>Favorites <Icon as={FcLike} boxSize="1.75em"/></a>
+            <Link onClick={() => navigate('/projects/search')} className='nav-link'>Find Projects <Icon as={FcCollaboration} boxSize="1.75em"/></Link>
+            <Link onClick={() => navigate('/projects/new')} className='nav-link'>Pitch an Idea <Icon as={FcGlobe} boxSize="1.75em"/></Link>
+            <Link onClick={() => navigate('/')} className='nav-link'>Favorites <Icon as={FcLike} boxSize="1.75em"/></Link>
 
           </Stack>
           <Box

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { getProjectByAuthId, getProjectById } from '../../apis/projects'
 import UpdateUser from '../Register/UpdateUser'
 import Grid from '../Grid/Grid'
@@ -12,10 +11,9 @@ import { userHomeData } from '../Grid/gridData'
 import { Button, HStack } from '@chakra-ui/react'
 
 export default function UserHome () {
-  const navigate = useNavigate()
   const [userProjects, setUserProjects] = useState([])
   const [followed, setFollowed] = useState([])
-  const { auth0Id, token, following, firstName } = useSelector(state => state.user)
+  const { auth0Id, token, following } = useSelector(state => state.user)
   const [resource, setResource] = useState(
     <Grid
       features = {userHomeData}
@@ -24,8 +22,8 @@ export default function UserHome () {
     />
   )
 
-  function getOwnedProjects () {
-    getProjectByAuthId(auth0Id, token)
+  async function getOwnedProjects () {
+    await getProjectByAuthId(auth0Id, token)
       .then(projects => {
         setUserProjects(projects)
         return null
@@ -36,7 +34,7 @@ export default function UserHome () {
       })
   }
 
-  function getFollowedProjects () {
+  async function getFollowedProjects () {
     const projectId = following.split(',').map(Number).filter(filtered => filtered !== 0)
     const projectArray = []
     projectId.map((id) => {
@@ -65,6 +63,7 @@ export default function UserHome () {
   }, [resource])
 
   return (
+
     <>
       <HStack m={8} spacing={4} justify={'center'}>
         <Button
@@ -103,10 +102,7 @@ export default function UserHome () {
           Your Profile
         </Button>
       </HStack>
-
       {resource}
-
     </>
-
   )
 }

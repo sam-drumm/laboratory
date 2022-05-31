@@ -1,21 +1,21 @@
 const express = require('express')
+const { checkJwt } = require('../auth0')
 const db = require('../db/messages')
 const router = express.Router()
 const log = require('../logger')
 
-router.post('/', async (req, res) => {
-  const { auth0Id, id, why, bring, share } = req.body
-  const message = { auth0Id, id, why, bring, share }
-  try {
-    await db.addMessage(message)
-  } catch (err) {
-    console.error(err.message)
-    return res.status(500).json({
-      error: {
-        title: 'failed: message exists'
-      }
+// Open Routes
+
+router.get('/', async (req, res) => {
+  db.getMessages()
+    .then(messages => {
+      res.json({ messages })
+      return null
     })
-  }
+    .catch(err => {
+      console.error(err)
+      return res.status(500).json({ message: 'Something went wrong' })
+    })
 })
 
 router.get('/:id', async (req, res) => {
@@ -34,16 +34,21 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.get('/', (req, res) => {
-  db.getMessages()
-    .then(messages => {
-      res.json({ messages })
-      return null
+// Authenticated Routes
+
+router.post('/', checkJwt, async (req, res) => {
+  const { auth0Id, id, why, bring, share } = req.body
+  const message = { auth0Id, id, why, bring, share }
+  try {
+    await db.addMessage(message)
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).json({
+      error: {
+        title: 'failed: message exists'
+      }
     })
-    .catch(err => {
-      console.error(err)
-      return res.status(500).json({ message: 'Something went wrong' })
-    })
+  }
 })
 
 module.exports = router

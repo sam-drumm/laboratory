@@ -36,7 +36,7 @@ export default function HomeProjectCarousel () {
       })
       .catch(err => {
         dispatch(showError(err.message))
-        // return false
+        return false
       })
       .finally(() => {
         dispatch(clearWaiting)

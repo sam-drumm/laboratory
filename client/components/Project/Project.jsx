@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
+import { getIsAuthenticated, getRegisterFn } from '../../auth0-utils'
 import { addFollowing, removeFollowing } from '../Register/updateHelper'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
@@ -17,17 +18,21 @@ export default function Project () {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const toast = useToast()
-  const [userProject, setUserProject] = useState(false)
-  const [followed, setFollowed] = useState(false)
-  const [skill, setSkill] = useState([])
-  const [expiry, setExpiry] = useState()
-  const authUser = useAuth0().user
+  const register = getRegisterFn(useAuth0)
+  const isAuthenticated = getIsAuthenticated(useAuth0)
   const { id } = useParams()
+  const authUser = useAuth0().user
   const {
     isOpen: isVisible,
     onOpen,
     onClose
   } = useDisclosure({ defaultIsOpen: false })
+
+  const [userProject, setUserProject] = useState(false)
+  const [followed, setFollowed] = useState(false)
+  const [skill, setSkill] = useState([])
+  const [expiry, setExpiry] = useState()
+
   const { projectTitle, region, category, description, seeking, started, success, skillType, skillDescription, createdAt, authId } = useSelector(state => state.project)
   const { token, following, auth0Id } = useSelector(state => state.user)
   const users = useSelector(state => state.users)
@@ -45,16 +50,20 @@ export default function Project () {
   }
 
   async function saveHandler () {
-    await addFollowing(following, Number(id), authUser)
-    onOpen()
-    toast({
-      title: 'Added!',
-      description: 'We\'ve added this pitch to your follow list.',
-      status: 'success',
-      duration: 10000,
-      isClosable: true,
-      position: 'top'
-    })
+    if (isAuthenticated === true) {
+      await addFollowing(following, Number(id), authUser)
+      onOpen()
+      toast({
+        title: 'Added!',
+        description: 'We\'ve added this pitch to your follow list.',
+        status: 'success',
+        duration: 10000,
+        isClosable: true,
+        position: 'top'
+      })
+    } else {
+      register()
+    }
   }
 
   async function removeHandler () {
@@ -223,6 +232,7 @@ export default function Project () {
                   title={`Keen to connect with ${name?.firstName}, who's leading: ${projectTitle}?`}
                   hidden={true}
                   firstname={name?.firstName}
+                  auth={isAuthenticated}
                 />
 
                 {isVisible ? (

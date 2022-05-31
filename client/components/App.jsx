@@ -14,6 +14,7 @@ import UserHome from './User/UserHome'
 import UpdateProject from './Project/UpdateProject'
 import Search from './Search/Search'
 import SearchBar from './Search/SearchBar'
+import { RequireAuth } from './Register/Authenticated'
 
 function App () {
   const navigate = useNavigate()
@@ -23,13 +24,25 @@ function App () {
     <div className='app'>
       <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path='/profile' element={<Profile/>} />
-        <Route path='/profile/home' element={<UserHome/>} />
+        <Route path='/profile' element={
+          <RequireAuth>
+            <Profile/>
+          </RequireAuth>
+        } />
+        <Route path='/profile/home' element={<UserHome/>}/>
         <Route path='/register' element={<Registration/>} />
         <Route path='/verification' element={<Verification/>} />
-        <Route path='/projects/new' element={<NewProject />}/>
+        <Route path='/projects/new' element={
+          <RequireAuth>
+            <NewProject />
+          </RequireAuth>
+        }/>
         <Route path='/projects/:id' element={<Project />}/>
-        <Route path='/projects/edit/:id' element={<UpdateProject />}/>
+        <Route path='/projects/edit/:id' element={
+          <RequireAuth>
+            <UpdateProject />
+          </RequireAuth>
+        }/>
         <Route path='/projects/search/:query' element={<Search />} />
         <Route path='/projects/search' element={<SearchBar />} />
         <Route path='/category' element={<Category />}/>
