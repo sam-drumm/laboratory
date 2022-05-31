@@ -16,7 +16,7 @@ import Waiting from './components/Wait/Waiting'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <ChakraProvider theme={colabTheme}>
+    <Router>
       <Auth0Provider
         domain={config.domain}
         clientId={config.clientId}
@@ -24,15 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
         audience={config.audience}
       >
         <Provider store={store}>
-          <Router>
+          <ChakraProvider theme={colabTheme}>
             <Header/>
             <Waiting />
             <App />
             <Footer />
-          </Router>
+          </ChakraProvider>,
         </Provider>
       </Auth0Provider>
-    </ChakraProvider>,
+    </Router>,
     document.getElementById('app')
   )
 })

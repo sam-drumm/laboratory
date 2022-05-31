@@ -1,7 +1,6 @@
 import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-
-import { getIsAuthenticated } from '../../auth0-utils'
+import { getIsAuthenticated, getRegisterFn } from '../../auth0-utils'
 
 export function IfAuthenticated ({ children }) {
   const isAuthenticated = getIsAuthenticated(useAuth0)
@@ -15,4 +14,10 @@ export function IfNotAuthenticated ({ children }) {
   return !isAuthenticated
     ? <>{children}</>
     : null
+}
+
+export function RequireAuth ({ children }) {
+  const register = getRegisterFn(useAuth0)
+  const isAuthenticated = getIsAuthenticated(useAuth0)
+  return isAuthenticated ? <>{children}</> : register()
 }

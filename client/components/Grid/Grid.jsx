@@ -91,7 +91,9 @@ export default function Grid (props) {
           Join Now
           </Button>
         </IfNotAuthenticated>
-        <Button>
+        <Button
+          onClick={() => navigate('/projects/search')
+          }>
           Search Project Pitches
         </Button>
         <Button

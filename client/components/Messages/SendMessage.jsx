@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { getRegisterFn, getIsAuthenticated } from '../../auth0-utils'
+import { useAuth0 } from '@auth0/auth0-react'
 
 import {
   Flex, FormControl, FormLabel, Button, Textarea, useDisclosure, Modal, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, ModalContent, List, ListItem, ListIcon, Tooltip, VStack, useToast
@@ -10,7 +12,7 @@ import { addMessage } from '../../actions/message'
 
 function SendMessage (props) {
   const toast = useToast()
-
+  const register = getRegisterFn(useAuth0)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [why, setWhy] = useState('')
   const [bring, setBring] = useState('')
@@ -19,6 +21,7 @@ function SendMessage (props) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
+  const isAuthenticated = getIsAuthenticated(useAuth0)
 
   const form = ({
     auth0Id,
@@ -30,7 +33,7 @@ function SendMessage (props) {
 
   async function handleSubmit (e) {
     e.preventDefault()
-    try {
+    if (isAuthenticated === true) {
       dispatch(addMessage(form, token))
       toast({
         title: "Awesome, we've sent your details on.",
@@ -42,8 +45,8 @@ function SendMessage (props) {
       })
       navigate('/profile/home')
       onClose()
-    } catch (error) {
-      console.error(error)
+    } else {
+      register()
     }
   }
 
@@ -58,8 +61,8 @@ function SendMessage (props) {
         marginBottom={10}
         borderWidth={2}
         boxShadow='sm'
-
-        onClick={onOpen}>{props.button}
+        onClick={(onOpen)
+        }>{props.button}
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -134,7 +137,7 @@ function SendMessage (props) {
                     type='submit'
                     onClick={handleSubmit}
                   >
-          Send
+                    {(isAuthenticated ? 'Send' : 'You\'ll need to Login first!')}
                   </Button>
                   {/* </VStack> */}
 
