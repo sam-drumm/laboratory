@@ -1,4 +1,4 @@
-import { addProjects, getProjectById, getProjects, editProject, searchProjects} from '../apis/projects'
+import { addProjects, getProjectById, getProjects, editProject } from '../apis/projects'
 
 export const SET_PROJECT = 'SET_PROJECT'
 export const SET_PROJECTS = 'SET_PROJECTS'
@@ -81,5 +81,3 @@ export function editProjects (project, token, auth0Id) {
       })
   }
 }
-
-

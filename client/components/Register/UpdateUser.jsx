@@ -33,20 +33,28 @@ const registerSchema = Yup.object().shape({
 
 function UpdateUser () {
   const authUser = useAuth0().user
-  const { firstName, lastName, addressFormatted } = useSelector(state => state.user)
+  const { firstName, lastName, formatted } = useSelector(state => state.user)
   const navigate = useNavigate()
 
   const [addresses, setAddresses] = useState([])
   const [data, setData] = useState('')
+
   const [selectedAddress, setSelectedAddress] = useState([])
 
-  async function handleChange (e) {
-    e.preventDefault()
-    if (e.target.value.length > 5) {
-      setData({
-        [e.target.name]: e.target.value
-      })
+  const [editAddress, setEditAddress] = useState({
+    formatted
+  })
+
+  function handleAddressInput (e) {
+    const { name, value } = e.target
+    const copyEditAddress = {
+      ...editAddress,
+      [name]: value
     }
+    setEditAddress(copyEditAddress)
+    // if (e.target.length > 5) {
+    //   setData(copyEditAddress)
+    // }
   }
 
   function handleSelectedAddress (e) {
@@ -54,17 +62,36 @@ function UpdateUser () {
     setSelectedAddress(e.target.value)
   }
 
+  // async function handleChange (e) {
+  //   if (e.target.value.length > 5) {
+  //     setData({
+  //       [e.target.name]: e.target.value
+  //     })
+  //   }
+  // }
+
+  // async function handleChange (e) {
+  //   e.preventDefault()
+  //   if (e.target.value.length > 5) {
+  //     setData({
+  //       [e.target.name]: e.target.value
+  //     })
+  //   }
+  // }
+
   useEffect(() => {
-    const address = JSON.stringify(data.address)
-    getAddresses(address)
-      .then(addressList => setAddresses(addressList))
-      .catch(err => console.error(err))
-  }, [data])
+    const address = JSON.stringify(editAddress.formatted)
+    if (address.length > 5) {
+      getAddresses(address)
+        .then(addressList => setAddresses(addressList))
+        .catch(err => console.error(err))
+    }
+  }, [editAddress])
 
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: ''
+      firstName: firstName,
+      lastName: lastName
     },
     onSubmit: values => {
       updateUser(values, selectedAddress, authUser, navigate)
@@ -137,13 +164,16 @@ function UpdateUser () {
             </FormControl>
 
             <FormControl mt={3}>
-              <FormLabel htmlFor='address'>Address search</FormLabel>
+              <FormLabel htmlFor='formatted'>Address search</FormLabel>
               <Input
-                name='address'
-                onChange={handleChange}
-                placeholder={addressFormatted}
+              // this is where the user searchs for the address
+              // this is where you want to start with the current formatted address.
+                name='formatted'
+                onChange={handleAddressInput}
+                value={editAddress.formatted}
               />
               <Select
+              // dropdown of the addresses searched from the api, with selected being sent to the user form dispatch.
                 mt={3}
                 variant='outline'
                 name='address'
