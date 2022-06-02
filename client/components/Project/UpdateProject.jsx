@@ -2,28 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { editProjects, fetchProject } from '../../actions/project'
-import { clearWaiting, setWaiting } from '../../actions/waiting'
+// import { clearWaiting, setWaiting } from '../../actions/waiting'
 
-import {
-  Flex,
-  Box,
-  Heading,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-  Stack,
-  Radio,
-  RadioGroup,
-  Textarea,
-  Select,
-  useToast,
-  Tooltip
-} from '@chakra-ui/react'
-import Category from '../Projects/Category'
+import { Flex, Box, Heading, FormControl, FormLabel, Button, Stack, Radio, RadioGroup, Textarea, Select, Tooltip } from '@chakra-ui/react'
+// import Category from '../Projects/Category'
 
 function UpdateProject () {
-  const toast = useToast()
+  // const toast = useToast()
   const { id } = useParams()
   const { auth0Id, token } = useSelector(state => state.user)
   const savedProject = useSelector(state => state.project)
@@ -31,24 +16,9 @@ function UpdateProject () {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [category, setCategory] = useState('')
-  const [description, setDescription] = useState('')
-  const [success, setSuccess] = useState('')
-  const [seeking, setSeeking] = useState('')
-  const [purpose, setPurpose] = useState('')
-  const [teamEstablished, setTeamEstablished] = useState('')
-  const [started, setStarted] = useState('')
-  const [skillDescription, setSkillDescription] = useState('')
-  const [region, setRegion] = useState('')
-  const [selectedItems, setSelectedItems] = useState([])
-
-  const skillType = selectedItems.map(skill =>
-    skill.value
-  )
-
-  const form = ({
-    id,
-    auth0Id,
+  const {
+    // id,
+    // auth0Id,
     category,
     description,
     success,
@@ -56,10 +26,43 @@ function UpdateProject () {
     purpose,
     teamEstablished,
     started,
-    skillType,
+    // skillType,
     skillDescription,
     region
+  } = savedProject
+
+  // const [selectedItems, setSelectedItems] = useState([])
+
+  // const skillType = selectedItems?.map(skill =>
+  //   skill.value
+  // )
+  // console.log(selectedItems)
+  // console.log(skillType)
+
+  const [editForm, setEditForm] = useState({
+    id,
+    category,
+    region,
+    description,
+    success,
+    seeking,
+    purpose,
+    teamEstablished,
+    started,
+    skillDescription
+    // skillType
   })
+
+  // console.log(editForm.skillType)
+
+  function handleChange (e) {
+    const { name, value } = e.target
+    const copyEditForm = {
+      ...editForm,
+      [name]: value
+    }
+    setEditForm(copyEditForm)
+  }
 
   useEffect(() => {
     dispatch(fetchProject(id, token))
@@ -67,27 +70,22 @@ function UpdateProject () {
 
   async function handleSubmit (event) {
     event.preventDefault()
-    dispatch(setWaiting())
-    if (skillType.length >= 2) {
-      try {
-        dispatch(editProjects(form, token, auth0Id))
-        navigate('/profile/home')
-        dispatch(clearWaiting())
-      } catch (err) {
-        console.error(err)
-      }
-    } else {
-      toast({
-        title: 'Double-check the skills section.',
-        description: 'You need to add at least two skills that you\'re seeking.',
-        status: 'warning',
-        duration: 9000,
-        isClosable: true,
-        position: 'top'
-      })
-      dispatch(clearWaiting())
-      return null
+    try {
+      dispatch(editProjects(editForm, token, auth0Id))
+      navigate('/profile/home')
+    } catch (err) {
+      console.error(err)
     }
+    // else {
+    // toast({
+    //   title: 'Double-check the skills section.',
+    //   description: 'You need to add at least two skills that you\'re seeking.',
+    //   status: 'warning',
+    //   duration: 9000,
+    //   isClosable: true,
+    //   position: 'top'
+    // })
+    // return null
   }
 
   return (
@@ -115,7 +113,10 @@ function UpdateProject () {
 
           <FormControl mt={6} isRequired={true}>
             <FormLabel htmlFor='category' >Category</FormLabel>
-            <RadioGroup onChange={setCategory} >
+            <RadioGroup
+              onChange={handleChange}
+              value={editForm.category}
+            >
               <Stack spacing={[1, 5]} direction={['column', 'row']}>
                 <Radio value='1'>Just for Fun</Radio>
                 <Radio value='2'>Commercial</Radio>
@@ -127,9 +128,9 @@ function UpdateProject () {
           <FormControl mt={6} >
             <FormLabel htmlFor='region'>Nearest Region</FormLabel>
             <Select
-              defaultValue={savedProject.region}
+              value={editForm.region}
               name='region'
-              onChange={(e) => setRegion(e.target.value)}>
+              onChange={handleChange}>
 
               <option value="0">Select you nearest region</option>
               <option value="4">Northland - Dargaville</option>
@@ -319,8 +320,8 @@ function UpdateProject () {
             {/* <Tooltip label='How would you describe your project to others if you only had 100 words?' openDelay={1500} closeDelay={250}> */}
             <Textarea
               name='description'
-              onChange={(e) => setDescription(e.target.value)}
-              defaultValue={savedProject.description}
+              onChange={handleChange}
+              value={editForm.description}
               maxLength={500}
             >
             </Textarea>
@@ -332,8 +333,8 @@ function UpdateProject () {
             <Tooltip label='What would would end users get if this pitch was sucessful?' openDelay={1500} closeDelay={250}>
               <Textarea
                 name='success'
-                onChange={(e) => setSuccess(e.target.value)}
-                defaultValue={savedProject.success}
+                onChange={handleChange}
+                value={editForm.success}
                 maxLength={500}
               >
               </Textarea>
@@ -342,7 +343,11 @@ function UpdateProject () {
 
           <FormControl >
             <FormLabel mt={6}htmlFor='seeking' >Looking for</FormLabel>
-            <RadioGroup onChange={setSeeking} defaultValue={JSON.stringify(savedProject.seeking)}>
+            <RadioGroup
+              onChange={handleChange}
+              value={editForm.seeking}
+              // defaultValue={JSON.stringify(savedProject.seeking)}
+            >
               <Stack direction='column'>
                 <Radio value='4'>Like-minded people to spitball the idea with.</Radio>
                 <Radio value='3'>Pro-bono or voluntary contributions to help develop idea.</Radio>
@@ -354,7 +359,11 @@ function UpdateProject () {
 
           <FormControl >
             <FormLabel mt={6} htmlFor='teamEstablished'>Team</FormLabel>
-            <RadioGroup onChange={setTeamEstablished} defaultValue={JSON.stringify(savedProject.started)}>
+            <RadioGroup
+              onChange={handleChange}
+              value={editForm.teamEstablished}
+              // defaultValue={JSON.stringify(savedProject.started)}
+            >
               <Stack direction='column'>
                 <Radio value='1'>I’m looking to add to an established team</Radio>
                 <Radio value='2'>I’m looking to form a new team</Radio>
@@ -364,7 +373,11 @@ function UpdateProject () {
 
           <FormControl >
             <FormLabel mt={6} htmlFor='started'>Started</FormLabel>
-            <RadioGroup onChange={setStarted} defaultValue={JSON.stringify(savedProject.started)}>
+            <RadioGroup
+              onChange={handleChange}
+              value={editForm.started}
+              // defaultValue={JSON.stringify(savedProject.started)}
+            >
               <Stack direction='column'>
                 <Radio value='1'>Brand spanking new idea</Radio>
                 <Radio value='2'>Already in motion</Radio>
@@ -376,22 +389,23 @@ function UpdateProject () {
             <Heading>Skills</Heading>
           </Box>
 
-          <FormControl mt={3}>
+          {/* <FormControl mt={3}>
             <FormLabel htmlFor='skillType'></FormLabel>
             <Category
               setSelectedItems={setSelectedItems}
               selectedItems={selectedItems}
-              defaultValue={savedProject.skillType}
+              value={editForm.skillType}
             />
-          </FormControl>
+          </FormControl> */}
 
           <FormControl mt={3}>
             <FormLabel htmlFor='skillDescription'>Skill Description</FormLabel>
             <Tooltip label='How do you see these skills being used in your project?' openDelay={1500} closeDelay={250}>
               <Textarea
                 name='skillDescription'
-                onChange={(e) => setSkillDescription(e.target.value)}
-                defaultValue={savedProject.skillDescription}
+                onChange={handleChange}
+                value={editForm.skillDescription}
+                // defaultValue={savedProject.skillDescription}
               />
             </Tooltip>
           </FormControl>
@@ -401,7 +415,7 @@ function UpdateProject () {
             mt={8}
             type='submit'
           >
-          Register
+          Update your Pitch
           </Button>
 
         </form>
