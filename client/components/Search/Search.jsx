@@ -7,6 +7,7 @@ import { fetchProjects } from '../../actions/project'
 import { capsFirst } from '../utils'
 import { regionLookup, categoryLookup, seekingLookup } from '../utils/lookup'
 import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRedo } from 'react-icons/fc'
+import { findByAltText } from '@testing-library/react'
 
 
 export default function Search () {
@@ -15,8 +16,21 @@ export default function Search () {
   const { query } = useParams()
   const projects = useSelector(state => state.projects)
   const [data, setData] = useState()
-  const [filterCategory, setFilterCategory] = useState(['All'])
-  const [filterSeeking, setFilterSeeking] = useState(['All'])
+
+
+const [filter, setFilter] = useState({
+  seeking:'All',
+  category:'All'
+})
+
+function handleFilterInput(e) {
+  const { name, value} = e.target
+  const copyFilter = {
+    ...filter,
+    [name]: value
+  }
+  setFilter(copyFilter)
+}
 
   const [searchParams, setSearchParams] = useState('')
   const navigate = useNavigate()
@@ -59,8 +73,10 @@ export default function Search () {
     return (
 
       <VStack ml={8} mr={8} mb={150}>
+        <Heading>
+            Search results for '{query}' :
+          </Heading>
         <HStack p={10}>
-
         <VStack>
         <HStack width='full'>
           <Input
@@ -84,8 +100,9 @@ export default function Search () {
         <HStack>
           <Select
           name='category'
-            onChange={(e) => {
-              setFilterCategory(e.target.value)}}>
+          onChange={handleFilterInput}
+          value={filter.category}
+            >
             <option value ='All'>Purpose</option>
             <option value='1'>Just for Fun</option>
             <option value='2'>Commercial</option>
@@ -94,7 +111,9 @@ export default function Search () {
           
           <Select 
           name='seeking'
-          onChange={(e) => {setFilterSeeking(e.target.value)}} >
+          onChange={handleFilterInput}
+          value={filter.seeking}
+          >
             <option value='All'>Looking for</option>
             <option value='1'>Commerical partners to develop the idea and take shareholding.</option>
             <option value='2'>Skilled people to develop idea at an agreed rate.</option>
@@ -119,16 +138,18 @@ export default function Search () {
                     }
                   }).filter(post => {
                     console.log(post.category, post.seeking)
-                    if (post.seeking == filterSeeking) {
-                    return post
-                    } if (filterSeeking == 'All') {
-                    return post 
-                    } if (post.category == filterCategory) {
+                    if (post.category == filter.category && post.seeking == filter.seeking) {
+                      return post
+                    } else if (filter.category == 'All' && post.seeking == filter.seeking) {
+                      return post
+                    } else if (filter.seeking == 'All' && post.category == filter.category) {
                       return post
                     }
-                    // } else if (filterCategory == 'All') {
-                    //   return post
-                    // }
+                     else if (filter.category == 'All' && filter.seeking == 'All') {
+                        return post                    
+                    } else {
+                      return
+                    }
                   }).map((post, index) => {
                     return <Box
                     key={index}
