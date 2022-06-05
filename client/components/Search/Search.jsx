@@ -7,7 +7,6 @@ import { fetchProjects } from '../../actions/project'
 import { capsFirst } from '../utils'
 import { regionLookup, categoryLookup, seekingLookup } from '../utils/lookup'
 import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRedo } from 'react-icons/fc'
-import { findByAltText } from '@testing-library/react'
 
 
 export default function Search () {
@@ -73,13 +72,11 @@ function handleFilterInput(e) {
     return (
 
       <VStack ml={8} mr={8} mb={150}>
-        <Heading>
-            Search results for '{query}' :
-          </Heading>
         <HStack p={10}>
         <VStack>
         <HStack width='full'>
           <Input
+          size={'lg'}
             value={searchParams}
             type={'text'}
             onChange={(e) => {
@@ -97,7 +94,13 @@ function handleFilterInput(e) {
           }} >Search</Button>
         </HStack>
 
-        <HStack>
+              <Heading p={8}>
+                  Search results for '{query}' :
+                </Heading>
+        <HStack  p={2} >
+        <Heading as='h3' size='md'>
+          Filters:  
+          </Heading>
           <Select
           name='category'
           onChange={handleFilterInput}
@@ -137,7 +140,6 @@ function handleFilterInput(e) {
                       return post
                     }
                   }).filter(post => {
-                    console.log(post.category, post.seeking)
                     if (post.category == filter.category && post.seeking == filter.seeking) {
                       return post
                     } else if (filter.category == 'All' && post.seeking == filter.seeking) {

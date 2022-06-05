@@ -1,4 +1,4 @@
-import { Input, Button, HStack, VStack } from '@chakra-ui/react'
+import { Input, Button, HStack, VStack, InputGroup, InputRightElement } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -16,22 +16,28 @@ export default function SearchBar () {
     <>
       <VStack>
         <HStack width='full'>
-          <Input
-            value={searchParams}
-            type={'text'}
-            onChange={(e) => {
-              setSearchParams(e.target.value)
-            }}
-            placeholder={'Search for projects'}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleSubmit()
-              }
-            }}
-          />
-          <Button onClick={() => {
-            handleSubmit()
-          }} >Search</Button>
+          <InputGroup size = 'lg'>
+            <Input
+              pr='4.5rem'
+              value={searchParams}
+              type={'text'}
+              onChange={(e) => {
+                setSearchParams(e.target.value)
+              }}
+              placeholder={'Search for projects'}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  handleSubmit()
+                }
+              }}
+            />
+            <InputRightElement width='5rem'>
+              <Button
+                h='1.75rem'
+                size='sm'
+                onClick={() => { handleSubmit() }} >Search</Button>
+            </InputRightElement>
+          </InputGroup>
         </HStack>
       </VStack>
 

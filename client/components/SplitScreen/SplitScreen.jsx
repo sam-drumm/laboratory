@@ -64,7 +64,7 @@ export default function SplitScreen (props) {
       </Flex>
       <Flex flex={1}>
         <Image
-          alt={'Login Image'}
+          alt={'People shaking hands and connecting'}
           objectFit={'cover'}
           src={props.image}
         />

@@ -29,8 +29,8 @@
 //         }
 //       }
 //     })
-//     const firstNameInput = screen.getByText(/First Name/i)
-//     const lastNameInput = screen.getByText(/Surname/i)
+//     const firstNameInput = screen.getByLabelText(/first name/i)
+//     const lastNameInput = screen.getByLabelText(/last name/i)
 
 //     userEvent.type(firstNameInput, 'Mr Cool')
 //     userEvent.type(lastNameInput, 'Is Cool')
@@ -40,24 +40,24 @@
 //       expect(lastNameInput).toHaveValue('Is Cool')
 //     })
 //   })
-//   it('"Required" comes up on empty input', async () => {
-//     const handleSubmit = jest.fn()
-//     renderWithRedux(<Registration onSubmit={handleSubmit} location={{ pathname: '/registration' }}/>, {
-//       initialState: {
-//         user: {
-//           id: 4
-//         }
-//       }
-//     })
+//   //   it('"Required" comes up on empty input', async () => {
+//   //     const handleSubmit = jest.fn()
+//   //     renderWithRedux(<Registration onSubmit={handleSubmit} location={{ pathname: '/registration' }}/>, {
+//   //       initialState: {
+//   //         user: {
+//   //           id: 4
+//   //         }
+//   //       }
+//   //     })
 
-//     userEvent.clear(screen.getByLabelText(/first name/i))
-//     userEvent.clear(screen.getByLabelText(/last name/i))
+//   //     userEvent.clear(screen.getByLabelText(/first name/i))
+//   //     userEvent.clear(screen.getByLabelText(/last name/i))
 
-//     userEvent.click(screen.getByRole('button', { name: /register/i }))
+//   //     userEvent.click(screen.getByRole('button', { name: /register/i }))
 
-//     const element = await screen.findAllByText('Required')
-//     expect(element[0]).toBeInTheDocument()
-//   })
+//   //     const element = await screen.findAllByText('Required')
+//   //     expect(element[0]).toBeInTheDocument()
+//   //   })
 //   //   it('message comes up on short input', async () => {
 //   //     const handleSubmit = jest.fn()
 //   //     renderWithRedux(<Registration onSubmit={handleSubmit} location={{ pathname: '/profile' }}/>, {
