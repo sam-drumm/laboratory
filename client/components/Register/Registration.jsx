@@ -91,8 +91,8 @@ function Registration () {
         </Box>
         <form onSubmit={formik.handleSubmit}>
 
-          <FormControl mt={6}>
-            <FormLabel htmlFor='firstName'>First Name</FormLabel>
+          <FormControl mt={6} isRequired >
+            <FormLabel htmlFor='first-name'>First Name</FormLabel>
             {showAnyErrors('firstName')}
             <Input
               name='firstName'
@@ -101,7 +101,7 @@ function Registration () {
             ></Input>
           </FormControl>
 
-          <FormControl mt={6}>
+          <FormControl mt={6} isRequired={'true'}>
             <FormLabel htmlFor='lastName'>Surname</FormLabel>
             {showAnyErrors('lastName')}
             <Input
