@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { getIsAuthenticated, getRegisterFn } from '../../auth0-utils'
-import { addFollowing, removeFollowing } from '../Register/updateHelper'
+import { addFollowing, removeFollowing } from '../../components/Register/updateHelper'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
-import CountdownTimer from '../Countdown/CountdownTimer'
+import CountdownTimer from '../../components/Countdown/CountdownTimer'
 import { fetchProject } from '../../actions/project'
-import { useDisclosure, TagLabel, VStack, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertDescription, CloseButton, useToast, Skeleton } from '@chakra-ui/react'
+import { useDisclosure, TagLabel, TagLeftIcon, Box, Heading, Tag, Flex, Button, Tooltip, HStack, Wrap, Stack, Alert, AlertIcon, AlertDescription, CloseButton, useToast, Skeleton } from '@chakra-ui/react'
 import { FaFacebook, FaGithub, FaTwitter } from 'react-icons/fa'
 import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRedo } from 'react-icons/fc'
-import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../utils/lookup'
-import { capsFirst } from '../utils'
-import SendMessage from '../Messages/SendMessage'
+import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup, capsFirst } from '../../components/utils/lookup'
+
+import SendMessage from '../../components/Messages/SendMessage'
 import { fetchUsers } from '../../actions/user'
 
 export default function Project () {
