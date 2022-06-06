@@ -1,6 +1,5 @@
 import React from 'react'
-import { Modal, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, Button, ModalFooter, ModalContent, useDisclosure } from
-'@chakra-ui/react'
+import { Modal, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, Button, ModalFooter, ModalContent, useDisclosure } from '@chakra-ui/react'
 
 export default function ModalBox (props) {
   const { isOpen, onOpen, onClose } = useDisclosure()

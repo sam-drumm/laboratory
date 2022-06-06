@@ -1,13 +1,7 @@
 import React from 'react'
-import Grid from '../Grid/Grid'
-import { featureData } from '../Grid/gridData'
-
-import {
-  Flex,
-  Heading,
-  Text,
-  useBreakpointValue
-} from '@chakra-ui/react'
+import { featureData } from '../../components/Grid/gridData'
+import { Flex, Heading, Text, useBreakpointValue } from '@chakra-ui/react'
+import Grid from '../../components/Grid/Grid'
 
 export default function NoProjects () {
   return (

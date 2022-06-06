@@ -1,8 +1,8 @@
 import React from 'react'
+import { featureData } from '../../components/Grid/gridData'
 import SplitScreen from '../../components/SplitScreen/SplitScreen'
 import Grid from '../../components/Grid/Grid'
 import HomeProjectCarousel from '../../components/Carousel/HomeProjectCarousel'
-import { featureData } from '../../components/Grid/gridData'
 import SearchBar from '../../components/Search/SearchBar'
 
 export default function Home () {

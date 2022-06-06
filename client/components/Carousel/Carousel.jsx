@@ -1,22 +1,5 @@
-import React, {
-  useLayoutEffect,
-  useCallback,
-  useEffect,
-  useState,
-  useMemo,
-  useRef
-} from 'react'
-
-import {
-  useMediaQuery,
-  useTheme,
-  Progress,
-  VStack,
-  Button,
-  Flex,
-  Box
-} from '@chakra-ui/react'
-
+import React, { useLayoutEffect, useCallback, useEffect, useState, useMemo, useRef } from 'react'
+import { useMediaQuery, useTheme, Progress, VStack, Button, Flex, Box } from '@chakra-ui/react'
 import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons'
 import { motion, useAnimation, useMotionValue } from 'framer-motion'
 import { percentage } from '../utils'

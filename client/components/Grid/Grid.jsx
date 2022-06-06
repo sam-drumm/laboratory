@@ -2,20 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import { getRegisterFn } from '../../auth0-utils'
-
-import {
-  Box,
-  Button,
-  Container,
-  Heading,
-  SimpleGrid,
-  Icon,
-  Text,
-  Stack,
-  HStack,
-  VStack,
-  useBreakpointValue
-} from '@chakra-ui/react'
+import { Box, Button, Container, Heading, SimpleGrid, Icon, Text, Stack, HStack, VStack, useBreakpointValue } from '@chakra-ui/react'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
 
 export default function Grid (props) {

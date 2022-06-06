@@ -1,22 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import {
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  useBreakpointValue
-
-} from '@chakra-ui/react'
+import { Button, Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
 
 export default function SplitScreen (props) {
   const navigate = useNavigate()
 
   return (
-
     <Stack minH={'50vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'lg'}>
@@ -56,7 +45,6 @@ export default function SplitScreen (props) {
               {props.buttonOne}
             </Button>
             <Button
-              // onClick={() => executeScroll()}
               rounded={'full'}>{props.buttonTwo}
             </Button>
           </Stack>

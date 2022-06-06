@@ -3,24 +3,12 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { showError } from '../../actions/error'
 import { regionLookup, categoryLookup } from '../utils/lookup'
-
-import Carousel from './Carousel'
-import {
-  Button,
-  Flex,
-  Heading,
-  Wrap,
-  Text,
-  VStack,
-  HStack,
-  Tag,
-  useBreakpointValue
-
-} from '@chakra-ui/react'
-import { getAllProjects } from '../Projects/projectsHelper'
+import { Button, Flex, Heading, Wrap, Text, VStack, HStack, Tag, useBreakpointValue } from '@chakra-ui/react'
+import { getAllProjects } from '../../pages/Projects/projectsHelper'
 import { capsFirst } from '../utils'
-import CountdownTimer from '../Countdown/CountdownTimer'
 import { clearWaiting, setWaiting } from '../../actions/waiting'
+import Carousel from './Carousel'
+import CountdownTimer from '../Countdown/CountdownTimer'
 
 export default function HomeProjectCarousel () {
   const [data, setData] = useState([])
@@ -110,8 +98,6 @@ export default function HomeProjectCarousel () {
               }/>
             </Flex>
 
-            {/* <Flex justifyContent="space-between"> */}
-
             <HStack spacing={2} justify={'left'} mb={2}>
               <Wrap>
 
@@ -130,10 +116,9 @@ export default function HomeProjectCarousel () {
               fontWeight="bold"
               color="gray.900"
             >
-                    Find out more
+              Find out more
             </Button>
           </Flex>
-          // </Flex>
         ))}
       </Carousel>
 
