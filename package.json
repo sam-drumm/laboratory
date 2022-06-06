@@ -67,7 +67,7 @@
     ]
   },
   "engines": {
-    "node": "14.16"
+    "node": "16.x"
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
