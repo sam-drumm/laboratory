@@ -1,19 +1,7 @@
 import React from 'react'
 import { useFormik } from 'formik'
+import { Flex, Box, FormControl, FormLabel, Input, Button, Textarea, InputLeftAddon, InputGroup, propNames } from '@chakra-ui/react'
 import * as Yup from 'yup'
-
-import {
-  Flex,
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-  Textarea,
-  InputLeftAddon,
-  InputGroup,
-  propNames
-} from '@chakra-ui/react'
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 

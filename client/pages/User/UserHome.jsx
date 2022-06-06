@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { getProjectByAuthId, getProjectById } from '../../apis/projects'
-import UpdateUser from '../Register/UpdateUser'
-import Grid from '../Grid/Grid'
-import Projects from '../Projects/Projects'
-import Following from '../Following/Following'
-import NoProjects from './NoProjects'
-import MessageHome from '../Messages/MessageHome'
-import { userHomeData } from '../Grid/gridData'
+import { userHomeData } from '../../components/Grid/gridData'
 import { Button, HStack } from '@chakra-ui/react'
+
+import UpdateProfile from '../Profile/UpdateProfile'
+import Grid from '../../components/Grid/Grid'
+import Projects from '../Projects/Projects'
+import Following from '../../components/Following/Following'
+import NoProjects from './NoProjects'
+import MessageHome from '../../components/Messages/MessageHome'
 
 export default function UserHome () {
   const [userProjects, setUserProjects] = useState([])
@@ -98,7 +99,7 @@ export default function UserHome () {
         )}>
             Your Projects
         </Button>
-        <Button onClick={() => setResource(<UpdateUser />)}>
+        <Button onClick={() => setResource(<UpdateProfile />)}>
           Your Profile
         </Button>
       </HStack>

@@ -5,20 +5,8 @@ import { getAddresses } from '../../apis/address'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
+import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Select, useBreakpointValue, Text } from '@chakra-ui/react'
 import * as Yup from 'yup'
-
-import {
-  Flex,
-  Box,
-  Heading,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-  Select,
-  useBreakpointValue,
-  Text
-} from '@chakra-ui/react'
 
 const registerSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -31,7 +19,7 @@ const registerSchema = Yup.object().shape({
     .max(20, 'Sorry, this must be under 20 characters long')
 })
 
-function UpdateUser () {
+function UpdateProfile () {
   const authUser = useAuth0().user
   const { firstName, lastName, formatted } = useSelector(state => state.user)
   const navigate = useNavigate()
@@ -204,4 +192,4 @@ function UpdateUser () {
   )
 }
 
-export default UpdateUser
+export default UpdateProfile

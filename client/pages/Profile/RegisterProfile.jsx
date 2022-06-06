@@ -28,7 +28,7 @@ const registerSchema = Yup.object().shape({
     .max(20, 'Sorry, this must be under 20 characters long')
 })
 
-function Registration () {
+function RegisterProfile () {
   const authUser = useAuth0().user
   const navigate = useNavigate()
 
@@ -148,4 +148,4 @@ function Registration () {
   )
 }
 
-export default Registration
+export default RegisterProfile

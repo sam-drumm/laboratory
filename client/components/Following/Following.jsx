@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { capsFirst } from '../utils'
+import { Button, Flex, Heading, Text, VStack, HStack, Tag, useBreakpointValue, Wrap } from '@chakra-ui/react'
+import { categoryLookup, regionLookup } from '../utils/lookup'
 
 import Carousel from '../Carousel/Carousel'
-
-import { Button, Flex, Heading, Text, VStack, HStack, Tag, useBreakpointValue, Wrap } from '@chakra-ui/react'
 import CountdownTimer from '../Countdown/CountdownTimer'
-import { categoryLookup, regionLookup } from '../utils/lookup'
 
 export default function Following (props) {
   const navigate = useNavigate()

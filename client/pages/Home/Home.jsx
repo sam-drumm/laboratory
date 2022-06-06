@@ -1,9 +1,9 @@
 import React from 'react'
-import SplitScreen from './SplitScreen/SplitScreen'
-import Grid from './Grid/Grid'
-import HomeProjectCarousel from './Carousel/HomeProjectCarousel'
-import { featureData } from './Grid/gridData'
-import SearchBar from './Search/SearchBar'
+import { featureData } from '../../components/Grid/gridData'
+import SplitScreen from '../../components/SplitScreen/SplitScreen'
+import Grid from '../../components/Grid/Grid'
+import HomeProjectCarousel from '../../components/Carousel/HomeProjectCarousel'
+import SearchBar from '../../components/Search/SearchBar'
 
 export default function Home () {
   return (
@@ -17,7 +17,6 @@ export default function Home () {
         navOne='./projects/new'
         buttonTwo="How it works"
         navTwo='./'
-        // image='https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
         image={'images/pexels-fauxels-3184297.jpg'}
 
       />

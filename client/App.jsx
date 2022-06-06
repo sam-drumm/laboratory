@@ -1,20 +1,20 @@
 import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { cacheUser } from '../auth0-utils'
-import NewProject from './Projects/NewProject'
-import Project from './Project/Project'
-import Home from './Home'
-
-import Registration from './Register/Registration'
-import Profile from './Register/Profile'
+import { cacheUser } from './auth0-utils'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import Verification from './Register/Verification'
-import Category from './Projects/Category'
-import UserHome from './User/UserHome'
-import UpdateProject from './Project/UpdateProject'
-import Search from './Search/Search'
-import SearchBar from './Search/SearchBar'
-import { RequireAuth } from './Register/Authenticated'
+import { RequireAuth } from './components/Register/Authenticated'
+
+import NewProject from './pages/Project/NewProject'
+import Project from './pages/Project/Project'
+import Home from './pages/Home/Home'
+import Registration from './pages/Profile/RegisterProfile'
+// import Profile from './pages/Profile/Profile'
+import Verification from './components/Register/Verification'
+import Category from './components/Category/Category'
+import UserHome from './pages/User/UserHome'
+import UpdateProject from './pages/Project/UpdateProject'
+import Search from './components/Search/Search'
+import SearchBar from './components/Search/SearchBar'
 
 function App () {
   const navigate = useNavigate()
@@ -24,11 +24,11 @@ function App () {
     <div className='app'>
       <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path='/profile' element={
+        {/* <Route path='/profile' element={
           <RequireAuth>
             <Profile/>
           </RequireAuth>
-        } />
+        } /> */}
         <Route path='/profile/home' element={<UserHome/>}/>
         <Route path='/register' element={<Registration/>} />
         <Route path='/verification' element={<Verification/>} />

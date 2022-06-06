@@ -1,11 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { capsFirst } from '../utils'
-import CountdownTimer from '../Countdown/CountdownTimer'
-import Carousel from '../Carousel/Carousel'
-import { categoryLookup, regionLookup } from '../utils/lookup'
+import { capsFirst } from '../../components/utils'
+import { categoryLookup, regionLookup } from '../../components/utils/lookup'
 import { Wrap, Button, Flex, Heading, Text, VStack, HStack, Tag, useBreakpointValue } from '@chakra-ui/react'
 import { FcRedo } from 'react-icons/fc'
+import CountdownTimer from '../../components/Countdown/CountdownTimer'
+import Carousel from '../../components/Carousel/Carousel'
 
 export default function Projects (props) {
   const navigate = useNavigate()

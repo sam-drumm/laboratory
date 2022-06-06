@@ -1,7 +1,7 @@
-import { HStack, Stack } from '@chakra-ui/react'
 import React from 'react'
-import DateTimeDisplay from './DateTimeDisplay'
+import { HStack, Stack } from '@chakra-ui/react'
 import { useCountdown } from './useCountdown'
+import DateTimeDisplay from './DateTimeDisplay'
 
 const ShowCounter = ({ days, hours, minutes, seconds }) => {
   return (

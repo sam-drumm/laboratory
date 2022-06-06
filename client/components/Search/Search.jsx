@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Box, Stack, Center, Select, Spinner, Text, Container, Heading, HStack, Input, Button, Wrap,VStack, Tag, Flex, TagLeftIcon, TagLabel } from '@chakra-ui/react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-
 import { fetchProjects } from '../../actions/project'
 import { capsFirst } from '../utils'
 import { regionLookup, categoryLookup, seekingLookup } from '../utils/lookup'

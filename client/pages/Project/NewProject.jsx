@@ -2,24 +2,9 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProject } from '../../actions/project'
+import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Stack, Radio, RadioGroup, Textarea, Select, useToast } from '@chakra-ui/react'
 
-import {
-  Flex,
-  Box,
-  Heading,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-  Stack,
-  Radio,
-  RadioGroup,
-  Textarea,
-  Select,
-  useToast
-
-} from '@chakra-ui/react'
-import Category from './Category'
+import Category from '../../components/Category/Category'
 
 function NewProject () {
   const toast = useToast()

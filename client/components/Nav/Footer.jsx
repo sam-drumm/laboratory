@@ -1,12 +1,9 @@
 import React from 'react'
+import { Stack, Flex } from '@chakra-ui/react'
+import { LoremIpsum } from 'react-lorem-ipsum'
+
 import ModalBox from '../ModalBox/ModalBox'
 import ContactForm from '../Contact/ContactForm'
-
-import { LoremIpsum } from 'react-lorem-ipsum'
-import {
-  Stack,
-  Flex
-} from '@chakra-ui/react'
 
 const Footer = () => {
   return (
