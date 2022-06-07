@@ -77,7 +77,6 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "chakra-ui-autocomplete": "^1.4.5",
-    "chakra-ui-steps": "^1.7.2",
     "express": "^4.17.1",
     "express-jwt": "^6.1.0",
     "express-jwt-authz": "^2.4.1",
