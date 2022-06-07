@@ -1,24 +1,30 @@
 {
-  "name": "boilerplate-fullstack",
-  "version": "2.0.0",
+  "name": "co_lab",
+  "version": "0.1.0",
   "main": "server/index.js",
   "license": "MIT",
-  "keywords": [
-    "fullstack"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sam-drumm/laboratory.git"
+  },
+
   "scripts": {
     "start": "node server",
-    "test": "jest",
-    "test:watch": "jest --noStackTrace --watchAll",
+    "build": "run-p build:client build:server",
+    "build:client": "npm run webpack -- --mode=production",
+    "build:server": "npm run db:migrate",
+    "webpack": "webpack --config client/webpack.config.js",
     "dev": "run-p dev:client dev:server",
     "dev:client": "npm run webpack -- --watch",
-    "dev:server": "nodemon --watch server server/index.js",
-    "build": "run-p build:client build:server",
-    "build:client": "npm run webpack -- --mode production",
-    "build:server": "npm run knex -- migrate:latest",
-    "lint": "eslint --ext .js,.jsx .",
-    "webpack": "webpack --config ./client/webpack.config.js",
-    "knex": "knex --knexfile ./server/db/knexfile.js"
+    "dev:server": "nodemon server",
+    "knex": "knex --knexfile server/db/knexfile.js",
+    "db:migrate": "npm run knex migrate:latest",
+    "db:seed": "npm run knex seed:run",
+    "db:reset": "npm run knex migrate:rollback && npm run db:migrate && npm run db:seed",
+    "postinstall": "run-s db:migrate db:seed",
+    "test": "jest --selectProjects client server",
+    "test:watch": "npm run test -- --watchAll",
+    "lint": "eslint --ext .js,.jsx ."
   },
   "babel": {
     "presets": [
@@ -68,7 +74,7 @@
   },
   "engines": {
     "node": "14.x",
-    "npm": "6.14.11"
+    "npm": "6.14.x"
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
