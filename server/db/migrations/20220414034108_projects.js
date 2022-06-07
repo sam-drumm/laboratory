@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('projects', table => {
     table.increments('id').primary()
-    table.foreign('auth0_id').references('users.hash')
+    table.string('hash').references('users.hash')
     table.string('project_title')
     table.string('category')
     table.string('region')

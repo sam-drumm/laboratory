@@ -1,10 +1,10 @@
 exports.up = function (knex) {
   return knex.schema.createTable('users', table => {
-    table.string('hash').primary()
-    table.increments('id')
+    table.increments('id').primary()
     table.string('first_name')
     table.string('last_name')
     table.string('email')
+    table.string('hash')
     table.string('street_number')
     table.string('street')
     table.string('locality')
