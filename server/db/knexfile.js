@@ -9,23 +9,54 @@ module.exports = {
     useNullAsDefault: true
   },
 
+  // test: {
+  //   client: 'sqlite3',
+  //   connection: {
+  //     filename: ':memory:'
+  //   },
+  //   useNullAsDefault: true
+  // },
+
   test: {
     client: 'sqlite3',
+    useNullAsDefault: true,
     connection: {
       filename: ':memory:'
     },
-    useNullAsDefault: true
+    seeds: {
+      directory: path.join(__dirname, 'seeds')
+    },
+    migrations: {
+      directory: path.join(__dirname, 'migrations')
+    }
   },
+
+  //   production: {
+  //     client: 'postgresql',
+  //     connection: process.env.DATABASE_URL,
+  //     pool: {
+  //       min: 2,
+  //       max: 10
+  //     },
+  //     migrations: {
+  //       tableName: 'knex_migrations'
+  //     }
+  //   }
+  // }
 
   production: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL,
+    connection: {
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }
+    },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
       tableName: 'knex_migrations'
-    }
+    },
+    useNullAsDefault: true
   }
 }
