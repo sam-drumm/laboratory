@@ -67,8 +67,8 @@ export default function Header () {
       >
         <IfAuthenticated>
           <Link onClick={() => navigate('/projects/new')} className='nav-link'>Pitch an Idea <Icon as={FcGlobe} boxSize="1.75em"/></Link>
-          <Link onClick={() => navigate('/profile/home')} className='nav-link'>Following <Icon as={FcLike} boxSize="1.75em"/></Link>
           <Link onClick={() => navigate('/projects/search')} className='nav-link'>Search Projects <Icon as={FcCollaboration} boxSize="1.75em"/></Link>
+          <Link onClick={() => navigate('/profile/home')} className='nav-link'>Following <Icon as={FcLike} boxSize="1.75em"/></Link>
         </IfAuthenticated>
         <IfNotAuthenticated>
           <Link onClick={() => navigate('/projects/new')} className='nav-link'>Pitch an Idea <Icon as={FcGlobe} boxSize="1.75em"/></Link>
