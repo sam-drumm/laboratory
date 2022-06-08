@@ -1,7 +1,6 @@
 import { SET_USER, CLEAR_USER } from '../actions/user'
 
 const emptyUser = {
-  id: null,
   auth0Id: '',
   firstName: '',
   lastName: '',

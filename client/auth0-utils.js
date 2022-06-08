@@ -4,7 +4,6 @@ import { dispatch } from './store'
 import { showError } from './actions/error'
 
 const emptyUser = {
-  id: null,
   auth0Id: '',
   email: '',
   firstName: '',
@@ -24,14 +23,14 @@ export async function cacheUser (useAuth0, navigate) {
     try {
       const token = await getAccessTokenSilently()
       const res = await consume(`/users/${user.sub}`, token)
-      const { id, firstName, lastName, email, following, formatted } = res.body
-      if (id === undefined) {
+      const { firstName, lastName, email, following, formatted } = res.body
+      if (firstName === undefined) {
         navigate('/register')
       }
       if (user.email_verified === false) {
         navigate('/verification')
       }
-      saveUser({ id, auth0Id: user.sub, firstName, lastName, email, token, following, formatted })
+      saveUser({ auth0Id: user.sub, firstName, lastName, email, token, following, formatted })
     } catch (err) {
       dispatch(showError('Unable to set the current user'))
     }

@@ -7,7 +7,7 @@ exports.seed = function (knex) {
     .then(() =>
       knex('users').insert([
         {
-          id: 1,
+          // id: 1,
           auth0_id: 'auth0|61414f84d35ac900717bc280',
           first_name: 'Sandy',
           last_name: 'Bojangles',
@@ -25,7 +25,7 @@ exports.seed = function (knex) {
           formatted: '102 Metehau Street, Marshland, Christchurch'
         },
         {
-          id: 2,
+          // id: 2,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
           first_name: 'Hermione',
           last_name: 'Butachican',
@@ -43,7 +43,7 @@ exports.seed = function (knex) {
           formatted: '102 Marsden Avenue, Mount Eden, Auckland'
         },
         {
-          id: 3,
+          // id: 3,
           auth0_id: 'auth0|09414f84d35ac900717bc280',
           first_name: 'Kelly',
           last_name: 'Europa',
@@ -61,7 +61,7 @@ exports.seed = function (knex) {
           formatted: '102 Marsden Road, Greymouth'
         },
         {
-          id: 4,
+          // id: 4,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           first_name: 'Joe',
           last_name: 'Smoking',
