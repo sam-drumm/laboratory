@@ -241,7 +241,7 @@ export default function Project () {
                     <AlertIcon />
                     <Box>
                       <AlertDescription>
-          Added to your favorites for later.
+          Added to your followed projects.
                       </AlertDescription>
                     </Box>
 

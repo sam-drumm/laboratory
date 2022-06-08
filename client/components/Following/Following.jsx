@@ -94,7 +94,7 @@ export default function Following (props) {
             </HStack>
             <Button
               onClick={() => navigate(`/projects/${project.id}`)}
-              colorScheme="grey"
+              colorScheme="gray"
               fontWeight="bold"
               color="gray.900"
 
