@@ -5,9 +5,8 @@ exports.seed = function (knex) {
   // Deletes ALL existing entries
   return knex('messages')
     .del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('messages').insert([
+    .then(() =>
+      knex('messages').insert([
         {
           id: 1,
           project_id: 1,
@@ -57,5 +56,5 @@ exports.seed = function (knex) {
           share: 'Maecenas egestas, quam sit amet finibus faucibus, ligula felis gravida justo, et suscipit neque magna id lorem. Nulla venenatis consequat elit eget rutrum. Donec accumsan, libero et convallis blandit, lacus diam ultricies orci, in vulputate libero leo in sapien. Integer condimentum risus in ante dignissim, sed ultrices orci vehicula. Praesent porta quam vitae massa aliquam tristique. Aliquam ornare tempor vehicula. Quisque aliquam sapien posuere efficitur suscipit. Quisque lobortis ultricies magna, quis finibus dolor eleifend cursus.'
         }
       ])
-    })
+    )
 }
