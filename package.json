@@ -12,7 +12,7 @@
     "npm": "8.1.0"
   },
   "scripts": {
-    "start": "node server",
+    "start": "node server/server.js",
     "build": "run-p build:client build:server",
     "build:client": "npm run webpack -- --mode=production",
     "build:server": "npm run db:migrate",
@@ -75,7 +75,6 @@
       }
     ]
   },
-
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
     "@chakra-ui/icons": "^1.1.7",
@@ -89,6 +88,7 @@
     "flat-color-icons": "^1.1.0",
     "formik": "^2.2.9",
     "framer-motion": "^6.2.10",
+    "heroku-cli": "^7.0.9",
     "jwks-rsa": "^2.0.4",
     "knex": "^0.95.11",
     "pg": "^8.7.1",
