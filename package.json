@@ -12,7 +12,7 @@
     "npm": "8.1.0"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node server",
     "build": "run-p build:client build:server",
     "build:client": "npm run webpack -- --mode=production",
     "build:server": "npm run db:migrate",
