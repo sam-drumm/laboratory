@@ -28,7 +28,7 @@ async function addMessage (input, db = connection) {
 }
 
 async function getMessageById (id, db = connection) {
-  return db('Messages')
+  return db('messages')
     .select(
       'id',
       'auth0_id as authId',
@@ -42,6 +42,6 @@ async function getMessageById (id, db = connection) {
 }
 
 async function getMessageByAuthId (auth0Id, db = connection) {
-  return db('Messages').select()
+  return db('messages').select()
     .where('auth0_id', auth0Id)
 }

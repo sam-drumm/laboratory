@@ -51,13 +51,8 @@ module.exports = {
       ssl: { rejectUnauthorized: false }
     },
     pool: {
-      // min: 2,
-      // max: 10,
-      min: 0,
-      max: 5,
-      acquireTimeoutMillis: 60000,
-      idleTimeoutMillis: 600000
-
+      min: 2,
+      max: 10
     },
     migrations: {
       tableName: 'knex_migrations'

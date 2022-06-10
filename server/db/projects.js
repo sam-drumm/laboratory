@@ -57,12 +57,12 @@ async function updateProject (newProject,
 }
 
 async function deleteProject (id, auth0Id, db = connection) {
-  return db('Projects')
+  return db('projects')
     .where('id', id)
     .first()
     .then(project => authorizeUpdate(project, auth0Id))
     .then(() => {
-      return db('Projects')
+      return db('projects')
         .where('id', id)
         .delete()
     })
@@ -72,7 +72,7 @@ async function deleteProject (id, auth0Id, db = connection) {
 }
 
 async function getProjectById (id, db = connection) {
-  return db('Projects')
+  return db('projects')
     .select(
       'id',
       'auth0_id as authId',
@@ -92,7 +92,7 @@ async function getProjectById (id, db = connection) {
 }
 
 async function getProjectByAuthId (auth0Id, db = connection) {
-  return db('Projects').select()
+  return db('projects').select()
     .where('auth0_id', auth0Id)
 }
 
