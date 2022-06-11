@@ -85,7 +85,8 @@ export default function Project () {
         dispatch(fetchProject(id, token))
       )
       .then(
-        setSkill(skillType.split(',').map(Number))
+        console.log('pageSet', skillType),
+        setSkill(skillType?.split(',').map(Number))
       )
       .catch(err => {
         console.error(err)
