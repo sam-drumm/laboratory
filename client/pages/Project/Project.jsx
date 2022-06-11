@@ -79,21 +79,22 @@ export default function Project () {
     })
   }
 
-  function pageSet () {
+  async function pageSet () {
     dispatch(fetchUsers())
       .then(
         dispatch(fetchProject(id, token))
       )
       .then(
-        console.log('pageSet', skillType),
-        setSkill(skillType?.split(',').map(Number))
+        console.log(skillType),
+        // setSkill(skillType?.split(',').map(Number))
+        setSkill(skillType)
       )
       .catch(err => {
         console.error(err)
       })
   }
 
-  function ownerSet () {
+  async function ownerSet () {
     try {
       if (auth0Id === authId) {
         setUserProject(true)
@@ -106,7 +107,7 @@ export default function Project () {
     }
   }
 
-  function followingSet () {
+  async function followingSet () {
     try {
       if (following.includes(id)) {
         setFollowed(true)
