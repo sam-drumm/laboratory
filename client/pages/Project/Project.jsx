@@ -86,8 +86,7 @@ export default function Project () {
       )
       .then(
         console.log(skillType),
-        // setSkill(skillType?.split(',').map(Number))
-        setSkill(skillType)
+        setSkill(skillType?.split(',').map(Number))
       )
       .catch(err => {
         console.error(err)
