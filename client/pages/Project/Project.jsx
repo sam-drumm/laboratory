@@ -84,10 +84,10 @@ export default function Project () {
       .then(
         dispatch(fetchProject(id, token))
       )
-      .then(
-        // console.log(skillType),
-        setSkill(skillType ? skillType.split(',').map(Number) : [])
-      )
+      // .then(
+    // console.log(skillType),
+    // setSkill(skillType ? skillType.split(',').map(Number) : [])
+
       .catch(err => {
         console.error(err)
       })
@@ -122,12 +122,9 @@ export default function Project () {
   }, [createdAt])
 
   useEffect(() => {
-    pageSet()
-  }, [])
-
-  useEffect(() => {
     ownerSet()
-  }, [auth0Id])
+    pageSet()
+  }, [skillType])
 
   useEffect(() => {
     followingSet()
@@ -160,7 +157,7 @@ export default function Project () {
                   <TagLeftIcon as={FcGlobe}/>
                   <TagLabel>Member located in {regionLookup(region)}</TagLabel>
                 </Tag>
-                {skill.map((item, i) =>
+                {skillType?.map((item, i) =>
                   <Tooltip label='These are the skills the project is seeking' key={i} openDelay={1500} closeDelay={250}>
                     <Tag variant='outline' colorScheme="pink">
                       <TagLeftIcon as={FcSupport}/>
