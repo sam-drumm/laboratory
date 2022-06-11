@@ -123,7 +123,7 @@ export default function Project () {
 
   useEffect(() => {
     pageSet()
-  }, [skillType])
+  }, [])
 
   useEffect(() => {
     ownerSet()
