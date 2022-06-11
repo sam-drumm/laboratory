@@ -86,7 +86,8 @@ export default function Project () {
       )
       .then(
         console.log(skillType),
-        setSkill(skillType?.split(',').map(Number))
+        // setSkill(skillType?.split(',').map(Number))
+        setSkill(skillType)
       )
       .catch(err => {
         console.error(err)
@@ -124,7 +125,7 @@ export default function Project () {
   useEffect(() => {
     pageSet()
     ownerSet()
-  }, [skillType])
+  }, [])
 
   useEffect(() => {
     followingSet()
