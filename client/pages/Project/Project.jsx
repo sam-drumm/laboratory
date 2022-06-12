@@ -11,6 +11,7 @@ import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRe
 import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../../components/utils/lookup'
 import { capsFirst } from '../../components/utils'
 import { fetchUsers } from '../../actions/user'
+import { getSkill } from './projectHelper'
 import SendMessage from '../../components/Messages/SendMessage'
 import CountdownTimer from '../../components/Countdown/CountdownTimer'
 
@@ -84,10 +85,12 @@ export default function Project () {
       .then(
         dispatch(fetchProject(id, token))
       )
-      // .then(
-    // console.log(skillType),
-    // setSkill(skillType ? skillType.split(',').map(Number) : [])
+      .then(
+        setSkill(getSkill(skillType))
 
+        // console.log(skillType),
+        // setSkill(skillType.split(',').map(Number))
+      )
       .catch(err => {
         console.error(err)
       })
@@ -122,9 +125,12 @@ export default function Project () {
   }, [createdAt])
 
   useEffect(() => {
-    ownerSet()
     pageSet()
   }, [skillType])
+
+  useEffect(() => {
+    ownerSet()
+  }, [auth0Id])
 
   useEffect(() => {
     followingSet()
@@ -157,7 +163,7 @@ export default function Project () {
                   <TagLeftIcon as={FcGlobe}/>
                   <TagLabel>Member located in {regionLookup(region)}</TagLabel>
                 </Tag>
-                {skillType?.map((item, i) =>
+                {skill?.map((item, i) =>
                   <Tooltip label='These are the skills the project is seeking' key={i} openDelay={1500} closeDelay={250}>
                     <Tag variant='outline' colorScheme="pink">
                       <TagLeftIcon as={FcSupport}/>
