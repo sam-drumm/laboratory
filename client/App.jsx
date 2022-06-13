@@ -33,15 +33,15 @@ function App () {
         <Route path='/register' element={<Registration/>} />
         <Route path='/verification' element={<Verification/>} />
         <Route path='/projects/new' element={
-          <RequireAuth>
-            <NewProject />
-          </RequireAuth>
+
+          <NewProject />
+
         }/>
         <Route path='/projects/:id' element={<Project />}/>
         <Route path='/projects/edit/:id' element={
-          <RequireAuth>
-            <UpdateProject />
-          </RequireAuth>
+
+          <UpdateProject />
+
         }/>
         <Route path='/projects/search/:query' element={<Search />} />
         <Route path='/projects/search' element={<SearchBar />} />
