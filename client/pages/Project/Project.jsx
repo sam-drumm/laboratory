@@ -52,20 +52,16 @@ export default function Project () {
 
   function saveHandler () {
     if (isAuthenticated === true) {
-      try {
-        addFollowing(following, Number(id), authUser)
-        onOpen()
-        toast({
-          title: 'Added!',
-          description: 'We\'ve added this pitch to your follow list.',
-          status: 'success',
-          duration: 10000,
-          isClosable: true,
-          position: 'top'
-        })
-      } catch (error) {
-        console.error(error)
-      }
+      addFollowing(following.toString(), Number(id), authUser)
+      onOpen()
+      toast({
+        title: 'Added!',
+        description: 'We\'ve added this pitch to your follow list.',
+        status: 'success',
+        duration: 10000,
+        isClosable: true,
+        position: 'top'
+      })
     } else {
       register()
     }
@@ -112,7 +108,7 @@ export default function Project () {
 
   async function followingSet () {
     try {
-      if (following.includes(id)) {
+      if (following?.includes(id)) {
         setFollowed(true)
         onOpen()
       }
