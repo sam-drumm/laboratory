@@ -36,7 +36,7 @@ export default function UserHome () {
   }
 
   async function getFollowedProjects () {
-    const projectId = following?.soString().split(',').map(Number).filter(filtered => filtered !== 0)
+    const projectId = following?.toString().split(',').map(Number).filter(filtered => filtered !== 0)
     const projectArray = []
     projectId.map((id) => {
       getProjectById(id)
