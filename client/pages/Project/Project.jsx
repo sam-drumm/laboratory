@@ -11,8 +11,10 @@ import { FcGlobe, FcBinoculars, FcCollaboration, FcSupport, FcIdea, FcLike, FcRe
 import { regionLookup, categoryLookup, skillLookup, seekingLookup, startedLookup } from '../../components/utils/lookup'
 import { capsFirst } from '../../components/utils'
 import { fetchUsers } from '../../actions/user'
+// import {getSkill} from '../Project/projectHelper'
 import SendMessage from '../../components/Messages/SendMessage'
 import CountdownTimer from '../../components/Countdown/CountdownTimer'
+
 
 export default function Project () {
   const navigate = useNavigate()
@@ -88,7 +90,7 @@ export default function Project () {
         // setSkill(getSkill(skillType))
 
         // console.log(skillType),
-        setSkill(skillType !== undefined ? skillType.split(',').map(Number) : [])
+        setSkill(skillType?.toString().split(',').map(Number))
       )
       .catch(err => {
         console.error(err)
