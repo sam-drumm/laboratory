@@ -47,7 +47,9 @@ router.post('/', async (req, res) => {
 
 router.patch('/', checkJwt, async (req, res) => {
   const { auth0Id, firstName, lastName, email, streetNumber, street, locality, city, region, postcode, meshblock, lon, lat, formatted, following } = req.body
+  console.log(req.body)
   const user = { auth0Id, firstName, lastName, email, streetNumber, street, locality, city, region, postcode, meshblock, lon, lat, formatted, following }
+  console.log(user)
   try {
     await db.updateUser(user)
   } catch (err) {
