@@ -15,7 +15,6 @@ import { fetchUsers } from '../../actions/user'
 import SendMessage from '../../components/Messages/SendMessage'
 import CountdownTimer from '../../components/Countdown/CountdownTimer'
 
-
 export default function Project () {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -51,9 +50,9 @@ export default function Project () {
     }
   }
 
-  async function saveHandler () {
+  function saveHandler () {
     if (isAuthenticated === true) {
-      await addFollowing(following, Number(id), authUser)
+      addFollowing(following, Number(id), authUser)
       onOpen()
       toast({
         title: 'Added!',
@@ -68,8 +67,8 @@ export default function Project () {
     }
   }
 
-  async function removeHandler () {
-    await removeFollowing(following, Number(id), authUser)
+  function removeHandler () {
+    removeFollowing(following, Number(id), authUser)
     onClose()
     toast({
       title: 'Removed',
