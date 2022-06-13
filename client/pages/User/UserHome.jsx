@@ -23,8 +23,8 @@ export default function UserHome () {
     />
   )
 
-  async function getOwnedProjects () {
-    await getProjectByAuthId(auth0Id, token)
+  function getOwnedProjects () {
+    getProjectByAuthId(auth0Id, token)
       .then(projects => {
         setUserProjects(projects)
         return null

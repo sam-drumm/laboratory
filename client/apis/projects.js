@@ -10,7 +10,9 @@ export function getProjectByAuthId (auth0Id, token) {
     .then(res => {
       return res.body
     })
-    .catch(console.error('error'))
+    .catch(err => {
+      console.error(err.message)
+    })
 }
 
 export function getProjects (token) {
@@ -38,7 +40,9 @@ export function editProject (project, token, auth0Id) {
     .patch(rootUrl + '/projects/edit')
     .set('authorization', `Bearer ${token}`)
     .send(project, auth0Id)
-    .catch(console.error('error'))
+    .catch(err => {
+      console.error(err.message)
+    })
 }
 
 export function getProjectById (id, token) {

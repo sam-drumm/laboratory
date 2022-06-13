@@ -34,8 +34,8 @@ export function updateUser (user, selectedAddress, authUser, navigateTo, consume
       navigateTo('/profile/home')
       return newUser
     })
-    .catch((err) => {
-      dispatch(showError(err.message))
+    .catch(err => {
+      console.error(err.message)
     })
     .finally(() => {
       dispatch(clearWaiting())
@@ -58,8 +58,8 @@ export function addFollowing (following, follow, authUser, consume = requestor) 
       dispatch(setUser(newUser))
       return newUser
     })
-    .catch((err) => {
-      dispatch(showError(err.message))
+    .catch(err => {
+      console.error(err.message)
     })
     .finally(() => {
       dispatch(clearWaiting())
@@ -84,8 +84,8 @@ export function removeFollowing (following, follow, authUser, consume = requesto
       dispatch(setUser(newUser))
       return newUser
     })
-    .catch((err) => {
-      dispatch(showError(err.message))
+    .catch(err => {
+      console.error(err.message)
     })
     .finally(() => {
       dispatch(clearWaiting())

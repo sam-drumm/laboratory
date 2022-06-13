@@ -78,7 +78,11 @@ router.get('/user/auth', checkJwt, async (req, res) => {
     const projectByUser = await db.getProjectByAuthId(req.query.query)
     res.json({ projectByUser })
   } catch (err) {
-    console.error('error bro')
-    res.status(500).send(err.message)
+    log(err.message)
+    res.status(500).json({
+      error: {
+        title: 'Unable to get projects from user'
+      }
+    })
   }
 })
