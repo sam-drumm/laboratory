@@ -35,10 +35,3 @@ export function getProject (id, user, consume = requestor) {
       dispatch(clearWaiting())
     })
 }
-
-// export function getSkill (skillType) {
-//   console.log(skillType)
-//   if (skillType !== '') {
-//     return skillType.split(',').map(Number)
-//   } else return []
-// }

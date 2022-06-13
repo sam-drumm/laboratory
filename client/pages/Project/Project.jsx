@@ -87,9 +87,6 @@ export default function Project () {
         dispatch(fetchProject(id, token))
       )
       .then(
-        // setSkill(getSkill(skillType))
-
-        // console.log(skillType),
         setSkill(skillType?.toString().split(',').map(Number))
       )
       .catch(err => {
