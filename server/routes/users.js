@@ -44,6 +44,7 @@ router.post('/', async (req, res) => {
 
 // Authenticated Routes
 // Need to update patch only if your own account
+
 router.patch('/', checkJwt, async (req, res) => {
   const { auth0Id, firstName, lastName, email, streetNumber, street, locality, city, region, postcode, meshblock, lon, lat, formatted, following } = req.body
   const user = { auth0Id, firstName, lastName, email, streetNumber, street, locality, city, region, postcode, meshblock, lon, lat, formatted, following }

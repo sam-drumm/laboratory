@@ -68,7 +68,7 @@ export function addFollowing (following, follow, authUser, consume = requestor) 
 
 export function removeFollowing (following, follow, authUser, consume = requestor) {
   dispatch(setWaiting())
-  const arraz = following?.toString().split(',').map(Number)
+  const arraz = following.split(',').map(Number)
   const filtered = arraz.filter(element => element !== follow)
   const newUser = {
     auth0Id: authUser.sub,
