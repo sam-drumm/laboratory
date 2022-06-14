@@ -109,7 +109,7 @@ export default function Project () {
 
   async function followingSet () {
     try {
-      if (following.includes(id)) {
+      if (following.includes(Number(id))) {
         setFollowed(true)
         onOpen()
       }
