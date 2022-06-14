@@ -45,7 +45,6 @@ export function updateUser (user, selectedAddress, authUser, navigateTo, consume
 export function addFollowing (following, follow, authUser, consume = requestor) {
   dispatch(setWaiting())
   following.push(follow)
-  // console.log(following)
   const newUser = {
     auth0Id: authUser.sub,
     following: following
@@ -70,11 +69,12 @@ export function addFollowing (following, follow, authUser, consume = requestor) 
 
 export function removeFollowing (following, follow, authUser, consume = requestor) {
   dispatch(setWaiting())
-  const arraz = following.split(',').map(Number)
-  const filtered = arraz.filter(element => element !== follow)
+  // const arraz = following.split(',').map(Number)
+  const filtered = following.filter(element => element !== follow)
+  console.log(filtered)
   const newUser = {
     auth0Id: authUser.sub,
-    following: [filtered]
+    following: filtered
   }
   const storeState = getState()
   const { token } = storeState.user
