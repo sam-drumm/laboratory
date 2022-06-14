@@ -14,8 +14,7 @@ exports.up = function (knex) {
     table.float('lon')
     table.float('lat')
     table.string('formatted')
-    // table.specificType('following', 'integer ARRAY')
-    table.string('following')
+    table.specificType('following', 'integer ARRAY')
   }
   )
 }

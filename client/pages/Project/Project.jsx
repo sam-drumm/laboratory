@@ -53,7 +53,7 @@ export default function Project () {
   function saveHandler () {
     if (isAuthenticated === true) {
       addFollowing(following, Number(id), authUser)
-      // console.log('following', following, 'id', Number(id))
+      console.log('following:', following, 'id:', Number(id))
       onOpen()
       toast({
         title: 'Added!',
@@ -123,12 +123,6 @@ export default function Project () {
     pageSet()
     ownerSet()
   }, [createdAt])
-
-  // useEffect(() => {
-  // }, [skillType])
-
-  // useEffect(() => {
-  // }, [auth0Id])
 
   useEffect(() => {
     followingSet()
