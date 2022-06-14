@@ -5,15 +5,13 @@ const emptyProject = {
   auth0Id: '',
   projectTitle: '',
   category: '',
+  region: '',
   description: '',
   success: '',
   seeking: '',
-  purpose: '',
-  teamEstablished: '',
   started: '',
-  skillType: '',
-  skillDescription: '',
-  region: ''
+  skillType: [],
+  skillDescription: ''
 }
 
 export default function project (state = emptyProject, action) {
