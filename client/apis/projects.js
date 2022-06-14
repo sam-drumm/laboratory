@@ -27,7 +27,9 @@ export function getProjects (token) {
 }
 
 export function addProjects (project, token) {
-  return request.post(rootUrl + '/projects')
+  console.log(project)
+  return request
+    .post(rootUrl + '/projects')
     .set('authorization', `Bearer ${token}`)
     .send(project)
     .catch(err => {

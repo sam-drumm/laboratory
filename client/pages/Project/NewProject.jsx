@@ -48,10 +48,9 @@ function NewProject () {
   async function handleSubmit (event) {
     event.preventDefault()
     console.log(skillType.length)
-    if (skillType.length >= 2) {
+    if (skillType.length >= 4) {
       try {
         dispatch(addProject(form, token))
-        navigate('/profile/home')
         toast({
           title: 'Your pitch is live',
           description: 'You can find your pitch in your user home, under your projects tab.',
@@ -60,17 +59,18 @@ function NewProject () {
           isClosable: true,
           position: 'top'
         })
-        setProjectTitle('')
-        setCategory('')
-        setDescription('')
-        setSuccess('')
-        setSeeking('')
-        setPurpose('')
-        setTeamEstablished('')
-        setStarted('')
-        setSkillDescription('')
-        setRegion('')
-        setSelectedItems([])
+        navigate('/profile/home')
+        // setProjectTitle('')
+        // setCategory('')
+        // setDescription('')
+        // setSuccess('')
+        // setSeeking('')
+        // setPurpose('')
+        // setTeamEstablished('')
+        // setStarted('')
+        // setSkillDescription('')
+        // setRegion('')
+        // setSelectedItems([])
       } catch (err) {
         console.error(err)
       }
