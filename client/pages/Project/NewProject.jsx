@@ -47,7 +47,7 @@ function NewProject () {
 
   async function handleSubmit (event) {
     event.preventDefault()
-    console.log(skillType.length())
+    console.log(skillType.length)
     if (skillType.length >= 2) {
       try {
         dispatch(addProject(form, token))
