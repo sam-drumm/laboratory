@@ -36,7 +36,8 @@ export default function UserHome () {
   }
 
   async function getFollowedProjects () {
-    const projectId = following?.toString().split(',').map(Number).filter(filtered => filtered !== 0)
+    // const projectId = following?.toString().split(',').map(Number).filter(filtered => filtered !== 0)
+    const projectId = following?.filter(filtered => filtered !== 0)
     const projectArray = []
     projectId.map((id) => {
       getProjectById(id)
@@ -83,7 +84,7 @@ export default function UserHome () {
           Messages
         </Button>
         <Button onClick={() => setResource(
-          (following.length >= 4 ? <Following
+          (following.length >= 3 ? <Following
             following = {following}
             data={followed}
           />
