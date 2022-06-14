@@ -44,10 +44,11 @@ export function updateUser (user, selectedAddress, authUser, navigateTo, consume
 
 export function addFollowing (following, follow, authUser, consume = requestor) {
   dispatch(setWaiting())
-  console.log('following:', following, 'follow:', follow)
+  following.push(follow)
+  console.log('following:', following)
   const newUser = {
     auth0Id: authUser.sub,
-    following: [following, follow]
+    following: [following]
   }
   const storeState = getState()
   const { token } = storeState.user
