@@ -19,7 +19,7 @@ export function getProject (id, user, consume = requestor) {
         category: project.category,
         description: project.description,
         seeking: project.seeking,
-        purpose: project.purpose,
+        // purpose: project.purpose,
         teamEstablished: project.teamEstablished,
         started: project.started,
         success: project.success,

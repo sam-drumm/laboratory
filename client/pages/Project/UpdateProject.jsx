@@ -23,7 +23,7 @@ function UpdateProject () {
     description,
     success,
     seeking,
-    purpose,
+    // purpose,
     teamEstablished,
     started,
     // skillType,
@@ -46,7 +46,7 @@ function UpdateProject () {
     description,
     success,
     seeking,
-    purpose,
+    // purpose,
     teamEstablished,
     started,
     skillDescription

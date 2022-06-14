@@ -18,7 +18,7 @@ function NewProject () {
   const [description, setDescription] = useState('')
   const [success, setSuccess] = useState('')
   const [seeking, setSeeking] = useState('')
-  const [purpose, setPurpose] = useState('')
+  // const [purpose, setPurpose] = useState('')
   const [teamEstablished, setTeamEstablished] = useState('')
   const [started, setStarted] = useState('')
   const [skillDescription, setSkillDescription] = useState('')
@@ -37,7 +37,7 @@ function NewProject () {
     description,
     success,
     seeking,
-    purpose,
+    // purpose,
     teamEstablished,
     started,
     skillType,
@@ -48,7 +48,7 @@ function NewProject () {
   async function handleSubmit (event) {
     event.preventDefault()
     console.log(skillType.length)
-    if (skillType.length >= 4) {
+    if (skillType.length >= 2) {
       try {
         dispatch(addProject(form, token))
         toast({
