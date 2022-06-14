@@ -1,18 +1,6 @@
 import { SET_PROJECT, CLEAR_PROJECT } from '../actions/project'
 
-const emptyProject = {
-  id: null,
-  auth0Id: '',
-  projectTitle: '',
-  category: '',
-  region: '',
-  description: '',
-  success: '',
-  seeking: '',
-  started: '',
-  skillType: [],
-  skillDescription: ''
-}
+const emptyProject = {}
 
 export default function project (state = emptyProject, action) {
   switch (action.type) {
