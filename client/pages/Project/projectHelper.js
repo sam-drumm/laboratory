@@ -40,7 +40,6 @@ export function addProject (projectForm, consume = requestor) {
   dispatch(setWaiting())
   const storeState = getState()
   const { token } = storeState.user
-  console.log(token)
 
   const newProject = {
     ...projectForm
