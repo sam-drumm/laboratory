@@ -46,10 +46,10 @@ router.post('/', checkJwt, async (req, res) => {
   try {
     await db.addProject(project)
   } catch (err) {
-    console.error(err.message)
-    return res.status(500).json({
+    log(err.message)
+    res.status(500).json({
       error: {
-        title: 'failed: project exists'
+        title: 'Unable to post project'
       }
     })
   }
