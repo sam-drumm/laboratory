@@ -4,8 +4,8 @@ import {
   useDispatch,
   useSelector
 } from 'react-redux'
-import { addProject } from '../../actions/project'
-// import { addProject } from '../Project/projectHelper'
+// import { addProject } from '../../actions/project'
+import { addProject } from '../Project/projectHelper'
 import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Stack, Radio, RadioGroup, Textarea, Select, useToast } from '@chakra-ui/react'
 
 import Category from '../../components/Category/Category'
@@ -54,8 +54,8 @@ function NewProject () {
     e.preventDefault()
     if (skillType.length >= 2) {
       try {
-        // addProject(newProject)
-        dispatch(addProject(newProject, token))
+        addProject(newProject, token)
+        // dispatch(addProject(newProject, token))
         navigate('/')
         toast({
           title: 'Your pitch is live',

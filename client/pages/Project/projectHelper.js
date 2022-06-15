@@ -1,5 +1,5 @@
 import requestor from '../../consume'
-import { dispatch, getState } from '../../store'
+import { dispatch } from '../../store'
 import { clearWaiting, setWaiting } from '../../actions/waiting'
 import { showError } from '../../actions/error'
 // import { setProject } from '../../actions/project'
@@ -36,10 +36,10 @@ import { showError } from '../../actions/error'
 //     })
 // }
 
-export function addProject (projectForm, consume = requestor) {
+export function addProject (projectForm, token, consume = requestor) {
   dispatch(setWaiting())
-  const storeState = getState()
-  const { token } = storeState.user
+  // const storeState = getState()
+  // const { token } = storeState.user
 
   const newProject = {
     ...projectForm
