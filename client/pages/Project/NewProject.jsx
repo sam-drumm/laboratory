@@ -51,11 +51,13 @@ function NewProject () {
     region
   })
 
-  async function handleSubmit (event) {
-    event.preventDefault()
+  function handleSubmit (e) {
+    e.preventDefault()
     if (skillType.length >= 2) {
       try {
+        console.log(form)
         addProject(form, navigate)
+        navigate('/')
         // dispatch(addProject(form, token))
         toast({
           title: 'Your pitch is live',

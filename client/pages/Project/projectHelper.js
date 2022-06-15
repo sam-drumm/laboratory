@@ -38,9 +38,11 @@ import { setProject } from '../../actions/project'
 
 export function addProject (form, navigateTo, consume = requestor) {
   dispatch(setWaiting())
+  console.log(form)
   const newProject = {
     auth0Id: form.auth0Id,
     projectTitle: form.projectTitle,
+    region: form.region,
     category: form.category,
     description: form.description,
     seeking: form.seeking,
@@ -50,11 +52,12 @@ export function addProject (form, navigateTo, consume = requestor) {
     skillType: form.skillType,
     skillDescription: form.skillDescription
   }
+  console.log(newProject)
 
   const storeState = getState()
   const { token } = storeState.user
 
-  return consume('/projects/new', token, 'post', newProject)
+  return consume('/projects', token, 'post', newProject)
     .then((res) => {
       const newProject = res.body
       newProject.token = token

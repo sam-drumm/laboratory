@@ -32,7 +32,7 @@ function addProject (project, db = connection) {
   return projectExists(project.projectTitle, db)
     .then((exists) => {
       if (exists) {
-        throw new Error('User exists')
+        throw new Error('Project already exists')
       }
       return false
     })
