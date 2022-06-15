@@ -57,7 +57,7 @@ export function addProject (form, navigateTo, consume = requestor) {
   return consume('/projects', token, 'post', newProject)
     .then((res) => {
       const newProject = res.body
-      // newProject.token = token
+      newProject.token = token
       dispatch(setProject(newProject))
       navigateTo('/')
       return newProject

@@ -29,20 +29,27 @@ async function getProjects (db = connection) {
 // }
 
 function addProject (project, db = connection) {
-  return db('projects').insert({
-    auth0_id: project.auth0Id,
-    category: project.category,
-    project_title: project.projectTitle,
-    description: project.description,
-    seeking: project.seeking,
-    started: project.started,
-    skill_type: project.skillType,
-    skill_description: project.skillDescription,
-    region: project.region,
-    success: project.success
-  })
-    .then(() => db)
-    .then(getProjects)
+  return projectExists(project.projectTitle, db)
+    .then((exists) => {
+      if (exists) {
+        throw new Error('User exists')
+      }
+      return false
+    })
+    .then(() => {
+      return db('projects').insert({
+        auth0_id: project.auth0Id,
+        category: project.category,
+        project_title: project.projectTitle,
+        description: project.description,
+        seeking: project.seeking,
+        started: project.started,
+        skill_type: project.skillType,
+        skill_description: project.skillDescription,
+        region: project.region,
+        success: project.success
+      })
+    })
 }
 
 async function updateProject (newProject,
@@ -117,4 +124,13 @@ async function authorizeUpdate (project, auth0Id) {
   if (project.auth0_id !== auth0Id) {
     throw new Error('Unauthorized')
   }
+}
+
+function projectExists (uid, db = connection) {
+  return db('projects')
+    .count('project_title as n')
+    .where('project_title', uid)
+    .then((count) => {
+      return count[0].n > 0
+    })
 }
