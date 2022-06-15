@@ -44,7 +44,6 @@ export function addProject (form, navigateTo, consume = requestor) {
     category: form.category,
     description: form.description,
     seeking: form.seeking,
-    // purpose: project.purpose,
     teamEstablished: form.teamEstablished,
     started: form.started,
     success: form.success,
