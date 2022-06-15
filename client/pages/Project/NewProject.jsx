@@ -49,35 +49,30 @@ function NewProject () {
     region
   })
 
-  function handleSubmit (e) {
-    e.preventDefault()
+  function handleSubmit () {
     if (skillType.length >= 2) {
-      try {
-        addProject(newProject)
-        // dispatch(addProject(newProject, token))
-        navigate('/')
-        toast({
-          title: 'Your pitch is live',
-          description: 'You can find your pitch in your user home, under your projects tab.',
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-          position: 'top'
-        })
-        // setProjectTitle('')
-        // setCategory('')
-        // setDescription('')
-        // setSuccess('')
-        // setSeeking('')
-        // setPurpose('')
-        // setTeamEstablished('')
-        // setStarted('')
-        // setSkillDescription('')
-        // setRegion('')
-        // setSelectedItems([])
-      } catch (err) {
-        console.error(err)
-      }
+      addProject(newProject)
+      // dispatch(addProject(newProject, token))
+      navigate('/')
+      toast({
+        title: 'Your pitch is live',
+        description: 'You can find your pitch in your user home, under your projects tab.',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+        position: 'top'
+      })
+      // setProjectTitle('')
+      // setCategory('')
+      // setDescription('')
+      // setSuccess('')
+      // setSeeking('')
+      // setPurpose('')
+      // setTeamEstablished('')
+      // setStarted('')
+      // setSkillDescription('')
+      // setRegion('')
+      // setSelectedItems([])
     } else {
       toast({
         title: 'Double-check the skills section.',

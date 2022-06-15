@@ -53,7 +53,6 @@ export default function Project () {
   function saveHandler () {
     if (isAuthenticated === true) {
       addFollowing(following, Number(id), authUser)
-      console.log('following:', following, 'id:', Number(id))
       onOpen()
       toast({
         title: 'Added!',

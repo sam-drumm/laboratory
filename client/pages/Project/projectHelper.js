@@ -2,6 +2,7 @@ import requestor from '../../consume'
 import { dispatch, getState } from '../../store'
 import { clearWaiting, setWaiting } from '../../actions/waiting'
 import { showError } from '../../actions/error'
+import { setProject } from '../../actions/project'
 // import { setProject } from '../../actions/project'
 
 // export function getProject (id, user, consume = requestor) {
@@ -38,15 +39,12 @@ import { showError } from '../../actions/error'
 
 export function addProject (projectForm, consume = requestor) {
   dispatch(setWaiting())
-
-  const storeState = getState()
-  const { token } = storeState.user
-  console.log(token)
-
   const newProject = {
     ...projectForm
   }
 
+  const storeState = getState()
+  const { token } = storeState.user
   // const newProject = {
   //   auth0Id: form.auth0Id,
   //   projectTitle: form.projectTitle,
@@ -62,11 +60,14 @@ export function addProject (projectForm, consume = requestor) {
   // }
 
   return consume('/projects', token, 'post', newProject)
-    .then(() => {
-      return null
+    .then((res) => {
+      const newProject = res.body
+      newProject.token = token
+      dispatch(setProject(newProject))
+      return newProject
     })
-    .catch((err) => {
-      dispatch(showError(err.message))
+    .catch(err => {
+      console.error(err.message)
     })
     .finally(() => {
       dispatch(clearWaiting())
