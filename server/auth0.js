@@ -6,8 +6,8 @@ require('dotenv').config({ path: path.join(__dirname, '.env') })
 
 const domain = process.env.AUTH0_DOMAIN || 'https://laboratory.au.auth0.com'
 const ssoAudience = process.env.AUTH0_SSO_AUDIENCE || 'some_sso_audience'
-const machine2machineClientId = process.env.AUTH0_MACHINE_2_MACHINE_CLIENT_ID || 'some_client_id'
-const machine2machineSecret = process.env.AUTH0_MACHINE_2_MACHINE_SECRET || 'some_secret'
+const clientId = process.env.AUTH0_API_EXPLORER_CLIENTID || 'some_client_id'
+const secret = process.env.AUTH0_API_EXPLORER_SECRET || 'some_secret'
 
 // const getUserRoles = async (uid) => {
 //   const accessToken = await getAccessToken()
@@ -20,8 +20,8 @@ const machine2machineSecret = process.env.AUTH0_MACHINE_2_MACHINE_SECRET || 'som
 const getAccessToken = async () => {
   const data = {
     grant_type: 'client_credentials',
-    client_id: machine2machineClientId,
-    client_secret: machine2machineSecret,
+    client_id: clientId,
+    client_secret: secret,
     audience: `${domain}/api/v2/`
   }
 
