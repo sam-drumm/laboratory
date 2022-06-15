@@ -53,6 +53,17 @@ router.post('/', async (req, res) => {
       }
     })
   }
+  try {
+    const addedUser = await db.getProjectByAuthId(project.auth0Id)
+    res.json(addedUser)
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).json({
+      error: {
+        title: 'failed to retrieve added user'
+      }
+    })
+  }
 })
 
 // Update project
