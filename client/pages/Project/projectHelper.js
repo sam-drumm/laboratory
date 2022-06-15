@@ -54,7 +54,7 @@ export function addProject (form, navigateTo, consume = requestor) {
   const storeState = getState()
   const { token } = storeState.user
 
-  return consume('/projects', token, 'post', newProject)
+  return consume('/projects/new', token, 'post', newProject)
     .then((res) => {
       const newProject = res.body
       newProject.token = token
