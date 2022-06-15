@@ -14,8 +14,7 @@ function NewProject () {
   const dispatch = useDispatch()
   const toast = useToast()
   const {
-    auth0Id,
-    token
+    auth0Id
   } = useSelector(state => state.user)
 
   const navigate = useNavigate()
@@ -54,7 +53,7 @@ function NewProject () {
     e.preventDefault()
     if (skillType.length >= 2) {
       try {
-        addProject(newProject, token)
+        addProject(newProject)
         // dispatch(addProject(newProject, token))
         navigate('/')
         toast({
