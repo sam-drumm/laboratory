@@ -107,44 +107,44 @@ function userExists (uid, db = connection) {
     })
 }
 
-function addUser (input, db = connection) {
-  const {
-    auth0Id,
-    firstName,
-    lastName,
-    email,
-    streetNumber,
-    street,
-    locality,
-    city,
-    region,
-    postcode,
-    meshblock,
-    lon,
-    lat,
-    formatted,
-    following
-  } = input
-  const user = {
-    auth0_id: auth0Id,
-    first_name: firstName,
-    last_name: lastName,
-    email,
-    street_number: streetNumber,
-    street,
-    locality,
-    city,
-    region,
-    postcode,
-    meshblock,
-    lon,
-    lat,
-    formatted,
-    following
-  }
-  return db('users')
-    .insert(user)
-}
+// function addUser (input, db = connection) {
+//   const {
+//     auth0Id,
+//     firstName,
+//     lastName,
+//     email,
+//     streetNumber,
+//     street,
+//     locality,
+//     city,
+//     region,
+//     postcode,
+//     meshblock,
+//     lon,
+//     lat,
+//     formatted,
+//     following
+//   } = input
+//   const user = {
+//     auth0_id: auth0Id,
+//     first_name: firstName,
+//     last_name: lastName,
+//     email,
+//     street_number: streetNumber,
+//     street,
+//     locality,
+//     city,
+//     region,
+//     postcode,
+//     meshblock,
+//     lon,
+//     lat,
+//     formatted,
+//     following
+//   }
+//   return db('users')
+//     .insert(user)
+// }
 
 // function getUserById (id, db = connection) {
 //   return db('users')
@@ -172,7 +172,7 @@ function addUser (input, db = connection) {
 
 module.exports = {
   getUsers,
-  addUser,
+  // addUser,
   // getUserById,
   createUser,
   getUsersByAuth,
