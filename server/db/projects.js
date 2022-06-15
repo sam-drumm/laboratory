@@ -29,6 +29,7 @@ async function getProjects (db = connection) {
 // }
 
 function addProject (project, db = connection) {
+  console.log(project)
   return projectExists(project.projectTitle, db)
     .then((exists) => {
       if (exists) {
