@@ -41,7 +41,6 @@ function NewProject () {
     description,
     success,
     seeking,
-    // purpose,
     teamEstablished,
     started,
     skillType,
