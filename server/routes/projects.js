@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 // Authenticated Routes
 
 // POST /api/v1/projects/protected
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
   const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region } = req.body
   const project = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region }
   try {
@@ -60,7 +60,7 @@ router.post('/', async (req, res) => {
     console.error(err.message)
     return res.status(500).json({
       error: {
-        title: 'failed to retrieve added user'
+        title: 'failed to retrieve added project'
       }
     })
   }
