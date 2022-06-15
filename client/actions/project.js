@@ -56,9 +56,9 @@ export function fetchProject (id, token) {
   }
 }
 
-export function addProject (project, token) {
+export function addProject (newProject, token) {
   return dispatch => {
-    return addProjects(project, token)
+    return addProjects(newProject, token)
       .then(project => {
         dispatch(setProject(project))
         return null

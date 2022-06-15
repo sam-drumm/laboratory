@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  // useDispatch,
+  useDispatch,
   useSelector
 } from 'react-redux'
-// import { addProject } from '../../actions/project'
-import { addProject } from '../Project/projectHelper'
+import { addProject } from '../../actions/project'
+// import { addProject } from '../Project/projectHelper'
 import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Stack, Radio, RadioGroup, Textarea, Select, useToast } from '@chakra-ui/react'
 
 import Category from '../../components/Category/Category'
 
 function NewProject () {
+  const dispatch = useDispatch()
   const toast = useToast()
   const {
-    auth0Id
+    auth0Id,
+    token
   } = useSelector(state => state.user)
 
   const navigate = useNavigate()
@@ -52,9 +54,9 @@ function NewProject () {
     e.preventDefault()
     if (skillType.length >= 2) {
       try {
-        addProject(newProject)
+        // addProject(newProject)
+        dispatch(addProject(newProject, token))
         navigate('/')
-        // dispatch(addProject(form, token))
         toast({
           title: 'Your pitch is live',
           description: 'You can find your pitch in your user home, under your projects tab.',
