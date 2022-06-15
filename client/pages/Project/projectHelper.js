@@ -2,7 +2,7 @@ import requestor from '../../consume'
 import { dispatch, getState } from '../../store'
 import { clearWaiting, setWaiting } from '../../actions/waiting'
 import { showError } from '../../actions/error'
-import { setProject } from '../../actions/project'
+// import { setProject } from '../../actions/project'
 
 // export function getProject (id, user, consume = requestor) {
 //   dispatch(setWaiting())
@@ -36,37 +36,35 @@ import { setProject } from '../../actions/project'
 //     })
 // }
 
-export function addProject (form, navigateTo, consume = requestor) {
+export function addProject (projectForm, consume = requestor) {
   dispatch(setWaiting())
-  console.log(form)
-  const newProject = {
-    auth0Id: form.auth0Id,
-    projectTitle: form.projectTitle,
-    region: form.region,
-    category: form.category,
-    description: form.description,
-    seeking: form.seeking,
-    teamEstablished: form.teamEstablished,
-    started: form.started,
-    success: form.success,
-    skillType: form.skillType,
-    skillDescription: form.skillDescription
-  }
-  console.log(newProject)
-
   const storeState = getState()
   const { token } = storeState.user
 
+  const newProject = {
+    ...projectForm
+  }
+
+  // const newProject = {
+  //   auth0Id: form.auth0Id,
+  //   projectTitle: form.projectTitle,
+  //   region: form.region,
+  //   category: form.category,
+  //   description: form.description,
+  //   seeking: form.seeking,
+  //   teamEstablished: form.teamEstablished,
+  //   started: form.started,
+  //   success: form.success,
+  //   skillType: form.skillType,
+  //   skillDescription: form.skillDescription
+  // }
+
   return consume('/projects', token, 'post', newProject)
-    .then((res) => {
-      const newProject = res.body
-      newProject.token = token
-      dispatch(setProject(newProject))
-      navigateTo('/')
-      return newProject
+    .then(() => {
+      return null
     })
-    .catch((error) => {
-      dispatch(showError(error.message))
+    .catch((err) => {
+      dispatch(showError(err.message))
     })
     .finally(() => {
       dispatch(clearWaiting())

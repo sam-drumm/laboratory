@@ -14,7 +14,6 @@ function NewProject () {
   const toast = useToast()
   const {
     auth0Id
-    // token
   } = useSelector(state => state.user)
 
   const navigate = useNavigate()
@@ -24,7 +23,6 @@ function NewProject () {
   const [description, setDescription] = useState('')
   const [success, setSuccess] = useState('')
   const [seeking, setSeeking] = useState('')
-  // const [purpose, setPurpose] = useState('')
   const [teamEstablished, setTeamEstablished] = useState('')
   const [started, setStarted] = useState('')
   const [skillDescription, setSkillDescription] = useState('')
@@ -36,7 +34,7 @@ function NewProject () {
     skill.value
   )
 
-  const form = ({
+  const newProject = ({
     auth0Id,
     projectTitle,
     category,
@@ -55,8 +53,7 @@ function NewProject () {
     e.preventDefault()
     if (skillType.length >= 2) {
       try {
-        console.log(form)
-        addProject(form, navigate)
+        addProject(newProject)
         navigate('/')
         // dispatch(addProject(form, token))
         toast({
