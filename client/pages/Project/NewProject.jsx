@@ -35,7 +35,7 @@ function NewProject () {
     skill.value
   )
 
-  const newProject = ({
+  const form = ({
     auth0Id,
     projectTitle,
     category,
@@ -51,7 +51,7 @@ function NewProject () {
 
   function handleSubmit () {
     if (skillType.length >= 2) {
-      addProject(newProject)
+      addProject(form)
       // dispatch(addProject(newProject, token))
       navigate('/')
       toast({

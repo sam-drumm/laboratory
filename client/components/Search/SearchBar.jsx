@@ -7,7 +7,8 @@ export default function SearchBar () {
 
   const navigate = useNavigate()
 
-  async function handleSubmit () {
+  async function handleSubmit (e) {
+    e.preventDefault()
     navigate(`/projects/search/${searchParams}`)
     setSearchParams('')
   }
