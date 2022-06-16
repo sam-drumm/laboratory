@@ -37,19 +37,23 @@ router.get('/', async (req, res) => {
 // Authenticated Routes
 
 // POST /api/v1/projects/protected
-router.post('/', checkJwt, async (req, res) => {
+router.post('/', async (req, res) => {
   const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region } = req.body
   const project = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region }
-  try {
-    await db.addProject(project)
-  } catch (err) {
-    console.error(err.message)
-    res.status(500).json({
-      error: {
-        title: 'Unable to post project'
-      }
+  db.addProject(project)
+    .then(project => {
+      res.json({ project })
+      return null
     })
-  }
+
+    .catch(err => {
+      console.error(err.message)
+      res.status(500).json({
+        error: {
+          title: 'Unable to post project'
+        }
+      })
+    })
 })
 
 // Update project
