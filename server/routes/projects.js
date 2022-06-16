@@ -6,10 +6,10 @@ const router = express.Router()
 // Open Routes
 
 // get by project id
-router.get('/:id', async (req, res) => {
+router.get('/:id', checkJwt, (req, res) => {
   const id = Number(req.params.id)
   try {
-    const getProject = await db.getProjectById(id)
+    const getProject = db.getProjectById(id)
     const project = JSON.parse(JSON.stringify(getProject))
     return res.json(project)
   } catch (err) {
@@ -37,20 +37,19 @@ router.get('/', async (req, res) => {
 // Authenticated Routes
 
 // POST /api/v1/projects/protected
-router.post('/', async (req, res) => {
+router.post('/', checkJwt, (req, res) => {
   const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region } = req.body
   const project = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region }
   db.addProject(project)
-    .then(project => {
-      res.json({ project })
+    .then((project) => {
+      res.status(201).json(project)
       return null
     })
-
-    .catch(err => {
+    .catch((err) => {
       console.error(err.message)
       res.status(500).json({
         error: {
-          title: 'Unable to post project'
+          title: 'Unable to add project'
         }
       })
     })

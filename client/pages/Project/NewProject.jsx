@@ -11,13 +11,12 @@ import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Stack, Radio
 import Category from '../../components/Category/Category'
 
 function NewProject () {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const toast = useToast()
   const {
     auth0Id
   } = useSelector(state => state.user)
-
-  const navigate = useNavigate()
 
   const [projectTitle, setProjectTitle] = useState('')
   const [category, setCategory] = useState('')
@@ -52,8 +51,9 @@ function NewProject () {
   function handleSubmit () {
     if (skillType.length >= 2) {
       addProject(form)
+      navigate('/profile/home')
+      // navigate()
       // dispatch(addProject(newProject, token))
-      navigate('/')
       toast({
         title: 'Your pitch is live',
         description: 'You can find your pitch in your user home, under your projects tab.',
