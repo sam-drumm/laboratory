@@ -1,8 +1,9 @@
 const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')
-const path = require('path')
 const request = require('superagent')
-require('dotenv').config({ path: path.join(__dirname, '.env') })
+
+// const path = require('path')
+// require('dotenv').config({ path: path.join(__dirname, '.env') })
 
 const domain = process.env.AUTH0_DOMAIN || 'https://laboratory.au.auth0.com'
 const ssoAudience = process.env.AUTH0_SSO_AUDIENCE || 'some_sso_audience'

@@ -1,8 +1,6 @@
 const path = require('path')
 const express = require('express')
 
-require('dotenv').config({ path: path.join(__dirname, '.env') })
-
 const usersRoutes = require('./routes/users')
 const projectsRoutes = require('./routes/projects')
 const messagesRoutes = require('./routes/messages')
