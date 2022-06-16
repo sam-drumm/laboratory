@@ -4,7 +4,8 @@ import { showError } from '../../actions/error'
 import requestor from '../../consume'
 
 export function addProject (form, consume = requestor) {
-  dispatch(setWaiting())
+  const storeState = getState()
+  const { token } = storeState.user
   const newProject = {
     auth0Id: form.auth0Id,
     projectTitle: form.projectTitle,
@@ -18,9 +19,8 @@ export function addProject (form, consume = requestor) {
     skillType: form.skillType,
     skillDescription: form.skillDescription
   }
-  const storeState = getState()
-  const { token } = storeState.user
 
+  dispatch(setWaiting())
   return consume('/projects', token, 'post', newProject)
     .then(() => {
       // navigateTo('/projects/search')

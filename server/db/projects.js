@@ -28,23 +28,22 @@ async function getProjects (db = connection) {
 //     .then(getProjects)
 // }
 
-function addProject (project, db = connection) {
+function addProject (newProject, db = connection) {
+  const { auth0Id, category, projectTitle, description, seeking, started, skillType, skillDescription, region, success } = newProject
   return db('projects')
     .insert({
-      auth0_id: project.auth0Id,
-      category: project.category,
-      project_title: project.projectTitle,
-      description: project.description,
-      seeking: project.seeking,
-      started: project.started,
-      skill_type: project.skillType,
-      skill_description: project.skillDescription,
-      region: project.region,
-      success: project.success
+      auth0_id: auth0Id,
+      category: category,
+      project_title: projectTitle,
+      description: description,
+      seeking: seeking,
+      started: started,
+      skill_type: skillType,
+      skill_description: skillDescription,
+      region: region,
+      success: success
     })
-    .then(() => db)
-    .then(getProjects)
-    .then(sort)
+    .then((ids) => getProjectById(ids[0], db))
 }
 
 async function updateProject (newProject,

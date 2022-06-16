@@ -2,14 +2,15 @@ const express = require('express')
 const { checkJwt } = require('../auth0')
 const db = require('../db/projects')
 const router = express.Router()
+module.exports = router
 
 // Open Routes
 
 // get by project id
-router.get('/:id', checkJwt, (req, res) => {
+router.get('/:id', async (req, res) => {
   const id = Number(req.params.id)
   try {
-    const getProject = db.getProjectById(id)
+    const getProject = await db.getProjectById(id)
     const project = JSON.parse(JSON.stringify(getProject))
     return res.json(project)
   } catch (err) {
@@ -23,15 +24,20 @@ router.get('/:id', checkJwt, (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-  db.getProjects()
-    .then(projects => {
-      res.json({ projects })
-      return null
+  try {
+    await db.getProjects()
+      .then(projects => {
+        res.json({ projects })
+        return null
+      })
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({
+      error: {
+        title: 'Unable to retrieve project!'
+      }
     })
-    .catch(err => {
-      console.error(err)
-      return res.status(500).json({ message: 'Something went wrong' })
-    })
+  }
 })
 
 // Authenticated Routes
@@ -39,8 +45,8 @@ router.get('/', async (req, res) => {
 // POST /api/v1/projects/protected
 router.post('/', checkJwt, (req, res) => {
   const { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region } = req.body
-  const project = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region }
-  db.addProject(project)
+  const newProject = { auth0Id, category, description, success, projectTitle, seeking, started, skillType, skillDescription, region }
+  db.addProject(newProject)
     .then((project) => {
       res.status(201).json(project)
       return null
@@ -87,4 +93,3 @@ router.get('/user/auth', checkJwt, async (req, res) => {
   }
 })
 
-module.exports = router
