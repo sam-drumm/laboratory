@@ -2,9 +2,6 @@ const express = require('express')
 const { checkJwt } = require('../auth0')
 const db = require('../db/projects')
 const router = express.Router()
-const log = require('../logger')
-
-module.exports = router
 
 // Open Routes
 
@@ -16,7 +13,7 @@ router.get('/:id', async (req, res) => {
     const project = JSON.parse(JSON.stringify(getProject))
     return res.json(project)
   } catch (err) {
-    log(err.message)
+    console.error(err.message)
     res.status(500).json({
       error: {
         title: 'Unable to retrieve project!'
@@ -46,7 +43,7 @@ router.post('/', checkJwt, async (req, res) => {
   try {
     await db.addProject(project)
   } catch (err) {
-    log(err.message)
+    console.error(err.message)
     res.status(500).json({
       error: {
         title: 'Unable to post project'
@@ -64,7 +61,7 @@ router.patch('/edit', checkJwt, async (req, res) => {
   try {
     await db.updateProject(updatedProject)
   } catch (err) {
-    log(err.message)
+    console.error(err.message)
     res.status(500).json({
       error: {
         title: 'Unable to update project'
@@ -78,7 +75,7 @@ router.get('/user/auth', checkJwt, async (req, res) => {
     const projectByUser = await db.getProjectByAuthId(req.query.query)
     res.json({ projectByUser })
   } catch (err) {
-    log(err.message)
+    console.error(err.message)
     res.status(500).json({
       error: {
         title: 'Unable to get projects from user'
@@ -86,3 +83,5 @@ router.get('/user/auth', checkJwt, async (req, res) => {
     })
   }
 })
+
+module.exports = router
