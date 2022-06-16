@@ -1,8 +1,4 @@
-// const path = require('path')
-// require('dotenv').config({ path: path.join(__dirname, '../../.env') })
-
 exports.seed = function (knex) {
-  // Deletes ALL existing entries
   return knex('messages')
     .del()
     .then(() =>

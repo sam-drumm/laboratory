@@ -1,6 +1,3 @@
-// const path = require('path')
-// require('dotenv').config({ path: path.join(__dirname, '../../.env') })
-
 exports.seed = function (knex) {
   return knex('projects')
     .del()

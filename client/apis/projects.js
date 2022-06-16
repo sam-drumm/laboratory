@@ -27,20 +27,20 @@ export function getProjects (token) {
     })
 }
 
-export function addProjects (project, token) {
-  return request
-    .post(rootUrl + '/projects')
-    .set('authorization', 'Bearer ' + token)
-    .send(project)
-    .catch(err => {
-      console.error(err.message)
-    })
-}
-
-// export function addProjects (project) {
-//   return request.post(rootUrl + '/projects')
+// export function addProjects (project, token) {
+//   return request
+//     .post(rootUrl + '/projects')
+//     .set('authorization', 'Bearer ' + token)
 //     .send(project)
+//     .catch(err => {
+//       console.error(err.message)
+//     })
 // }
+
+export function addProjects (project) {
+  return request.post(rootUrl + '/projects')
+    .send(project)
+}
 
 export function editProject (project, token, auth0Id) {
   return request
