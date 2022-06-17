@@ -1,9 +1,11 @@
 import { dispatch, getState } from '../../store'
 import { clearWaiting, setWaiting } from '../../actions/waiting'
 import { showError } from '../../actions/error'
+import { setProject } from '../../actions/project'
 import requestor from '../../consume'
 
 export function addProject (form, consume = requestor) {
+  dispatch(setWaiting())
   const storeState = getState()
   const { token } = storeState.user
   const newProject = {
@@ -19,15 +21,14 @@ export function addProject (form, consume = requestor) {
     skillType: form.skillType,
     skillDescription: form.skillDescription
   }
-
-  dispatch(setWaiting())
   return consume('/projects', token, 'post', newProject)
-    .then(() => {
+    .then((res) => {
       // navigateTo('/projects/search')
-      // const newProject = res.body
+      const newProject = res.body
+      newProject.token = token
       // newProject.token = token
-      // dispatch(setProject(newProject))
-      return null
+      dispatch(setProject(newProject))
+      return newProject
     })
     .catch((err) => {
       dispatch(showError(err.message))
