@@ -4,7 +4,7 @@ exports.seed = function (knex) {
     .then(() =>
       knex('projects').insert([
         {
-          id: 1,
+          // id: 1,
           auth0_id: 'auth0|61414f84d35ac900717bc280',
           category: 1,
           project_title: 'Community Garden voluntering platform',
@@ -17,7 +17,7 @@ exports.seed = function (knex) {
           region: 9
         },
         {
-          id: 2,
+          // id: 2,
           category: 2,
           auth0_id: 'auth0|61414f84d35ac900717bc280',
           project_title: 'Website to track political trends',
@@ -31,7 +31,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 3,
+          // id: 3,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
           category: 3,
           project_title: 'Sell robotics learning kits',
@@ -45,7 +45,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 4,
+          // id: 4,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
           category: 1,
           project_title: 'Create a public funds finder site',
@@ -59,7 +59,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 5,
+          // id: 5,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
           category: 2,
           project_title: 'Create a local tool sharing system',
@@ -73,7 +73,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 6,
+          // id: 6,
           auth0_id: 'auth0|09414f84d35ac900717bc280',
           category: 3,
           project_title: 'Build a local network to teach machine learning',
@@ -87,7 +87,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 7,
+          // id: 7,
           auth0_id: 'auth0|09414f84d35ac900717bc280',
           category: 1,
           project_title: 'Develop an artist lead music platform',
@@ -101,7 +101,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 8,
+          // id: 8,
           auth0_id: 'auth0|09414f84d35ac900717bc280',
           category: 2,
           project_title: 'Produce content to help engage young men with mental health issues',
@@ -114,7 +114,7 @@ exports.seed = function (knex) {
           region: 87
         },
         {
-          id: 9,
+          // id: 9,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           category: 3,
           project_title: 'Develop a better freind finder app',
@@ -128,7 +128,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 10,
+          // id: 10,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           category: 1,
           project_title: 'Create a robototic hand prototype',
@@ -142,7 +142,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 11,
+          // id: 11,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           category: 2,
           project_title: 'Start a corporate behaviour analysis tool',
@@ -156,7 +156,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 12,
+          // id: 12,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           category: 3,
           project_title: 'Build a shopping plugin that notifys of cheapest prices',
@@ -170,7 +170,7 @@ exports.seed = function (knex) {
 
         },
         {
-          id: 13,
+          // id: 13,
           auth0_id: 'auth0|61414f84d35ac900717bc280',
           project_title: 'Develop a survey platform for panels',
           category: 1,
