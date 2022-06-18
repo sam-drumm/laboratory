@@ -1,7 +1,7 @@
 function categoryLookup (id) {
   const category = {
     1: 'Just for Fun',
-    2: 'Commerical',
+    2: 'Commercial',
     3: 'Community'
   }
   return category[id]

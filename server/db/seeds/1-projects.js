@@ -4,10 +4,9 @@ exports.seed = function (knex) {
     .then(() =>
       knex('projects').insert([
         {
-          // id: 1,
           auth0_id: 'auth0|61414f84d35ac900717bc280',
           category: 1,
-          project_title: 'Community Garden voluntering platform',
+          project_title: 'Community Garden volunteering platform',
           description: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam sed est risus. Vestibulum ut lectus in nunc egestas lacinia. Sed id augue sed augue iaculis viverra ut id tellus. Integer iaculis, felis sit amet pellentesque dapibus, nisi tellus hendrerit nisl, fringilla mollis augue quam non orci. Aenean blandit rhoncus nibh, nec luctus ligula rutrum quis. Vivamus at risus id diam finibus placerat a vel dui. Pellentesque vitae dignissim lorem. Donec lacinia lectus et eros blandit efficitur. Quisque ornare, nibh ut finibus tempor, metus nisl aliquam est, quis porttitor sem nulla quis libero. Donec tristique gravida.',
           seeking: 1,
           success: 'Nullam quis odio sed leo condimentum sagittis. Mauris diam leo, porta at ante feugiat, sagittis laoreet felis. Morbi pulvinar velit in fermentum dapibus. Nunc aliquam.',
@@ -17,7 +16,6 @@ exports.seed = function (knex) {
           region: 9
         },
         {
-          // id: 2,
           category: 2,
           auth0_id: 'auth0|61414f84d35ac900717bc280',
           project_title: 'Website to track political trends',
@@ -31,7 +29,6 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 3,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
           category: 3,
           project_title: 'Sell robotics learning kits',
@@ -45,7 +42,6 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 4,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
           category: 1,
           project_title: 'Create a public funds finder site',
@@ -59,7 +55,6 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 5,
           auth0_id: 'auth0|98414f84d35ac900717bc280',
           category: 2,
           project_title: 'Create a local tool sharing system',
@@ -73,7 +68,6 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 6,
           auth0_id: 'auth0|09414f84d35ac900717bc280',
           category: 3,
           project_title: 'Build a local network to teach machine learning',
@@ -87,7 +81,6 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 7,
           auth0_id: 'auth0|09414f84d35ac900717bc280',
           category: 1,
           project_title: 'Develop an artist lead music platform',
@@ -101,10 +94,9 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 8,
           auth0_id: 'auth0|09414f84d35ac900717bc280',
           category: 2,
-          project_title: 'Produce content to help engage young men with mental health issues',
+          project_title: 'Produce content to help engage young people with mental health issues',
           description: 'Nam porttitor, enim et mattis fermentum, nibh mauris gravida ligula, vel mattis urna ex ac lorem. Integer condimentum sagittis lacus sed consectetur. Sed ac nibh lobortis, rutrum ex ac, tristique odio. Nunc viverra sed dolor sit amet vulputate. Morbi lorem arcu, aliquet vitae egestas ac, vestibulum id neque. Duis condimentum risus ipsum. Phasellus pellentesque eleifend efficitur. Nulla porta et tellus a accumsan. Fusce ut eleifend quam, quis suscipit tellus. Nunc efficitur felis quis eros dignissim finibus. Integer fermentum, arcu eu tempus eleifend, nisl dui consectetur tortor, tincidunt pulvinar ante diam at erat. Proin consectetur leo sit amet efficitur ultricies. Fusce. ',
           seeking: 2,
           success: 'Nullam quis odio sed leo condimentum sagittis. Mauris diam leo, porta at ante feugiat, sagittis laoreet felis. Morbi pulvinar velit in fermentum dapibus. Nunc aliquam.',
@@ -114,10 +106,9 @@ exports.seed = function (knex) {
           region: 87
         },
         {
-          // id: 9,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           category: 3,
-          project_title: 'Develop a better freind finder app',
+          project_title: 'Develop a better friend finder app',
           description: 'Nullam fermentum, neque quis ultricies scelerisque, velit felis varius elit, lobortis molestie purus nisl eu felis. Sed eleifend rutrum diam, eget lobortis nisi malesuada id. Integer luctus iaculis ante, eu mollis justo hendrerit id. Morbi id urna varius, aliquet leo quis, laoreet nibh. Proin a venenatis nulla. Pellentesque ex neque, pharetra ac interdum at, laoreet eu nibh. Donec nec neque non ex commodo bibendum faucibus ac lacus. Vestibulum pharetra aliquet iaculis. Nam eros erat, vehicula eget sodales nec, faucibus in magna. Donec id enim non urna rhoncus posuere in sed nunc. Mauris vel dictum quam. Integer finibus, ex ut elementum. ',
           seeking: 1,
           success: 'Nullam quis odio sed leo condimentum sagittis. Mauris diam leo, porta at ante feugiat, sagittis laoreet felis. Morbi pulvinar velit in fermentum dapibus. Nunc aliquam.',
@@ -128,10 +119,9 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 10,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           category: 1,
-          project_title: 'Create a robototic hand prototype',
+          project_title: 'Create a robototic arm prototype',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eleifend sed est in sodales. Vivamus sollicitudin ex varius diam pulvinar eleifend. Morbi pellentesque tortor non erat molestie accumsan. Suspendisse ac enim nunc. Nullam volutpat tortor vel mauris posuere, vel pretium risus iaculis. Nunc consectetur elit arcu, et mollis tortor maximus eu. Donec aliquet malesuada bibendum. Sed eu interdum ante. Curabitur finibus tellus nec venenatis volutpat. Sed lacus lorem, pulvinar a laoreet sed, laoreet id mauris. Cras ut urna rhoncus, ultrices magna vitae, fermentum mi. Nam pellentesque sodales purus. Mauris lobortis enim non auctor aliquet. Maecenas dictum quis nunc eu posuere. ',
           seeking: 4,
           success: 'Nullam quis odio sed leo condimentum sagittis. Mauris diam leo, porta at ante feugiat, sagittis laoreet felis. Morbi pulvinar velit in fermentum dapibus. Nunc aliquam.',
@@ -142,7 +132,6 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 11,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           category: 2,
           project_title: 'Start a corporate behaviour analysis tool',
@@ -156,7 +145,6 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 12,
           auth0_id: 'auth0|12414f84d35ac900717bc280',
           category: 3,
           project_title: 'Build a shopping plugin that notifys of cheapest prices',
@@ -170,7 +158,6 @@ exports.seed = function (knex) {
 
         },
         {
-          // id: 13,
           auth0_id: 'auth0|61414f84d35ac900717bc280',
           project_title: 'Develop a survey platform for panels',
           category: 1,
