@@ -145,7 +145,7 @@ const Slider = ({
 
       <Box
         ref={ref}
-        w={{ base: '90%', md: `calc(90% + ${gap}px)` }}
+        w={{ base: '97.5%', md: `calc(90% + ${gap}px)` }}
         ml={{ base: 0, md: `-${gap / 2}px` }}
         px={`${gap / 2}px`}
         position="relative"
@@ -210,7 +210,7 @@ const Slider = ({
             ml={`${gap / 3}px`}
             color="gray.200"
             variant="link"
-            zIndex={2}
+            // zIndex={2}
             minW={0}
           >
             <ChevronRightIcon boxSize={9} />

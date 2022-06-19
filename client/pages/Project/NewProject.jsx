@@ -89,11 +89,14 @@ function NewProject () {
   return (
     <>
       <Flex
-        width="full"
         align="center"
         justifyContent="center"
-        marginTop={10}
+        // marginTop={10}
         marginBottom={110}
+        // marginLeft={10}
+        ml={5}
+        mr={5}
+        mt={5}
       >
         <Box
           p={8}

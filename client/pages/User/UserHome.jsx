@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { getProjectByAuthId, getProjectById } from '../../apis/projects'
 import { userHomeData } from '../../components/Grid/gridData'
-import { Button, HStack } from '@chakra-ui/react'
+import { Button, Stack } from '@chakra-ui/react'
 
 import UpdateProfile from '../Profile/UpdateProfile'
 import Grid from '../../components/Grid/Grid'
@@ -67,7 +67,12 @@ export default function UserHome () {
   return (
 
     <>
-      <HStack m={8} spacing={4} justify={'center'}>
+      <Stack
+        m={8}
+        spacing={4}
+        justify={'center'}
+        direction={{ base: 'column', md: 'row' }}
+      >
         <Button
           onClick={() => setResource(
             <Grid
@@ -103,7 +108,7 @@ export default function UserHome () {
         <Button onClick={() => setResource(<UpdateProfile />)}>
           Your Profile
         </Button>
-      </HStack>
+      </Stack>
       {resource}
     </>
   )

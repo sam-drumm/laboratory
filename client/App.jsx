@@ -8,27 +8,26 @@ import NewProject from './pages/Project/NewProject'
 import Project from './pages/Project/Project'
 import Home from './pages/Home/Home'
 import Registration from './pages/Profile/RegisterProfile'
-// import Profile from './pages/Profile/Profile'
 import Verification from './components/Register/Verification'
 import Category from './components/Category/Category'
 import UserHome from './pages/User/UserHome'
 import UpdateProject from './pages/Project/UpdateProject'
 import Search from './components/Search/Search'
 import SearchBar from './components/Search/SearchBar'
+import Footer from './components/Nav/Footer'
+import Header from './components/Nav/Header'
+import Waiting from './components/Wait/Waiting'
 
 function App () {
   const navigate = useNavigate()
   cacheUser(useAuth0, navigate)
 
   return (
-    <div className='app'>
+    <>
+      <Waiting/>
+      <Header/>
       <Routes>
         <Route path='/' element={<Home/>} />
-        {/* <Route path='/profile' element={
-          <RequireAuth>
-            <Profile/>
-          </RequireAuth>
-        } /> */}
         <Route path='/profile/home' element={<UserHome/>}/>
         <Route path='/register' element={<Registration/>} />
         <Route path='/verification' element={<Verification/>} />
@@ -47,7 +46,8 @@ function App () {
         <Route path='/projects/search' element={<SearchBar />} />
         <Route path='/category' element={<Category />}/>
       </Routes>
-    </div>
+      <Footer />
+    </>
   )
 }
 

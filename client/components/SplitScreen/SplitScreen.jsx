@@ -7,6 +7,7 @@ export default function SplitScreen (props) {
 
   return (
     <Stack minH={'50vh'} direction={{ base: 'column', md: 'row' }}>
+
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'lg'}>
           <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
@@ -50,6 +51,7 @@ export default function SplitScreen (props) {
           </Stack>
         </Stack>
       </Flex>
+
       <Flex flex={1}>
         <Image
           alt={'People shaking hands and connecting'}
@@ -57,6 +59,7 @@ export default function SplitScreen (props) {
           src={props.image}
         />
       </Flex>
+
     </Stack>
   )
 }

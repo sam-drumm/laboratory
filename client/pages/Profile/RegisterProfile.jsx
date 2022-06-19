@@ -76,14 +76,21 @@ function RegisterProfile () {
   }
 
   return (
-    <Flex width="full" align="center" justifyContent="center" marginTop={10}>
+    <Flex
+      width='auto'
+      align="center"
+      justifyContent="center"
+      marginTop={10}
+      ml={5}
+      mr={5}
+    >
       <Box
         p={8}
-        minWidth='500px'
-        maxWidth="500px"
+        // maxWidth="500px"
         borderWidth={2}
         borderRadius={8}
         boxShadow="lg"
+
       >
 
         <Box textAlign="centre">
