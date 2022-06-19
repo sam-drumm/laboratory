@@ -9,17 +9,15 @@ const Footer = () => {
   return (
     <Flex
       flex="auto"
-      marginTop={10}
+      position="fixed"
       as="footer"
       width="100%"
-      position="fixed"
       bottom={0}
-      align="center"
-      justify="space-between"
       wrap="wrap"
-      padding={6}
+      padding={4}
       bg="blue.400"
       color="white"
+      zIndex={2}
     >
       <Stack
         direction='row'

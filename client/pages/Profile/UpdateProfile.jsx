@@ -121,7 +121,7 @@ function UpdateProfile () {
         <Box
           mb={125}
           p={8}
-          minWidth='500px'
+          minWidth='300px'
           maxWidth="500px"
           borderWidth={2}
           borderRadius={8}

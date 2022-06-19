@@ -42,15 +42,17 @@ export default function Header () {
   return (
 
     <Flex
+      flex='auto'
       position="sticky"
       width="100%"
-      as="nav"
+      as="header"
       align="center"
       justify="space-between"
       wrap="wrap"
       padding={6}
       bg="blue.400"
       color="white"
+      zIndex={2}
     >
       <Link align="center" mr={5} onClick={() => navigate('./')}>
         <Heading size="lg" letterSpacing={'tighter'}>Co_lab
@@ -59,11 +61,11 @@ export default function Header () {
 
       <Stack
         direction={{ base: 'column', md: 'row' }}
+        width={{ base: 'full', md: 'auto' }}
         spacing={8}
         display={{ base: isOpen ? 'block' : 'none', md: 'flex' }}
-        width={{ base: 'full', md: 'auto' }}
         flexGrow={1}
-        mt={{ base: 4, md: 0 }}
+        // mt={{ base: 4, md: 0 }}
       >
         <IfAuthenticated>
           <Link onClick={() => navigate('/projects/new')} className='nav-link'>Pitch an Idea <Icon as={FcGlobe} boxSize="1.75em"/></Link>

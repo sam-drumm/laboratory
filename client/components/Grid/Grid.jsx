@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import { getRegisterFn } from '../../auth0-utils'
-import { Box, Button, Container, Heading, SimpleGrid, Icon, Text, Stack, HStack, VStack, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Button, Container, Heading, SimpleGrid, Icon, Text, Stack, HStack, VStack, useBreakpointValue, Flex } from '@chakra-ui/react'
 import { IfAuthenticated, IfNotAuthenticated } from '../Register/Authenticated'
 
 export default function Grid (props) {
@@ -15,14 +15,29 @@ export default function Grid (props) {
   }
 
   return (
-    <Box p={4} paddingBottom="250px">
-      <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
 
+    <Flex
+      w={'90%'}
+      margin={'auto'}
+      mb={20}
+      flex={1}
+      direction='column'
+      position='relative'
+      p={8}
+    >
+
+      <Stack
+        spacing={4}
+        as={Container}
+        maxW={'5xl'}
+        textAlign={'center'}
+        w={'full'}
+      >
         {props.headline ? (
           <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
             <Text
-              left={1}
               as={'span'}
+              left={1}
               position={'relative'}
               _after={{
                 content: "''",
@@ -51,7 +66,8 @@ export default function Grid (props) {
         </Text>
       </Stack>
 
-      <Container maxW={'6xl'} mt={10} paddingBottom="75px">
+      <Container maxW={'6xl'} mt={10} paddingBottom="75px"
+      >
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
           {props.features.map((feature) => (
             <HStack key={feature.id} align={'top'}>
@@ -66,7 +82,12 @@ export default function Grid (props) {
           ))}
         </SimpleGrid>
       </Container>
-      <Stack justify='center' direction='row' spacing={4} align='center' mt={8}>
+
+      <Stack
+        direction={{ base: 'column', md: 'row' }}
+        spacing={4}
+        margin='auto'
+      >
         <IfAuthenticated>
           <Button
             onClick={() => navigate('/profile/home')}>
@@ -89,6 +110,6 @@ export default function Grid (props) {
           Pitch Your Project
         </Button>
       </Stack>
-    </Box>
+    </Flex>
   )
 }
