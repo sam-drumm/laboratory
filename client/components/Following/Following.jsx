@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { capsFirst } from '../utils'
-import { Button, Flex, Heading, Text, VStack, HStack, Tag, useBreakpointValue, Wrap } from '@chakra-ui/react'
+import { Button, Flex, Heading, Text, VStack, HStack, Tag, useBreakpointValue, Wrap, Stack } from '@chakra-ui/react'
 import { categoryLookup, regionLookup } from '../utils/lookup'
 
 import Carousel from '../Carousel/Carousel'
@@ -21,11 +21,16 @@ export default function Following (props) {
   }, [])
 
   return (
-    <>
-      <Flex p={8} flex={1} align={'left'} justify={'left'}>
-        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+    <Stack
+      p={8}
+    >
+      <VStack margin={'auto'}>
+        <Heading
+          fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+          width='full'
+          mb={4}
+        >
           <Text
-            left={1}
             as={'span'}
             position={'relative'}
             _after={{
@@ -42,7 +47,7 @@ export default function Following (props) {
           Pitches you're following.
           </Text>
         </Heading>
-      </Flex>
+      </VStack>
 
       <Carousel gap={32} >
         {follow.reverse().map((project, index) => (
@@ -106,6 +111,6 @@ export default function Following (props) {
         ))}
       </Carousel>
 
-    </>
+    </Stack>
   )
 }

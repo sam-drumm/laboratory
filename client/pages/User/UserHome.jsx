@@ -23,7 +23,7 @@ export default function UserHome () {
     />
   )
 
-  function getOwnedProjects () {
+  async function getOwnedProjects () {
     getProjectByAuthId(auth0Id, token)
       .then(projects => {
         setUserProjects(projects)
@@ -36,21 +36,21 @@ export default function UserHome () {
   }
 
   async function getFollowedProjects () {
-    // const projectId = following?.toString().split(',').map(Number).filter(filtered => filtered !== 0)
-    const projectId = following?.filter(filtered => filtered !== 0)
     const projectArray = []
-    projectId.map((id) => {
-      getProjectById(id)
-        .then(project => (
-          projectArray.push(project)
-        ))
-        .then(
-          setFollowed(projectArray)
-        )
-        .catch(err => {
-          console.error(err)
-        })
-    })
+    if (typeof following !== 'string') {
+      following?.filter(filtered => filtered !== 0).map((id) => {
+        getProjectById(id)
+          .then(project => (
+            projectArray.push(project)
+          ))
+          .then(
+            setFollowed(projectArray)
+          )
+          .catch(err => {
+            console.error(err)
+          })
+      })
+    }
   }
 
   useEffect(() => {
