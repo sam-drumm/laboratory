@@ -86,7 +86,7 @@ function RegisterProfile () {
     >
       <Box
         p={8}
-        // maxWidth="500px"
+        minWidth={{ base: '300px', md: '500px', lg: '750px' }}
         borderWidth={2}
         borderRadius={8}
         boxShadow="lg"

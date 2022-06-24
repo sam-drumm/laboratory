@@ -1,14 +1,19 @@
 import React from 'react'
-import { Box, Heading, Stack, Container, useBreakpointValue, Text } from '@chakra-ui/react'
+import { Flex, Box, VStack, Heading, Stack, useBreakpointValue, Text } from '@chakra-ui/react'
 
 export default function MessageHome (props) {
   return (
-    <Box p={4} paddingBottom="250px">
-      <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
 
-        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+    <Stack
+      p={8}
+    >
+      <VStack margin={'auto'}>
+        <Heading
+          fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+          width='full'
+          mb={4}
+        >
           <Text
-            left={1}
             as={'span'}
             position={'relative'}
             _after={{
@@ -25,14 +30,27 @@ export default function MessageHome (props) {
             {props.headline}
           </Text>
         </Heading>
-      </Stack>
+      </VStack>
 
-      <Heading>
-          Inbox (for your projects)
-      </Heading>
-      <Heading>
-          Outbox (Pitches you've contacted )
-      </Heading>
-    </Box>
+      <Flex width='full' align="center" justifyContent="center">
+        <Box
+          mb={125}
+          p={8}
+          minWidth={{ base: '300px', md: '500px', lg: '750px' }}
+          borderWidth={2}
+          borderRadius={8}
+          boxShadow="lg"
+
+        >
+
+          <Heading>
+          Inbox
+          </Heading>
+          <Heading>
+          Outbox
+          </Heading>
+        </Box>
+      </Flex>
+    </Stack>
   )
 }
