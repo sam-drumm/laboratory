@@ -135,6 +135,7 @@ export default function Project () {
 
         <Box
           p={8}
+          minWidth={{ base: '300px', md: '500px', lg: '750px' }}
           maxWidth="750px"
           borderWidth={2}
           borderRadius={8}

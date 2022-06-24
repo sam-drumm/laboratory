@@ -91,16 +91,14 @@ function NewProject () {
       <Flex
         align="center"
         justifyContent="center"
-        // marginTop={10}
         marginBottom={110}
-        // marginLeft={10}
         ml={5}
         mr={5}
         mt={5}
       >
         <Box
           p={8}
-          width="500px"
+          minWidth={{ base: '300px', md: '500px', lg: '750px' }}
           borderWidth={2}
           borderRadius={8}
           boxShadow="lg"
@@ -405,7 +403,7 @@ function NewProject () {
               mt={8}
               type='submit'
             >
-          Register
+          Start your Pitch
             </Button>
 
           </form>

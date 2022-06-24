@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { capsFirst } from '../../components/utils'
 import { categoryLookup, regionLookup } from '../../components/utils/lookup'
-import { Wrap, Button, Flex, Heading, Text, VStack, HStack, Tag, useBreakpointValue } from '@chakra-ui/react'
+import { Wrap, Button, Flex, Heading, Text, VStack, HStack, Tag, useBreakpointValue, Stack } from '@chakra-ui/react'
 import { FcRedo } from 'react-icons/fc'
 import CountdownTimer from '../../components/Countdown/CountdownTimer'
 import Carousel from '../../components/Carousel/Carousel'
@@ -13,11 +13,16 @@ export default function Projects (props) {
   const fourteenDaysMS = 14 * 24 * 60 * 60 * 1000
 
   return (
-    <>
-      <Flex p={8} flex={1} align={'left'} justify={'left'}>
-        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+    <Stack
+      p={8}
+    >
+      <VStack margin={'auto'}>
+        <Heading
+          fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+          width='full'
+          mb={4}
+        >
           <Text
-            left={1}
             as={'span'}
             position={'relative'}
             _after={{
@@ -34,7 +39,7 @@ export default function Projects (props) {
           Your projects.
           </Text>
         </Heading>
-      </Flex>
+      </VStack>
 
       <Carousel gap={32}>
         {data.reverse().map((project, index) => (
@@ -95,7 +100,7 @@ export default function Projects (props) {
 
         ))}
       </Carousel>
-    </>
+    </Stack>
 
   )
 }

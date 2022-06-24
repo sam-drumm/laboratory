@@ -5,7 +5,7 @@ import { getAddresses } from '../../apis/address'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
-import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Select, useBreakpointValue, Text } from '@chakra-ui/react'
+import { Stack, VStack, Flex, Box, Heading, FormControl, FormLabel, Input, Button, Select, useBreakpointValue, Text } from '@chakra-ui/react'
 import * as Yup from 'yup'
 
 const registerSchema = Yup.object().shape({
@@ -40,32 +40,12 @@ function UpdateProfile () {
       [name]: value
     }
     setEditAddress(copyEditAddress)
-    // if (e.target.length > 5) {
-    //   setData(copyEditAddress)
-    // }
   }
 
   function handleSelectedAddress (e) {
     e.preventDefault()
     setSelectedAddress(e.target.value)
   }
-
-  // async function handleChange (e) {
-  //   if (e.target.value.length > 5) {
-  //     setData({
-  //       [e.target.name]: e.target.value
-  //     })
-  //   }
-  // }
-
-  // async function handleChange (e) {
-  //   e.preventDefault()
-  //   if (e.target.value.length > 5) {
-  //     setData({
-  //       [e.target.name]: e.target.value
-  //     })
-  //   }
-  // }
 
   useEffect(() => {
     const address = JSON.stringify(editAddress.formatted)
@@ -94,11 +74,16 @@ function UpdateProfile () {
   }
 
   return (
-    <>
-      <Flex p={8} flex={1} align={'left'} justify={'left'}>
-        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+    <Stack
+      p={8}
+    >
+      <VStack margin={'auto'}>
+        <Heading
+          fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+          width='full'
+          mb={4}
+        >
           <Text
-            left={1}
             as={'span'}
             position={'relative'}
             _after={{
@@ -115,14 +100,13 @@ function UpdateProfile () {
             Update your details.
           </Text>
         </Heading>
-      </Flex>
+      </VStack>
 
-      <Flex width="full" align="center" justifyContent="center">
+      <Flex width='full' align="center" justifyContent="center">
         <Box
           mb={125}
           p={8}
-          minWidth='300px'
-          maxWidth="500px"
+          minWidth={{ base: '300px', md: '500px', lg: '750px' }}
           borderWidth={2}
           borderRadius={8}
           boxShadow="lg"
@@ -188,7 +172,7 @@ function UpdateProfile () {
           </form>
         </Box>
       </Flex>
-    </>
+    </Stack>
   )
 }
 
