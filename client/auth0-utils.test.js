@@ -12,7 +12,7 @@ describe('verified email', () => {
     })
 
     const navigate = jest.fn()
-    consume.mockImplementation(() => Promise.resolve({ body: { id: 1 } }))
+    consume.mockImplementation(() => Promise.resolve({ body: { auth0Id: 1 } }))
 
     return cacheUser(useAuth0, navigate)
       .then(() => {
@@ -21,7 +21,7 @@ describe('verified email', () => {
       })
   })
 
-  test('when a logged in user has a verified email, navigate not should be called', () => {
+  test('when a logged in user has a verified email, navigate should not be called', () => {
     const useAuth0 = () => ({
       isAuthenticated: true,
       getAccessTokenSilently: () => Promise.resolve('token'),
@@ -29,7 +29,7 @@ describe('verified email', () => {
     })
 
     const navigate = jest.fn()
-    consume.mockImplementation(() => Promise.resolve({ body: { id: 1 } }))
+    consume.mockImplementation(() => Promise.resolve({ body: { auth0Id: 1 } }))
 
     return cacheUser(useAuth0, navigate)
       .then(() => {
@@ -44,11 +44,11 @@ describe('user registration', () => {
     const useAuth0 = () => ({
       isAuthenticated: true,
       getAccessTokenSilently: () => Promise.resolve('token'),
-      user: { id: undefined }
+      user: { firstName: undefined }
     })
 
     const navigate = jest.fn()
-    consume.mockImplementation(() => Promise.resolve({ body: { id: undefined } }))
+    consume.mockImplementation(() => Promise.resolve({ body: { firstName: undefined } }))
 
     return cacheUser(useAuth0, navigate)
       .then(() => {
@@ -65,7 +65,7 @@ describe('user registration', () => {
     })
 
     const navigate = jest.fn()
-    consume.mockImplementation(() => Promise.resolve({ body: { id: 1 } }))
+    consume.mockImplementation(() => Promise.resolve({ body: { auth0Id: 1 } }))
 
     return cacheUser(useAuth0, navigate)
       .then(() => {
