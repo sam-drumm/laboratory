@@ -14,6 +14,7 @@ server.use('/api/v1/users', usersRoutes)
 server.use('/api/v1/projects', projectsRoutes)
 server.use('/api/v1/messages', messagesRoutes)
 
+// general redirect to index
 server.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'))
 })
