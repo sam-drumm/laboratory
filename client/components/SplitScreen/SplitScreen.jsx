@@ -6,7 +6,7 @@ export default function SplitScreen (props) {
   const navigate = useNavigate()
 
   return (
-    <Stack minH={'50vh'} direction={{ base: 'column', md: 'row' }}>
+    <Stack minH={'50vh'} m={5} direction={{ base: 'column', md: 'row' }}>
 
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'lg'}>
@@ -57,6 +57,9 @@ export default function SplitScreen (props) {
           alt={'People shaking hands and connecting'}
           objectFit={'cover'}
           src={props.image}
+          boxSize={'750px'}
+          flex={1}
+          rounded={7}
         />
       </Flex>
 
