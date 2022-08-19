@@ -107,73 +107,8 @@ function userExists (uid, db = connection) {
     })
 }
 
-// function addUser (input, db = connection) {
-//   const {
-//     auth0Id,
-//     firstName,
-//     lastName,
-//     email,
-//     streetNumber,
-//     street,
-//     locality,
-//     city,
-//     region,
-//     postcode,
-//     meshblock,
-//     lon,
-//     lat,
-//     formatted,
-//     following
-//   } = input
-//   const user = {
-//     auth0_id: auth0Id,
-//     first_name: firstName,
-//     last_name: lastName,
-//     email,
-//     street_number: streetNumber,
-//     street,
-//     locality,
-//     city,
-//     region,
-//     postcode,
-//     meshblock,
-//     lon,
-//     lat,
-//     formatted,
-//     following
-//   }
-//   return db('users')
-//     .insert(user)
-// }
-
-// function getUserById (id, db = connection) {
-//   return db('users')
-//     .select(
-//       'id',
-//       'auth0_id as auth0Id',
-//       'email',
-//       'first_name as firstName',
-//       'last_name as lastName',
-//       'street_number: streetNumber',
-//       'street',
-//       'locality',
-//       'city',
-//       'region',
-//       'postcode',
-//       'meshblock',
-//       'lon',
-//       'lat',
-//       'formatted',
-//       'following'
-//     )
-//     .where('id', id)
-//     .first()
-// }
-
 module.exports = {
   getUsers,
-  // addUser,
-  // getUserById,
   createUser,
   getUsersByAuth,
   updateUser

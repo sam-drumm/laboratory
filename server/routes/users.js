@@ -5,14 +5,14 @@ const router = express.Router()
 
 // Open Routes
 router.get('/', async (req, res) => {
-  db.getUsers()
+  await db.getUsers()
     .then(users => {
       res.json({ users })
       return null
     })
     .catch(err => {
       console.error(err)
-      return res.status(500).json({ message: 'Something went wrong' })
+      return res.status(500).json({ message: 'failed to get users' })
     })
 })
 
