@@ -92,4 +92,3 @@ router.get('/user/auth', checkJwt, async (req, res) => {
     })
   }
 })
-

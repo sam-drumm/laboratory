@@ -6,7 +6,6 @@ const { getMockToken } = require('./mockToken')
 jest.mock('../db/projects')
 
 const mockProject =
-
 {
   id: 123,
   auth0_id: 'auth0|12345',
@@ -34,6 +33,33 @@ describe('GET /api/v1/project', () => {
       .expect('Content-Type', /json/)
       .then(res => {
         expect(res.body.projects).not.toBeUndefined()
+        return null
+      })
+  })
+  it('has the correct datatypes', () => {
+    db.getProjects.mockImplementation(() => Promise.resolve(mockProject))
+    return request(server)
+      .get('/api/v1/projects')
+      .expect('Content-Type', /json/)
+      .then(res => {
+        expect(res.body.projects.id).toBe(123)
+        expect(res.body.projects.auth0_id).toBe('auth0|12345')
+        expect(res.body.projects.project_title).toBe('Class aptent taciti sociosqu')
+        expect(res.body.projects.skill_type[0]).toEqual(1)
+        expect(res.body.projects.skill_type[1]).toEqual(2)
+        expect(res.body.projects.skill_type[2]).toEqual(3)
+        return null
+      })
+  })
+  it('responds with 500 status error during a DB error', () => {
+    db.getProjects.mockImplementation(() => Promise.reject(
+      new Error('mock getUser error')
+    ))
+    return request(server)
+      .get('/api/v1/projects')
+      .expect(500)
+      .then(res => {
+        expect(res.body.message).toBe('failed to get users')
         return null
       })
   })

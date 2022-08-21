@@ -16,7 +16,7 @@ function sort (projectArray) {
   return allProjects
 }
 
-async function getProjects (db = connection) {
+function getProjects (db = connection) {
   return db('projects').select().then(sort)
 }
 

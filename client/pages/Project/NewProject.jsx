@@ -4,10 +4,8 @@ import {
   useDispatch,
   useSelector
 } from 'react-redux'
-// import { addProject } from '../../actions/project'
 import { addProject } from '../Project/projectHelper'
 import { Flex, Box, Heading, FormControl, FormLabel, Input, Button, Stack, Radio, RadioGroup, Textarea, Select, useToast } from '@chakra-ui/react'
-
 import Category from '../../components/Category/Category'
 
 function NewProject () {
@@ -27,7 +25,6 @@ function NewProject () {
   const [started, setStarted] = useState('')
   const [skillDescription, setSkillDescription] = useState('')
   const [region, setRegion] = useState('')
-
   const [selectedItems, setSelectedItems] = useState([])
 
   const skillType = selectedItems.map(skill =>
@@ -52,8 +49,6 @@ function NewProject () {
     if (skillType.length >= 2) {
       addProject(form)
       navigate('/profile/home')
-      // navigate()
-      // dispatch(addProject(newProject, token))
       toast({
         title: 'Your pitch is live',
         description: 'You can find your pitch in your user home, under your projects tab.',
@@ -62,17 +57,6 @@ function NewProject () {
         isClosable: true,
         position: 'top'
       })
-      // setProjectTitle('')
-      // setCategory('')
-      // setDescription('')
-      // setSuccess('')
-      // setSeeking('')
-      // setPurpose('')
-      // setTeamEstablished('')
-      // setStarted('')
-      // setSkillDescription('')
-      // setRegion('')
-      // setSelectedItems([])
     } else {
       toast({
         title: 'Double-check the skills section.',

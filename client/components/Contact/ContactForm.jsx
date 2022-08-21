@@ -54,7 +54,6 @@ function ContactForm (props) {
               name='name'
               value={formik.values.name}
               onChange={formik.handleChange}
-              // placeholder="enter your first name"
             ></Input>
           </FormControl>
 

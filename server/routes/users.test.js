@@ -44,7 +44,7 @@ describe('GET /api/v1/user', () => {
         return null
       })
   })
-  it('has the correct datatypes', () => {
+  it('returns the correct data', () => {
     db.getUsers.mockImplementation(() => Promise.resolve(mockUser))
     return request(server)
       .get('/api/v1/users')
